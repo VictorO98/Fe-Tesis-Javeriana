@@ -14,6 +14,5 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
         public int? IdUsuario { get; set; }
 
         public virtual ProductosServiciosPc IdProductoServicioNavigation { get; set; }
-        public virtual UsuarioCor IdUsuarioNavigation { get; set; }
     }
 }

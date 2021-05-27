@@ -13,6 +13,6 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
         public DateTime? Creacion { get; set; }
         public string Estado { get; set; }
 
-        public virtual UsuarioCor IdusuarioNavigation { get; set; }
+        public virtual DemografiaCor IdusuarioNavigation { get; set; }
     }
 }

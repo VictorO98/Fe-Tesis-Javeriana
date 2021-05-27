@@ -1,0 +1,12 @@
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\bin\Debug\netcoreapp3.1\Fe.Dominio.trueques.deps.json
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\bin\Debug\netcoreapp3.1\Fe.Dominio.trueques.runtimeconfig.json
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\bin\Debug\netcoreapp3.1\Fe.Dominio.trueques.runtimeconfig.dev.json
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\bin\Debug\netcoreapp3.1\Fe.Dominio.trueques.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\bin\Debug\netcoreapp3.1\Fe.Dominio.trueques.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\obj\Debug\netcoreapp3.1\Fe.Dominio.trueques.csprojAssemblyReference.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\obj\Debug\netcoreapp3.1\Fe.Dominio.trueques.AssemblyInfoInputs.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\obj\Debug\netcoreapp3.1\Fe.Dominio.trueques.AssemblyInfo.cs
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\obj\Debug\netcoreapp3.1\Fe.Dominio.trueques.csproj.CoreCompileInputs.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\obj\Debug\netcoreapp3.1\Fe.Dominio.trueques.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\obj\Debug\netcoreapp3.1\Fe.Dominio.trueques.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\obj\Debug\netcoreapp3.1\Fe.Dominio.trueques.genruntimeconfig.cache

@@ -28,6 +28,13 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
         public virtual DbSet<FacturasFac> FacturasFacs { get; set; }
         public virtual DbSet<FaqCor> FaqCors { get; set; }
         public virtual DbSet<FavoritosUsuarioProductosPc> FavoritosUsuarioProductosPcs { get; set; }
+        public virtual DbSet<Identityrole> Identityroles { get; set; }
+        public virtual DbSet<IdentityroleclaimString> IdentityroleclaimStrings { get; set; }
+        public virtual DbSet<Identityuser> Identityusers { get; set; }
+        public virtual DbSet<IdentityuserclaimString> IdentityuserclaimStrings { get; set; }
+        public virtual DbSet<IdentityuserloginString> IdentityuserloginStrings { get; set; }
+        public virtual DbSet<IdentityuserroleString> IdentityuserroleStrings { get; set; }
+        public virtual DbSet<IdentityusertokenString> IdentityusertokenStrings { get; set; }
         public virtual DbSet<NotificacionesCor> NotificacionesCors { get; set; }
         public virtual DbSet<PedidosPed> PedidosPeds { get; set; }
         public virtual DbSet<PoblacionCor> PoblacionCors { get; set; }
@@ -42,7 +49,6 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
         public virtual DbSet<TipoDocumentoCor> TipoDocumentoCors { get; set; }
         public virtual DbSet<TipoPublicacionPc> TipoPublicacionPcs { get; set; }
         public virtual DbSet<TruequesPedidoTrue> TruequesPedidoTrues { get; set; }
-        public virtual DbSet<UsuarioCor> UsuarioCors { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -99,8 +105,6 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
 
                 entity.HasIndex(e => e.Idpoblacion, "demografia_cor_id_poblacion_idx");
 
-                entity.HasIndex(e => e.Idrazonsocial, "demografia_cor_id_razon_social_idx");
-
                 entity.HasIndex(e => e.Rolcorid, "demografia_cor_rol_cor_id_idx");
 
                 entity.HasIndex(e => e.Tipodocumentocorid, "demografia_cor_tipo_documento_cor_id_idx");
@@ -112,26 +116,38 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                 entity.Property(e => e.Aceptoterminoscondiciones).HasColumnName("aceptoterminoscondiciones");
 
                 entity.Property(e => e.Apellido)
+                    .IsRequired()
                     .HasMaxLength(20)
                     .HasColumnName("apellido");
+
+                entity.Property(e => e.Codigotelefonopais)
+                    .IsRequired()
+                    .HasMaxLength(5)
+                    .HasColumnName("codigotelefonopais");
 
                 entity.Property(e => e.Creacion).HasColumnName("creacion");
 
                 entity.Property(e => e.Direccion)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .HasColumnName("direccion");
 
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("email");
+
                 entity.Property(e => e.Estado)
+                    .IsRequired()
                     .HasMaxLength(5)
                     .HasColumnName("estado");
 
                 entity.Property(e => e.Idpoblacion).HasColumnName("idpoblacion");
 
-                entity.Property(e => e.Idrazonsocial).HasColumnName("idrazonsocial");
-
                 entity.Property(e => e.Modificacion).HasColumnName("modificacion");
 
                 entity.Property(e => e.Nombre)
+                    .IsRequired()
                     .HasMaxLength(20)
                     .HasColumnName("nombre");
 
@@ -148,12 +164,6 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                     .HasForeignKey(d => d.Idpoblacion)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("demografia_poblacion_cor");
-
-                entity.HasOne(d => d.IdrazonsocialNavigation)
-                    .WithMany(p => p.DemografiaCors)
-                    .HasForeignKey(d => d.Idrazonsocial)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("demografia_cor_razon_social_cor");
 
                 entity.HasOne(d => d.Rolcor)
                     .WithMany(p => p.DemografiaCors)
@@ -252,9 +262,23 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
 
                 entity.Property(e => e.Creacion).HasColumnName("creacion");
 
-                entity.Property(e => e.Mensaje).HasColumnName("mensaje");
+                entity.Property(e => e.Mensaje)
+                    .IsRequired()
+                    .HasColumnName("mensaje");
 
-                entity.Property(e => e.Traza).HasColumnName("traza");
+                entity.Property(e => e.Tipoerror)
+                    .IsRequired()
+                    .HasMaxLength(4)
+                    .HasColumnName("tipoerror");
+
+                entity.Property(e => e.Traza)
+                    .IsRequired()
+                    .HasColumnName("traza");
+
+                entity.Property(e => e.Usuario)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("usuario");
             });
 
             modelBuilder.Entity<EstadoPoblacionCor>(entity =>
@@ -262,11 +286,11 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                 entity.ToTable("estado_poblacion_cor");
 
                 entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .UseIdentityAlwaysColumn();
+                    .ValueGeneratedNever()
+                    .HasColumnName("id");
 
                 entity.Property(e => e.Nombre)
-                    .HasMaxLength(30)
+                    .HasMaxLength(70)
                     .HasColumnName("nombre");
             });
 
@@ -336,11 +360,107 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                     .WithMany(p => p.FavoritosUsuarioProductosPcs)
                     .HasForeignKey(d => d.IdProductoServicio)
                     .HasConstraintName("id_prod_ser_fk");
+            });
 
-                entity.HasOne(d => d.IdUsuarioNavigation)
-                    .WithMany(p => p.FavoritosUsuarioProductosPcs)
-                    .HasForeignKey(d => d.IdUsuario)
-                    .HasConstraintName("id_usuario_fk");
+            modelBuilder.Entity<Identityrole>(entity =>
+            {
+                entity.ToTable("identityrole");
+
+                entity.HasIndex(e => e.NormalizedName, "RoleNameIndex")
+                    .IsUnique();
+
+                entity.Property(e => e.Name).HasMaxLength(256);
+
+                entity.Property(e => e.NormalizedName).HasMaxLength(256);
+            });
+
+            modelBuilder.Entity<IdentityroleclaimString>(entity =>
+            {
+                entity.ToTable("identityroleclaim<string>");
+
+                entity.HasIndex(e => e.RoleId, "IX_identityroleclaim<string>_RoleId");
+
+                entity.Property(e => e.RoleId).IsRequired();
+
+                entity.HasOne(d => d.Role)
+                    .WithMany(p => p.IdentityroleclaimStrings)
+                    .HasForeignKey(d => d.RoleId);
+            });
+
+            modelBuilder.Entity<Identityuser>(entity =>
+            {
+                entity.ToTable("identityuser");
+
+                entity.HasIndex(e => e.NormalizedEmail, "EmailIndex");
+
+                entity.HasIndex(e => e.NormalizedUserName, "UserNameIndex")
+                    .IsUnique();
+
+                entity.Property(e => e.Email).HasMaxLength(256);
+
+                entity.Property(e => e.LockoutEnd).HasColumnType("timestamp with time zone");
+
+                entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
+
+                entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
+
+                entity.Property(e => e.UserName).HasMaxLength(256);
+            });
+
+            modelBuilder.Entity<IdentityuserclaimString>(entity =>
+            {
+                entity.ToTable("identityuserclaim<string>");
+
+                entity.HasIndex(e => e.UserId, "IX_identityuserclaim<string>_UserId");
+
+                entity.Property(e => e.UserId).IsRequired();
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.IdentityuserclaimStrings)
+                    .HasForeignKey(d => d.UserId);
+            });
+
+            modelBuilder.Entity<IdentityuserloginString>(entity =>
+            {
+                entity.HasKey(e => new { e.LoginProvider, e.ProviderKey });
+
+                entity.ToTable("identityuserlogin<string>");
+
+                entity.HasIndex(e => e.UserId, "IX_identityuserlogin<string>_UserId");
+
+                entity.Property(e => e.UserId).IsRequired();
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.IdentityuserloginStrings)
+                    .HasForeignKey(d => d.UserId);
+            });
+
+            modelBuilder.Entity<IdentityuserroleString>(entity =>
+            {
+                entity.HasKey(e => new { e.UserId, e.RoleId });
+
+                entity.ToTable("identityuserrole<string>");
+
+                entity.HasIndex(e => e.RoleId, "IX_identityuserrole<string>_RoleId");
+
+                entity.HasOne(d => d.Role)
+                    .WithMany(p => p.IdentityuserroleStrings)
+                    .HasForeignKey(d => d.RoleId);
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.IdentityuserroleStrings)
+                    .HasForeignKey(d => d.UserId);
+            });
+
+            modelBuilder.Entity<IdentityusertokenString>(entity =>
+            {
+                entity.HasKey(e => new { e.UserId, e.LoginProvider, e.Name });
+
+                entity.ToTable("identityusertoken<string>");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.IdentityusertokenStrings)
+                    .HasForeignKey(d => d.UserId);
             });
 
             modelBuilder.Entity<NotificacionesCor>(entity =>
@@ -369,7 +489,7 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                     .WithMany(p => p.NotificacionesCors)
                     .HasForeignKey(d => d.Idusuario)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("notificaciones_cor_usuario_cor");
+                    .HasConstraintName("fk_idUsuario");
             });
 
             modelBuilder.Entity<PedidosPed>(entity =>
@@ -394,7 +514,7 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                     .WithMany(p => p.PedidosPeds)
                     .HasForeignKey(d => d.Idusuario)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("pedidos_ped_usuario_cor");
+                    .HasConstraintName("fk_idUsuario");
             });
 
             modelBuilder.Entity<PoblacionCor>(entity =>
@@ -404,17 +524,18 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                 entity.HasIndex(e => e.Idestadopoblacion, "poblacion_cor_id_estado_poblacion_idx");
 
                 entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .UseIdentityAlwaysColumn();
+                    .ValueGeneratedNever()
+                    .HasColumnName("id");
 
                 entity.Property(e => e.Estado)
                     .HasMaxLength(5)
-                    .HasColumnName("estado");
+                    .HasColumnName("estado")
+                    .HasDefaultValueSql("'VIG'::character varying");
 
                 entity.Property(e => e.Idestadopoblacion).HasColumnName("idestadopoblacion");
 
                 entity.Property(e => e.Nombre)
-                    .HasMaxLength(20)
+                    .HasMaxLength(50)
                     .HasColumnName("nombre");
 
                 entity.HasOne(d => d.IdestadopoblacionNavigation)
@@ -622,7 +743,7 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                     .WithMany(p => p.ProductosServiciosPcs)
                     .HasForeignKey(d => d.Idusuario)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("productos_servicios_pc_usuario_cor");
+                    .HasConstraintName("fk_idUsuario");
             });
 
             modelBuilder.Entity<RazonSocialCor>(entity =>
@@ -635,13 +756,16 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
 
                 entity.Property(e => e.Creacion).HasColumnName("creacion");
 
-                entity.Property(e => e.Direccion)
+                entity.Property(e => e.DireccionDocumento)
                     .HasMaxLength(30)
-                    .HasColumnName("direccion");
+                    .HasColumnName("direccion_documento");
 
                 entity.Property(e => e.Estado)
+                    .IsRequired()
                     .HasMaxLength(5)
                     .HasColumnName("estado");
+
+                entity.Property(e => e.Nit).HasColumnName("NIT");
 
                 entity.Property(e => e.Nombre)
                     .HasMaxLength(30)
@@ -746,48 +870,13 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                     .WithMany(p => p.TruequesPedidoTrueIdcompradorNavigations)
                     .HasForeignKey(d => d.Idcomprador)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("trueques_pedido_usuario_cor_id_comprador");
+                    .HasConstraintName("fk_idUsuarioComprador");
 
                 entity.HasOne(d => d.IdvendedorNavigation)
                     .WithMany(p => p.TruequesPedidoTrueIdvendedorNavigations)
                     .HasForeignKey(d => d.Idvendedor)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("trueques_pedido_usuario_cor_id_vendedor");
-            });
-
-            modelBuilder.Entity<UsuarioCor>(entity =>
-            {
-                entity.ToTable("usuario_cor");
-
-                entity.HasIndex(e => e.Rolcorid, "usuario_cor_rol_cor_id_idx");
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .UseIdentityAlwaysColumn();
-
-                entity.Property(e => e.Creacion).HasColumnName("creacion");
-
-                entity.Property(e => e.Email)
-                    .HasMaxLength(50)
-                    .HasColumnName("email");
-
-                entity.Property(e => e.Emailconfirmed).HasColumnName("emailconfirmed");
-
-                entity.Property(e => e.Estado)
-                    .HasMaxLength(5)
-                    .HasColumnName("estado");
-
-                entity.Property(e => e.Modificacion).HasColumnName("modificacion");
-
-                entity.Property(e => e.Passwordhash).HasColumnName("passwordhash");
-
-                entity.Property(e => e.Rolcorid).HasColumnName("rolcorid");
-
-                entity.HasOne(d => d.Rolcor)
-                    .WithMany(p => p.UsuarioCors)
-                    .HasForeignKey(d => d.Rolcorid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("usuario_cor_rol_cor");
+                    .HasConstraintName("fk_idUsuarioVendedor");
             });
 
             OnModelCreatingPartial(modelBuilder);

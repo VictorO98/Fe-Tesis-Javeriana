@@ -18,8 +18,8 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
         public string Estado { get; set; }
         public DateTime? Fechatrueque { get; set; }
 
-        public virtual UsuarioCor IdcompradorNavigation { get; set; }
-        public virtual UsuarioCor IdvendedorNavigation { get; set; }
+        public virtual DemografiaCor IdcompradorNavigation { get; set; }
+        public virtual DemografiaCor IdvendedorNavigation { get; set; }
         public virtual ICollection<ProdSerTruequeTrue> ProdSerTruequeTrues { get; set; }
     }
 }

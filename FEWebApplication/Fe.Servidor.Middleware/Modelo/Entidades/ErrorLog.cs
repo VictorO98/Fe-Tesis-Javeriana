@@ -10,6 +10,8 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
         public int Id { get; set; }
         public string Mensaje { get; set; }
         public string Traza { get; set; }
-        public DateTime? Creacion { get; set; }
+        public DateTime Creacion { get; set; }
+        public string Usuario { get; set; }
+        public string Tipoerror { get; set; }
     }
 }

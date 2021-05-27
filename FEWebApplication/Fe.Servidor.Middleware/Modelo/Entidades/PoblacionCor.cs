@@ -14,8 +14,8 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
 
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public string Estado { get; set; }
         public int Idestadopoblacion { get; set; }
+        public string Estado { get; set; }
 
         public virtual EstadoPoblacionCor IdestadopoblacionNavigation { get; set; }
         public virtual ICollection<DemografiaCor> DemografiaCors { get; set; }

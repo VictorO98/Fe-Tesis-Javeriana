@@ -10,7 +10,6 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
         public RolCor()
         {
             DemografiaCors = new HashSet<DemografiaCor>();
-            UsuarioCors = new HashSet<UsuarioCor>();
         }
 
         public int Id { get; set; }
@@ -18,6 +17,5 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
         public DateTime? Creacion { get; set; }
 
         public virtual ICollection<DemografiaCor> DemografiaCors { get; set; }
-        public virtual ICollection<UsuarioCor> UsuarioCors { get; set; }
     }
 }

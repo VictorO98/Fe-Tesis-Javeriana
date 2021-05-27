@@ -8,11 +8,11 @@ import 'package:Fe_mobile/src/screens/checkout.dart';
 import 'package:Fe_mobile/src/screens/checkout_done.dart';
 import 'package:Fe_mobile/src/screens/help.dart';
 import 'package:Fe_mobile/src/screens/languages.dart';
-import 'package:Fe_mobile/src/screens/on_boarding.dart';
+import 'package:Fe_mobile/src/core/pages/induccion_page.dart';
 import 'package:Fe_mobile/src/screens/orders.dart';
 import 'package:Fe_mobile/src/screens/product.dart';
 import 'package:Fe_mobile/src/screens/signin.dart';
-import 'package:Fe_mobile/src/screens/signup.dart';
+import 'package:Fe_mobile/src/core/pages/usuario/registro_page.dart';
 import 'package:Fe_mobile/src/screens/tabs.dart';
 import 'package:flutter/material.dart';
 
@@ -23,9 +23,9 @@ class RouteGenerator {
 
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => OnBoardingWidget());
-      case '/SignUp':
-        return MaterialPageRoute(builder: (_) => SignUpWidget());
+        return MaterialPageRoute(builder: (_) => InduccionPage());
+      case '/Registro':
+        return MaterialPageRoute(builder: (_) => RegistroPage());
       case '/SignIn':
         return MaterialPageRoute(builder: (_) => SignInWidget());
       case '/Categories':

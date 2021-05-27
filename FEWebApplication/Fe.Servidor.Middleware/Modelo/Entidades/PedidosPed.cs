@@ -19,7 +19,7 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
         public string Estado { get; set; }
         public DateTime? Fechapedido { get; set; }
 
-        public virtual UsuarioCor IdusuarioNavigation { get; set; }
+        public virtual DemografiaCor IdusuarioNavigation { get; set; }
         public virtual ICollection<DevolucionesDev> DevolucionesDevs { get; set; }
         public virtual ICollection<FacturasFac> FacturasFacs { get; set; }
         public virtual ICollection<ProdSerXVendidosPed> ProdSerXVendidosPeds { get; set; }

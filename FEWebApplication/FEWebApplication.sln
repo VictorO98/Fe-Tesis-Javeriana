@@ -23,15 +23,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "facturas", "facturas", "{2B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "devoluciones", "devoluciones", "{255431E0-9B59-4881-995E-2CD21D55CC1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fe.Dominio.trueques", "Fe.Dominio.trueques\Fe.Dominio.trueques.csproj", "{622F1A77-53B6-4AE6-A9E3-F512A7AB58D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fe.Dominio.trueques", "Fe.Dominio.trueques\Fe.Dominio.trueques.csproj", "{622F1A77-53B6-4AE6-A9E3-F512A7AB58D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fe.Dominio.pedidos", "Fe.Dominio.pedidos\Fe.Dominio.pedidos.csproj", "{CA241593-6103-4F17-B3E1-4D135AEBC582}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fe.Dominio.pedidos", "Fe.Dominio.pedidos\Fe.Dominio.pedidos.csproj", "{CA241593-6103-4F17-B3E1-4D135AEBC582}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fe.Dominio.facturas", "Fe.Dominio.facturas\Fe.Dominio.facturas.csproj", "{B3977F71-12A3-40CC-B620-7537DB08EE8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fe.Dominio.facturas", "Fe.Dominio.facturas\Fe.Dominio.facturas.csproj", "{B3977F71-12A3-40CC-B620-7537DB08EE8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fe.Dominio.devoluciones", "Fe.Dominio.devoluciones\Fe.Dominio.devoluciones.csproj", "{9EDD15BC-AE82-4586-8F38-9C5192472F2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fe.Dominio.devoluciones", "Fe.Dominio.devoluciones\Fe.Dominio.devoluciones.csproj", "{9EDD15BC-AE82-4586-8F38-9C5192472F2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fe.Dominio.contenido", "Fe.Dominio.contenido\Fe.Dominio.contenido.csproj", "{8E21B1CD-F2BA-4AC4-98AC-052C1A576031}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fe.Dominio.contenido", "Fe.Dominio.contenido\Fe.Dominio.contenido.csproj", "{8E21B1CD-F2BA-4AC4-98AC-052C1A576031}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "general", "general", "{E7D2F4A2-92FB-4916-8305-EFAC0002057D}"
 EndProject
@@ -39,9 +39,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "global", "global", "{B71401
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "seguridad", "seguridad", "{EE7BEB40-57F8-498A-B78A-776353139723}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fe.Core.General", "Fe.Core.General\Fe.Core.General.csproj", "{649D0819-C90C-4A74-92C4-1CCF0D8B3D11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fe.Core.General", "Fe.Core.General\Fe.Core.General.csproj", "{649D0819-C90C-4A74-92C4-1CCF0D8B3D11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fe.Core.Global", "Fe.Core.Global\Fe.Core.Global.csproj", "{382B7666-8FC2-4FB8-9A82-065562FD2D7E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fe.Core.Global", "Fe.Core.Global\Fe.Core.Global.csproj", "{382B7666-8FC2-4FB8-9A82-065562FD2D7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fe.Core.Seguridad", "Fe.Core.Seguridad\Fe.Core.Seguridad.csproj", "{E0634EB9-E006-4EC0-A4A4-307CBCA792D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -85,6 +87,10 @@ Global
 		{382B7666-8FC2-4FB8-9A82-065562FD2D7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{382B7666-8FC2-4FB8-9A82-065562FD2D7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{382B7666-8FC2-4FB8-9A82-065562FD2D7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0634EB9-E006-4EC0-A4A4-307CBCA792D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0634EB9-E006-4EC0-A4A4-307CBCA792D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0634EB9-E006-4EC0-A4A4-307CBCA792D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0634EB9-E006-4EC0-A4A4-307CBCA792D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -106,6 +112,7 @@ Global
 		{EE7BEB40-57F8-498A-B78A-776353139723} = {32423D4D-F363-41A1-A3CA-D988078AA5A3}
 		{649D0819-C90C-4A74-92C4-1CCF0D8B3D11} = {E7D2F4A2-92FB-4916-8305-EFAC0002057D}
 		{382B7666-8FC2-4FB8-9A82-065562FD2D7E} = {B714016E-19D4-44E2-9030-BC67A2224AEA}
+		{E0634EB9-E006-4EC0-A4A4-307CBCA792D0} = {EE7BEB40-57F8-498A-B78A-776353139723}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {18D08042-ECF2-4852-B616-BF915381DB0C}

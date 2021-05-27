@@ -1,0 +1,12 @@
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.contenido\obj\Debug\netcoreapp3.1\Fe.Dominio.contenido.csprojAssemblyReference.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.contenido\obj\Debug\netcoreapp3.1\Fe.Dominio.contenido.AssemblyInfoInputs.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.contenido\obj\Debug\netcoreapp3.1\Fe.Dominio.contenido.AssemblyInfo.cs
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.contenido\obj\Debug\netcoreapp3.1\Fe.Dominio.contenido.csproj.CoreCompileInputs.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.contenido\bin\Debug\netcoreapp3.1\Fe.Dominio.contenido.deps.json
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.contenido\bin\Debug\netcoreapp3.1\Fe.Dominio.contenido.runtimeconfig.json
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.contenido\bin\Debug\netcoreapp3.1\Fe.Dominio.contenido.runtimeconfig.dev.json
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.contenido\bin\Debug\netcoreapp3.1\Fe.Dominio.contenido.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.contenido\bin\Debug\netcoreapp3.1\Fe.Dominio.contenido.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.contenido\obj\Debug\netcoreapp3.1\Fe.Dominio.contenido.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.contenido\obj\Debug\netcoreapp3.1\Fe.Dominio.contenido.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.contenido\obj\Debug\netcoreapp3.1\Fe.Dominio.contenido.genruntimeconfig.cache
