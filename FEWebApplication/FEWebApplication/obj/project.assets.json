@@ -904,6 +904,30 @@
           "bin/placeholder/Fe.Core.Seguridad.dll": {}
         }
       },
+      "Fe.Dominio.contenido/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Dapper": "2.0.78",
+          "Dapper.Contrib": "2.0.78",
+          "Fe.Servidor.Middleware": "1.0.0",
+          "IdentityServer4": "4.1.2",
+          "IdentityServer4.Storage": "4.1.2",
+          "Microsoft.AspNet.Mvc": "5.2.7",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.5",
+          "Microsoft.EntityFrameworkCore": "5.0.5",
+          "Microsoft.EntityFrameworkCore.Relational": "5.0.5",
+          "Microsoft.NETCore.App": "2.2.8",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.5.1",
+          "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.1.0"
+        },
+        "compile": {
+          "bin/placeholder/Fe.Dominio.contenido.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Fe.Dominio.contenido.dll": {}
+        }
+      },
       "Fe.Servidor.Middleware/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -2618,6 +2642,11 @@
       "path": "../Fe.Core.Seguridad/Fe.Core.Seguridad.csproj",
       "msbuildProject": "../Fe.Core.Seguridad/Fe.Core.Seguridad.csproj"
     },
+    "Fe.Dominio.contenido/1.0.0": {
+      "type": "project",
+      "path": "../Fe.Dominio.contenido/Fe.Dominio.contenido.csproj",
+      "msbuildProject": "../Fe.Dominio.contenido/Fe.Dominio.contenido.csproj"
+    },
     "Fe.Servidor.Middleware/1.0.0": {
       "type": "project",
       "path": "../Fe.Servidor.Middleware/Fe.Servidor.Middleware.csproj",
@@ -2630,6 +2659,7 @@
       "Dapper.Contrib >= 2.0.78",
       "Fe.Core.General >= 1.0.0",
       "Fe.Core.Seguridad >= 1.0.0",
+      "Fe.Dominio.contenido >= 1.0.0",
       "Fe.Servidor.Middleware >= 1.0.0",
       "IdentityServer4 >= 4.1.2",
       "IdentityServer4.Storage >= 4.1.2",
@@ -2684,6 +2714,9 @@
             },
             "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Core.Seguridad\\Fe.Core.Seguridad.csproj": {
               "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Core.Seguridad\\Fe.Core.Seguridad.csproj"
+            },
+            "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Dominio.contenido\\Fe.Dominio.contenido.csproj": {
+              "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Dominio.contenido\\Fe.Dominio.contenido.csproj"
             },
             "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj": {
               "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj"

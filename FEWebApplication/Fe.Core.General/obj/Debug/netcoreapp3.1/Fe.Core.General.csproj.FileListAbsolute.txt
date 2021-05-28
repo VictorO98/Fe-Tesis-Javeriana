@@ -1,6 +1,3 @@
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.General\obj\Debug\netcoreapp3.1\Fe.Core.General.AssemblyInfoInputs.cache
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.General\obj\Debug\netcoreapp3.1\Fe.Core.General.AssemblyInfo.cs
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.General\obj\Debug\netcoreapp3.1\Fe.Core.General.csproj.CoreCompileInputs.cache
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.General\bin\Debug\netcoreapp3.1\Fe.Core.General.deps.json
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.General\bin\Debug\netcoreapp3.1\Fe.Core.General.runtimeconfig.json
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.General\bin\Debug\netcoreapp3.1\Fe.Core.General.runtimeconfig.dev.json
@@ -11,6 +8,9 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.General\bin\Deb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.General\bin\Debug\netcoreapp3.1\Fe.Core.Global.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.General\bin\Debug\netcoreapp3.1\Fe.Servidor.Middleware.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.General\obj\Debug\netcoreapp3.1\Fe.Core.General.csprojAssemblyReference.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.General\obj\Debug\netcoreapp3.1\Fe.Core.General.AssemblyInfoInputs.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.General\obj\Debug\netcoreapp3.1\Fe.Core.General.AssemblyInfo.cs
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.General\obj\Debug\netcoreapp3.1\Fe.Core.General.csproj.CoreCompileInputs.cache
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.General\obj\Debug\netcoreapp3.1\Fe.Core.General.csproj.CopyComplete
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.General\obj\Debug\netcoreapp3.1\Fe.Core.General.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.General\obj\Debug\netcoreapp3.1\Fe.Core.General.pdb

@@ -1,5 +1,4 @@
 using Fe.Dominio.contenido.Datos;
-using Fe.Dominio.contenido.Negocio;
 using Fe.Dominio.contenido;
 using Fe.Core.Global.Constantes;
 using Fe.Core.Global.Errores;
@@ -31,7 +30,7 @@ namespace FEWebApplication.Controladores.Contenido
         [HttpGet]
         public CategoriaPc GetCategoriaPorIdCategoria(int idCategoria)
         {
-            return _coFachada.GetCategoriaPorIdCategoria();
+            return _coFachada.GetCategoriaPorIdCategoria(idCategoria);
         }
     }
 }

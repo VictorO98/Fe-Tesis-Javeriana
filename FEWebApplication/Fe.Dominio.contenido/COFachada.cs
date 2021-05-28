@@ -1,6 +1,5 @@
 ﻿using Fe.Servidor.Middleware.Modelo.Contexto;
 using Fe.Servidor.Middleware.Modelo.Entidades;
-using Fe.Dominio.contenido.Negocio
 using System.Collections.Generic;
 using System.Linq;
 using System;
@@ -11,7 +10,7 @@ namespace Fe.Dominio.contenido
     {
         private readonly COBiz _cObiz;
 
-        public COFachada(CObiz cObiz)
+        public COFachada(COBiz cObiz)
         {
             _cObiz = cObiz;
         }

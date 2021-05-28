@@ -832,6 +832,29 @@
         "runtime": {
           "lib/netstandard2.1/System.Text.Encodings.Web.dll": {}
         }
+      },
+      "Fe.Servidor.Middleware/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Dapper": "2.0.78",
+          "Dapper.Contrib": "2.0.78",
+          "IdentityServer4": "4.1.2",
+          "IdentityServer4.Storage": "4.1.2",
+          "Microsoft.AspNet.Mvc": "5.2.7",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.5",
+          "Microsoft.EntityFrameworkCore": "5.0.5",
+          "Microsoft.EntityFrameworkCore.Relational": "5.0.5",
+          "Microsoft.NETCore.App": "2.2.8",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.5.1",
+          "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.1.0"
+        },
+        "compile": {
+          "bin/placeholder/Fe.Servidor.Middleware.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Fe.Servidor.Middleware.dll": {}
+        }
       }
     }
   },
@@ -2508,12 +2531,18 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "Fe.Servidor.Middleware/1.0.0": {
+      "type": "project",
+      "path": "../Fe.Servidor.Middleware/Fe.Servidor.Middleware.csproj",
+      "msbuildProject": "../Fe.Servidor.Middleware/Fe.Servidor.Middleware.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "Dapper >= 2.0.78",
       "Dapper.Contrib >= 2.0.78",
+      "Fe.Servidor.Middleware >= 1.0.0",
       "IdentityServer4 >= 4.1.2",
       "IdentityServer4.Storage >= 4.1.2",
       "Microsoft.AspNet.Mvc >= 5.2.7",
@@ -2561,7 +2590,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj": {
+              "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

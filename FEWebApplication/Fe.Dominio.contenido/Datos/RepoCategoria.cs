@@ -24,7 +24,7 @@ namespace Fe.Dominio.contenido.Datos
         public CategoriaPc GetCategoriaPorIdCategoria(int idCategoria)
         {
             using FeContext context = new FeContext();
-            return context.CategoriaPcs.Where(p => p.Id == idCategoria);
+            return (CategoriaPc)context.CategoriaPcs.Where(p => p.Id == idCategoria);
         }
     }
 }

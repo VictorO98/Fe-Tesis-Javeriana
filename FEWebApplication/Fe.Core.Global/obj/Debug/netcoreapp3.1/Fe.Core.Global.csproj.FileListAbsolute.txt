@@ -3,7 +3,6 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Global\bin\Debu
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Global\bin\Debug\netcoreapp3.1\Fe.Core.Global.runtimeconfig.dev.json
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Global\bin\Debug\netcoreapp3.1\Fe.Core.Global.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Global\bin\Debug\netcoreapp3.1\Fe.Core.Global.pdb
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Global\obj\Debug\netcoreapp3.1\Fe.Core.Global.csprojAssemblyReference.cache
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Global\obj\Debug\netcoreapp3.1\Fe.Core.Global.AssemblyInfoInputs.cache
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Global\obj\Debug\netcoreapp3.1\Fe.Core.Global.AssemblyInfo.cs
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Global\obj\Debug\netcoreapp3.1\Fe.Core.Global.csproj.CoreCompileInputs.cache
