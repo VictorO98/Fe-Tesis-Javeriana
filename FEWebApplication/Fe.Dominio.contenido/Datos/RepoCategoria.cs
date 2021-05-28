@@ -1,30 +1,45 @@
+using Fe.Core.Global.Constantes;
+using Fe.Core.Global.Errores;
+using Fe.Servidor.Middleware.Contratos.Core;
 using Fe.Servidor.Middleware.Modelo.Contexto;
 using Fe.Servidor.Middleware.Modelo.Entidades;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Fe.Dominio.contenido.Datos
 {
     public class RepoCategoria
     {
-        public CategoriaPc GuardarCategoria(CategoriaPc categoria)
+        internal async Task<RespuestaDatos> GuardarCategoria(CategoriaPc categoria)
         {
             using FeContext context = new FeContext();
-            context.Add(categoria);
-            context.SaveChanges();
-            return categoria;
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                context.Add(categoria);
+                context.SaveChanges();
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "Categoría creada exitosamente." };
+            }
+            catch(Exception e)
+            {
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = "Ocurrió un problema al intentar agregar la categoría." };
+                throw new COExcepcion("Ocurrió un problema al intentar agregar la categoría.");
+            }
+            return respuestaDatos;
         }
 
-        public List<CategoriaPc> GetCategorias()
+        internal List<CategoriaPc> GetCategorias()
         {
             using var context = new FeContext();
             return context.CategoriaPcs.ToList();
         }
 
-        public CategoriaPc GetCategoriaPorIdCategoria(int idCategoria)
+        internal CategoriaPc GetCategoriaPorIdCategoria(int idCategoria)
         {
             using FeContext context = new FeContext();
-            return (CategoriaPc)context.CategoriaPcs.Where(p => p.Id == idCategoria);
+            return context.CategoriaPcs.SingleOrDefault(p => p.Id == idCategoria);
         }
     }
 }
