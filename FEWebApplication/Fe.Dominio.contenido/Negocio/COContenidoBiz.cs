@@ -8,11 +8,11 @@ using System.Text;
 
 namespace Fe.Dominio.contenido
 {
-    public class COBiz
+    public class COContenidoBiz
     {
         private readonly RepoCategoria _repoCategoria;
 
-        public COBiz(RepoCategoria repoCategoria)
+        public COContenidoBiz(RepoCategoria repoCategoria)
         {
             _repoCategoria = repoCategoria;
         }
