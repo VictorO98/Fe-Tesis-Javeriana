@@ -43,7 +43,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fe.Core.General", "Fe.Core.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fe.Core.Global", "Fe.Core.Global\Fe.Core.Global.csproj", "{382B7666-8FC2-4FB8-9A82-065562FD2D7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fe.Core.Seguridad", "Fe.Core.Seguridad\Fe.Core.Seguridad.csproj", "{E0634EB9-E006-4EC0-A4A4-307CBCA792D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fe.Core.Seguridad", "Fe.Core.Seguridad\Fe.Core.Seguridad.csproj", "{E0634EB9-E006-4EC0-A4A4-307CBCA792D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

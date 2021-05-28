@@ -928,6 +928,98 @@
           "bin/placeholder/Fe.Dominio.contenido.dll": {}
         }
       },
+      "Fe.Dominio.devoluciones/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Dapper": "2.0.78",
+          "Dapper.Contrib": "2.0.78",
+          "IdentityServer4": "4.1.2",
+          "IdentityServer4.Storage": "4.1.2",
+          "Microsoft.AspNet.Mvc": "5.2.7",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.5",
+          "Microsoft.EntityFrameworkCore": "5.0.5",
+          "Microsoft.EntityFrameworkCore.Relational": "5.0.5",
+          "Microsoft.NETCore.App": "2.2.8",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.5.1",
+          "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.1.0"
+        },
+        "compile": {
+          "bin/placeholder/Fe.Dominio.devoluciones.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Fe.Dominio.devoluciones.dll": {}
+        }
+      },
+      "Fe.Dominio.facturas/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Dapper": "2.0.78",
+          "Dapper.Contrib": "2.0.78",
+          "IdentityServer4": "4.1.2",
+          "IdentityServer4.Storage": "4.1.2",
+          "Microsoft.AspNet.Mvc": "5.2.7",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.5",
+          "Microsoft.EntityFrameworkCore": "5.0.5",
+          "Microsoft.EntityFrameworkCore.Relational": "5.0.5",
+          "Microsoft.NETCore.App": "2.2.8",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.5.1",
+          "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.1.0"
+        },
+        "compile": {
+          "bin/placeholder/Fe.Dominio.facturas.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Fe.Dominio.facturas.dll": {}
+        }
+      },
+      "Fe.Dominio.pedidos/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Dapper": "2.0.78",
+          "Dapper.Contrib": "2.0.78",
+          "IdentityServer4": "4.1.2",
+          "IdentityServer4.Storage": "4.1.2",
+          "Microsoft.AspNet.Mvc": "5.2.7",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.5",
+          "Microsoft.EntityFrameworkCore": "5.0.5",
+          "Microsoft.EntityFrameworkCore.Relational": "5.0.5",
+          "Microsoft.NETCore.App": "2.2.8",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.5.1",
+          "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.1.0"
+        },
+        "compile": {
+          "bin/placeholder/Fe.Dominio.pedidos.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Fe.Dominio.pedidos.dll": {}
+        }
+      },
+      "Fe.Dominio.trueques/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Dapper": "2.0.78",
+          "Dapper.Contrib": "2.0.78",
+          "IdentityServer4": "4.1.2",
+          "IdentityServer4.Storage": "4.1.2",
+          "Microsoft.AspNet.Mvc": "5.2.7",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.5",
+          "Microsoft.EntityFrameworkCore": "5.0.5",
+          "Microsoft.EntityFrameworkCore.Relational": "5.0.5",
+          "Microsoft.NETCore.App": "2.2.8",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.5.1",
+          "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.1.0"
+        },
+        "compile": {
+          "bin/placeholder/Fe.Dominio.trueques.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Fe.Dominio.trueques.dll": {}
+        }
+      },
       "Fe.Servidor.Middleware/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -2647,6 +2739,26 @@
       "path": "../Fe.Dominio.contenido/Fe.Dominio.contenido.csproj",
       "msbuildProject": "../Fe.Dominio.contenido/Fe.Dominio.contenido.csproj"
     },
+    "Fe.Dominio.devoluciones/1.0.0": {
+      "type": "project",
+      "path": "../Fe.Dominio.devoluciones/Fe.Dominio.devoluciones.csproj",
+      "msbuildProject": "../Fe.Dominio.devoluciones/Fe.Dominio.devoluciones.csproj"
+    },
+    "Fe.Dominio.facturas/1.0.0": {
+      "type": "project",
+      "path": "../Fe.Dominio.facturas/Fe.Dominio.facturas.csproj",
+      "msbuildProject": "../Fe.Dominio.facturas/Fe.Dominio.facturas.csproj"
+    },
+    "Fe.Dominio.pedidos/1.0.0": {
+      "type": "project",
+      "path": "../Fe.Dominio.pedidos/Fe.Dominio.pedidos.csproj",
+      "msbuildProject": "../Fe.Dominio.pedidos/Fe.Dominio.pedidos.csproj"
+    },
+    "Fe.Dominio.trueques/1.0.0": {
+      "type": "project",
+      "path": "../Fe.Dominio.trueques/Fe.Dominio.trueques.csproj",
+      "msbuildProject": "../Fe.Dominio.trueques/Fe.Dominio.trueques.csproj"
+    },
     "Fe.Servidor.Middleware/1.0.0": {
       "type": "project",
       "path": "../Fe.Servidor.Middleware/Fe.Servidor.Middleware.csproj",
@@ -2660,6 +2772,10 @@
       "Fe.Core.General >= 1.0.0",
       "Fe.Core.Seguridad >= 1.0.0",
       "Fe.Dominio.contenido >= 1.0.0",
+      "Fe.Dominio.devoluciones >= 1.0.0",
+      "Fe.Dominio.facturas >= 1.0.0",
+      "Fe.Dominio.pedidos >= 1.0.0",
+      "Fe.Dominio.trueques >= 1.0.0",
       "Fe.Servidor.Middleware >= 1.0.0",
       "IdentityServer4 >= 4.1.2",
       "IdentityServer4.Storage >= 4.1.2",
@@ -2717,6 +2833,18 @@
             },
             "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Dominio.contenido\\Fe.Dominio.contenido.csproj": {
               "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Dominio.contenido\\Fe.Dominio.contenido.csproj"
+            },
+            "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Dominio.devoluciones\\Fe.Dominio.devoluciones.csproj": {
+              "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Dominio.devoluciones\\Fe.Dominio.devoluciones.csproj"
+            },
+            "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Dominio.facturas\\Fe.Dominio.facturas.csproj": {
+              "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Dominio.facturas\\Fe.Dominio.facturas.csproj"
+            },
+            "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Dominio.pedidos\\Fe.Dominio.pedidos.csproj": {
+              "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Dominio.pedidos\\Fe.Dominio.pedidos.csproj"
+            },
+            "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Dominio.trueques\\Fe.Dominio.trueques.csproj": {
+              "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Dominio.trueques\\Fe.Dominio.trueques.csproj"
             },
             "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj": {
               "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj"

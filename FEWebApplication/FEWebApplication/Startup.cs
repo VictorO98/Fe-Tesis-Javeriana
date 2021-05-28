@@ -12,6 +12,22 @@ using FEWebApplication.Controladores.Core;
 using Fe.Core.Seguridad.Negocio;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Hosting;
+using Fe.Dominio.contenido;
+using Fe.Dominio.contenido.Datos;
+using FEWebApplication.Controladores.Dominio.Contenido;
+using FEWebApplication.Controladores.Dominio.Devolucion;
+using FEWebApplication.Controladores.Dominio.Factura;
+using FEWebApplication.Controladores.Dominio.Pedido;
+using FEWebApplication.Controladores.Dominio.Trueque;
+using Fe.Core.General;
+using Fe.Dominio.devoluciones.Negocio;
+using Fe.Dominio.devoluciones;
+using Fe.Dominio.facturas.Negocio;
+using Fe.Dominio.facturas;
+using Fe.Dominio.pedidos.Negocio;
+using Fe.Dominio.pedidos;
+using Fe.Dominio.trueques.Negocio;
+using Fe.Dominio.trueques;
 
 namespace FEWebApplication
 {
@@ -54,11 +70,31 @@ namespace FEWebApplication
 
             services.AddScoped<DbContext, ApplicationUserDbContext>();
 
-            services.AddScoped<RepoPoblacion>();
-            services.AddScoped<COGeneralBiz>();
-            services.AddScoped<COGeneralController>();
             services.AddScoped<AuthenticateController>();
+            services.AddScoped<COGeneralController>();
+            services.AddScoped<COContenidoController>();
+            services.AddScoped<DEDevolucionController>();
+            services.AddScoped<FAFacturaController>();
+            services.AddScoped<PEPedidoController>();
+            services.AddScoped<TRTruequeController>();
+
+            services.AddScoped<COGeneralBiz>();
             services.AddScoped<COSeguridadBiz>();
+            services.AddScoped<COContenidoBiz>();
+            services.AddScoped<DEDevolucionesBiz>();
+            services.AddScoped<FAFacturaBiz>();
+            services.AddScoped<PEPedidoBiz>();
+            services.AddScoped<TRTruequeBiz>();
+
+            services.AddScoped<COFachada>();
+            services.AddScoped<COGeneralFachada>();
+            services.AddScoped<DEFachada>();
+            services.AddScoped<FAFachada>();
+            services.AddScoped<PEFachada>();
+            services.AddScoped<TRFachada>();
+
+            services.AddScoped<RepoCategoria>();
+            services.AddScoped<RepoPoblacion>();
             services.AddScoped<RepoDemografia>();
 
             services.AddRazorPages();

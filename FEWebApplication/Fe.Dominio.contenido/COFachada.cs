@@ -8,9 +8,9 @@ namespace Fe.Dominio.contenido
 {
     public class COFachada
     {
-        private readonly COBiz _cObiz;
+        private readonly COContenidoBiz _cObiz;
 
-        public COFachada(COBiz cObiz)
+        public COFachada(COContenidoBiz cObiz)
         {
             _cObiz = cObiz;
         }

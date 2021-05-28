@@ -28,13 +28,16 @@
 
   <ItemGroup>
     <Folder Include="Controladores\Core\" />
-    <Folder Include="Controladores\Dominio\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Fe.Core.General\Fe.Core.General.csproj" />
     <ProjectReference Include="..\Fe.Core.Seguridad\Fe.Core.Seguridad.csproj" />
     <ProjectReference Include="..\Fe.Dominio.contenido\Fe.Dominio.contenido.csproj" />
+    <ProjectReference Include="..\Fe.Dominio.devoluciones\Fe.Dominio.devoluciones.csproj" />
+    <ProjectReference Include="..\Fe.Dominio.facturas\Fe.Dominio.facturas.csproj" />
+    <ProjectReference Include="..\Fe.Dominio.pedidos\Fe.Dominio.pedidos.csproj" />
+    <ProjectReference Include="..\Fe.Dominio.trueques\Fe.Dominio.trueques.csproj" />
     <ProjectReference Include="..\Fe.Servidor.Middleware\Fe.Servidor.Middleware.csproj" />
   </ItemGroup>
 

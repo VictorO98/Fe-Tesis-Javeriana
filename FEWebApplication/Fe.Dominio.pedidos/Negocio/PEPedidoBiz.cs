@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Fe.Dominio.facturas.Negocio
+namespace Fe.Dominio.pedidos.Negocio
 {
-    public class FAFacturaBiz
+    public class PEPedidoBiz
     {
     }
 }
