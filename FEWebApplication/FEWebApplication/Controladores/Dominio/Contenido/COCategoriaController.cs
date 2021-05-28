@@ -7,14 +7,14 @@ using Fe.Servidor.Middleware.Modelo.Entidades;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
-namespace FEWebApplication.Controladores.Contenido
+namespace FEWebApplication.Controladores.Dominio.Contenido
 {
     [Route("contenido/[controller]")]
-    public class COController : COApiController
+    public class COCategoriaController : COCategoriaApiController
     {   
         private readonly COFachada _coFachada;
 
-        public COController(COBiz cObiz, COFachada cOFachada)
+        public COCategoriaController(COFachada cOFachada)
         {
             _coFachada = cOFachada;
         }
