@@ -12,7 +12,7 @@ namespace Fe.Dominio.contenido.Datos
         internal TipoPublicacionPc GetTipoPublicacionPorID(int idPublicacion)
         {
             using FeContext context = new FeContext();
-            return (TipoPublicacionPc)context.TipoPublicacionPcs.Where(p => p.Id == idPublicacion);
+            return context.TipoPublicacionPcs.SingleOrDefault(p => p.Id == idPublicacion);
         }
     }
 }
