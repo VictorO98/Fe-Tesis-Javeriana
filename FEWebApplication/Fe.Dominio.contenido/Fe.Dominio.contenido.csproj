@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Fe.Core.Global\Fe.Core.Global.csproj" />
     <ProjectReference Include="..\Fe.Servidor.Middleware\Fe.Servidor.Middleware.csproj" />
   </ItemGroup>
 

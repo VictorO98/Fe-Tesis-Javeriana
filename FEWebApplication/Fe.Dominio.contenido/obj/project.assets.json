@@ -833,6 +833,29 @@
           "lib/netstandard2.1/System.Text.Encodings.Web.dll": {}
         }
       },
+      "Fe.Core.Global/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Dapper": "2.0.78",
+          "Dapper.Contrib": "2.0.78",
+          "IdentityServer4": "4.1.2",
+          "IdentityServer4.Storage": "4.1.2",
+          "Microsoft.AspNet.Mvc": "5.2.7",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.5",
+          "Microsoft.EntityFrameworkCore": "5.0.5",
+          "Microsoft.EntityFrameworkCore.Relational": "5.0.5",
+          "Microsoft.NETCore.App": "2.2.8",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.5.1",
+          "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.1.0"
+        },
+        "compile": {
+          "bin/placeholder/Fe.Core.Global.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Fe.Core.Global.dll": {}
+        }
+      },
       "Fe.Servidor.Middleware/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -2532,6 +2555,11 @@
         "version.txt"
       ]
     },
+    "Fe.Core.Global/1.0.0": {
+      "type": "project",
+      "path": "../Fe.Core.Global/Fe.Core.Global.csproj",
+      "msbuildProject": "../Fe.Core.Global/Fe.Core.Global.csproj"
+    },
     "Fe.Servidor.Middleware/1.0.0": {
       "type": "project",
       "path": "../Fe.Servidor.Middleware/Fe.Servidor.Middleware.csproj",
@@ -2542,6 +2570,7 @@
     ".NETCoreApp,Version=v3.1": [
       "Dapper >= 2.0.78",
       "Dapper.Contrib >= 2.0.78",
+      "Fe.Core.Global >= 1.0.0",
       "Fe.Servidor.Middleware >= 1.0.0",
       "IdentityServer4 >= 4.1.2",
       "IdentityServer4.Storage >= 4.1.2",
@@ -2591,6 +2620,9 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
+            "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Core.Global\\Fe.Core.Global.csproj": {
+              "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Core.Global\\Fe.Core.Global.csproj"
+            },
             "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj": {
               "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj"
             }
