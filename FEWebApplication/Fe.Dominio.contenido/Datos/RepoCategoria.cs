@@ -24,7 +24,6 @@ namespace Fe.Dominio.contenido.Datos
             }
             catch(Exception e)
             {
-                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = "Ocurrió un problema al intentar agregar la categoría." };
                 throw new COExcepcion("Ocurrió un problema al intentar agregar la categoría.");
             }
             return respuestaDatos;
