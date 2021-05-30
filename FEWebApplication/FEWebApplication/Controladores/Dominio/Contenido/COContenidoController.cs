@@ -51,5 +51,60 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
             }
             return respuestaDatos;
         }
+
+        [Route("GuardarPublicacion")]
+        [HttpPost]
+        public async Task<RespuestaDatos> GuardarPublicacion([FromBody] ProductosServiciosPc productosServicios)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _coFachada.GuardarPublicacion(productosServicios);
+            }
+            catch (COExcepcion e)
+            {
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
+            }
+            return respuestaDatos;
+        }
+
+        [Route("GetPublicacionPorId")]
+        [HttpGet]
+        public ProductosServiciosPc GetPublicacionPorId(int idPublicacion)
+        {
+            return _coFachada.GetPublicacionPorId(idPublicacion);
+        }
+
+        [Route("RemoverPublicacion")]
+        [HttpDelete]
+        public async Task<RespuestaDatos> RemoverPublicacion(int idPublicacion)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _coFachada.RemoverPublicacion(idPublicacion);
+            }
+            catch (COExcepcion e)
+            {
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
+            }
+            return respuestaDatos;
+        }
+
+        [Route("ModificarPublicacion")]
+        [HttpPut]
+        public async Task<RespuestaDatos> ModificarPublicacion(ProductosServiciosPc productosServicios)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _coFachada.ModificarPublicacion(productosServicios);
+            }
+            catch (COExcepcion e)
+            {
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
+            }
+            return respuestaDatos;
+        }
     }
 }

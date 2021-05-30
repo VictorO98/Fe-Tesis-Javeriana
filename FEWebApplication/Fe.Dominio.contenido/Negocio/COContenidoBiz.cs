@@ -15,10 +15,14 @@ namespace Fe.Dominio.contenido
     public class COContenidoBiz
     {
         private readonly RepoCategoria _repoCategoria;
+        private readonly RepoProducto _repoProducto;
+        private readonly RepoTipoPublicacion _repoTipoPublicacion;
 
-        public COContenidoBiz(RepoCategoria repoCategoria)
+        public COContenidoBiz(RepoCategoria repoCategoria, RepoProducto repoProducto, RepoTipoPublicacion repoTipoPublicacion)
         {
             _repoCategoria = repoCategoria;
+            _repoProducto = repoProducto;
+            _repoTipoPublicacion = repoTipoPublicacion;
         }
 
         internal List<CategoriaPc> GetCategorias()
@@ -31,6 +35,11 @@ namespace Fe.Dominio.contenido
             return _repoCategoria.GetCategoriaPorIdCategoria(idCategoria);
         }
 
+        internal TipoPublicacionPc GetTipoPublicacionPorID(int idPublicacion)
+        {
+            return _repoTipoPublicacion.GetTipoPublicacionPorID(idPublicacion);
+        }
+
         internal async Task<RespuestaDatos> GuardarCategoria(CategoriaPc categoria)
         {
             RespuestaDatos respuestaDatos;
@@ -40,8 +49,66 @@ namespace Fe.Dominio.contenido
             }
             catch(COExcepcion e)
             {
-                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
-                throw new COExcepcion("Ocurrió un problema al intentar agregar la categoría.");
+                throw e;
+            }
+            return respuestaDatos;
+        }
+
+        internal async Task<RespuestaDatos> GuardarPublicacion(ProductosServiciosPc productosServicios, DemografiaCor demografiaCor)
+        {
+            RespuestaDatos respuestaDatos;
+            if (demografiaCor != null)
+            {
+                if (GetCategoriaPorIdCategoria(productosServicios.Idcategoria) != null)
+                {
+                    if (GetTipoPublicacionPorID(productosServicios.Idtipopublicacion) != null)
+                    {
+                        try
+                        {
+                            respuestaDatos = await _repoProducto.GuardarPublicacion(productosServicios);
+                        }
+                        catch (COExcepcion e)
+                        {
+                            throw e;
+                        }
+                    }
+                    else { throw new COExcepcion("El tipo de publicación ingresado no existe."); }
+                }
+                else { throw new COExcepcion("La categoría ingresada no existe."); }
+            }
+            else { throw new COExcepcion("El usuario ingresado no existe."); }
+            return respuestaDatos;
+        }
+
+        internal ProductosServiciosPc GetPublicacionPorId(int idPublicacion)
+        {
+            return _repoProducto.GetPublicacionPorId(idPublicacion);
+        }
+
+        internal async Task<RespuestaDatos> RemoverPublicacion(int idPublicacion)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _repoProducto.RemoverPublicacion(idPublicacion);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
+
+        internal async Task<RespuestaDatos> ModificarPublicacion(ProductosServiciosPc productosServicios)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _repoProducto.ModificarPublicacion(productosServicios);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
             }
             return respuestaDatos;
         }
