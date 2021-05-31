@@ -21,7 +21,6 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
         public int Idcategoria { get; set; }
         public int Idtipopublicacion { get; set; }
         public int Idusuario { get; set; }
-        public int? Nombre { get; set; }
         public string Descripcion { get; set; }
         public int? Cantidadtotal { get; set; }
         public DateTime? Tiempoentrega { get; set; }
@@ -32,6 +31,7 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
         public decimal? Calificacionpromedio { get; set; }
         public int? Habilitatrueque { get; set; }
         public DateTime? Creacion { get; set; }
+        public string Nombre { get; set; }
 
         public virtual CategoriaPc IdcategoriaNavigation { get; set; }
         public virtual TipoPublicacionPc IdtipopublicacionNavigation { get; set; }

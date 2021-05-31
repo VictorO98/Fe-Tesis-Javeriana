@@ -9,3 +9,4 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\obj
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\obj\Debug\netcoreapp3.1\Fe.Dominio.trueques.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\obj\Debug\netcoreapp3.1\Fe.Dominio.trueques.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\obj\Debug\netcoreapp3.1\Fe.Dominio.trueques.genruntimeconfig.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\obj\Debug\netcoreapp3.1\Fe.Dominio.trueques.csprojAssemblyReference.cache

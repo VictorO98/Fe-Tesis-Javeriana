@@ -13,11 +13,7 @@ namespace Fe.Servidor.Middleware.Dapper
 
         public COMicroOrm(IConfiguration configuration)
         {
-
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-            stringConnection = "server=157.230.83.145;port=5432;database=comunidad-fe-db;uid=postgres;password=NoTieneContra123";
-            //stringConnection = configuration.GetConnectionString("ConexionString");
-
+            stringConnection = configuration.GetConnectionString("ConexionString");
         }
 
         public IDbConnection GetConnection()

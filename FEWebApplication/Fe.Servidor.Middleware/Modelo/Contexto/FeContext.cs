@@ -67,6 +67,9 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
             {
                 entity.ToTable("categoria_pc");
 
+                entity.HasIndex(e => e.Nombre, "ix_nombre_categoria")
+                    .IsUnique();
+
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .UseIdentityAlwaysColumn();
@@ -719,7 +722,9 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
 
                 entity.Property(e => e.Idusuario).HasColumnName("idusuario");
 
-                entity.Property(e => e.Nombre).HasColumnName("nombre");
+                entity.Property(e => e.Nombre)
+                    .HasMaxLength(30)
+                    .HasColumnName("nombre");
 
                 entity.Property(e => e.Preciounitario).HasColumnName("preciounitario");
 

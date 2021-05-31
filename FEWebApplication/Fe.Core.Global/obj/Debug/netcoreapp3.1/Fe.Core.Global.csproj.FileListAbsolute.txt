@@ -9,3 +9,4 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Global\obj\Debu
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Global\obj\Debug\netcoreapp3.1\Fe.Core.Global.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Global\obj\Debug\netcoreapp3.1\Fe.Core.Global.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Global\obj\Debug\netcoreapp3.1\Fe.Core.Global.genruntimeconfig.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Global\obj\Debug\netcoreapp3.1\Fe.Core.Global.csprojAssemblyReference.cache

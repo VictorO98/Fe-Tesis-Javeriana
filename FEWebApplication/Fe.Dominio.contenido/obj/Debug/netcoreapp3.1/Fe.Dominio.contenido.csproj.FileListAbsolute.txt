@@ -13,3 +13,7 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.contenido\ob
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.contenido\obj\Debug\netcoreapp3.1\Fe.Dominio.contenido.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.contenido\obj\Debug\netcoreapp3.1\Fe.Dominio.contenido.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.contenido\obj\Debug\netcoreapp3.1\Fe.Dominio.contenido.genruntimeconfig.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.contenido\bin\Debug\netcoreapp3.1\Fe.Core.General.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.contenido\bin\Debug\netcoreapp3.1\Fe.Core.Global.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.contenido\bin\Debug\netcoreapp3.1\Fe.Core.General.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.contenido\bin\Debug\netcoreapp3.1\Fe.Core.Global.pdb

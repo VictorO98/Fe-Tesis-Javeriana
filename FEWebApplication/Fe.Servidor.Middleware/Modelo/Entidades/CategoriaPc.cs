@@ -14,7 +14,7 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
 
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public DateTime Creacion { get; set; } = DateTime.Now;
+        public DateTime? Creacion { get; set; }
 
         public virtual ICollection<ProductosServiciosPc> ProductosServiciosPcs { get; set; }
     }

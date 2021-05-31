@@ -9,3 +9,4 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.pedidos\obj\
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.pedidos\obj\Debug\netcoreapp3.1\Fe.Dominio.pedidos.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.pedidos\obj\Debug\netcoreapp3.1\Fe.Dominio.pedidos.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.pedidos\obj\Debug\netcoreapp3.1\Fe.Dominio.pedidos.genruntimeconfig.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.pedidos\obj\Debug\netcoreapp3.1\Fe.Dominio.pedidos.csprojAssemblyReference.cache

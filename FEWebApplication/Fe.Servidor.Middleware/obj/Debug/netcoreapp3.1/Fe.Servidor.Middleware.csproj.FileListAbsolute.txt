@@ -9,3 +9,4 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\obj\Debug\netcoreapp3.1\Fe.Servidor.Middleware.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\obj\Debug\netcoreapp3.1\Fe.Servidor.Middleware.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\obj\Debug\netcoreapp3.1\Fe.Servidor.Middleware.genruntimeconfig.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\obj\Debug\netcoreapp3.1\Fe.Servidor.Middleware.csprojAssemblyReference.cache

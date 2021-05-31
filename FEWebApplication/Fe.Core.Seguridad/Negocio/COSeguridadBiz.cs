@@ -5,6 +5,7 @@ using Fe.Servidor.Middleware.Contratos.Core.Seguridad;
 using Fe.Servidor.Middleware.Modelo.Entidades;
 using Microsoft.AspNetCore.Identity;
 using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,16 @@ namespace Fe.Core.Seguridad.Negocio
         {
             _userManager = userManager;
             _repoDemografia = repoDemografia;
+        }
+
+        private async Task<JwtSecurityToken> GenerarTokenAcceso(IdentityUser user)
+        {
+            return null;
+        }
+
+        public async Task<RespuestaLogin> RefreshToken(string token)
+        {
+            return null;
         }
 
         public async Task<ApplicationUser> RegistrarUsuario(RegisterDatos model)

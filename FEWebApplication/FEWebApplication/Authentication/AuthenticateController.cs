@@ -19,37 +19,50 @@ namespace FEWebApplication.Authentication
         private readonly COSeguridadBiz _seguridadBiz;
         private readonly IConfiguration _configuration;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        //private readonly WorkflowMensaje _workflowMensaje;
 
         public AuthenticateController(COSeguridadBiz seguridadBiz, IConfiguration configuration
-            , UserManager<IdentityUser> userManager)
+            , UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _seguridadBiz = seguridadBiz;
             _configuration = configuration;
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("CreateRole")]
-        public async Task<RespuestaDatos> CreateRole(CreateRoleBindingModel model)
+        public async Task CreateRole()
         {
-            return null;
-           /* if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR , Mensaje = "No se pudo agregar el modelo" } ;
+                bool x = await _roleManager.RoleExistsAsync("Administrador");
+                if (!x)
+                {
+                    var role = new IdentityRole();
+                    role.Name = "Administrador";
+                    await _roleManager.CreateAsync(role);
+                }
+
+                x = await _roleManager.RoleExistsAsync("Emprendedor");
+                if (!x)
+                {
+                    var role = new IdentityRole();
+                    role.Name = "Emprendedor";
+                    await _roleManager.CreateAsync(role);
+                }
+
+                x = await _roleManager.RoleExistsAsync("Usuario");
+                if (!x)
+                {
+                    var role = new IdentityRole();
+                    role.Name = "Usuario";
+                    await _roleManager.CreateAsync(role);
+                }
             }
 
-            var role = new IdentityRole { Name = model.Name };
-
-            var result = await this.AppRoleManager.CreateAsync(role);
-
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
-
-            Uri locationHeader = new Uri(Url.Link("GetRoleById", new { id = role.Id }));
-
-            return Created(locationHeader, TheModelFactory.Create(role));*/
+            
         }
 
         [HttpGet]
@@ -59,6 +72,7 @@ namespace FEWebApplication.Authentication
             return null; 
         }
 
+        //TODO: Implementar el envio de correos para los usuarios que se registran.
         [HttpPost]
         [Route("Register")]
         public async Task<RespuestaDatos> Register([FromBody] RegisterDatos model)
@@ -70,8 +84,8 @@ namespace FEWebApplication.Authentication
             {
                 var urlApp = _configuration["App:Url"];
                 //Generar token de confirmación
-                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            /*    var linkConfirmation = urlApp + Url.Action("ConfirmarCuenta", "Authenticate", new
+                /*var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var linkConfirmation = urlApp + Url.Action("ConfirmarCuenta", "Authenticate", new
                 {
                     userId = user.Email,
                     code
@@ -101,11 +115,11 @@ namespace FEWebApplication.Authentication
                         Creacion = DateTime.Now,
                         Tipoerror = COErrorLog.ENVIO_CORREO
                     });
-                    return new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = $@"Registro exitoso!!! Ocurrió un problema al enviar el correo de confirmación. Pongase en contacto con servicio al cliente" };
+                    return new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = $@"Ocurrió un problema al enviar el correo de confirmación. Pongase en contacto con servicio al cliente" };
                 }
                 catch (Exception e1)
                 {
-                    return new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = $@"Registro exitoso!!! Ocurrió un problema al enviar el correo de confirmación. Pongase en contacto con servicio al cliente" };
+                    return new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = $@"Ocurrió un problema al enviar el correo de confirmación. Pongase en contacto con servicio al cliente" };
                 }
             }
         }

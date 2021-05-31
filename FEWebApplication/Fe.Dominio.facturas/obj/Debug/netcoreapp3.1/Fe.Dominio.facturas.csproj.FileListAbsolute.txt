@@ -9,3 +9,4 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\obj
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\obj\Debug\netcoreapp3.1\Fe.Dominio.facturas.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\obj\Debug\netcoreapp3.1\Fe.Dominio.facturas.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\obj\Debug\netcoreapp3.1\Fe.Dominio.facturas.genruntimeconfig.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\obj\Debug\netcoreapp3.1\Fe.Dominio.facturas.csprojAssemblyReference.cache

@@ -91,3 +91,15 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\De
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Debug\netcoreapp3.1\FEWebApplication.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Debug\netcoreapp3.1\FEWebApplication.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Debug\netcoreapp3.1\FEWebApplication.genruntimeconfig.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\netcoreapp3.1\Fe.Dominio.devoluciones.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\netcoreapp3.1\Fe.Dominio.facturas.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\netcoreapp3.1\Fe.Dominio.pedidos.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\netcoreapp3.1\Fe.Dominio.trueques.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\netcoreapp3.1\Fe.Dominio.devoluciones.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\netcoreapp3.1\Fe.Dominio.facturas.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\netcoreapp3.1\Fe.Dominio.pedidos.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\netcoreapp3.1\Fe.Dominio.trueques.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\netcoreapp3.1\MailKit.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\netcoreapp3.1\MimeKit.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\netcoreapp3.1\NETCore.MailKit.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll

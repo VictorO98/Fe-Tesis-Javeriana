@@ -9,3 +9,4 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.devoluciones
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.devoluciones\obj\Debug\netcoreapp3.1\Fe.Dominio.devoluciones.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.devoluciones\obj\Debug\netcoreapp3.1\Fe.Dominio.devoluciones.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.devoluciones\obj\Debug\netcoreapp3.1\Fe.Dominio.devoluciones.genruntimeconfig.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.devoluciones\obj\Debug\netcoreapp3.1\Fe.Dominio.devoluciones.csprojAssemblyReference.cache
