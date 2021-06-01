@@ -22,16 +22,18 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
         public int Idtipopublicacion { get; set; }
         public int Idusuario { get; set; }
         public string Descripcion { get; set; }
-        public int? Cantidadtotal { get; set; }
-        public DateTime? Tiempoentrega { get; set; }
-        public DateTime? Tiempogarantia { get; set; }
-        public int? Preciounitario { get; set; }
+        public int Cantidadtotal { get; set; }
+        public DateTime Tiempoentrega { get; set; }
+        public DateTime Tiempogarantia { get; set; }
+        public int Preciounitario { get; set; }
         public decimal? Descuento { get; set; }
         public string Estado { get; set; }
-        public decimal? Calificacionpromedio { get; set; }
-        public int? Habilitatrueque { get; set; }
-        public DateTime? Creacion { get; set; }
+        public decimal Calificacionpromedio { get; set; }
+        public int Habilitatrueque { get; set; }
+        public DateTime Creacion { get; set; }
         public string Nombre { get; set; }
+        public DateTime Modificacion { get; set; }
+        public string Urlimagenproductoservicio { get; set; }
 
         public virtual CategoriaPc IdcategoriaNavigation { get; set; }
         public virtual TipoPublicacionPc IdtipopublicacionNavigation { get; set; }
