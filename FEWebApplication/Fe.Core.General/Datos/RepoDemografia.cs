@@ -20,5 +20,11 @@ namespace Fe.Core.General.Datos
             using FeContext context = new FeContext();
             return context.DemografiaCors.Where(d => d.Id == idDemografia).FirstOrDefault();
         }
+
+        public DemografiaCor GetDemografiaPorEmail(string emailDemografia)
+        {
+            using FeContext context = new FeContext();
+            return context.DemografiaCors.Where(d => d.Email == emailDemografia).FirstOrDefault();
+        }
     }
 }
