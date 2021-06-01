@@ -65,15 +65,14 @@ namespace FEWebApplication.Authentication
             
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("Login")]
-        public async Task<RespuestaLogin> Login()
+        public async Task<RespuestaLogin> Login([FromBody] LoginDatos model)
         {
-            return null; 
+            return await _seguridadBiz.Login(model);
         }
 
         //TODO: Implementar el envio de correos para los usuarios que se registran.
-
         [HttpPost]
         [Route("Register")]
         public async Task<RespuestaDatos> Register([FromBody] RegisterDatos model)
@@ -116,11 +115,11 @@ namespace FEWebApplication.Authentication
                         Creacion = DateTime.Now,
                         Tipoerror = COErrorLog.ENVIO_CORREO
                     });
-                    return new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = $@"Ocurrió un problema al enviar el correo de confirmación. Pongase en contacto con servicio al cliente" };
+                    return new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = $@"Se completo el registro!! Ocurrió un problema al enviar el correo de confirmación. Pongase en contacto con servicio al cliente" };
                 }
                 catch (Exception e1)
                 {
-                    return new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = $@"Ocurrió un problema al enviar el correo de confirmación. Pongase en contacto con servicio al cliente" };
+                    return new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = $@"Se completo el registro!! Ocurrió un problema al enviar el correo de confirmación. Pongase en contacto con servicio al cliente" };
                 }
             }
         }

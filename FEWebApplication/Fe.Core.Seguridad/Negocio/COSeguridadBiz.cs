@@ -31,6 +31,25 @@ namespace Fe.Core.Seguridad.Negocio
             _configuration = configuration;
         }
 
+        public async Task<RespuestaLogin> RefreshToken(string token)
+        {
+            JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
+            var tokenS = handler.ReadToken(token) as JwtSecurityToken;
+            var email = tokenS.Claims.First(claim => claim.Type == "email").Value;
+            if (string.IsNullOrEmpty(email))
+                throw new COExcepcion("El token no es válido");
+
+            var jwtToken = await GenerarTokenAcceso(await _userManager.FindByEmailAsync(email));
+
+            return new RespuestaLogin
+            {
+                Codigo = COCodigoRespuesta.OK,
+                Mensaje = "Se refrescó el token correctamente. ",
+                Token = new JwtSecurityTokenHandler().WriteToken(jwtToken),
+                Expire = jwtToken.ValidTo
+            };
+        }
+
         private async Task<JwtSecurityToken> GenerarTokenAcceso(IdentityUser user)
         {
             var userRoles = await _userManager.GetRolesAsync(user);
@@ -65,24 +84,36 @@ namespace Fe.Core.Seguridad.Negocio
                 );
         }
 
-        public async Task<RespuestaLogin> RefreshToken(string token)
+        public async Task<RespuestaLogin> Login(LoginDatos model)
         {
-            JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
-            var tokenS = handler.ReadToken(token) as JwtSecurityToken;
-            var email = tokenS.Claims.First(claim => claim.Type == "email").Value;
-            if (string.IsNullOrEmpty(email))
-                throw new COExcepcion("El token no es válido");
+            var user = await _userManager.FindByEmailAsync(model.Email);
 
-            var jwtToken = await GenerarTokenAcceso(await _userManager.FindByEmailAsync(email));
+            if (user == null)
+                throw new COExcepcion("El email no se encuentra registrado. ");
 
-            return new RespuestaLogin
+            if (await _userManager.CheckPasswordAsync(user, model.Password))
             {
-                Codigo = COCodigoRespuesta.OK,
-                Mensaje = "Se refrescó el token correctamente. ",
-                Token = new JwtSecurityTokenHandler().WriteToken(jwtToken),
-                Expire = jwtToken.ValidTo
-            };
+                // TODO : Queda pendiente resolver la confirmación del usuario para desbloquear esta validación
+                /* if (!user.EmailConfirmed)
+                     return new RespuestaLogin
+                     {
+                         Codigo = 11,
+                         Mensaje = "Por favor confirme la cuenta. El email fue enviado a su correo electrónico. ¿Desea reenviar el mensaje de confirmación?"
+                     };*/
+                var token = await GenerarTokenAcceso(user);
+
+                return new RespuestaLogin
+                {
+                    Codigo = COCodigoRespuesta.OK,
+                    Mensaje = "Se inició sesión correctamente",
+                    Token = new JwtSecurityTokenHandler().WriteToken(token),
+                    Expire = token.ValidTo
+                };
+            }
+            throw new COExcepcion("La contraseña es incorrecta. ");
         }
+
+        
 
         public async Task<ApplicationUser> RegistrarUsuario(RegisterDatos model)
         {

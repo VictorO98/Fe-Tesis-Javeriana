@@ -96,6 +96,7 @@ namespace FEWebApplication
             services.AddScoped<RepoCategoria>();
             services.AddScoped<RepoPoblacion>();
             services.AddScoped<RepoDemografia>();
+            services.AddScoped<RepoDocumento>();
             services.AddScoped<RepoTipoPublicacion>();
             services.AddScoped<RepoProducto>();
 
