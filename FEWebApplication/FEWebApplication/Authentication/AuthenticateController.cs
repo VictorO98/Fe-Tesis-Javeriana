@@ -73,6 +73,7 @@ namespace FEWebApplication.Authentication
         }
 
         //TODO: Implementar el envio de correos para los usuarios que se registran.
+
         [HttpPost]
         [Route("Register")]
         public async Task<RespuestaDatos> Register([FromBody] RegisterDatos model)
