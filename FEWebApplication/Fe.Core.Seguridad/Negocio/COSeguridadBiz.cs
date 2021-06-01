@@ -4,9 +4,13 @@ using Fe.Core.Global.Errores;
 using Fe.Servidor.Middleware.Contratos.Core.Seguridad;
 using Fe.Servidor.Middleware.Modelo.Entidades;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,21 +20,68 @@ namespace Fe.Core.Seguridad.Negocio
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RepoDemografia _repoDemografia;
+        private readonly RepoDocumento _repoDocumento;
+        private readonly IConfiguration _configuration;
 
-        public COSeguridadBiz(UserManager<IdentityUser> userManager, RepoDemografia repoDemografia) 
+        public COSeguridadBiz(UserManager<IdentityUser> userManager, RepoDemografia repoDemografia, RepoDocumento repoDocumento, IConfiguration configuration) 
         {
             _userManager = userManager;
             _repoDemografia = repoDemografia;
+            _repoDocumento = repoDocumento;
+            _configuration = configuration;
         }
 
         private async Task<JwtSecurityToken> GenerarTokenAcceso(IdentityUser user)
         {
-            return null;
+            var userRoles = await _userManager.GetRolesAsync(user);
+            var demografia = _repoDemografia.GetDemografiaPorEmail(user.Email);
+            var tipoDocumento = _repoDocumento.GetTipoDocumentoPorId(demografia.Tipodocumentocorid);
+            var authClaims = new List<Claim>
+                {
+                    new Claim("email", user.Email),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim("nombres", demografia.Nombre),
+                    new Claim("apellidos", demografia.Apellido),
+                    new Claim("telefono", demografia.Telefono.ToString()),
+                    new Claim("id", demografia.Id.ToString()),
+                    new Claim("tipoDocumento", tipoDocumento.Nombre),
+                    new Claim("documento", demografia.Numerodocumento.ToString())
+
+                };
+
+            foreach (var userRole in userRoles)
+            {
+                authClaims.Add(new Claim("roles", userRole));
+            }
+
+            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
+
+            return new JwtSecurityToken(
+                issuer: _configuration["JWT:ValidIssuer"],
+                audience: _configuration["JWT:ValidAudience"],
+                expires: DateTime.Now.AddDays(60),
+                claims: authClaims,
+                signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
+                );
         }
 
         public async Task<RespuestaLogin> RefreshToken(string token)
         {
-            return null;
+            JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
+            var tokenS = handler.ReadToken(token) as JwtSecurityToken;
+            var email = tokenS.Claims.First(claim => claim.Type == "email").Value;
+            if (string.IsNullOrEmpty(email))
+                throw new COExcepcion("El token no es válido");
+
+            var jwtToken = await GenerarTokenAcceso(await _userManager.FindByEmailAsync(email));
+
+            return new RespuestaLogin
+            {
+                Codigo = COCodigoRespuesta.OK,
+                Mensaje = "Se refrescó el token correctamente. ",
+                Token = new JwtSecurityTokenHandler().WriteToken(jwtToken),
+                Expire = jwtToken.ValidTo
+            };
         }
 
         public async Task<ApplicationUser> RegistrarUsuario(RegisterDatos model)
