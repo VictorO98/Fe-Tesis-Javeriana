@@ -66,9 +66,9 @@ namespace Fe.Dominio.contenido
             return respuestaDatos;
         }
 
-        public ProductosServiciosPc GetPublicacionPorId(int idPublicacion)
+        public ProductosServiciosPc GetPublicacionPorIdPublicacion(int idPublicacion)
         {
-            return _cOContenidoBiz.GetPublicacionPorId(idPublicacion);
+            return _cOContenidoBiz.GetPublicacionPorIdPublicacion(idPublicacion);
         }
         
         public async Task<RespuestaDatos> RemoverPublicacion(int idPublicacion)
@@ -125,6 +125,30 @@ namespace Fe.Dominio.contenido
                 throw e;
             }
             return respuestaDatos;
+        }
+
+        public async Task<RespuestaDatos> GuardarResena(ResenasPc resena)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = respuestaDatos = await _cOContenidoBiz.GuardarResena(resena);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
+
+        public ResenasPc GetResenaPorIdResena(int idResena)
+        {
+            return _cOContenidoBiz.GetResenaPorIdResena(idResena);
+        }
+
+        public ICollection<ResenasPc> GetResenasPorIdPublicacion(int idPublicacion)
+        {
+            return _cOContenidoBiz.GetResenasPorIdPublicacion(idPublicacion);
         }
     }
 }

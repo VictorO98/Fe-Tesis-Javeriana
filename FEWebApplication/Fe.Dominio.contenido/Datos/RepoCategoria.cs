@@ -50,6 +50,7 @@ namespace Fe.Dominio.contenido.Datos
             {
                 try
                 {
+                    context.CategoriaPcs.Attach(categoria);
                     categoria.Nombre = nuevaCategoria.Nombre;
                     context.SaveChanges();
                     respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "Categoría modificada exitosamente." };
@@ -80,7 +81,7 @@ namespace Fe.Dominio.contenido.Datos
             }
             catch (Exception e)
             {
-                throw new COExcepcion("Ocurrió un problema al intentar eliminar la Categoría");
+                throw new COExcepcion("Ocurrió un problema al intentar eliminar la categoría");
             }
             return respuestaDatos;
         }

@@ -1,14 +1,10 @@
-using Fe.Servidor.Middleware.Modelo.Contexto;
 using Fe.Servidor.Middleware.Modelo.Entidades;
 using Fe.Dominio.contenido.Datos;
 using System.Collections.Generic;
-using System.Linq;
-using System;
-using System.Text;
 using Fe.Core.Global.Errores;
 using System.Threading.Tasks;
 using Fe.Servidor.Middleware.Contratos.Core;
-using Fe.Core.Global.Constantes;
+using System;
 
 namespace Fe.Dominio.contenido
 {
@@ -17,12 +13,15 @@ namespace Fe.Dominio.contenido
         private readonly RepoCategoria _repoCategoria;
         private readonly RepoProducto _repoProducto;
         private readonly RepoTipoPublicacion _repoTipoPublicacion;
+        private readonly RepoResena _repoResena;
 
-        public COContenidoBiz(RepoCategoria repoCategoria, RepoProducto repoProducto, RepoTipoPublicacion repoTipoPublicacion)
+        public COContenidoBiz(RepoCategoria repoCategoria, RepoProducto repoProducto, RepoTipoPublicacion repoTipoPublicacion, 
+            RepoResena repoResena)
         {
             _repoCategoria = repoCategoria;
             _repoProducto = repoProducto;
             _repoTipoPublicacion = repoTipoPublicacion;
+            _repoResena = repoResena;
         }
 
         internal List<CategoriaPc> GetCategorias()
@@ -80,9 +79,9 @@ namespace Fe.Dominio.contenido
             return respuestaDatos;
         }
 
-        internal ProductosServiciosPc GetPublicacionPorId(int idPublicacion)
+        internal ProductosServiciosPc GetPublicacionPorIdPublicacion(int idPublicacion)
         {
-            return _repoProducto.GetPublicacionPorId(idPublicacion);
+            return _repoProducto.GetPublicacionPorIdPublicacion(idPublicacion);
         }
 
         internal async Task<RespuestaDatos> RemoverPublicacion(int idPublicacion)
@@ -133,6 +132,47 @@ namespace Fe.Dominio.contenido
             try
             {
                 respuestaDatos = await _repoCategoria.ModificarCategoria(categoria);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
+
+        internal ResenasPc GetResenaPorIdResena(int idResena)
+        {
+            return _repoResena.GetResenaPorIdResena(idResena);
+        }
+
+        internal List<ResenasPc> GetResenasPorIdPublicacion(int idPublicacion)
+        {
+            return _repoResena.GetResenasPorIdPublicacion(idPublicacion);
+        }
+
+        internal async Task<RespuestaDatos> GuardarResena(ResenasPc resena)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                ProductosServiciosPc publicacion = _repoProducto.GetPublicacionPorIdPublicacion(resena.Idpublicacion);
+                if (publicacion != null)
+                {
+                    respuestaDatos = await _repoResena.GuardarResena(resena);
+                    try
+                    {
+                        decimal calificacion = _repoResena.GetCalificacionPromedioPorIdPublicacion(resena.Idpublicacion);
+                        await _repoProducto.ModificarCalificacion(publicacion.Id, calificacion);
+                    }
+                    catch (COExcepcion e)
+                    {
+                        throw e;
+                    }
+                }
+                else
+                {
+                    throw new COExcepcion("La publicación ingresada no existe");
+                }
             }
             catch (COExcepcion e)
             {
