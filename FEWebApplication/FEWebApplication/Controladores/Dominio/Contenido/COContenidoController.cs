@@ -68,11 +68,11 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
             return respuestaDatos;
         }
 
-        [Route("GetPublicacionPorId")]
+        [Route("GetPublicacionPorIdPublicacion")]
         [HttpGet]
-        public ProductosServiciosPc GetPublicacionPorId(int idPublicacion)
+        public ProductosServiciosPc GetPublicacionPorIdPublicacion(int idPublicacion)
         {
-            return _coFachada.GetPublicacionPorId(idPublicacion);
+            return _coFachada.GetPublicacionPorIdPublicacion(idPublicacion);
         }
 
         [Route("RemoverPublicacion")]
@@ -93,7 +93,7 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
 
         [Route("ModificarPublicacion")]
         [HttpPut]
-        public async Task<RespuestaDatos> ModificarPublicacion(ProductosServiciosPc productosServicios)
+        public async Task<RespuestaDatos> ModificarPublicacion([FromBody] ProductosServiciosPc productosServicios)
         {
             RespuestaDatos respuestaDatos;
             try
@@ -105,6 +105,68 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
             }
             return respuestaDatos;
+        }
+
+        [Route("RemoverCategoria")]
+        [HttpDelete]
+        public async Task<RespuestaDatos> RemoverCategoria(int idCategoria)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _coFachada.RemoverCategoria(idCategoria);
+            }
+            catch (COExcepcion e)
+            {
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
+            }
+            return respuestaDatos;
+        }
+
+        [Route("ModificarCategoria")]
+        [HttpPut]
+        public async Task<RespuestaDatos> ModificarCategoria([FromBody] CategoriaPc categoria)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _coFachada.ModificarCategoria(categoria);
+            }
+            catch (COExcepcion e)
+            {
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
+            }
+            return respuestaDatos;
+        }
+
+        [Route("GuardarResena")]
+        [HttpPost]
+        public async Task<RespuestaDatos> GuardarResena([FromBody] ResenasPc resena)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _coFachada.GuardarResena(resena);
+            }
+            catch (COExcepcion e)
+            {
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
+            }
+            return respuestaDatos;
+        }
+
+        [Route("GetResenaPorIdResena")]
+        [HttpGet]
+        public ResenasPc GetResenaPorIdResena(int idResena)
+        {
+            return _coFachada.GetResenaPorIdResena(idResena);
+        }
+
+        [Route("GetResenasPorIdPublicacion")]
+        [HttpGet]
+        public ICollection<ResenasPc> GetResenasPorIdPublicacion(int idPublicacion)
+        {
+            return _coFachada.GetResenasPorIdPublicacion(idPublicacion);
         }
     }
 }
