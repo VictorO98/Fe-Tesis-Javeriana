@@ -3,8 +3,9 @@ using Fe.Dominio.contenido.Datos;
 using System.Collections.Generic;
 using Fe.Core.Global.Errores;
 using System.Threading.Tasks;
-using Fe.Servidor.Middleware.Contratos.Core;
 using System;
+using Fe.Servidor.Middleware.Contratos.Core;
+using Fe.Servidor.Middleware.Contratos.Dominio.Contenido;
 
 namespace Fe.Dominio.contenido
 {
@@ -222,6 +223,35 @@ namespace Fe.Dominio.contenido
         internal List<PreguntasRespuestasPc> GetPreguntasyRespuestasPorIdPublicacion(int idPublicacion)
         {
             return _repoPyR.GetPreguntasyRespuestasPorIdPublicacion(idPublicacion);
+        }
+
+        internal ContratoPc DesplegarPublicacion(int idPublicacion)
+        {
+            ProductosServiciosPc publicacion = _repoProducto.GetPublicacionPorIdPublicacion(idPublicacion);
+            ContratoPc contrato = new ContratoPc();
+            if (publicacion != null)
+            {
+                contrato.Id = publicacion.Id;
+                contrato.Nombre = publicacion.Nombre;
+                contrato.Habilitatrueque = publicacion.Habilitatrueque;
+                contrato.Cantidadtotal = publicacion.Cantidadtotal;
+                contrato.Descripcion = publicacion.Descripcion;
+                contrato.Descuento = publicacion.Descuento;
+                contrato.Preciounitario = publicacion.Preciounitario;
+                contrato.Urlimagenproductoservicio = publicacion.Urlimagenproductoservicio;
+                contrato.Tiempoentrega = publicacion.Tiempoentrega;
+                contrato.Tiempogarantia = publicacion.Tiempogarantia;
+                contrato.Calificacionpromedio = publicacion.Calificacionpromedio;
+                contrato.NombreCategoria = _repoCategoria.GetCategoriaPorIdCategoria(publicacion.Idcategoria).Nombre;
+                contrato.TipoPublicacion = _repoTipoPublicacion.GetTipoPublicacionPorID(publicacion.Idtipopublicacion).Nombre;
+                contrato.Resenas = _repoResena.GetResenasPorIdPublicacion(idPublicacion);
+                contrato.PreguntasRespuestas = _repoPyR.GetPreguntasyRespuestasPorIdPublicacion(idPublicacion);
+            }
+            else
+            {
+                throw new COExcepcion("La publicación ingresada no existe.");
+            }
+            return contrato;
         }
     }
 }

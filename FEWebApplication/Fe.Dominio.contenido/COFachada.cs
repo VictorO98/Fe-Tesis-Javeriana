@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Fe.Servidor.Middleware.Contratos.Core;
 using Fe.Core.Global.Constantes;
 using Fe.Core.General;
+using Fe.Servidor.Middleware.Contratos.Dominio.Contenido;
 
 namespace Fe.Dominio.contenido
 {
@@ -182,6 +183,11 @@ namespace Fe.Dominio.contenido
         public List<PreguntasRespuestasPc> GetPreguntasyRespuestasPorIdPublicacion(int idPublicacion)
         {
             return _cOContenidoBiz.GetPreguntasyRespuestasPorIdPublicacion(idPublicacion);
+        }
+
+        public ContratoPc DesplegarPublicacion(int idPublicacion)
+        {
+            return _cOContenidoBiz.DesplegarPublicacion(idPublicacion);
         }
     }
 }

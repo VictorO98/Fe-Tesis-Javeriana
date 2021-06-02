@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using FEWebApplication.Controladores.Core;
 using Fe.Servidor.Middleware.Contratos.Core;
 using System.Threading.Tasks;
+using Fe.Servidor.Middleware.Contratos.Dominio.Contenido;
 
 namespace FEWebApplication.Controladores.Dominio.Contenido
 {
@@ -54,6 +55,7 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         }
 
         // TODO: Decodificacion de JWT para validar el usuario mediante el claim del ID
+        // TODO: Agregar método para las imágenes
         [Route("GuardarPublicacion")]
         [HttpPost]
         public async Task<RespuestaDatos> GuardarPublicacion([FromBody] ProductosServiciosPc productosServicios)
@@ -211,6 +213,13 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
             }
             return respuestaDatos;
+        }
+
+        [Route("DesplegarPublicacion")]
+        [HttpGet]
+        public ContratoPc DesplegarPublicacion(int idPublicacion)
+        {
+            return _coFachada.DesplegarPublicacion(idPublicacion);
         }
     }
 }
