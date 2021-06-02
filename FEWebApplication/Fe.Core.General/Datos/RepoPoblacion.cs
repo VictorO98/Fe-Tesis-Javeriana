@@ -16,7 +16,7 @@ namespace Fe.Core.General.Datos
             return feContext.EstadoPoblacionCors.ToList();
         }
 
-        public List<PoblacionCor> GetPoblacionPorIdEstado(int idEstado)
+        internal List<PoblacionCor> GetPoblacionPorIdEstado(int idEstado)
         {
             using FeContext context = new FeContext();
             return context.PoblacionCors.Where(p => p.Estado == COEstados.VIGENTE && p.Idestadopoblacion == idEstado).ToList();
