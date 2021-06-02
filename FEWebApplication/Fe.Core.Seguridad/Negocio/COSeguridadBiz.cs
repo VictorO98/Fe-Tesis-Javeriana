@@ -67,7 +67,7 @@ namespace Fe.Core.Seguridad.Negocio
                     new Claim("documento", demografia.Numerodocumento.ToString())
 
                 };
-
+             
             foreach (var userRole in userRoles)
             {
                 authClaims.Add(new Claim("roles", userRole));
