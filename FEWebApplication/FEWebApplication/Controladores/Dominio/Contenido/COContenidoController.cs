@@ -106,5 +106,37 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
             }
             return respuestaDatos;
         }
+
+        [Route("RemoverCategoria")]
+        [HttpDelete]
+        public async Task<RespuestaDatos> RemoverCategoria(int idCategoria)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _coFachada.RemoverCategoria(idCategoria);
+            }
+            catch (COExcepcion e)
+            {
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
+            }
+            return respuestaDatos;
+        }
+
+        [Route("ModificarCategoria")]
+        [HttpPut]
+        public async Task<RespuestaDatos> ModificarCategoria(CategoriaPc categoria)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _coFachada.ModificarCategoria(categoria);
+            }
+            catch (COExcepcion e)
+            {
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
+            }
+            return respuestaDatos;
+        }
     }
 }

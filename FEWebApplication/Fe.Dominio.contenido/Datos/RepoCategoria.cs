@@ -40,5 +40,49 @@ namespace Fe.Dominio.contenido.Datos
             using FeContext context = new FeContext();
             return context.CategoriaPcs.SingleOrDefault(p => p.Id == idCategoria);
         }
+
+        internal async Task<RespuestaDatos> ModificarCategoria(CategoriaPc nuevaCategoria)
+        {
+            using FeContext context = new FeContext();
+            RespuestaDatos respuestaDatos;
+            CategoriaPc categoria = GetCategoriaPorIdCategoria(nuevaCategoria.Id);
+            if (categoria != null)
+            {
+                try
+                {
+                    categoria.Nombre = nuevaCategoria.Nombre;
+                    context.SaveChanges();
+                    respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "Categoría modificada exitosamente." };
+                }
+                catch (COExcepcion e)
+                {
+                    throw new COExcepcion("Ocurrió un problema al intentar modificar la categoría.");
+                }
+            }
+            else
+            {
+                throw new COExcepcion("La categoría no existe");
+            }
+            return respuestaDatos;
+        }
+
+        internal async Task<RespuestaDatos> RemoverCategoria(int idCategoria)
+        {
+            using FeContext context = new FeContext();
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                CategoriaPc categoria = new CategoriaPc { Id = idCategoria };
+                context.CategoriaPcs.Attach(categoria);
+                context.CategoriaPcs.Remove(categoria);
+                context.SaveChanges();
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "Categoría eliminada exitosamente." };
+            }
+            catch (Exception e)
+            {
+                throw new COExcepcion("Ocurrió un problema al intentar eliminar la Categoría");
+            }
+            return respuestaDatos;
+        }
     }
 }

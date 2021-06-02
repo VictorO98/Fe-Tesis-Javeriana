@@ -112,5 +112,33 @@ namespace Fe.Dominio.contenido
             }
             return respuestaDatos;
         }
+
+        internal async Task<RespuestaDatos> RemoverCategoria(int idCategoria)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _repoCategoria.RemoverCategoria(idCategoria);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
+
+        internal async Task<RespuestaDatos> ModificarCategoria(CategoriaPc categoria)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _repoCategoria.ModificarCategoria(categoria);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
     }
 }
