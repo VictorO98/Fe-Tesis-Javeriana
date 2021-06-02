@@ -13,7 +13,7 @@ namespace Fe.Core.General.Datos
             return context.TipoDocumentoCors.ToList();
         }
 
-        internal TipoDocumentoCor GetTipoDocumentoPorId(int idTipoDocumento)
+        public TipoDocumentoCor GetTipoDocumentoPorId(int idTipoDocumento)
         {
             using FeContext context = new FeContext();
             return context.TipoDocumentoCors.Where(t => t.Id == idTipoDocumento).FirstOrDefault();
