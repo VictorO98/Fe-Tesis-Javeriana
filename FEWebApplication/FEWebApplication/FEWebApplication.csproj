@@ -34,6 +34,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Fe.Core.General\Fe.Core.General.csproj" />
+    <ProjectReference Include="..\Fe.Core.Global\Fe.Core.Global.csproj" />
     <ProjectReference Include="..\Fe.Core.Seguridad\Fe.Core.Seguridad.csproj" />
     <ProjectReference Include="..\Fe.Dominio.contenido\Fe.Dominio.contenido.csproj" />
     <ProjectReference Include="..\Fe.Dominio.devoluciones\Fe.Dominio.devoluciones.csproj" />
