@@ -24,7 +24,6 @@ namespace Fe.Dominio.contenido.Datos
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.StackTrace);
                 throw new COExcepcion("Ocurrió un problema al intentar realizar la publicación");
             }
             return respuestaDatos;

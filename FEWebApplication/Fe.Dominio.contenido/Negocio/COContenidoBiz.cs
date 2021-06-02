@@ -14,14 +14,16 @@ namespace Fe.Dominio.contenido
         private readonly RepoProducto _repoProducto;
         private readonly RepoTipoPublicacion _repoTipoPublicacion;
         private readonly RepoResena _repoResena;
+        private readonly RepoPyR _repoPyR;
 
         public COContenidoBiz(RepoCategoria repoCategoria, RepoProducto repoProducto, RepoTipoPublicacion repoTipoPublicacion, 
-            RepoResena repoResena)
+            RepoResena repoResena, RepoPyR repoPyR)
         {
             _repoCategoria = repoCategoria;
             _repoProducto = repoProducto;
             _repoTipoPublicacion = repoTipoPublicacion;
             _repoResena = repoResena;
+            _repoPyR = repoPyR;
         }
 
         internal List<CategoriaPc> GetCategorias()
@@ -179,6 +181,47 @@ namespace Fe.Dominio.contenido
                 throw e;
             }
             return respuestaDatos;
+        }
+
+        internal async Task<RespuestaDatos> GuardarPreguntasyRespuestas(PreguntasRespuestasPc pyr)
+        {
+            RespuestaDatos respuestaDatos;
+            ProductosServiciosPc publicacion = _repoProducto.GetPublicacionPorIdPublicacion(pyr.Idproductoservicio);
+            if (publicacion != null)
+            {
+                try
+                {
+                    respuestaDatos = await _repoPyR.GuardarPreguntasyRespuestas(pyr);
+                }
+                catch (COExcepcion e)
+                {
+                    throw e;
+                }
+            }
+            else
+            {
+                throw new COExcepcion("La publicación ingresada no existe");
+            }
+            return respuestaDatos;
+        }
+
+        internal async Task<RespuestaDatos> ModificarPreguntasyRespuestas(PreguntasRespuestasPc pyr)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _repoPyR.ModificarPreguntasyRespuestas(pyr);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
+
+        internal List<PreguntasRespuestasPc> GetPreguntasyRespuestasPorIdPublicacion(int idPublicacion)
+        {
+            return _repoPyR.GetPreguntasyRespuestasPorIdPublicacion(idPublicacion);
         }
     }
 }
