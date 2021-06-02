@@ -11,7 +11,7 @@ namespace Fe.Core.General.Datos
 {
     public class RepoDemografia
     {
-        internal async Task<RespuestaDatos> GuardarDemografia(DemografiaCor demografia)
+        public async Task<RespuestaDatos> GuardarDemografia(DemografiaCor demografia)
         {
             using FeContext context = new FeContext();
             RespuestaDatos respuestaDatos;
@@ -34,7 +34,7 @@ namespace Fe.Core.General.Datos
             return context.DemografiaCors.Where(d => d.Id == idDemografia).FirstOrDefault();
         }
 
-        internal DemografiaCor GetDemografiaPorEmail(string emailDemografia)
+        public DemografiaCor GetDemografiaPorEmail(string emailDemografia)
         {
             using FeContext context = new FeContext();
             return context.DemografiaCors.Where(d => d.Email == emailDemografia).FirstOrDefault();

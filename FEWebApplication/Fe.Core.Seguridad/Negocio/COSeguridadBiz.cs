@@ -94,7 +94,7 @@ namespace Fe.Core.Seguridad.Negocio
             if (await _userManager.CheckPasswordAsync(user, model.Password))
             {
                 // TODO : Queda pendiente resolver la confirmación del usuario para desbloquear esta validación
-                /* if (!user.EmailConfirmed)
+                /*if (!user.EmailConfirmed)
                      return new RespuestaLogin
                      {
                          Codigo = 11,
