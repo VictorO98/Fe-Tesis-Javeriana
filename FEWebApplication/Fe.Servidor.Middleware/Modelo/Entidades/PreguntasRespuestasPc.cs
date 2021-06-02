@@ -11,7 +11,8 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
         public int Idproductoservicio { get; set; }
         public string Pregunta { get; set; }
         public string Respuesta { get; set; }
-        public DateTime? Creacion { get; set; }
+        public DateTime Creacion { get; set; }
+        public DateTime Modificacion { get; set; }
 
         public virtual ProductosServiciosPc IdproductoservicioNavigation { get; set; }
     }

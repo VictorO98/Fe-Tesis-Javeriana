@@ -562,7 +562,10 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
 
                 entity.Property(e => e.Idproductoservicio).HasColumnName("idproductoservicio");
 
+                entity.Property(e => e.Modificacion).HasColumnName("modificacion");
+
                 entity.Property(e => e.Pregunta)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .HasColumnName("pregunta");
 
@@ -704,13 +707,16 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
 
                 entity.Property(e => e.Creacion).HasColumnName("creacion");
 
-                entity.Property(e => e.Descripcion).HasColumnName("descripcion");
+                entity.Property(e => e.Descripcion)
+                    .IsRequired()
+                    .HasColumnName("descripcion");
 
                 entity.Property(e => e.Descuento)
                     .HasPrecision(5, 3)
                     .HasColumnName("descuento");
 
                 entity.Property(e => e.Estado)
+                    .IsRequired()
                     .HasMaxLength(5)
                     .HasColumnName("estado");
 
@@ -722,7 +728,10 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
 
                 entity.Property(e => e.Idusuario).HasColumnName("idusuario");
 
+                entity.Property(e => e.Modificacion).HasColumnName("modificacion");
+
                 entity.Property(e => e.Nombre)
+                    .IsRequired()
                     .HasMaxLength(30)
                     .HasColumnName("nombre");
 
@@ -731,6 +740,10 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                 entity.Property(e => e.Tiempoentrega).HasColumnName("tiempoentrega");
 
                 entity.Property(e => e.Tiempogarantia).HasColumnName("tiempogarantia");
+
+                entity.Property(e => e.Urlimagenproductoservicio)
+                    .IsRequired()
+                    .HasColumnName("urlimagenproductoservicio");
 
                 entity.HasOne(d => d.IdcategoriaNavigation)
                     .WithMany(p => p.ProductosServiciosPcs)
@@ -761,9 +774,7 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
 
                 entity.Property(e => e.Creacion).HasColumnName("creacion");
 
-                entity.Property(e => e.DireccionDocumento)
-                    .HasMaxLength(30)
-                    .HasColumnName("direccion_documento");
+                entity.Property(e => e.DireccionDocumento).HasColumnName("direccion_documento");
 
                 entity.Property(e => e.Estado)
                     .IsRequired()
