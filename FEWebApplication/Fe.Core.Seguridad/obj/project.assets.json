@@ -994,6 +994,7 @@
         "dependencies": {
           "Dapper": "2.0.78",
           "Dapper.Contrib": "2.0.78",
+          "Fe.Core.Global": "1.0.0",
           "IdentityServer4": "4.1.2",
           "IdentityServer4.Storage": "4.1.2",
           "MailKit": "2.12.0",

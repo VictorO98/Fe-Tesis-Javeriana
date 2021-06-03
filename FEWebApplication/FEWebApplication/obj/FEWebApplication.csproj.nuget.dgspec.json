@@ -1050,7 +1050,11 @@
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Core.Global\\Fe.Core.Global.csproj": {
+                "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Core.Global\\Fe.Core.Global.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -1179,6 +1183,9 @@
             "projectReferences": {
               "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Core.General\\Fe.Core.General.csproj": {
                 "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Core.General\\Fe.Core.General.csproj"
+              },
+              "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Core.Global\\Fe.Core.Global.csproj": {
+                "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Core.Global\\Fe.Core.Global.csproj"
               },
               "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Core.Seguridad\\Fe.Core.Seguridad.csproj": {
                 "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Core.Seguridad\\Fe.Core.Seguridad.csproj"
