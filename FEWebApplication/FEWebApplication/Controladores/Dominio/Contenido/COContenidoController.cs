@@ -1,8 +1,6 @@
-using Fe.Dominio.contenido.Datos;
 using Fe.Dominio.contenido;
 using Fe.Core.Global.Constantes;
 using Fe.Core.Global.Errores;
-using Fe.Core.General.Datos;
 using Fe.Servidor.Middleware.Modelo.Entidades;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -220,6 +218,22 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         public ContratoPc DesplegarPublicacion(int idPublicacion)
         {
             return _coFachada.DesplegarPublicacion(idPublicacion);
+        }
+
+        [Route("FiltrarPublicacion")]
+        [HttpGet]
+        public List<ContratoPc> FiltrarPublicacion(int idPublicacion = -1, int idCategoria = -1, int idTipoPublicacion = -1, 
+            decimal precioMenor = -1, decimal precioMayor = -1, decimal calificacionMenor = -1, decimal calificacionMayor = -1)
+        {
+            try
+            {
+                return _coFachada.FiltrarPublicacion(idCategoria, idTipoPublicacion, precioMenor, precioMayor,
+                    calificacionMenor, calificacionMayor);
+            }
+            catch(COExcepcion e)
+            {
+                throw e;
+            }
         }
     }
 }

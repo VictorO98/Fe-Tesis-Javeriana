@@ -128,10 +128,78 @@ namespace Fe.Dominio.contenido.Datos
         }
 
         // TODO: Terminar la funcion de filtro
-        internal List<ProductosServiciosPc> FiltroPublicaciones()
+        internal List<ProductosServiciosPc> FiltrarPublicaciones(int idCategoria, int idTipoPublicacion,
+            decimal precioMenor, decimal precioMayor, decimal calificacionMenor, decimal calificacionMayor)
         {
-            using FeContext context = new FeContext();
-            return null;
+            var dynamicParameters = new DynamicParameters();
+            StringBuilder condiciones = new StringBuilder();
+
+            dynamicParameters.Add("Idcategoria", idCategoria);
+            dynamicParameters.Add("Idtipopublicacion", idTipoPublicacion);
+            dynamicParameters.Add("Preciomenor", precioMenor);
+            dynamicParameters.Add("Preciomayor", precioMayor);
+            dynamicParameters.Add("Calificacionmenor", calificacionMenor);
+            dynamicParameters.Add("Calificacionmayor", calificacionMayor);
+
+            if (idCategoria != -1)
+            {
+                condiciones.Append(" p.idcategoria = @Idcategoria ");
+                if (idTipoPublicacion != -1)
+                {
+                    condiciones.Append(" AND p.idtipopublicacion = @Idtipopublicacion ");
+                }
+                if (precioMenor != -1 && precioMayor != -1)
+                {
+                    condiciones.Append(" AND p.preciounitario between @Preciomenor and @Preciomayor ");
+                }
+                if (calificacionMenor != -1 && calificacionMayor != -1)
+                {
+                    condiciones.Append(" AND p.calificacionpromedio between @Calificacionmenor and @Calificacionmayor ");
+                }
+            }
+
+            else
+            {
+                if (idTipoPublicacion != -1)
+                {
+                    condiciones.Append(" p.idtipopublicacion = @Idtipopublicacion ");
+                    if (precioMenor != -1 && precioMayor != -1)
+                    {
+                        condiciones.Append(" AND p.preciounitario between @Preciomenor and @Preciomayor ");
+                    }
+                    if (calificacionMenor != -1 && calificacionMayor != -1)
+                    {
+                        condiciones.Append(" AND p.calificacionpromedio between @Calificacionmenor and @Calificacionmayor ");
+                    }
+                }
+                else
+                {
+                    if (precioMenor != -1 && precioMayor != -1)
+                    {
+                        condiciones.Append(" p.preciounitario between @Preciomenor and @Preciomayor ");
+                        if (calificacionMenor != -1 && calificacionMayor != -1)
+                        {
+                            condiciones.Append(" AND p.calificacionpromedio between @Calificacionmenor and @Calificacionmayor ");
+                        }
+                    }
+                    else
+                    {
+                        if (calificacionMenor != -1 && calificacionMayor != -1)
+                        {
+                            condiciones.Append(" p.calificacionpromedio between @Calificacionmenor and @Calificacionmayor ");
+                        }
+                    }
+                }
+            }
+
+
+            var listado = CODBOrmFactorycs.Orm.SqlQuery<ProductosServiciosPc>($@"
+                SELECT
+                    p.id as Id
+                FROM
+                    public.productos_servicios_pc p
+                WHERE {condiciones}", dynamicParameters);
+            return listado.ToList();
         }
     }
 }

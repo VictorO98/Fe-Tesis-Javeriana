@@ -253,5 +253,43 @@ namespace Fe.Dominio.contenido
             }
             return contrato;
         }
+
+        internal List<ContratoPc> FiltrarPublicacion(int idCategoria, int idTipoPublicacion,
+            decimal precioMenor, decimal precioMayor, decimal calificacionMenor, decimal calificacionMayor)
+        {
+            List<ContratoPc> contratos = new List<ContratoPc>();
+            if (idCategoria != -1 && GetCategoriaPorIdCategoria(idCategoria) == null)
+            {
+                throw new COExcepcion("La categoría ingresada no existe.");
+            }
+            if (idTipoPublicacion != -1 && GetTipoPublicacionPorID(idTipoPublicacion) == null)
+            {
+                throw new COExcepcion("El tipo de publicación ingresado no existe.");
+            }
+            if (precioMenor <= precioMayor)
+            {
+                if(calificacionMenor <= calificacionMayor)
+                {
+                    try
+                    {
+
+                        List<ProductosServiciosPc> listaPublicaciones = _repoProducto.FiltrarPublicaciones(idCategoria, 
+                            idTipoPublicacion, precioMenor, precioMayor, calificacionMenor, calificacionMayor);
+                        for(int i = 0; i < listaPublicaciones.Count; i++)
+                        {
+                            contratos.Add(DesplegarPublicacion(listaPublicaciones[i].Id));
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        throw new COExcepcion("Ocurrió un problema al intentar filtrar la publicación.");
+                    }
+
+                }
+                else { throw new COExcepcion("Las calificaciones ingresadas son inválidas."); }
+            }
+            else { throw new COExcepcion("Los precios ingresados son inválidos."); }
+            return contratos;
+        }
     }
 }

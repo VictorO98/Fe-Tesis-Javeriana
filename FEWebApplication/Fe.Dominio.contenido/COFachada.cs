@@ -189,5 +189,19 @@ namespace Fe.Dominio.contenido
         {
             return _cOContenidoBiz.DesplegarPublicacion(idPublicacion);
         }
+
+        public List<ContratoPc> FiltrarPublicacion(int idCategoria, int idTipoPublicacion,
+            decimal precioMenor, decimal precioMayor, decimal calificacionMenor, decimal calificacionMayor)
+        {
+            try
+            {
+                return _cOContenidoBiz.FiltrarPublicacion(idCategoria, idTipoPublicacion, precioMenor, precioMayor,
+                calificacionMenor, calificacionMayor);
+            }
+            catch(COExcepcion e)
+            {
+                throw e;
+            }
+        }
     }
 }
