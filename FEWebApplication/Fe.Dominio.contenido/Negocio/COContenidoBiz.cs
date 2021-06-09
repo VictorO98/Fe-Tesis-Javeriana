@@ -71,9 +71,9 @@ namespace Fe.Dominio.contenido
                             throw e;
                         }
                     }
-                    else { throw new COExcepcion("El tipo de publicaci髇 ingresado no existe."); }
+                    else { throw new COExcepcion("El tipo de publicaci贸n ingresado no existe."); }
                 }
-                else { throw new COExcepcion("La categor韆 ingresada no existe."); }
+                else { throw new COExcepcion("La categor铆a ingresada no existe."); }
             }
             else { throw new COExcepcion("El usuario ingresado no existe."); }
             return respuestaDatos;
@@ -171,7 +171,7 @@ namespace Fe.Dominio.contenido
                 }
                 else
                 {
-                    throw new COExcepcion("La publicaci髇 ingresada no existe");
+                    throw new COExcepcion("La publicaci贸n ingresada no existe");
                 }
             }
             catch (COExcepcion e)
@@ -180,5 +180,114 @@ namespace Fe.Dominio.contenido
             }
             return respuestaDatos;
         }
+
+        internal async Task<RespuestaDatos> GuardarPreguntasyRespuestas(PreguntasRespuestasPc pyr)
+        {
+            RespuestaDatos respuestaDatos;
+            ProductosServiciosPc publicacion = _repoProducto.GetPublicacionPorIdPublicacion(pyr.Idproductoservicio);
+            if (publicacion != null)
+            {
+                try
+                {
+                    respuestaDatos = await _repoPyR.GuardarPreguntasyRespuestas(pyr);
+                }
+                catch (COExcepcion e)
+                {
+                    throw e;
+                }
+            }
+            else
+            {
+                throw new COExcepcion("La publicaci贸n ingresada no existe");
+            }
+            return respuestaDatos;
+        }
+
+        internal async Task<RespuestaDatos> ModificarPreguntasyRespuestas(PreguntasRespuestasPc pyr)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _repoPyR.ModificarPreguntasyRespuestas(pyr);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
+
+        internal List<PreguntasRespuestasPc> GetPreguntasyRespuestasPorIdPublicacion(int idPublicacion)
+        {
+            return _repoPyR.GetPreguntasyRespuestasPorIdPublicacion(idPublicacion);
+        }
+
+        internal ContratoPc DesplegarPublicacion(int idPublicacion)
+        {
+            ProductosServiciosPc publicacion = _repoProducto.GetPublicacionPorIdPublicacion(idPublicacion);
+            ContratoPc contrato = new ContratoPc();
+            if (publicacion != null)
+            {
+                contrato.Id = publicacion.Id;
+                contrato.Nombre = publicacion.Nombre;
+                contrato.Habilitatrueque = publicacion.Habilitatrueque;
+                contrato.Cantidadtotal = publicacion.Cantidadtotal;
+                contrato.Descripcion = publicacion.Descripcion;
+                contrato.Descuento = publicacion.Descuento;
+                contrato.Preciounitario = publicacion.Preciounitario;
+                contrato.Urlimagenproductoservicio = publicacion.Urlimagenproductoservicio;
+                contrato.Tiempoentrega = publicacion.Tiempoentrega;
+                contrato.Tiempogarantia = publicacion.Tiempogarantia;
+                contrato.Calificacionpromedio = publicacion.Calificacionpromedio;
+                contrato.NombreCategoria = _repoCategoria.GetCategoriaPorIdCategoria(publicacion.Idcategoria).Nombre;
+                contrato.TipoPublicacion = _repoTipoPublicacion.GetTipoPublicacionPorID(publicacion.Idtipopublicacion).Nombre;
+                contrato.Resenas = _repoResena.GetResenasPorIdPublicacion(idPublicacion);
+                contrato.PreguntasRespuestas = _repoPyR.GetPreguntasyRespuestasPorIdPublicacion(idPublicacion);
+            }
+            else
+            {
+                throw new COExcepcion("La publicaci贸n ingresada no existe.");
+            }
+            return contrato;
+        }
+
+        internal List<ContratoPc> FiltrarPublicacion(int idCategoria, int idTipoPublicacion,
+            decimal precioMenor, decimal precioMayor, decimal calificacionMenor, decimal calificacionMayor)
+        {
+            List<ContratoPc> contratos = new List<ContratoPc>();
+            if (idCategoria != -1 && GetCategoriaPorIdCategoria(idCategoria) == null)
+            {
+                throw new COExcepcion("La categor铆a ingresada no existe.");
+            }
+            if (idTipoPublicacion != -1 && GetTipoPublicacionPorID(idTipoPublicacion) == null)
+            {
+                throw new COExcepcion("El tipo de publicaci贸n ingresado no existe.");
+            }
+            if (precioMenor <= precioMayor)
+            {
+                if(calificacionMenor <= calificacionMayor)
+                {
+                    try
+                    {
+
+                        List<ProductosServiciosPc> listaPublicaciones = _repoProducto.FiltrarPublicaciones(idCategoria, 
+                            idTipoPublicacion, precioMenor, precioMayor, calificacionMenor, calificacionMayor);
+                        for(int i = 0; i < listaPublicaciones.Count; i++)
+                        {
+                            contratos.Add(DesplegarPublicacion(listaPublicaciones[i].Id));
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        throw new COExcepcion("Ocurri贸 un problema al intentar filtrar la publicaci贸n.");
+                    }
+
+                }
+                else { throw new COExcepcion("Las calificaciones ingresadas son inv谩lidas."); }
+            }
+            else { throw new COExcepcion("Los precios ingresados son inv谩lidos."); }
+            return contratos;
+        }
+
     }
 }

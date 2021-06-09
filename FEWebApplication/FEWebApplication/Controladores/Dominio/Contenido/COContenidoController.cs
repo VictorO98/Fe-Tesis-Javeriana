@@ -1,8 +1,6 @@
-using Fe.Dominio.contenido.Datos;
 using Fe.Dominio.contenido;
 using Fe.Core.Global.Constantes;
 using Fe.Core.Global.Errores;
-using Fe.Core.General.Datos;
 using Fe.Servidor.Middleware.Modelo.Entidades;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -173,5 +171,68 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         {
             return _coFachada.GetResenasPorIdPublicacion(idPublicacion);
         }
+
+        [Route("GetPreguntasyRespuestasPorIdPublicacion")]
+        [HttpGet]
+        public List<PreguntasRespuestasPc> GetPreguntasyRespuestasPorIdPublicacion(int idPublicacion)
+        {
+            return _coFachada.GetPreguntasyRespuestasPorIdPublicacion(idPublicacion);
+        }
+
+        [Route("GuardarPreguntasyRespuestas")]
+        [HttpPost]
+        public async Task<RespuestaDatos> GuardarPreguntasyRespuestas([FromBody] PreguntasRespuestasPc pyr)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _coFachada.GuardarPreguntasyRespuestas(pyr);
+            }
+            catch (COExcepcion e)
+            {
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
+            }
+            return respuestaDatos;
+        }
+
+        [Route("ModificarPreguntasyRespuestas")]
+        [HttpPut]
+        public async Task<RespuestaDatos> ModificarPreguntasyRespuestas([FromBody] PreguntasRespuestasPc pyr)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _coFachada.ModificarPreguntasyRespuestas(pyr);
+            }
+            catch (COExcepcion e)
+            {
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
+            }
+            return respuestaDatos;
+        }
+
+        [Route("DesplegarPublicacion")]
+        [HttpGet]
+        public ContratoPc DesplegarPublicacion(int idPublicacion)
+        {
+            return _coFachada.DesplegarPublicacion(idPublicacion);
+        }
+
+        [Route("FiltrarPublicacion")]
+        [HttpGet]
+        public List<ContratoPc> FiltrarPublicacion(int idPublicacion = -1, int idCategoria = -1, int idTipoPublicacion = -1, 
+            decimal precioMenor = -1, decimal precioMayor = -1, decimal calificacionMenor = -1, decimal calificacionMayor = -1)
+        {
+            try
+            {
+                return _coFachada.FiltrarPublicacion(idCategoria, idTipoPublicacion, precioMenor, precioMayor,
+                    calificacionMenor, calificacionMayor);
+            }
+            catch(COExcepcion e)
+            {
+                throw e;
+            }
+        }
+
     }
 }
