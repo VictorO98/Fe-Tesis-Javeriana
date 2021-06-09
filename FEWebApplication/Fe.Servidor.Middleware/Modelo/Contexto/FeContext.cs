@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Fe.Servidor.Middleware.Modelo.Entidades;
+using Microsoft.Extensions.Configuration;
 
 #nullable disable
 
@@ -9,6 +10,7 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
 {
     public partial class FeContext : DbContext
     {
+
         public FeContext()
         {
         }

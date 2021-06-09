@@ -5,6 +5,8 @@ using Fe.Core.Global.Errores;
 using System.Threading.Tasks;
 using Fe.Servidor.Middleware.Contratos.Core;
 using System;
+using Fe.Servidor.Middleware.Contratos.Dominio.Contenido;
+using Fe.Core.General.Datos;
 
 namespace Fe.Dominio.contenido
 {
@@ -14,14 +16,16 @@ namespace Fe.Dominio.contenido
         private readonly RepoProducto _repoProducto;
         private readonly RepoTipoPublicacion _repoTipoPublicacion;
         private readonly RepoResena _repoResena;
+        private readonly RepoPyR _repoPyR;
 
         public COContenidoBiz(RepoCategoria repoCategoria, RepoProducto repoProducto, RepoTipoPublicacion repoTipoPublicacion, 
-            RepoResena repoResena)
+            RepoResena repoResena, RepoPyR repoPyR)
         {
             _repoCategoria = repoCategoria;
             _repoProducto = repoProducto;
             _repoTipoPublicacion = repoTipoPublicacion;
             _repoResena = repoResena;
+            _repoPyR = repoPyR;
         }
 
         internal List<CategoriaPc> GetCategorias()

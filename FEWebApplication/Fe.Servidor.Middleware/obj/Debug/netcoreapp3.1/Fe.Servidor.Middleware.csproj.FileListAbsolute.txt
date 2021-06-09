@@ -25,3 +25,6 @@ C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Servidor.Middleware\bin\Debug\n
 C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Servidor.Middleware\bin\Debug\netcoreapp3.1\Fe.Core.Global.pdb
 C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Servidor.Middleware\obj\Debug\netcoreapp3.1\Fe.Servidor.Middleware.csproj.CopyComplete
 C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Servidor.Middleware\obj\Debug\netcoreapp3.1\Fe.Servidor.Middleware.genruntimeconfig.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\bin\Debug\netcoreapp3.1\Fe.Core.Global.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\bin\Debug\netcoreapp3.1\Fe.Core.Global.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\obj\Debug\netcoreapp3.1\Fe.Servidor.Middleware.csproj.CopyComplete

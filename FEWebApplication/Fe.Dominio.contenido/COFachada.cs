@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Fe.Servidor.Middleware.Contratos.Core;
 using Fe.Core.Global.Constantes;
 using Fe.Core.General;
+using Fe.Servidor.Middleware.Contratos.Dominio.Contenido;
 
 namespace Fe.Dominio.contenido
 {

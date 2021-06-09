@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using FEWebApplication.Controladores.Core;
 using Fe.Servidor.Middleware.Contratos.Core;
 using System.Threading.Tasks;
+using Fe.Servidor.Middleware.Contratos.Dominio.Contenido;
 
 namespace FEWebApplication.Controladores.Dominio.Contenido
 {

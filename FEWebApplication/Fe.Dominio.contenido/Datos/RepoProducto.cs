@@ -1,11 +1,14 @@
-﻿using Fe.Core.Global.Constantes;
+﻿using Dapper;
+using Fe.Core.Global.Constantes;
 using Fe.Core.Global.Errores;
 using Fe.Servidor.Middleware.Contratos.Core;
+using Fe.Servidor.Middleware.Dapper;
 using Fe.Servidor.Middleware.Modelo.Contexto;
 using Fe.Servidor.Middleware.Modelo.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Fe.Dominio.contenido.Datos
