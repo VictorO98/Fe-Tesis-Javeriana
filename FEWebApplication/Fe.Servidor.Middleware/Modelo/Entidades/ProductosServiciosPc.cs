@@ -1,5 +1,4 @@
-﻿using Fe.Core.Global.Constantes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 #nullable disable
@@ -15,6 +14,7 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
             ProdSerTruequeTrueIdproductoserviciocompradorNavigations = new HashSet<ProdSerTruequeTrue>();
             ProdSerTruequeTrueIdproductoserviciovendedorNavigations = new HashSet<ProdSerTruequeTrue>();
             ProdSerXVendidosPeds = new HashSet<ProdSerXVendidosPed>();
+            ProductosFavoritosDemografiaPcs = new HashSet<ProductosFavoritosDemografiaPc>();
             ResenasPcs = new HashSet<ResenasPc>();
         }
 
@@ -28,12 +28,12 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
         public DateTime Tiempogarantia { get; set; }
         public int Preciounitario { get; set; }
         public decimal? Descuento { get; set; }
-        public string Estado { get; set; } = COEstados.VIGENTE;
-        public decimal Calificacionpromedio { get; set; } = 0;
+        public string Estado { get; set; }
+        public decimal Calificacionpromedio { get; set; }
         public int Habilitatrueque { get; set; }
-        public DateTime Creacion { get; set; } = DateTime.Now;
+        public DateTime Creacion { get; set; }
         public string Nombre { get; set; }
-        public DateTime Modificacion { get; set; } = DateTime.Now;
+        public DateTime Modificacion { get; set; }
         public string Urlimagenproductoservicio { get; set; }
 
         public virtual CategoriaPc IdcategoriaNavigation { get; set; }
@@ -44,6 +44,7 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
         public virtual ICollection<ProdSerTruequeTrue> ProdSerTruequeTrueIdproductoserviciocompradorNavigations { get; set; }
         public virtual ICollection<ProdSerTruequeTrue> ProdSerTruequeTrueIdproductoserviciovendedorNavigations { get; set; }
         public virtual ICollection<ProdSerXVendidosPed> ProdSerXVendidosPeds { get; set; }
+        public virtual ICollection<ProductosFavoritosDemografiaPc> ProductosFavoritosDemografiaPcs { get; set; }
         public virtual ICollection<ResenasPc> ResenasPcs { get; set; }
     }
 }

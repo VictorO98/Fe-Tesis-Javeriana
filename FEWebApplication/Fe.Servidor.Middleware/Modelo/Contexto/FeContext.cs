@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Fe.Servidor.Middleware.Modelo.Entidades;
-using Microsoft.Extensions.Configuration;
 
 #nullable disable
 
@@ -10,7 +9,6 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
 {
     public partial class FeContext : DbContext
     {
-
         public FeContext()
         {
         }
@@ -23,6 +21,7 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
         public virtual DbSet<CategoriaPc> CategoriaPcs { get; set; }
         public virtual DbSet<ConceptoDev> ConceptoDevs { get; set; }
         public virtual DbSet<DemografiaCor> DemografiaCors { get; set; }
+        public virtual DbSet<DemografiaReportadaCor> DemografiaReportadaCors { get; set; }
         public virtual DbSet<DevolucionesDetalleDev> DevolucionesDetalleDevs { get; set; }
         public virtual DbSet<DevolucionesDev> DevolucionesDevs { get; set; }
         public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
@@ -44,6 +43,7 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
         public virtual DbSet<ProdSerTruequeTrue> ProdSerTruequeTrues { get; set; }
         public virtual DbSet<ProdSerXFacturaFac> ProdSerXFacturaFacs { get; set; }
         public virtual DbSet<ProdSerXVendidosPed> ProdSerXVendidosPeds { get; set; }
+        public virtual DbSet<ProductosFavoritosDemografiaPc> ProductosFavoritosDemografiaPcs { get; set; }
         public virtual DbSet<ProductosServiciosPc> ProductosServiciosPcs { get; set; }
         public virtual DbSet<RazonSocialCor> RazonSocialCors { get; set; }
         public virtual DbSet<ResenasPc> ResenasPcs { get; set; }
@@ -181,6 +181,30 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                     .HasForeignKey(d => d.Tipodocumentocorid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("demografia_cor_tipo_documento_cor");
+            });
+
+            modelBuilder.Entity<DemografiaReportadaCor>(entity =>
+            {
+                entity.ToTable("demografia_reportada_cor");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .UseIdentityAlwaysColumn()
+                    .HasIdentityOptions(null, null, null, 999999L, null, null);
+
+                entity.Property(e => e.Creacion).HasColumnName("creacion");
+
+                entity.Property(e => e.Iddemografia).HasColumnName("iddemografia");
+
+                entity.Property(e => e.Motivo)
+                    .IsRequired()
+                    .HasColumnName("motivo");
+
+                entity.HasOne(d => d.IddemografiaNavigation)
+                    .WithMany(p => p.DemografiaReportadaCors)
+                    .HasForeignKey(d => d.Iddemografia)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("demografia_reportada_cor_demografia_cor");
             });
 
             modelBuilder.Entity<DevolucionesDetalleDev>(entity =>
@@ -685,6 +709,32 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                     .HasForeignKey(d => d.Idproductoservico)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("prod_ser_x_vendidos_ped_productos_servicios_pc");
+            });
+
+            modelBuilder.Entity<ProductosFavoritosDemografiaPc>(entity =>
+            {
+                entity.ToTable("productos_favoritos_demografia_pc");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .UseIdentityAlwaysColumn()
+                    .HasIdentityOptions(null, null, null, 999999L, null, null);
+
+                entity.Property(e => e.Iddemografia).HasColumnName("iddemografia");
+
+                entity.Property(e => e.Idproductoservicio).HasColumnName("idproductoservicio");
+
+                entity.HasOne(d => d.IddemografiaNavigation)
+                    .WithMany(p => p.ProductosFavoritosDemografiaPcs)
+                    .HasForeignKey(d => d.Iddemografia)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("productos_favoritos_demografia_pc_demografia_cor");
+
+                entity.HasOne(d => d.IdproductoservicioNavigation)
+                    .WithMany(p => p.ProductosFavoritosDemografiaPcs)
+                    .HasForeignKey(d => d.Idproductoservicio)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("productos_favoritos_demografia_pc_productos_servicios_pc");
             });
 
             modelBuilder.Entity<ProductosServiciosPc>(entity =>

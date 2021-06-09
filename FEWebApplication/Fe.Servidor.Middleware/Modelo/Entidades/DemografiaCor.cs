@@ -9,8 +9,10 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
     {
         public DemografiaCor()
         {
+            DemografiaReportadaCors = new HashSet<DemografiaReportadaCor>();
             NotificacionesCors = new HashSet<NotificacionesCor>();
             PedidosPeds = new HashSet<PedidosPed>();
+            ProductosFavoritosDemografiaPcs = new HashSet<ProductosFavoritosDemografiaPc>();
             ProductosServiciosPcs = new HashSet<ProductosServiciosPc>();
             TruequesPedidoTrueIdcompradorNavigations = new HashSet<TruequesPedidoTrue>();
             TruequesPedidoTrueIdvendedorNavigations = new HashSet<TruequesPedidoTrue>();
@@ -35,8 +37,10 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
         public virtual PoblacionCor IdpoblacionNavigation { get; set; }
         public virtual RolCor Rolcor { get; set; }
         public virtual TipoDocumentoCor Tipodocumentocor { get; set; }
+        public virtual ICollection<DemografiaReportadaCor> DemografiaReportadaCors { get; set; }
         public virtual ICollection<NotificacionesCor> NotificacionesCors { get; set; }
         public virtual ICollection<PedidosPed> PedidosPeds { get; set; }
+        public virtual ICollection<ProductosFavoritosDemografiaPc> ProductosFavoritosDemografiaPcs { get; set; }
         public virtual ICollection<ProductosServiciosPc> ProductosServiciosPcs { get; set; }
         public virtual ICollection<TruequesPedidoTrue> TruequesPedidoTrueIdcompradorNavigations { get; set; }
         public virtual ICollection<TruequesPedidoTrue> TruequesPedidoTrueIdvendedorNavigations { get; set; }
