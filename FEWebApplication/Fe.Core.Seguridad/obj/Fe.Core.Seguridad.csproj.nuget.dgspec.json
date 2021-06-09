@@ -1,24 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Core.Seguridad\\Fe.Core.Seguridad.csproj": {}
+    "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Core.Seguridad\\Fe.Core.Seguridad.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Core.General\\Fe.Core.General.csproj": {
+    "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Core.General\\Fe.Core.General.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Core.General\\Fe.Core.General.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Core.General\\Fe.Core.General.csproj",
         "projectName": "Fe.Core.General",
-        "projectPath": "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Core.General\\Fe.Core.General.csproj",
-        "packagesPath": "C:\\Users\\Antonio\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Core.General\\obj\\",
+        "projectPath": "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Core.General\\Fe.Core.General.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Core.General\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\Antonio\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -31,13 +30,12 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Core.Global\\Fe.Core.Global.csproj": {
-                "projectPath": "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Core.Global\\Fe.Core.Global.csproj"
+              "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Core.Global\\Fe.Core.Global.csproj": {
+                "projectPath": "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Core.Global\\Fe.Core.Global.csproj"
               },
-              "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj": {
-                "projectPath": "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj"
+              "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj": {
+                "projectPath": "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj"
               }
             }
           }
@@ -50,7 +48,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Dapper": {
               "target": "Package",
@@ -128,29 +125,31 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Core.Global\\Fe.Core.Global.csproj": {
+    "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Core.Global\\Fe.Core.Global.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Core.Global\\Fe.Core.Global.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Core.Global\\Fe.Core.Global.csproj",
         "projectName": "Fe.Core.Global",
-        "projectPath": "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Core.Global\\Fe.Core.Global.csproj",
-        "packagesPath": "C:\\Users\\Antonio\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Core.Global\\obj\\",
+        "projectPath": "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Core.Global\\Fe.Core.Global.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Core.Global\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\Antonio\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -163,7 +162,6 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -175,7 +173,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Dapper": {
               "target": "Package",
@@ -253,29 +250,31 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Core.Seguridad\\Fe.Core.Seguridad.csproj": {
+    "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Core.Seguridad\\Fe.Core.Seguridad.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Core.Seguridad\\Fe.Core.Seguridad.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Core.Seguridad\\Fe.Core.Seguridad.csproj",
         "projectName": "Fe.Core.Seguridad",
-        "projectPath": "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Core.Seguridad\\Fe.Core.Seguridad.csproj",
-        "packagesPath": "C:\\Users\\Antonio\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Core.Seguridad\\obj\\",
+        "projectPath": "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Core.Seguridad\\Fe.Core.Seguridad.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Core.Seguridad\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\Antonio\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -288,16 +287,15 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Core.General\\Fe.Core.General.csproj": {
-                "projectPath": "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Core.General\\Fe.Core.General.csproj"
+              "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Core.General\\Fe.Core.General.csproj": {
+                "projectPath": "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Core.General\\Fe.Core.General.csproj"
               },
-              "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Core.Global\\Fe.Core.Global.csproj": {
-                "projectPath": "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Core.Global\\Fe.Core.Global.csproj"
+              "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Core.Global\\Fe.Core.Global.csproj": {
+                "projectPath": "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Core.Global\\Fe.Core.Global.csproj"
               },
-              "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj": {
-                "projectPath": "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj"
+              "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj": {
+                "projectPath": "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj"
               }
             }
           }
@@ -310,7 +308,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Dapper": {
               "target": "Package",
@@ -370,29 +367,31 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj": {
+    "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj",
         "projectName": "Fe.Servidor.Middleware",
-        "projectPath": "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj",
-        "packagesPath": "C:\\Users\\Antonio\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Servidor.Middleware\\obj\\",
+        "projectPath": "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Servidor.Middleware\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\Antonio\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -405,10 +404,9 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Core.Global\\Fe.Core.Global.csproj": {
-                "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Core.Global\\Fe.Core.Global.csproj"
+              "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Core.Global\\Fe.Core.Global.csproj": {
+                "projectPath": "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Core.Global\\Fe.Core.Global.csproj"
               }
             }
           }
@@ -421,7 +419,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Dapper": {
               "target": "Package",
@@ -499,11 +496,14 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

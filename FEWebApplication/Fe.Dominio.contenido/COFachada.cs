@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using Fe.Servidor.Middleware.Contratos.Core;
 using Fe.Core.Global.Constantes;
 using Fe.Core.General;
-using Fe.Servidor.Middleware.Contratos.Dominio.Contenido;
 
 namespace Fe.Dominio.contenido
 {
@@ -147,47 +146,9 @@ namespace Fe.Dominio.contenido
             return _cOContenidoBiz.GetResenaPorIdResena(idResena);
         }
 
-        public List<ResenasPc> GetResenasPorIdPublicacion(int idPublicacion)
+        public ICollection<ResenasPc> GetResenasPorIdPublicacion(int idPublicacion)
         {
             return _cOContenidoBiz.GetResenasPorIdPublicacion(idPublicacion);
-        }
-
-        public async Task<RespuestaDatos> GuardarPreguntasyRespuestas(PreguntasRespuestasPc pyr)
-        {
-            RespuestaDatos respuestaDatos;
-            try
-            {
-                respuestaDatos = respuestaDatos = await _cOContenidoBiz.GuardarPreguntasyRespuestas(pyr);
-            }
-            catch (COExcepcion e)
-            {
-                throw e;
-            }
-            return respuestaDatos;
-        }
-
-        public async Task<RespuestaDatos> ModificarPreguntasyRespuestas(PreguntasRespuestasPc pyr)
-        {
-            RespuestaDatos respuestaDatos;
-            try
-            {
-                respuestaDatos = respuestaDatos = await _cOContenidoBiz.ModificarPreguntasyRespuestas(pyr);
-            }
-            catch (COExcepcion e)
-            {
-                throw e;
-            }
-            return respuestaDatos;
-        }
-
-        public List<PreguntasRespuestasPc> GetPreguntasyRespuestasPorIdPublicacion(int idPublicacion)
-        {
-            return _cOContenidoBiz.GetPreguntasyRespuestasPorIdPublicacion(idPublicacion);
-        }
-
-        public ContratoPc DesplegarPublicacion(int idPublicacion)
-        {
-            return _cOContenidoBiz.DesplegarPublicacion(idPublicacion);
         }
     }
 }

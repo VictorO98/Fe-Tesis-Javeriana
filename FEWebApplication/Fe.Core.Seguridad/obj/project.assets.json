@@ -961,7 +961,10 @@
         },
         "runtime": {
           "bin/placeholder/Fe.Core.General.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       },
       "Fe.Core.Global/1.0.0": {
         "type": "project",
@@ -986,7 +989,10 @@
         },
         "runtime": {
           "bin/placeholder/Fe.Core.Global.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       },
       "Fe.Servidor.Middleware/1.0.0": {
         "type": "project",
@@ -1012,7 +1018,10 @@
         },
         "runtime": {
           "bin/placeholder/Fe.Servidor.Middleware.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },
@@ -3029,25 +3038,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Antonio\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\ASUS\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Core.Seguridad\\Fe.Core.Seguridad.csproj",
+      "projectUniqueName": "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Core.Seguridad\\Fe.Core.Seguridad.csproj",
       "projectName": "Fe.Core.Seguridad",
-      "projectPath": "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Core.Seguridad\\Fe.Core.Seguridad.csproj",
-      "packagesPath": "C:\\Users\\Antonio\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Core.Seguridad\\obj\\",
+      "projectPath": "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Core.Seguridad\\Fe.Core.Seguridad.csproj",
+      "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Core.Seguridad\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "C:\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\Antonio\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -3060,16 +3067,15 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Core.General\\Fe.Core.General.csproj": {
-              "projectPath": "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Core.General\\Fe.Core.General.csproj"
+            "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Core.General\\Fe.Core.General.csproj": {
+              "projectPath": "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Core.General\\Fe.Core.General.csproj"
             },
-            "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Core.Global\\Fe.Core.Global.csproj": {
-              "projectPath": "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Core.Global\\Fe.Core.Global.csproj"
+            "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Core.Global\\Fe.Core.Global.csproj": {
+              "projectPath": "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Core.Global\\Fe.Core.Global.csproj"
             },
-            "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj": {
-              "projectPath": "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj"
+            "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj": {
+              "projectPath": "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj"
             }
           }
         }
@@ -3082,7 +3088,6 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
-        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "Dapper": {
             "target": "Package",
@@ -3142,11 +3147,14 @@
         "assetTargetFallback": true,
         "warn": true,
         "frameworkReferences": {
+          "Microsoft.AspNetCore.App": {
+            "privateAssets": "none"
+          },
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
       }
     }
   },
@@ -3155,7 +3163,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'Microsoft.AspNet.Mvc 5.2.7' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "message": "El paquete \"Microsoft.AspNet.Mvc 5.2.7\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\" en lugar de la plataforma de destino del proyecto \".NETCoreApp,Version=v3.1\". Puede que el paquete no sea totalmente compatible con el proyecto.",
       "libraryId": "Microsoft.AspNet.Mvc",
       "targetGraphs": [
         ".NETCoreApp,Version=v3.1"
@@ -3165,7 +3173,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'Microsoft.AspNet.Razor 3.2.7' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "message": "El paquete \"Microsoft.AspNet.Razor 3.2.7\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\" en lugar de la plataforma de destino del proyecto \".NETCoreApp,Version=v3.1\". Puede que el paquete no sea totalmente compatible con el proyecto.",
       "libraryId": "Microsoft.AspNet.Razor",
       "targetGraphs": [
         ".NETCoreApp,Version=v3.1"
@@ -3175,7 +3183,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'Microsoft.AspNet.WebPages 3.2.7' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "message": "El paquete \"Microsoft.AspNet.WebPages 3.2.7\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\" en lugar de la plataforma de destino del proyecto \".NETCoreApp,Version=v3.1\". Puede que el paquete no sea totalmente compatible con el proyecto.",
       "libraryId": "Microsoft.AspNet.WebPages",
       "targetGraphs": [
         ".NETCoreApp,Version=v3.1"
@@ -3185,7 +3193,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'Microsoft.Web.Infrastructure 1.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "message": "El paquete \"Microsoft.Web.Infrastructure 1.0.0\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\" en lugar de la plataforma de destino del proyecto \".NETCoreApp,Version=v3.1\". Puede que el paquete no sea totalmente compatible con el proyecto.",
       "libraryId": "Microsoft.Web.Infrastructure",
       "targetGraphs": [
         ".NETCoreApp,Version=v3.1"

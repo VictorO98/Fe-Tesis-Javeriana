@@ -14,12 +14,14 @@ namespace Fe.Core.General.Negocio
         RepoDemografia _repoDemografia;
         RepoDocumento _repoDocumento;
         RepoPoblacion _repoPoblacion;
+        RepoFaqCor _repoFaqCor;
 
-        public COGeneralBiz(RepoDemografia repoDemografia, RepoDocumento repoDocumento, RepoPoblacion repoPoblacion)
+        public COGeneralBiz(RepoDemografia repoDemografia, RepoDocumento repoDocumento, RepoPoblacion repoPoblacion, RepoFaqCor repoFaqCor)
         {
             _repoDemografia = repoDemografia;
             _repoDocumento = repoDocumento;
             _repoPoblacion = repoPoblacion;
+            _repoFaqCor = repoFaqCor;
         }
         internal DemografiaCor GetDemografiaPorId(int idDemografia)
         {
@@ -57,6 +59,58 @@ namespace Fe.Core.General.Negocio
             try
             {
                 respuestaDatos = await _repoDemografia.GuardarDemografia(demografia);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
+
+        internal async Task<RespuestaDatos> GuardarFaqCor(FaqCor faq)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _repoFaqCor.GuardarFaqCor(faq);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
+
+        internal FaqCor GetFaqCorPorId(int idFaqCor)
+        {
+            return _repoFaqCor.GetFaqCorPorId(idFaqCor);
+        }
+
+        internal List<FaqCor> GetTodasFaqCor()
+        {
+            return _repoFaqCor.GetTodasFaqCor();
+        }
+
+        internal async Task<RespuestaDatos> ModificarFaqCor(FaqCor faq)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _repoFaqCor.ModificarFaqCor(faq);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
+
+        internal async Task<RespuestaDatos> RemoverFaqCor(int idFaqCor)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _repoFaqCor.RemoverFaqCor(idFaqCor);
             }
             catch (COExcepcion e)
             {

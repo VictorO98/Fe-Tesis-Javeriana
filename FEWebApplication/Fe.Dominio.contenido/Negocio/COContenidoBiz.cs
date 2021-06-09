@@ -3,9 +3,8 @@ using Fe.Dominio.contenido.Datos;
 using System.Collections.Generic;
 using Fe.Core.Global.Errores;
 using System.Threading.Tasks;
-using System;
 using Fe.Servidor.Middleware.Contratos.Core;
-using Fe.Servidor.Middleware.Contratos.Dominio.Contenido;
+using System;
 
 namespace Fe.Dominio.contenido
 {
@@ -15,16 +14,14 @@ namespace Fe.Dominio.contenido
         private readonly RepoProducto _repoProducto;
         private readonly RepoTipoPublicacion _repoTipoPublicacion;
         private readonly RepoResena _repoResena;
-        private readonly RepoPyR _repoPyR;
 
         public COContenidoBiz(RepoCategoria repoCategoria, RepoProducto repoProducto, RepoTipoPublicacion repoTipoPublicacion, 
-            RepoResena repoResena, RepoPyR repoPyR)
+            RepoResena repoResena)
         {
             _repoCategoria = repoCategoria;
             _repoProducto = repoProducto;
             _repoTipoPublicacion = repoTipoPublicacion;
             _repoResena = repoResena;
-            _repoPyR = repoPyR;
         }
 
         internal List<CategoriaPc> GetCategorias()
@@ -182,76 +179,6 @@ namespace Fe.Dominio.contenido
                 throw e;
             }
             return respuestaDatos;
-        }
-
-        internal async Task<RespuestaDatos> GuardarPreguntasyRespuestas(PreguntasRespuestasPc pyr)
-        {
-            RespuestaDatos respuestaDatos;
-            ProductosServiciosPc publicacion = _repoProducto.GetPublicacionPorIdPublicacion(pyr.Idproductoservicio);
-            if (publicacion != null)
-            {
-                try
-                {
-                    respuestaDatos = await _repoPyR.GuardarPreguntasyRespuestas(pyr);
-                }
-                catch (COExcepcion e)
-                {
-                    throw e;
-                }
-            }
-            else
-            {
-                throw new COExcepcion("La publicación ingresada no existe");
-            }
-            return respuestaDatos;
-        }
-
-        internal async Task<RespuestaDatos> ModificarPreguntasyRespuestas(PreguntasRespuestasPc pyr)
-        {
-            RespuestaDatos respuestaDatos;
-            try
-            {
-                respuestaDatos = await _repoPyR.ModificarPreguntasyRespuestas(pyr);
-            }
-            catch (COExcepcion e)
-            {
-                throw e;
-            }
-            return respuestaDatos;
-        }
-
-        internal List<PreguntasRespuestasPc> GetPreguntasyRespuestasPorIdPublicacion(int idPublicacion)
-        {
-            return _repoPyR.GetPreguntasyRespuestasPorIdPublicacion(idPublicacion);
-        }
-
-        internal ContratoPc DesplegarPublicacion(int idPublicacion)
-        {
-            ProductosServiciosPc publicacion = _repoProducto.GetPublicacionPorIdPublicacion(idPublicacion);
-            ContratoPc contrato = new ContratoPc();
-            if (publicacion != null)
-            {
-                contrato.Id = publicacion.Id;
-                contrato.Nombre = publicacion.Nombre;
-                contrato.Habilitatrueque = publicacion.Habilitatrueque;
-                contrato.Cantidadtotal = publicacion.Cantidadtotal;
-                contrato.Descripcion = publicacion.Descripcion;
-                contrato.Descuento = publicacion.Descuento;
-                contrato.Preciounitario = publicacion.Preciounitario;
-                contrato.Urlimagenproductoservicio = publicacion.Urlimagenproductoservicio;
-                contrato.Tiempoentrega = publicacion.Tiempoentrega;
-                contrato.Tiempogarantia = publicacion.Tiempogarantia;
-                contrato.Calificacionpromedio = publicacion.Calificacionpromedio;
-                contrato.NombreCategoria = _repoCategoria.GetCategoriaPorIdCategoria(publicacion.Idcategoria).Nombre;
-                contrato.TipoPublicacion = _repoTipoPublicacion.GetTipoPublicacionPorID(publicacion.Idtipopublicacion).Nombre;
-                contrato.Resenas = _repoResena.GetResenasPorIdPublicacion(idPublicacion);
-                contrato.PreguntasRespuestas = _repoPyR.GetPreguntasyRespuestasPorIdPublicacion(idPublicacion);
-            }
-            else
-            {
-                throw new COExcepcion("La publicación ingresada no existe.");
-            }
-            return contrato;
         }
     }
 }

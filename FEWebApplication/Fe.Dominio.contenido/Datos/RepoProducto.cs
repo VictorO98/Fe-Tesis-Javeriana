@@ -1,14 +1,11 @@
-﻿using Dapper;
-using Fe.Core.Global.Constantes;
+﻿using Fe.Core.Global.Constantes;
 using Fe.Core.Global.Errores;
 using Fe.Servidor.Middleware.Contratos.Core;
-using Fe.Servidor.Middleware.Dapper;
 using Fe.Servidor.Middleware.Modelo.Contexto;
 using Fe.Servidor.Middleware.Modelo.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Fe.Dominio.contenido.Datos
@@ -27,6 +24,7 @@ namespace Fe.Dominio.contenido.Datos
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.StackTrace);
                 throw new COExcepcion("Ocurrió un problema al intentar realizar la publicación");
             }
             return respuestaDatos;
@@ -42,25 +40,17 @@ namespace Fe.Dominio.contenido.Datos
         {
             using FeContext context = new FeContext();
             RespuestaDatos respuestaDatos;
-            ProductosServiciosPc publicacion = GetPublicacionPorIdPublicacion(idPublicacion);
-            if (publicacion != null)
+            try
             {
-                try
-                {
-                    context.ProductosServiciosPcs.Attach(publicacion);
-                    publicacion.Estado = COEstados.INACTIVO;
-                    publicacion.Modificacion = DateTime.Now;
-                    context.SaveChanges();
-                    respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "Publicación eliminada exitosamente." };
-                }
-                catch (Exception e)
-                {
-                    throw new COExcepcion("Ocurrió un problema al intentar eliminar la publicación");
-                }
+                ProductosServiciosPc publicacion = new ProductosServiciosPc { Id = idPublicacion };
+                context.ProductosServiciosPcs.Attach(publicacion);
+                context.ProductosServiciosPcs.Remove(publicacion);
+                context.SaveChanges();
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "Publicación eliminada exitosamente." };
             }
-            else
+            catch(Exception e)
             {
-                throw new COExcepcion("La publicación no existe");
+                throw new COExcepcion("Ocurrió un problema al intentar eliminar la publicación");
             }
             return respuestaDatos;
         }
@@ -125,13 +115,6 @@ namespace Fe.Dominio.contenido.Datos
                 throw new COExcepcion("La publicación no existe");
             }
             return respuestaDatos;
-        }
-
-        // TODO: Terminar la funcion de filtro
-        internal List<ProductosServiciosPc> FiltroPublicaciones()
-        {
-            using FeContext context = new FeContext();
-            return null;
         }
     }
 }

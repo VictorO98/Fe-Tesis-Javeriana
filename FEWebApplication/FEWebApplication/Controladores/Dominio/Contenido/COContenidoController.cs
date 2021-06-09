@@ -9,13 +9,12 @@ using System.Collections.Generic;
 using FEWebApplication.Controladores.Core;
 using Fe.Servidor.Middleware.Contratos.Core;
 using System.Threading.Tasks;
-using Fe.Servidor.Middleware.Contratos.Dominio.Contenido;
 
 namespace FEWebApplication.Controladores.Dominio.Contenido
 {
     [Route("dominio/[controller]")]
     public class COContenidoController : COApiController
-    {
+    {   
         private readonly COFachada _coFachada;
 
         public COContenidoController(COFachada cOFachada)
@@ -47,7 +46,7 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
             {
                 respuestaDatos = await _coFachada.GuardarCategoria(categoria);
             }
-            catch (COExcepcion e)
+            catch (COExcepcion e) 
             {
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
             }
@@ -55,7 +54,6 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         }
 
         // TODO: Decodificacion de JWT para validar el usuario mediante el claim del ID
-        // TODO: Agregar método para las imágenes
         [Route("GuardarPublicacion")]
         [HttpPost]
         public async Task<RespuestaDatos> GuardarPublicacion([FromBody] ProductosServiciosPc productosServicios)
@@ -171,55 +169,9 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
 
         [Route("GetResenasPorIdPublicacion")]
         [HttpGet]
-        public List<ResenasPc> GetResenasPorIdPublicacion(int idPublicacion)
+        public ICollection<ResenasPc> GetResenasPorIdPublicacion(int idPublicacion)
         {
             return _coFachada.GetResenasPorIdPublicacion(idPublicacion);
-        }
-
-        [Route("GetPreguntasyRespuestasPorIdPublicacion")]
-        [HttpGet]
-        public List<PreguntasRespuestasPc> GetPreguntasyRespuestasPorIdPublicacion(int idPublicacion)
-        {
-            return _coFachada.GetPreguntasyRespuestasPorIdPublicacion(idPublicacion);
-        }
-
-        [Route("GuardarPreguntasyRespuestas")]
-        [HttpPost]
-        public async Task<RespuestaDatos> GuardarPreguntasyRespuestas([FromBody] PreguntasRespuestasPc pyr)
-        {
-            RespuestaDatos respuestaDatos;
-            try
-            {
-                respuestaDatos = await _coFachada.GuardarPreguntasyRespuestas(pyr);
-            }
-            catch (COExcepcion e)
-            {
-                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
-            }
-            return respuestaDatos;
-        }
-
-        [Route("ModificarPreguntasyRespuestas")]
-        [HttpPut]
-        public async Task<RespuestaDatos> ModificarPreguntasyRespuestas([FromBody] PreguntasRespuestasPc pyr)
-        {
-            RespuestaDatos respuestaDatos;
-            try
-            {
-                respuestaDatos = await _coFachada.ModificarPreguntasyRespuestas(pyr);
-            }
-            catch (COExcepcion e)
-            {
-                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
-            }
-            return respuestaDatos;
-        }
-
-        [Route("DesplegarPublicacion")]
-        [HttpGet]
-        public ContratoPc DesplegarPublicacion(int idPublicacion)
-        {
-            return _coFachada.DesplegarPublicacion(idPublicacion);
         }
     }
 }
