@@ -61,5 +61,57 @@ namespace Fe.Core.General
             }
             return respuestaDatos;
         }
+
+        public async Task<RespuestaDatos> GuardarFaqCor(FaqCor faq)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _cOGeneralBiz.GuardarFaqCor(faq);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
+
+        public FaqCor GetFaqCorPorId(int idFaqCor)
+        {
+            return _cOGeneralBiz.GetFaqCorPorId(idFaqCor);
+        }
+
+        public List<FaqCor> GetTodasFaqCor()
+        {
+            return _cOGeneralBiz.GetTodasFaqCor();
+        }
+
+        public async Task<RespuestaDatos> ModificarFaqCor(FaqCor faq)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _cOGeneralBiz.ModificarFaqCor(faq);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
+
+        public async Task<RespuestaDatos> RemoverFaqCor(int idFaqCor)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _cOGeneralBiz.RemoverFaqCor(idFaqCor);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
     }
 }

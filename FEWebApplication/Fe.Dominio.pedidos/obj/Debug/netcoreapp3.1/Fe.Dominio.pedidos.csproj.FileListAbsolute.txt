@@ -10,3 +10,15 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.pedidos\obj\
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.pedidos\obj\Debug\netcoreapp3.1\Fe.Dominio.pedidos.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.pedidos\obj\Debug\netcoreapp3.1\Fe.Dominio.pedidos.genruntimeconfig.cache
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.pedidos\obj\Debug\netcoreapp3.1\Fe.Dominio.pedidos.csprojAssemblyReference.cache
+C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.pedidos\bin\Debug\netcoreapp3.1\Fe.Dominio.pedidos.deps.json
+C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.pedidos\bin\Debug\netcoreapp3.1\Fe.Dominio.pedidos.runtimeconfig.json
+C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.pedidos\bin\Debug\netcoreapp3.1\Fe.Dominio.pedidos.runtimeconfig.dev.json
+C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.pedidos\bin\Debug\netcoreapp3.1\Fe.Dominio.pedidos.dll
+C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.pedidos\bin\Debug\netcoreapp3.1\Fe.Dominio.pedidos.pdb
+C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.pedidos\obj\Debug\netcoreapp3.1\Fe.Dominio.pedidos.csprojAssemblyReference.cache
+C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.pedidos\obj\Debug\netcoreapp3.1\Fe.Dominio.pedidos.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.pedidos\obj\Debug\netcoreapp3.1\Fe.Dominio.pedidos.AssemblyInfoInputs.cache
+C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.pedidos\obj\Debug\netcoreapp3.1\Fe.Dominio.pedidos.AssemblyInfo.cs
+C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.pedidos\obj\Debug\netcoreapp3.1\Fe.Dominio.pedidos.dll
+C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.pedidos\obj\Debug\netcoreapp3.1\Fe.Dominio.pedidos.pdb
+C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.pedidos\obj\Debug\netcoreapp3.1\Fe.Dominio.pedidos.genruntimeconfig.cache

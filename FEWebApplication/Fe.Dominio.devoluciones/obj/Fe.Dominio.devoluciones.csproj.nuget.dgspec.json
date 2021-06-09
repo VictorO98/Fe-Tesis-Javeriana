@@ -1,25 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Dominio.devoluciones\\Fe.Dominio.devoluciones.csproj": {}
+    "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Dominio.devoluciones\\Fe.Dominio.devoluciones.csproj": {}
   },
   "projects": {
-    "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Dominio.devoluciones\\Fe.Dominio.devoluciones.csproj": {
+    "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Dominio.devoluciones\\Fe.Dominio.devoluciones.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Dominio.devoluciones\\Fe.Dominio.devoluciones.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Dominio.devoluciones\\Fe.Dominio.devoluciones.csproj",
         "projectName": "Fe.Dominio.devoluciones",
-        "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Dominio.devoluciones\\Fe.Dominio.devoluciones.csproj",
-        "packagesPath": "C:\\Users\\vospi\\.nuget\\packages\\",
-        "outputPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Dominio.devoluciones\\obj\\",
+        "projectPath": "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Dominio.devoluciones\\Fe.Dominio.devoluciones.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Dominio.devoluciones\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\vospi\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -32,7 +30,6 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -44,7 +41,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Dapper": {
               "target": "Package",
@@ -122,11 +118,14 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
