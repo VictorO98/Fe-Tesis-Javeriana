@@ -3,9 +3,8 @@ using Fe.Dominio.contenido.Datos;
 using System.Collections.Generic;
 using Fe.Core.Global.Errores;
 using System.Threading.Tasks;
-using System;
 using Fe.Servidor.Middleware.Contratos.Core;
-using Fe.Servidor.Middleware.Contratos.Dominio.Contenido;
+using System;
 
 namespace Fe.Dominio.contenido
 {
@@ -15,16 +14,14 @@ namespace Fe.Dominio.contenido
         private readonly RepoProducto _repoProducto;
         private readonly RepoTipoPublicacion _repoTipoPublicacion;
         private readonly RepoResena _repoResena;
-        private readonly RepoPyR _repoPyR;
 
         public COContenidoBiz(RepoCategoria repoCategoria, RepoProducto repoProducto, RepoTipoPublicacion repoTipoPublicacion, 
-            RepoResena repoResena, RepoPyR repoPyR)
+            RepoResena repoResena)
         {
             _repoCategoria = repoCategoria;
             _repoProducto = repoProducto;
             _repoTipoPublicacion = repoTipoPublicacion;
             _repoResena = repoResena;
-            _repoPyR = repoPyR;
         }
 
         internal List<CategoriaPc> GetCategorias()
@@ -74,9 +71,9 @@ namespace Fe.Dominio.contenido
                             throw e;
                         }
                     }
-                    else { throw new COExcepcion("El tipo de publicación ingresado no existe."); }
+                    else { throw new COExcepcion("El tipo de publicaciÃ³n ingresado no existe."); }
                 }
-                else { throw new COExcepcion("La categoría ingresada no existe."); }
+                else { throw new COExcepcion("La categorÃ­a ingresada no existe."); }
             }
             else { throw new COExcepcion("El usuario ingresado no existe."); }
             return respuestaDatos;
@@ -174,7 +171,7 @@ namespace Fe.Dominio.contenido
                 }
                 else
                 {
-                    throw new COExcepcion("La publicación ingresada no existe");
+                    throw new COExcepcion("La publicaciÃ³n ingresada no existe");
                 }
             }
             catch (COExcepcion e)
@@ -201,7 +198,7 @@ namespace Fe.Dominio.contenido
             }
             else
             {
-                throw new COExcepcion("La publicación ingresada no existe");
+                throw new COExcepcion("La publicaciÃ³n ingresada no existe");
             }
             return respuestaDatos;
         }
@@ -249,7 +246,7 @@ namespace Fe.Dominio.contenido
             }
             else
             {
-                throw new COExcepcion("La publicación ingresada no existe.");
+                throw new COExcepcion("La publicaciÃ³n ingresada no existe.");
             }
             return contrato;
         }
@@ -260,11 +257,11 @@ namespace Fe.Dominio.contenido
             List<ContratoPc> contratos = new List<ContratoPc>();
             if (idCategoria != -1 && GetCategoriaPorIdCategoria(idCategoria) == null)
             {
-                throw new COExcepcion("La categoría ingresada no existe.");
+                throw new COExcepcion("La categorÃ­a ingresada no existe.");
             }
             if (idTipoPublicacion != -1 && GetTipoPublicacionPorID(idTipoPublicacion) == null)
             {
-                throw new COExcepcion("El tipo de publicación ingresado no existe.");
+                throw new COExcepcion("El tipo de publicaciÃ³n ingresado no existe.");
             }
             if (precioMenor <= precioMayor)
             {
@@ -282,14 +279,15 @@ namespace Fe.Dominio.contenido
                     }
                     catch(Exception e)
                     {
-                        throw new COExcepcion("Ocurrió un problema al intentar filtrar la publicación.");
+                        throw new COExcepcion("OcurriÃ³ un problema al intentar filtrar la publicaciÃ³n.");
                     }
 
                 }
-                else { throw new COExcepcion("Las calificaciones ingresadas son inválidas."); }
+                else { throw new COExcepcion("Las calificaciones ingresadas son invÃ¡lidas."); }
             }
-            else { throw new COExcepcion("Los precios ingresados son inválidos."); }
+            else { throw new COExcepcion("Los precios ingresados son invÃ¡lidos."); }
             return contratos;
         }
+
     }
 }

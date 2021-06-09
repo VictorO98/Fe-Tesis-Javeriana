@@ -78,5 +78,68 @@ namespace FEWebApplication.Controladores.Core
             }
             return respuestaDatos;
         }
+
+        [Route("GuardarFaqCor")]
+        [HttpPost]
+        public async Task<RespuestaDatos> GuardarFaqCor([FromBody] FaqCor faq)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _cOGeneralFachada.GuardarFaqCor(faq);
+            }
+            catch (COExcepcion e)
+            {
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
+            }
+            return respuestaDatos;
+        }
+
+        [Route("GetFaqCorPorId")]
+        [HttpGet]
+        public FaqCor GetFaqCorPorId(int idFaqCor)
+        {
+            return _cOGeneralFachada.GetFaqCorPorId(idFaqCor);
+        }
+
+        [Route("GetTodasFaqCor")]
+        [HttpGet]
+        public List<FaqCor> GetTodasFaqCor()
+        {
+            return _cOGeneralFachada.GetTodasFaqCor();
+        }
+
+        [Route("ModificarFaqCor")]
+        [HttpPost]
+        public async Task<RespuestaDatos> ModificarFaqCor([FromBody] FaqCor faq)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _cOGeneralFachada.ModificarFaqCor(faq);
+            }
+            catch (COExcepcion e)
+            {
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
+            }
+            return respuestaDatos;
+        }
+
+        [Route("RemoverFaqCor")]
+        [HttpDelete]
+        public async Task<RespuestaDatos> RemoverFaqCorPor(int idFaqCor)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _cOGeneralFachada.RemoverFaqCor(idFaqCor);
+            }
+            catch (COExcepcion e)
+            {
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
+            }
+            return respuestaDatos;
+        }
+
     }
 }

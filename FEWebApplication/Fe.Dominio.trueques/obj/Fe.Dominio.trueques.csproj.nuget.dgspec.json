@@ -1,24 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Dominio.trueques\\Fe.Dominio.trueques.csproj": {}
+    "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Dominio.trueques\\Fe.Dominio.trueques.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Dominio.trueques\\Fe.Dominio.trueques.csproj": {
+    "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Dominio.trueques\\Fe.Dominio.trueques.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Dominio.trueques\\Fe.Dominio.trueques.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Dominio.trueques\\Fe.Dominio.trueques.csproj",
         "projectName": "Fe.Dominio.trueques",
-        "projectPath": "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Dominio.trueques\\Fe.Dominio.trueques.csproj",
-        "packagesPath": "C:\\Users\\Antonio\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Antonio\\Desktop\\FE\\FEWebApplication\\Fe.Dominio.trueques\\obj\\",
+        "projectPath": "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Dominio.trueques\\Fe.Dominio.trueques.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ASUS\\Desktop\\victor\\FEWebApplication\\Fe.Dominio.trueques\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\Antonio\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -31,7 +30,6 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -43,7 +41,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Dapper": {
               "target": "Package",
@@ -121,11 +118,14 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

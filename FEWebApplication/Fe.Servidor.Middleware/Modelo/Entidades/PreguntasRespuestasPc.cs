@@ -9,10 +9,10 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
     {
         public int Id { get; set; }
         public int Idproductoservicio { get; set; }
-        public string Pregunta { get; set; } = "";
-        public string Respuesta { get; set; } = "";
-        public DateTime Creacion { get; set; } = DateTime.Now;
-        public DateTime Modificacion { get; set; } = DateTime.Now;
+        public string Pregunta { get; set; }
+        public string Respuesta { get; set; }
+        public DateTime Creacion { get; set; }
+        public DateTime Modificacion { get; set; }
 
         public virtual ProductosServiciosPc IdproductoservicioNavigation { get; set; }
     }

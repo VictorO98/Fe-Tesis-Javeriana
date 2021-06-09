@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using Fe.Servidor.Middleware.Contratos.Core;
 using Fe.Core.Global.Constantes;
 using Fe.Core.General;
-using Fe.Servidor.Middleware.Contratos.Dominio.Contenido;
 
 namespace Fe.Dominio.contenido
 {
@@ -147,7 +146,7 @@ namespace Fe.Dominio.contenido
             return _cOContenidoBiz.GetResenaPorIdResena(idResena);
         }
 
-        public List<ResenasPc> GetResenasPorIdPublicacion(int idPublicacion)
+        public ICollection<ResenasPc> GetResenasPorIdPublicacion(int idPublicacion)
         {
             return _cOContenidoBiz.GetResenasPorIdPublicacion(idPublicacion);
         }
@@ -203,5 +202,6 @@ namespace Fe.Dominio.contenido
                 throw e;
             }
         }
+
     }
 }
