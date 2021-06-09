@@ -150,5 +150,58 @@ namespace Fe.Dominio.contenido
         {
             return _cOContenidoBiz.GetResenasPorIdPublicacion(idPublicacion);
         }
+
+        public async Task<RespuestaDatos> GuardarPreguntasyRespuestas(PreguntasRespuestasPc pyr)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = respuestaDatos = await _cOContenidoBiz.GuardarPreguntasyRespuestas(pyr);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
+
+        public async Task<RespuestaDatos> ModificarPreguntasyRespuestas(PreguntasRespuestasPc pyr)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = respuestaDatos = await _cOContenidoBiz.ModificarPreguntasyRespuestas(pyr);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
+
+        public List<PreguntasRespuestasPc> GetPreguntasyRespuestasPorIdPublicacion(int idPublicacion)
+        {
+            return _cOContenidoBiz.GetPreguntasyRespuestasPorIdPublicacion(idPublicacion);
+        }
+
+        public ContratoPc DesplegarPublicacion(int idPublicacion)
+        {
+            return _cOContenidoBiz.DesplegarPublicacion(idPublicacion);
+        }
+
+        public List<ContratoPc> FiltrarPublicacion(int idCategoria, int idTipoPublicacion,
+            decimal precioMenor, decimal precioMayor, decimal calificacionMenor, decimal calificacionMayor)
+        {
+            try
+            {
+                return _cOContenidoBiz.FiltrarPublicacion(idCategoria, idTipoPublicacion, precioMenor, precioMayor,
+                calificacionMenor, calificacionMayor);
+            }
+            catch(COExcepcion e)
+            {
+                throw e;
+            }
+        }
+
     }
 }
