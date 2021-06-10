@@ -268,5 +268,20 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
             }
             return respuestaDatos;
         }
+
+        // TODO: Decodificacion de JWT para validar el usuario mediante el claim del ID
+        [Route("GetFavoritosPorIdDemografia")]
+        [HttpGet]
+        public List<ContratoPc> GetFavoritosPorIdDemografia(int idDemografia)
+        {
+            try
+            {
+                return _coFachada.GetFavoritosPorIdDemografia(idDemografia);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+        }
     }
 }
