@@ -143,7 +143,8 @@ namespace Fe.Core.General
             RespuestaDatos respuestaDatos;
             try
             {
-                respuestaDatos = await _cOGeneralBiz.ModificarDemografiaReportada(demografiaReportada);
+                DemografiaCor demografiaCor = _cOGeneralBiz.GetDemografiaPorId(demografiaReportada.Iddemografia);
+                respuestaDatos = await _cOGeneralBiz.ModificarDemografiaReportada(demografiaReportada, demografiaCor);
             }
             catch (COExcepcion e)
             {

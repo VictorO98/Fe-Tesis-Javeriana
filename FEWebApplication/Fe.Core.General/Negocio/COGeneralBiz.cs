@@ -145,17 +145,25 @@ namespace Fe.Core.General.Negocio
             return _repoDemografiaReportada.GetTodasDemografiaReportada();
         }
 
-        internal async Task<RespuestaDatos> ModificarDemografiaReportada(DemografiaReportadaCor demografiaReportada)
+        internal async Task<RespuestaDatos> ModificarDemografiaReportada(DemografiaReportadaCor demografiaReportada, DemografiaCor demografiaCor)
         {
             RespuestaDatos respuestaDatos;
-            try
+            if (demografiaCor != null)
             {
-                respuestaDatos = await _repoDemografiaReportada.ModificarDemografiaReportada(demografiaReportada);
+                if (GetDemografiaPorId(demografiaCor.Id) != null)
+                {
+                    try
+                    {
+                        respuestaDatos = await _repoDemografiaReportada.ModificarDemografiaReportada(demografiaReportada);
+                    }
+                    catch (COExcepcion e)
+                    {
+                        throw e;
+                    }
+                }
+                else { throw new COExcepcion("La demogradía que desea reportar no existe."); }
             }
-            catch (COExcepcion e)
-            {
-                throw e;
-            }
+            else { throw new COExcepcion("La demografía no existe."); }
             return respuestaDatos;
         }
 

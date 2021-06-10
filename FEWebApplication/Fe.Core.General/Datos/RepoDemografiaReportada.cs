@@ -16,25 +16,18 @@ namespace Fe.Core.General.Datos
         {
             using FeContext context = new FeContext();
             RespuestaDatos respuestaDatos;
-            DemografiaCor dr = context.DemografiaCors.Where(d => d.Id == demografiaReportada.Iddemografia).FirstOrDefault();
-
-            if (dr != null)
+           
+            try
             {
-                try
-                {
-                    context.Add(demografiaReportada);
-                    context.SaveChanges();
-                    respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "Demografía reportada creada exitosamente." };
-                }
-                catch (Exception e)
-                {
-                    throw new COExcepcion("Ocurrió un problema al intentar agregar la Demografía reportada.");
-                }
+                context.Add(demografiaReportada);
+                context.SaveChanges();
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "Demografía reportada creada exitosamente." };
             }
-            else
+            catch (Exception e)
             {
-                throw new COExcepcion("La demografía que desa ser reportada no existe");
+                throw new COExcepcion("Ocurrió un problema al intentar agregar la Demografía reportada.");
             }
+         
             return respuestaDatos;
         }
 
