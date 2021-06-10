@@ -10,7 +10,6 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
     {
         public ProductosServiciosPc()
         {
-            FavoritosUsuarioProductosPcs = new HashSet<FavoritosUsuarioProductosPc>();
             PreguntasRespuestasPcs = new HashSet<PreguntasRespuestasPc>();
             ProdSerTruequeTrueIdproductoserviciocompradorNavigations = new HashSet<ProdSerTruequeTrue>();
             ProdSerTruequeTrueIdproductoserviciovendedorNavigations = new HashSet<ProdSerTruequeTrue>();
@@ -40,7 +39,6 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
         public virtual CategoriaPc IdcategoriaNavigation { get; set; }
         public virtual TipoPublicacionPc IdtipopublicacionNavigation { get; set; }
         public virtual DemografiaCor IdusuarioNavigation { get; set; }
-        public virtual ICollection<FavoritosUsuarioProductosPc> FavoritosUsuarioProductosPcs { get; set; }
         public virtual ICollection<PreguntasRespuestasPc> PreguntasRespuestasPcs { get; set; }
         public virtual ICollection<ProdSerTruequeTrue> ProdSerTruequeTrueIdproductoserviciocompradorNavigations { get; set; }
         public virtual ICollection<ProdSerTruequeTrue> ProdSerTruequeTrueIdproductoserviciovendedorNavigations { get; set; }

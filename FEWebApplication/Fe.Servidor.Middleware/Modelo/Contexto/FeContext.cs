@@ -28,7 +28,6 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
         public virtual DbSet<EstadoPoblacionCor> EstadoPoblacionCors { get; set; }
         public virtual DbSet<FacturasFac> FacturasFacs { get; set; }
         public virtual DbSet<FaqCor> FaqCors { get; set; }
-        public virtual DbSet<FavoritosUsuarioProductosPc> FavoritosUsuarioProductosPcs { get; set; }
         public virtual DbSet<Identityrole> Identityroles { get; set; }
         public virtual DbSet<IdentityroleclaimString> IdentityroleclaimStrings { get; set; }
         public virtual DbSet<Identityuser> Identityusers { get; set; }
@@ -361,34 +360,6 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                 entity.Property(e => e.Pregunta).HasColumnName("pregunta");
 
                 entity.Property(e => e.Respuesta).HasColumnName("respuesta");
-            });
-
-            modelBuilder.Entity<FavoritosUsuarioProductosPc>(entity =>
-            {
-                entity.ToTable("favoritos_usuario_productos_pc");
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .UseIdentityAlwaysColumn()
-                    .HasIdentityOptions(null, null, null, 99999L, null, null);
-
-                entity.Property(e => e.Creacion)
-                    .HasColumnType("timestamp with time zone")
-                    .HasColumnName("creacion");
-
-                entity.Property(e => e.Estado)
-                    .IsRequired()
-                    .HasColumnType("character varying(3)[]")
-                    .HasColumnName("estado");
-
-                entity.Property(e => e.IdProductoServicio).HasColumnName("idProductoServicio");
-
-                entity.Property(e => e.IdUsuario).HasColumnName("idUsuario");
-
-                entity.HasOne(d => d.IdProductoServicioNavigation)
-                    .WithMany(p => p.FavoritosUsuarioProductosPcs)
-                    .HasForeignKey(d => d.IdProductoServicio)
-                    .HasConstraintName("id_prod_ser_fk");
             });
 
             modelBuilder.Entity<Identityrole>(entity =>
