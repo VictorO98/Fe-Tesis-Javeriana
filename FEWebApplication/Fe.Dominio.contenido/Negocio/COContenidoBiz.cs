@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Fe.Servidor.Middleware.Contratos.Core;
 using System;
 using Fe.Servidor.Middleware.Contratos.Dominio.Contenido;
-using Fe.Core.General.Datos;
 
 namespace Fe.Dominio.contenido
 {
@@ -17,15 +16,17 @@ namespace Fe.Dominio.contenido
         private readonly RepoTipoPublicacion _repoTipoPublicacion;
         private readonly RepoResena _repoResena;
         private readonly RepoPyR _repoPyR;
+        private readonly RepoFavorito _repoFavorito;
 
         public COContenidoBiz(RepoCategoria repoCategoria, RepoProducto repoProducto, RepoTipoPublicacion repoTipoPublicacion, 
-            RepoResena repoResena, RepoPyR repoPyR)
+            RepoResena repoResena, RepoPyR repoPyR, RepoFavorito repoFavorito)
         {
             _repoCategoria = repoCategoria;
             _repoProducto = repoProducto;
             _repoTipoPublicacion = repoTipoPublicacion;
             _repoResena = repoResena;
             _repoPyR = repoPyR;
+            _repoFavorito = repoFavorito;
         }
 
         internal List<CategoriaPc> GetCategorias()
@@ -293,5 +294,41 @@ namespace Fe.Dominio.contenido
             return contratos;
         }
 
+        internal async Task<RespuestaDatos> GuardarFavorito(ProductosFavoritosDemografiaPc favorito, DemografiaCor demografiaCor,
+            ProductosServiciosPc publicacion)
+        {
+            RespuestaDatos respuestaDatos;
+            if(demografiaCor != null)
+            {
+                if (publicacion != null)
+                {
+                    try
+                    {
+                        respuestaDatos = await _repoFavorito.GuardarFavorito(favorito);
+                    }
+                    catch (COExcepcion e)
+                    {
+                        throw e;
+                    }
+                }
+                else { throw new COExcepcion("La publicación ingresada no existe."); }
+            }
+            else { throw new COExcepcion("El usuario ingresado no existe."); }
+            return respuestaDatos;
+        }
+
+        internal async Task<RespuestaDatos> RemoverFavorito(int idFavorito)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _repoFavorito.RemoverFavorito(idFavorito);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
     }
 }
