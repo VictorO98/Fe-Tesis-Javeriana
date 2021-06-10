@@ -102,6 +102,7 @@ namespace FEWebApplication
             services.AddScoped<RepoResena>();
             services.AddScoped<RepoFaqCor>();
             services.AddScoped<RepoPyR>();
+            services.AddScoped<RepoDemografiaReportada>();
 
             services.AddRazorPages();
             services.AddControllers();
