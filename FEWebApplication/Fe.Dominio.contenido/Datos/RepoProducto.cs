@@ -43,17 +43,25 @@ namespace Fe.Dominio.contenido.Datos
         {
             using FeContext context = new FeContext();
             RespuestaDatos respuestaDatos;
-            try
+            ProductosServiciosPc publicacion = GetPublicacionPorIdPublicacion(idPublicacion);
+            if (publicacion != null)
             {
-                ProductosServiciosPc publicacion = new ProductosServiciosPc { Id = idPublicacion };
-                context.ProductosServiciosPcs.Attach(publicacion);
-                context.ProductosServiciosPcs.Remove(publicacion);
-                context.SaveChanges();
-                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "Publicación eliminada exitosamente." };
+                try
+                {
+                    context.ProductosServiciosPcs.Attach(publicacion);
+                    publicacion.Estado = COEstados.INACTIVO;
+                    publicacion.Modificacion = DateTime.Now;
+                    context.SaveChanges();
+                    respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "Publicación eliminada exitosamente." };
+                }
+                catch (Exception e)
+                {
+                    throw new COExcepcion("Ocurrió un problema al intentar eliminar la publicación");
+                }
             }
-            catch(Exception e)
+            else
             {
-                throw new COExcepcion("Ocurrió un problema al intentar eliminar la publicación");
+                throw new COExcepcion("La publicación no existe");
             }
             return respuestaDatos;
         }
