@@ -235,5 +235,53 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
             }
         }
 
+        // TODO: Decodificacion de JWT para validar el usuario mediante el claim del ID
+        [Route("GuardarFavorito")]
+        [HttpPost]
+        public async Task<RespuestaDatos> GuardarFavorito([FromBody] ProductosFavoritosDemografiaPc favorito)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _coFachada.GuardarFavorito(favorito);
+            }
+            catch (COExcepcion e)
+            {
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
+            }
+            return respuestaDatos;
+        }
+
+        // TODO: Decodificacion de JWT para validar el usuario mediante el claim del ID
+        [Route("RemoverFavorito")]
+        [HttpDelete]
+        public async Task<RespuestaDatos> RemoverFavorito(int idFavorito)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _coFachada.RemoverFavorito(idFavorito);
+            }
+            catch (COExcepcion e)
+            {
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
+            }
+            return respuestaDatos;
+        }
+
+        // TODO: Decodificacion de JWT para validar el usuario mediante el claim del ID
+        [Route("GetFavoritosPorIdDemografia")]
+        [HttpGet]
+        public List<ContratoPc> GetFavoritosPorIdDemografia(int idDemografia)
+        {
+            try
+            {
+                return _coFachada.GetFavoritosPorIdDemografia(idDemografia);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+        }
     }
 }
