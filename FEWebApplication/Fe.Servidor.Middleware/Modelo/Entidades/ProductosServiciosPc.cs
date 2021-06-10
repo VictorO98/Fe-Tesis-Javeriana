@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fe.Core.Global.Constantes;
+using System;
 using System.Collections.Generic;
 
 #nullable disable
@@ -28,10 +29,10 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
         public DateTime Tiempogarantia { get; set; }
         public int Preciounitario { get; set; }
         public decimal? Descuento { get; set; }
-        public string Estado { get; set; }
-        public decimal Calificacionpromedio { get; set; }
+        public string Estado { get; set; } = COEstados.VIGENTE;
+        public decimal Calificacionpromedio { get; set; } = 0;
         public int Habilitatrueque { get; set; }
-        public DateTime Creacion { get; set; }
+        public DateTime Creacion { get; set; } = DateTime.Now;
         public string Nombre { get; set; }
         public DateTime Modificacion { get; set; }
         public string Urlimagenproductoservicio { get; set; }
