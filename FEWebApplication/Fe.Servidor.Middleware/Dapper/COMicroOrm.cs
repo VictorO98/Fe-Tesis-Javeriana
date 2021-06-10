@@ -11,7 +11,7 @@ namespace Fe.Servidor.Middleware.Dapper
     {
         private readonly string stringConnection;
 
-        public COMicroOrm(IConfiguration configuration)
+        public COMicroOrm(IConfiguration configuration) 
         {
             stringConnection = configuration.GetConnectionString("ConexionString");
         }
