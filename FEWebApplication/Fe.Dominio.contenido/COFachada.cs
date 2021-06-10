@@ -204,5 +204,34 @@ namespace Fe.Dominio.contenido
             }
         }
 
+        public async Task<RespuestaDatos> GuardarFavorito(ProductosFavoritosDemografiaPc favorito)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                DemografiaCor demografiaCor = _cOGeneralFachada.GetDemografiaPorId(favorito.Iddemografia);
+                ProductosServiciosPc publicacion = _cOContenidoBiz.GetPublicacionPorIdPublicacion(favorito.Idproductoservicio);
+                respuestaDatos = respuestaDatos = await _cOContenidoBiz.GuardarFavorito(favorito, demografiaCor, publicacion);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
+
+        public async Task<RespuestaDatos> RemoverFavorito(int idFavorito)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _cOContenidoBiz.RemoverFavorito(idFavorito);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
     }
 }
