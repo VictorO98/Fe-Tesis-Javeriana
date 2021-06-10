@@ -119,7 +119,8 @@ namespace Fe.Core.General
             RespuestaDatos respuestaDatos;
             try
             {
-                respuestaDatos = await _cOGeneralBiz.GuardarDemografiaReportada(demografiaReportada);
+                DemografiaCor demografiaCor = _cOGeneralBiz.GetDemografiaPorId(demografiaReportada.Iddemografia);
+                respuestaDatos = await _cOGeneralBiz.GuardarDemografiaReportada(demografiaReportada, demografiaCor);
             }
             catch (COExcepcion e)
             {
@@ -143,8 +144,7 @@ namespace Fe.Core.General
             RespuestaDatos respuestaDatos;
             try
             {
-                DemografiaCor demografiaCor = _cOGeneralBiz.GetDemografiaPorId(demografiaReportada.Iddemografia);
-                respuestaDatos = await _cOGeneralBiz.ModificarDemografiaReportada(demografiaReportada, demografiaCor);
+                respuestaDatos = await _cOGeneralBiz.ModificarDemografiaReportada(demografiaReportada);
             }
             catch (COExcepcion e)
             {

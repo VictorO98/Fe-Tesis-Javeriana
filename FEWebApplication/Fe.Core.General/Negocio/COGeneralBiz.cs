@@ -121,17 +121,25 @@ namespace Fe.Core.General.Negocio
             return respuestaDatos;
         }
 
-        internal async Task<RespuestaDatos> GuardarDemografiaReportada(DemografiaReportadaCor demografiaReportada)
+        internal async Task<RespuestaDatos> GuardarDemografiaReportada(DemografiaReportadaCor demografiaReportada, DemografiaCor demografiaCor)
         {
             RespuestaDatos respuestaDatos;
-            try
+            if (demografiaCor != null)
             {
-                respuestaDatos = await _repoDemografiaReportada.GuardarDemografiaReportada(demografiaReportada);
+                if (GetDemografiaPorId(demografiaCor.Id) != null)
+                {
+                    try
+                    {
+                        respuestaDatos = await _repoDemografiaReportada.GuardarDemografiaReportada(demografiaReportada);
+                    }
+                    catch (COExcepcion e)
+                    {
+                        throw e;
+                    }
+                }
+                else { throw new COExcepcion("La demogradía que desea reportar no existe."); }
             }
-            catch (COExcepcion e)
-            {
-                throw e;
-            }
+            else { throw new COExcepcion("La demografía no existe."); }
             return respuestaDatos;
         }
 
@@ -145,25 +153,18 @@ namespace Fe.Core.General.Negocio
             return _repoDemografiaReportada.GetTodasDemografiaReportada();
         }
 
-        internal async Task<RespuestaDatos> ModificarDemografiaReportada(DemografiaReportadaCor demografiaReportada, DemografiaCor demografiaCor)
+        internal async Task<RespuestaDatos> ModificarDemografiaReportada(DemografiaReportadaCor demografiaReportada)
         {
             RespuestaDatos respuestaDatos;
-            if (demografiaCor != null)
+            try
             {
-                if (GetDemografiaPorId(demografiaCor.Id) != null)
-                {
-                    try
-                    {
-                        respuestaDatos = await _repoDemografiaReportada.ModificarDemografiaReportada(demografiaReportada);
-                    }
-                    catch (COExcepcion e)
-                    {
-                        throw e;
-                    }
-                }
-                else { throw new COExcepcion("La demogradía que desea reportar no existe."); }
+                respuestaDatos = await _repoDemografiaReportada.ModificarDemografiaReportada(demografiaReportada);
             }
-            else { throw new COExcepcion("La demografía no existe."); }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+      
             return respuestaDatos;
         }
 
