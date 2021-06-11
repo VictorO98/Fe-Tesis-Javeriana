@@ -45,12 +45,12 @@ namespace FEWebApplication
         {
             services.AddRazorPages();
 
-            //Conexión a DB de Fe
+            //ConexiÃ³n a DB de Fe
             services.AddDbContext<FeContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("ConexionString")));
             CODBOrmFactorycs.Configurar(Configuration);
 
-            //Añadir Identity
+            //AÃ±adir Identity
             services.AddDbContext<ApplicationUserDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("ConexionString")));
 
@@ -102,7 +102,11 @@ namespace FEWebApplication
             services.AddScoped<RepoResena>();
             services.AddScoped<RepoFaqCor>();
             services.AddScoped<RepoPyR>();
+
             services.AddScoped<RepoDemografiaReportada>();
+
+            services.AddScoped<RepoFavorito>();
+
 
             services.AddRazorPages();
             services.AddControllers();

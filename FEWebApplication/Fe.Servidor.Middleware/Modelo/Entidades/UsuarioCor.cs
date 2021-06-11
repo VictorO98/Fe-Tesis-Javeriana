@@ -9,7 +9,6 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
     {
         public UsuarioCor()
         {
-            FavoritosUsuarioProductosPcs = new HashSet<FavoritosUsuarioProductosPc>();
             NotificacionesCors = new HashSet<NotificacionesCor>();
             PedidosPeds = new HashSet<PedidosPed>();
             ProductosServiciosPcs = new HashSet<ProductosServiciosPc>();
@@ -27,7 +26,6 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
         public bool Emailconfirmed { get; set; }
 
         public virtual RolCor Rolcor { get; set; }
-        public virtual ICollection<FavoritosUsuarioProductosPc> FavoritosUsuarioProductosPcs { get; set; }
         public virtual ICollection<NotificacionesCor> NotificacionesCors { get; set; }
         public virtual ICollection<PedidosPed> PedidosPeds { get; set; }
         public virtual ICollection<ProductosServiciosPc> ProductosServiciosPcs { get; set; }
