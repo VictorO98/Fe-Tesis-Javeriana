@@ -259,7 +259,7 @@ namespace Fe.Dominio.contenido
         internal List<ContratoPc> FiltrarPublicacion(int idCategoria, int idTipoPublicacion,
             decimal precioMenor, decimal precioMayor, decimal calificacionMenor, decimal calificacionMayor)
         {
-            List<ContratoPc> contratos = new List<ContratoPc>();
+            List<ContratoPc> publicaciones = new List<ContratoPc>();
             if (idCategoria != -1 && GetCategoriaPorIdCategoria(idCategoria) == null)
             {
                 throw new COExcepcion("La categoría ingresada no existe.");
@@ -279,7 +279,7 @@ namespace Fe.Dominio.contenido
                             idTipoPublicacion, precioMenor, precioMayor, calificacionMenor, calificacionMayor);
                         for(int i = 0; i < listaPublicaciones.Count; i++)
                         {
-                            contratos.Add(DesplegarPublicacion(listaPublicaciones[i].Id));
+                            publicaciones.Add(DesplegarPublicacion(listaPublicaciones[i].Id));
                         }
                     }
                     catch(Exception e)
@@ -291,7 +291,7 @@ namespace Fe.Dominio.contenido
                 else { throw new COExcepcion("Las calificaciones ingresadas son inválidas."); }
             }
             else { throw new COExcepcion("Los precios ingresados son inválidos."); }
-            return contratos;
+            return publicaciones;
         }
 
         internal async Task<RespuestaDatos> GuardarFavorito(ProductosFavoritosDemografiaPc favorito, DemografiaCor demografiaCor,
@@ -329,6 +329,21 @@ namespace Fe.Dominio.contenido
                 throw e;
             }
             return respuestaDatos;
+        }
+
+        internal List<ContratoPc> GetFavoritosPorIdDemografia(DemografiaCor demografia)
+        {
+            List<ContratoPc> publicaciones = new List<ContratoPc>();
+            if(demografia != null)
+            {
+                List<ProductosFavoritosDemografiaPc> favoritos = _repoFavorito.GetFavoritosPorIdDemografia(demografia.Id);
+                for(int i = 0; i < favoritos.Count; i++)
+                {
+                    publicaciones.Add(DesplegarPublicacion(favoritos[i].Idproductoservicio));
+                }
+            }
+            else { throw new COExcepcion("El usuario ingresado no existe."); }
+            return publicaciones;
         }
     }
 }
