@@ -4,6 +4,8 @@ using Fe.Servidor.Middleware.Contratos.Core;
 using Fe.Servidor.Middleware.Modelo.Contexto;
 using Fe.Servidor.Middleware.Modelo.Entidades;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Fe.Dominio.contenido.Datos
@@ -44,6 +46,12 @@ namespace Fe.Dominio.contenido.Datos
                 throw new COExcepcion("Ocurrió un problema al intentar eliminar la publicación de favoritos.");
             }
             return respuestaDatos;
+        }
+
+        internal List<ProductosFavoritosDemografiaPc> GetFavoritosPorIdDemografia(int idDemografia)
+        {
+            using FeContext context = new FeContext();
+            return context.ProductosFavoritosDemografiaPcs.Where(f => f.Iddemografia == idDemografia).ToList();
         }
     }
 }

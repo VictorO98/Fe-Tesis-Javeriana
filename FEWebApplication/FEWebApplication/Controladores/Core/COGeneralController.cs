@@ -110,7 +110,7 @@ namespace FEWebApplication.Controladores.Core
         }
 
         [Route("ModificarFaqCor")]
-        [HttpPost]
+        [HttpPut]
         public async Task<RespuestaDatos> ModificarFaqCor([FromBody] FaqCor faq)
         {
             RespuestaDatos respuestaDatos;
@@ -141,5 +141,66 @@ namespace FEWebApplication.Controladores.Core
             return respuestaDatos;
         }
 
+        [Route("GuardarDemografiaReportada")]
+        [HttpPost]
+        public async Task<RespuestaDatos> GuardarDemografiaReportada([FromBody] DemografiaReportadaCor demografiaReportada)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _cOGeneralFachada.GuardarDemografiaReportada(demografiaReportada);
+            }
+            catch (COExcepcion e)
+            {
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
+            }
+            return respuestaDatos;
+        }
+
+        [Route("GetDemografiaReportadaPorId")]
+        [HttpGet]
+        public DemografiaReportadaCor GetDemografiaReportadaPorId(int idDemografiaReportada)
+        {
+            return _cOGeneralFachada.GetDemografiaReportadaPorId(idDemografiaReportada);
+        }
+
+        [Route("GetTodasDemografiaReportada")]
+        [HttpGet]
+        public List<DemografiaReportadaCor> GetTodasDemografiaReportada()
+        {
+            return _cOGeneralFachada.GetTodasDemografiaReportada();
+        }
+
+        [Route("ModificarDemografiaReportada")]
+        [HttpPut]
+        public async Task<RespuestaDatos> ModificarDemografiaReportada([FromBody] DemografiaReportadaCor demografiaReportada)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _cOGeneralFachada.ModificarDemografiaReportada(demografiaReportada);
+            }
+            catch (COExcepcion e)
+            {
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
+            }
+            return respuestaDatos;
+        }
+
+        [Route("RemoverDemografiaReportada")]
+        [HttpDelete]
+        public async Task<RespuestaDatos> RemoverDemografiaReportada(int idDemografiaReportada)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _cOGeneralFachada.RemoverDemografiaReportada(idDemografiaReportada);
+            }
+            catch (COExcepcion e)
+            {
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
+            }
+            return respuestaDatos;
+        }
     }
 }

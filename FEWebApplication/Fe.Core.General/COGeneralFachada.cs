@@ -113,5 +113,58 @@ namespace Fe.Core.General
             }
             return respuestaDatos;
         }
+
+        public async Task<RespuestaDatos> GuardarDemografiaReportada(DemografiaReportadaCor demografiaReportada)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                DemografiaCor demografiaCor = _cOGeneralBiz.GetDemografiaPorId(demografiaReportada.Iddemografia);
+                respuestaDatos = await _cOGeneralBiz.GuardarDemografiaReportada(demografiaReportada, demografiaCor);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
+
+        public DemografiaReportadaCor GetDemografiaReportadaPorId(int idDemografiaReportada)
+        {
+            return _cOGeneralBiz.GetDemografiaReportadaPorId(idDemografiaReportada);
+        }
+
+        public List<DemografiaReportadaCor> GetTodasDemografiaReportada()
+        {
+            return _cOGeneralBiz.GetTodasDemografiaReportada();
+        }
+
+        public async Task<RespuestaDatos> ModificarDemografiaReportada(DemografiaReportadaCor demografiaReportada)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _cOGeneralBiz.ModificarDemografiaReportada(demografiaReportada);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
+
+        public async Task<RespuestaDatos> RemoverDemografiaReportada(int idDemografiaReportada)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _cOGeneralBiz.RemoverDemografiaReportada(idDemografiaReportada);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
     }
 }
