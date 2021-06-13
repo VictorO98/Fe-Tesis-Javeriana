@@ -15,13 +15,15 @@ namespace Fe.Core.General.Negocio
         RepoDocumento _repoDocumento;
         RepoPoblacion _repoPoblacion;
         RepoFaqCor _repoFaqCor;
+        RepoDemografiaReportada _repoDemografiaReportada;
 
-        public COGeneralBiz(RepoDemografia repoDemografia, RepoDocumento repoDocumento, RepoPoblacion repoPoblacion, RepoFaqCor repoFaqCor)
+        public COGeneralBiz(RepoDemografia repoDemografia, RepoDocumento repoDocumento, RepoPoblacion repoPoblacion, RepoFaqCor repoFaqCor, RepoDemografiaReportada repoDemografiaReportada)
         {
             _repoDemografia = repoDemografia;
             _repoDocumento = repoDocumento;
             _repoPoblacion = repoPoblacion;
             _repoFaqCor = repoFaqCor;
+            _repoDemografiaReportada = repoDemografiaReportada;
         }
         internal DemografiaCor GetDemografiaPorId(int idDemografia)
         {
@@ -111,6 +113,67 @@ namespace Fe.Core.General.Negocio
             try
             {
                 respuestaDatos = await _repoFaqCor.RemoverFaqCor(idFaqCor);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
+
+        internal async Task<RespuestaDatos> GuardarDemografiaReportada(DemografiaReportadaCor demografiaReportada, DemografiaCor demografiaCor)
+        {
+            RespuestaDatos respuestaDatos;
+            if (demografiaCor != null)
+            {
+                if (GetDemografiaPorId(demografiaCor.Id) != null)
+                {
+                    try
+                    {
+                        respuestaDatos = await _repoDemografiaReportada.GuardarDemografiaReportada(demografiaReportada);
+                    }
+                    catch (COExcepcion e)
+                    {
+                        throw e;
+                    }
+                }
+                else { throw new COExcepcion("La demogradía que desea reportar no existe."); }
+            }
+            else { throw new COExcepcion("La demografía no existe."); }
+            return respuestaDatos;
+        }
+
+        internal DemografiaReportadaCor GetDemografiaReportadaPorId(int idDemografiaReportada)
+        {
+            return _repoDemografiaReportada.GetDemografiaReportadaPorId(idDemografiaReportada);
+        }
+
+        internal List<DemografiaReportadaCor> GetTodasDemografiaReportada()
+        {
+            return _repoDemografiaReportada.GetTodasDemografiaReportada();
+        }
+
+        internal async Task<RespuestaDatos> ModificarDemografiaReportada(DemografiaReportadaCor demografiaReportada)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _repoDemografiaReportada.ModificarDemografiaReportada(demografiaReportada);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+      
+            return respuestaDatos;
+        }
+
+        internal async Task<RespuestaDatos> RemoverDemografiaReportada(int idDemografiaReportada)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _repoDemografiaReportada.RemoverDemografiaReportada(idDemografiaReportada);
             }
             catch (COExcepcion e)
             {
