@@ -127,7 +127,6 @@ namespace Fe.Dominio.contenido.Datos
             return respuestaDatos;
         }
 
-        // TODO: Terminar la funcion de filtro
         internal List<ProductosServiciosPc> FiltrarPublicaciones(int idCategoria, int idTipoPublicacion,
             decimal precioMenor, decimal precioMayor, decimal calificacionMenor, decimal calificacionMayor)
         {

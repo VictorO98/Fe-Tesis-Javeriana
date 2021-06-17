@@ -28,6 +28,7 @@ using Fe.Dominio.pedidos.Negocio;
 using Fe.Dominio.pedidos;
 using Fe.Dominio.trueques.Negocio;
 using Fe.Dominio.trueques;
+using Fe.Dominio.trueques.Datos;
 
 namespace FEWebApplication
 {
@@ -102,6 +103,9 @@ namespace FEWebApplication
             services.AddScoped<RepoResena>();
             services.AddScoped<RepoFaqCor>();
             services.AddScoped<RepoPyR>();
+            services.AddScoped<RepoTrueque>();
+            services.AddScoped<RepoTruequeDetalle>();
+
 
             services.AddScoped<RepoDemografiaReportada>();
 
