@@ -16,14 +16,16 @@ namespace Fe.Core.General.Negocio
         RepoPoblacion _repoPoblacion;
         RepoFaqCor _repoFaqCor;
         RepoDemografiaReportada _repoDemografiaReportada;
+        RepoRazonSocial _repoRazonSocial;
 
-        public COGeneralBiz(RepoDemografia repoDemografia, RepoDocumento repoDocumento, RepoPoblacion repoPoblacion, RepoFaqCor repoFaqCor, RepoDemografiaReportada repoDemografiaReportada)
+        public COGeneralBiz(RepoDemografia repoDemografia, RepoDocumento repoDocumento, RepoPoblacion repoPoblacion, RepoFaqCor repoFaqCor, RepoDemografiaReportada repoDemografiaReportada, RepoRazonSocial repoRazonSocial)
         {
             _repoDemografia = repoDemografia;
             _repoDocumento = repoDocumento;
             _repoPoblacion = repoPoblacion;
             _repoFaqCor = repoFaqCor;
             _repoDemografiaReportada = repoDemografiaReportada;
+            _repoRazonSocial = repoRazonSocial;
         }
         internal DemografiaCor GetDemografiaPorId(int idDemografia)
         {
@@ -174,6 +176,58 @@ namespace Fe.Core.General.Negocio
             try
             {
                 respuestaDatos = await _repoDemografiaReportada.RemoverDemografiaReportada(idDemografiaReportada);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
+
+        internal async Task<RespuestaDatos> GuardarRazonSocial(RazonSocialCor razonSocial)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _repoRazonSocial.GuardarRazonSocial(razonSocial);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
+
+        internal RazonSocialCor GetRazonSocialPorId(int idRazonSocial)
+        {
+            return _repoRazonSocial.GetRazonSocialPorId(idRazonSocial);
+        }
+
+        internal List<RazonSocialCor> GetTodasRazonSocial()
+        {
+            return _repoRazonSocial.GetTodasRazonSocial();
+        }
+
+        internal async Task<RespuestaDatos> ModificarRazonSocial(RazonSocialCor razonSocial)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _repoRazonSocial.ModificarRazonSocial(razonSocial);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
+
+        internal async Task<RespuestaDatos> RemoverRazonSocial(int idRazonSocial)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _repoRazonSocial.RemoverRazonSocial(idRazonSocial);
             }
             catch (COExcepcion e)
             {
