@@ -202,5 +202,67 @@ namespace FEWebApplication.Controladores.Core
             }
             return respuestaDatos;
         }
+
+        [Route("GuardarRazonSocial")]
+        [HttpPost]
+        public async Task<RespuestaDatos> GuardarRazonSocial([FromBody] RazonSocialCor razonSocial)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _cOGeneralFachada.GuardarRazonSocial(razonSocial);
+            }
+            catch (COExcepcion e)
+            {
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
+            }
+            return respuestaDatos;
+        }
+
+        [Route("GetRazonSocialPorId")]
+        [HttpGet]
+        public RazonSocialCor GetRazonSocialPorId(int idRazonSocial)
+        {
+            return _cOGeneralFachada.GetRazonSocialPorId(idRazonSocial);
+        }
+
+        [Route("GetTodasRazonSocial")]
+        [HttpGet]
+        public List<RazonSocialCor> GetTodasRazonSocial()
+        {
+            return _cOGeneralFachada.GetTodasRazonSocial();
+        }
+
+        [Route("ModificarRazonSocial")]
+        [HttpPut]
+        public async Task<RespuestaDatos> ModificarRazonSocial([FromBody] RazonSocialCor razonSocial)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _cOGeneralFachada.ModificarRazonSocial(razonSocial);
+            }
+            catch (COExcepcion e)
+            {
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
+            }
+            return respuestaDatos;
+        }
+
+        [Route("RemoverRazonSocial")]
+        [HttpDelete]
+        public async Task<RespuestaDatos> RemoverRazonSocial(int idRazonSocial)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _cOGeneralFachada.RemoverRazonSocial(idRazonSocial);
+            }
+            catch (COExcepcion e)
+            {
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
+            }
+            return respuestaDatos;
+        }
     }
 }

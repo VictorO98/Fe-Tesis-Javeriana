@@ -108,7 +108,7 @@ namespace FEWebApplication
 
 
             services.AddScoped<RepoDemografiaReportada>();
-
+            services.AddScoped<RepoRazonSocial>();
             services.AddScoped<RepoFavorito>();
 
 

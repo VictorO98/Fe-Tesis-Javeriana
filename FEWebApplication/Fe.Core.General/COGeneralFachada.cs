@@ -166,5 +166,57 @@ namespace Fe.Core.General
             }
             return respuestaDatos;
         }
+
+        public async Task<RespuestaDatos> GuardarRazonSocial(RazonSocialCor razonSocial)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _cOGeneralBiz.GuardarRazonSocial(razonSocial);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
+
+        public RazonSocialCor GetRazonSocialPorId(int idRazonSocial)
+        {
+            return _cOGeneralBiz.GetRazonSocialPorId(idRazonSocial);
+        }
+
+        public List<RazonSocialCor> GetTodasRazonSocial()
+        {
+            return _cOGeneralBiz.GetTodasRazonSocial();
+        }
+
+        public async Task<RespuestaDatos> ModificarRazonSocial(RazonSocialCor razonSocial)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _cOGeneralBiz.ModificarRazonSocial(razonSocial);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
+
+        public async Task<RespuestaDatos> RemoverRazonSocial(int idRazonSocial)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _cOGeneralBiz.RemoverRazonSocial(idRazonSocial);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
     }
 }
