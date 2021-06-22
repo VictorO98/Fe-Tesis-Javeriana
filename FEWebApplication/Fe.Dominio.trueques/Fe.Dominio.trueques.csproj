@@ -32,4 +32,10 @@
     <Folder Include="Datos\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Fe.Core.General\Fe.Core.General.csproj" />
+    <ProjectReference Include="..\Fe.Dominio.contenido\Fe.Dominio.contenido.csproj" />
+    <ProjectReference Include="..\Fe.Servidor.Middleware\Fe.Servidor.Middleware.csproj" />
+  </ItemGroup>
+
 </Project>

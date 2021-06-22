@@ -22,3 +22,12 @@ C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.trueques\obj\Debug\netc
 C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.trueques\obj\Debug\netcoreapp3.1\Fe.Dominio.trueques.dll
 C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.trueques\obj\Debug\netcoreapp3.1\Fe.Dominio.trueques.pdb
 C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.trueques\obj\Debug\netcoreapp3.1\Fe.Dominio.trueques.genruntimeconfig.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\bin\Debug\netcoreapp3.1\Fe.Core.General.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\bin\Debug\netcoreapp3.1\Fe.Core.Global.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\bin\Debug\netcoreapp3.1\Fe.Dominio.contenido.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\bin\Debug\netcoreapp3.1\Fe.Servidor.Middleware.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\bin\Debug\netcoreapp3.1\Fe.Core.General.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\bin\Debug\netcoreapp3.1\Fe.Dominio.contenido.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\bin\Debug\netcoreapp3.1\Fe.Servidor.Middleware.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\bin\Debug\netcoreapp3.1\Fe.Core.Global.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\obj\Debug\netcoreapp3.1\Fe.Dominio.trueques.csproj.CopyComplete

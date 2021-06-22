@@ -936,6 +936,112 @@
         "runtime": {
           "lib/netstandard2.1/System.Text.Encodings.Web.dll": {}
         }
+      },
+      "Fe.Core.General/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Dapper": "2.0.90",
+          "Dapper.Contrib": "2.0.78",
+          "Fe.Core.Global": "1.0.0",
+          "Fe.Servidor.Middleware": "1.0.0",
+          "IdentityServer4": "4.1.2",
+          "IdentityServer4.Storage": "4.1.2",
+          "MailKit": "2.12.0",
+          "Microsoft.AspNet.Mvc": "5.2.7",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.7",
+          "Microsoft.EntityFrameworkCore": "5.0.7",
+          "Microsoft.EntityFrameworkCore.Relational": "5.0.7",
+          "Microsoft.NETCore.App": "2.2.8",
+          "NETCore.MailKit": "2.0.3",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.6",
+          "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.1.0"
+        },
+        "compile": {
+          "bin/placeholder/Fe.Core.General.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Fe.Core.General.dll": {}
+        }
+      },
+      "Fe.Core.Global/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Dapper": "2.0.90",
+          "Dapper.Contrib": "2.0.78",
+          "IdentityServer4": "4.1.2",
+          "IdentityServer4.Storage": "4.1.2",
+          "MailKit": "2.12.0",
+          "Microsoft.AspNet.Mvc": "5.2.7",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.7",
+          "Microsoft.EntityFrameworkCore": "5.0.7",
+          "Microsoft.EntityFrameworkCore.Relational": "5.0.7",
+          "Microsoft.NETCore.App": "2.2.8",
+          "NETCore.MailKit": "2.0.3",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.6",
+          "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.1.0"
+        },
+        "compile": {
+          "bin/placeholder/Fe.Core.Global.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Fe.Core.Global.dll": {}
+        }
+      },
+      "Fe.Dominio.contenido/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Dapper": "2.0.90",
+          "Dapper.Contrib": "2.0.78",
+          "Fe.Core.General": "1.0.0",
+          "Fe.Core.Global": "1.0.0",
+          "Fe.Servidor.Middleware": "1.0.0",
+          "IdentityServer4": "4.1.2",
+          "IdentityServer4.Storage": "4.1.2",
+          "MailKit": "2.12.0",
+          "Microsoft.AspNet.Mvc": "5.2.7",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.7",
+          "Microsoft.EntityFrameworkCore": "5.0.7",
+          "Microsoft.EntityFrameworkCore.Relational": "5.0.7",
+          "Microsoft.NETCore.App": "2.2.8",
+          "NETCore.MailKit": "2.0.3",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.6",
+          "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.1.0"
+        },
+        "compile": {
+          "bin/placeholder/Fe.Dominio.contenido.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Fe.Dominio.contenido.dll": {}
+        }
+      },
+      "Fe.Servidor.Middleware/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Dapper": "2.0.90",
+          "Dapper.Contrib": "2.0.78",
+          "Fe.Core.Global": "1.0.0",
+          "IdentityServer4": "4.1.2",
+          "IdentityServer4.Storage": "4.1.2",
+          "MailKit": "2.12.0",
+          "Microsoft.AspNet.Mvc": "5.2.7",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.7",
+          "Microsoft.EntityFrameworkCore": "5.0.7",
+          "Microsoft.EntityFrameworkCore.Relational": "5.0.7",
+          "Microsoft.NETCore.App": "2.2.8",
+          "NETCore.MailKit": "2.0.3",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.6",
+          "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.1.0"
+        },
+        "compile": {
+          "bin/placeholder/Fe.Servidor.Middleware.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Fe.Servidor.Middleware.dll": {}
+        }
       }
     }
   },
@@ -2915,12 +3021,35 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "Fe.Core.General/1.0.0": {
+      "type": "project",
+      "path": "../Fe.Core.General/Fe.Core.General.csproj",
+      "msbuildProject": "../Fe.Core.General/Fe.Core.General.csproj"
+    },
+    "Fe.Core.Global/1.0.0": {
+      "type": "project",
+      "path": "../Fe.Core.Global/Fe.Core.Global.csproj",
+      "msbuildProject": "../Fe.Core.Global/Fe.Core.Global.csproj"
+    },
+    "Fe.Dominio.contenido/1.0.0": {
+      "type": "project",
+      "path": "../Fe.Dominio.contenido/Fe.Dominio.contenido.csproj",
+      "msbuildProject": "../Fe.Dominio.contenido/Fe.Dominio.contenido.csproj"
+    },
+    "Fe.Servidor.Middleware/1.0.0": {
+      "type": "project",
+      "path": "../Fe.Servidor.Middleware/Fe.Servidor.Middleware.csproj",
+      "msbuildProject": "../Fe.Servidor.Middleware/Fe.Servidor.Middleware.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "Dapper >= 2.0.90",
       "Dapper.Contrib >= 2.0.78",
+      "Fe.Core.General >= 1.0.0",
+      "Fe.Dominio.contenido >= 1.0.0",
+      "Fe.Servidor.Middleware >= 1.0.0",
       "IdentityServer4 >= 4.1.2",
       "IdentityServer4.Storage >= 4.1.2",
       "MailKit >= 2.12.0",
@@ -2970,7 +3099,17 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Core.General\\Fe.Core.General.csproj": {
+              "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Core.General\\Fe.Core.General.csproj"
+            },
+            "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Dominio.contenido\\Fe.Dominio.contenido.csproj": {
+              "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Dominio.contenido\\Fe.Dominio.contenido.csproj"
+            },
+            "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj": {
+              "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
