@@ -28,6 +28,19 @@
           "lib/netstandard2.0/Dapper.Contrib.dll": {}
         }
       },
+      "ePayco.Net/1.0.13": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3",
+          "RestSharp": "105.2.3"
+        },
+        "compile": {
+          "lib/net40/epayco.net.dll": {}
+        },
+        "runtime": {
+          "lib/net40/epayco.net.dll": {}
+        }
+      },
       "Humanizer.Core/2.8.26": {
         "type": "package",
         "compile": {
@@ -81,10 +94,10 @@
           "lib/netstandard2.0/IdentityServer4.Storage.dll": {}
         }
       },
-      "MailKit/2.12.0": {
+      "MailKit/2.13.0": {
         "type": "package",
         "dependencies": {
-          "MimeKit": "2.12.0"
+          "MimeKit": "2.13.0"
         },
         "compile": {
           "lib/netstandard2.1/MailKit.dll": {}
@@ -684,7 +697,7 @@
           "lib/net40/Microsoft.Web.Infrastructure.dll": {}
         }
       },
-      "MimeKit/2.12.0": {
+      "MimeKit/2.13.0": {
         "type": "package",
         "dependencies": {
           "Portable.BouncyCastle": "1.8.10",
@@ -728,7 +741,7 @@
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
       },
-      "Newtonsoft.Json/12.0.2": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
@@ -737,7 +750,7 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
-      "Npgsql/5.0.5": {
+      "Npgsql/5.0.7": {
         "type": "package",
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "4.6.0"
@@ -749,13 +762,13 @@
           "lib/netcoreapp3.1/Npgsql.dll": {}
         }
       },
-      "Npgsql.EntityFrameworkCore.PostgreSQL/5.0.6": {
+      "Npgsql.EntityFrameworkCore.PostgreSQL/5.0.7": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "5.0.6",
-          "Microsoft.EntityFrameworkCore.Abstractions": "5.0.6",
-          "Microsoft.EntityFrameworkCore.Relational": "5.0.6",
-          "Npgsql": "5.0.5"
+          "Microsoft.EntityFrameworkCore": "5.0.7",
+          "Microsoft.EntityFrameworkCore.Abstractions": "5.0.7",
+          "Microsoft.EntityFrameworkCore.Relational": "5.0.7",
+          "Npgsql": "5.0.7"
         },
         "compile": {
           "lib/netstandard2.1/Npgsql.EntityFrameworkCore.PostgreSQL.dll": {}
@@ -789,6 +802,15 @@
         },
         "runtime": {
           "lib/netstandard2.0/BouncyCastle.Crypto.dll": {}
+        }
+      },
+      "RestSharp/105.2.3": {
+        "type": "package",
+        "compile": {
+          "lib/net46/RestSharp.dll": {}
+        },
+        "runtime": {
+          "lib/net46/RestSharp.dll": {}
         }
       },
       "System.Buffers/4.5.1": {
@@ -945,15 +967,16 @@
           "Dapper.Contrib": "2.0.78",
           "IdentityServer4": "4.1.2",
           "IdentityServer4.Storage": "4.1.2",
-          "MailKit": "2.12.0",
+          "MailKit": "2.13.0",
           "Microsoft.AspNet.Mvc": "5.2.7",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.7",
           "Microsoft.EntityFrameworkCore": "5.0.7",
           "Microsoft.EntityFrameworkCore.Relational": "5.0.7",
           "Microsoft.NETCore.App": "2.2.8",
           "NETCore.MailKit": "2.0.3",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.6",
-          "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.1.0"
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.7",
+          "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.1.0",
+          "ePayco.Net": "1.0.13"
         },
         "compile": {
           "bin/placeholder/Fe.Core.Global.dll": {}
@@ -971,15 +994,16 @@
           "Fe.Core.Global": "1.0.0",
           "IdentityServer4": "4.1.2",
           "IdentityServer4.Storage": "4.1.2",
-          "MailKit": "2.12.0",
+          "MailKit": "2.13.0",
           "Microsoft.AspNet.Mvc": "5.2.7",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.7",
           "Microsoft.EntityFrameworkCore": "5.0.7",
           "Microsoft.EntityFrameworkCore.Relational": "5.0.7",
           "Microsoft.NETCore.App": "2.2.8",
           "NETCore.MailKit": "2.0.3",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.6",
-          "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.1.0"
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.7",
+          "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.1.0",
+          "ePayco.Net": "1.0.13"
         },
         "compile": {
           "bin/placeholder/Fe.Servidor.Middleware.dll": {}
@@ -1024,6 +1048,18 @@
         "lib/net5.0/Dapper.Contrib.xml",
         "lib/netstandard2.0/Dapper.Contrib.dll",
         "lib/netstandard2.0/Dapper.Contrib.xml"
+      ]
+    },
+    "ePayco.Net/1.0.13": {
+      "sha512": "NHb6g0REgvpejalTeJoOOppkAOLL/4Uy49uEb9U2BiWgp5Hig17jKnq47UqGYBv9ZnS/ST2OEnZzv4/hZUyRSA==",
+      "type": "package",
+      "path": "epayco.net/1.0.13",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "epayco.net.1.0.13.nupkg.sha512",
+        "epayco.net.nuspec",
+        "lib/net40/epayco.net.dll"
       ]
     },
     "Humanizer.Core/2.8.26": {
@@ -1093,10 +1129,10 @@
         "lib/netstandard2.0/IdentityServer4.Storage.xml"
       ]
     },
-    "MailKit/2.12.0": {
-      "sha512": "YGjG1rHqTiyPZO3J/gWcBI1tOIMmSEALiEjf5i2YCUDkR4F+AEOyx/hNMP/99vPmpB6rxUdh/budN/tb3CcbCw==",
+    "MailKit/2.13.0": {
+      "sha512": "h+2fxPnB/gb+8nniTwetvooM8r9nmbWVF116uXZn8d4+k6V+mf+IOA4Gqb7nwHcZooale0s/v13O7B/6StRHJA==",
       "type": "package",
-      "path": "mailkit/2.12.0",
+      "path": "mailkit/2.13.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1122,7 +1158,7 @@
         "lib/netstandard2.1/MailKit.dll",
         "lib/netstandard2.1/MailKit.pdb",
         "lib/netstandard2.1/MailKit.xml",
-        "mailkit.2.12.0.nupkg.sha512",
+        "mailkit.2.13.0.nupkg.sha512",
         "mailkit.nuspec"
       ]
     },
@@ -2108,10 +2144,10 @@
         "microsoft.web.infrastructure.nuspec"
       ]
     },
-    "MimeKit/2.12.0": {
-      "sha512": "OB0sU/wk/Z0w8JBdtfdSme/trw0J7yWLivz+j/dO8KvfqQICkHL7oZVBRitFTlsTD68U62RNoUzrQ7zEiNtEoA==",
+    "MimeKit/2.13.0": {
+      "sha512": "wkHUQzy/sAtWCifZfNDq24DB/xshYoc+QeynSCJPSNeeA51DzZWjVaRslyix/9OEGhdSsUtvisL66dpGp0THjw==",
       "type": "package",
-      "path": "mimekit/2.12.0",
+      "path": "mimekit/2.13.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2137,7 +2173,7 @@
         "lib/netstandard2.1/MimeKit.dll",
         "lib/netstandard2.1/MimeKit.pdb",
         "lib/netstandard2.1/MimeKit.xml",
-        "mimekit.2.12.0.nupkg.sha512",
+        "mimekit.2.13.0.nupkg.sha512",
         "mimekit.nuspec"
       ]
     },
@@ -2281,10 +2317,10 @@
         "netstandard.library.nuspec"
       ]
     },
-    "Newtonsoft.Json/12.0.2": {
-      "sha512": "rTK0s2EKlfHsQsH6Yx2smvcTCeyoDNgCW7FEYyV01drPlh2T243PR2DiDXqtC5N4GDm4Ma/lkxfW5a/4793vbA==",
+    "Newtonsoft.Json/12.0.3": {
+      "sha512": "6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
       "type": "package",
-      "path": "newtonsoft.json/12.0.2",
+      "path": "newtonsoft.json/12.0.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2307,14 +2343,15 @@
         "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.xml",
         "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.dll",
         "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
-        "newtonsoft.json.12.0.2.nupkg.sha512",
-        "newtonsoft.json.nuspec"
+        "newtonsoft.json.12.0.3.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
       ]
     },
-    "Npgsql/5.0.5": {
-      "sha512": "cvqU1o/gTeX9ynzCEa1NkBEAtGFxLwROw1KweG/giNEYSSw/6W3G7hvYIFIyrdgTorEbLu/AaI2Lxs5TRB4goQ==",
+    "Npgsql/5.0.7": {
+      "sha512": "EQWwxb2lN9w78YG4f6Fxhw5lFEx4LuaNGasXzw86kTOJxiPsUORSh/BTencNZJO4uVqGZx3EO9Z8JXTAvRjgeg==",
       "type": "package",
-      "path": "npgsql/5.0.5",
+      "path": "npgsql/5.0.7",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2326,20 +2363,20 @@
         "lib/netstandard2.0/Npgsql.xml",
         "lib/netstandard2.1/Npgsql.dll",
         "lib/netstandard2.1/Npgsql.xml",
-        "npgsql.5.0.5.nupkg.sha512",
+        "npgsql.5.0.7.nupkg.sha512",
         "npgsql.nuspec",
         "postgresql.png"
       ]
     },
-    "Npgsql.EntityFrameworkCore.PostgreSQL/5.0.6": {
-      "sha512": "wX7ikYxbZDrcdiFw6dbG7MnoIaExR0QoOkqveZSrKdpkONxefKpXdtmZMUfzJbdE63qTaKzHsh+7kcCCF1gwqA==",
+    "Npgsql.EntityFrameworkCore.PostgreSQL/5.0.7": {
+      "sha512": "RxFmJ0I4uppEAyR7b+xCfj4ZilUoGkKD4otUjiu+O3hv+vG6LUFOfJcB1ms5kOWTIvLEQHow9e+0zH7JWWV0ig==",
       "type": "package",
-      "path": "npgsql.entityframeworkcore.postgresql/5.0.6",
+      "path": "npgsql.entityframeworkcore.postgresql/5.0.7",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.1/Npgsql.EntityFrameworkCore.PostgreSQL.dll",
-        "npgsql.entityframeworkcore.postgresql.5.0.6.nupkg.sha512",
+        "npgsql.entityframeworkcore.postgresql.5.0.7.nupkg.sha512",
         "npgsql.entityframeworkcore.postgresql.nuspec",
         "postgresql.png"
       ]
@@ -2370,6 +2407,44 @@
         "lib/netstandard2.0/BouncyCastle.Crypto.xml",
         "portable.bouncycastle.1.8.10.nupkg.sha512",
         "portable.bouncycastle.nuspec"
+      ]
+    },
+    "RestSharp/105.2.3": {
+      "sha512": "aR2Td2s7DUHSk+H3EdcJ7pAju3JLYUZMwWmkVNtiEl4pAQuQCnU218YMMAdPbTdw0PJnGqLwrJxWr1RdL4ADeQ==",
+      "type": "package",
+      "path": "restsharp/105.2.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/MonoAndroid10/RestSharp.dll",
+        "lib/MonoAndroid10/RestSharp.xml",
+        "lib/MonoTouch10/RestSharp.dll",
+        "lib/MonoTouch10/RestSharp.xml",
+        "lib/Xamarin.iOS10/RestSharp.dll",
+        "lib/Xamarin.iOS10/RestSharp.xml",
+        "lib/net35/RestSharp.dll",
+        "lib/net35/RestSharp.xml",
+        "lib/net4-client/RestSharp.dll",
+        "lib/net4-client/RestSharp.xml",
+        "lib/net4/RestSharp.dll",
+        "lib/net4/RestSharp.xml",
+        "lib/net45/RestSharp.dll",
+        "lib/net45/RestSharp.xml",
+        "lib/net451/RestSharp.dll",
+        "lib/net451/RestSharp.xml",
+        "lib/net452/RestSharp.dll",
+        "lib/net452/RestSharp.xml",
+        "lib/net46/RestSharp.dll",
+        "lib/net46/RestSharp.xml",
+        "lib/sl5/RestSharp.dll",
+        "lib/sl5/RestSharp.xml",
+        "lib/windowsphone8/RestSharp.dll",
+        "lib/windowsphone8/RestSharp.xml",
+        "lib/windowsphone81/RestSharp.dll",
+        "lib/windowsphone81/RestSharp.xml",
+        "readme.txt",
+        "restsharp.105.2.3.nupkg.sha512",
+        "restsharp.nuspec"
       ]
     },
     "System.Buffers/4.5.1": {
@@ -2986,7 +3061,7 @@
       "Fe.Servidor.Middleware >= 1.0.0",
       "IdentityServer4 >= 4.1.2",
       "IdentityServer4.Storage >= 4.1.2",
-      "MailKit >= 2.12.0",
+      "MailKit >= 2.13.0",
       "Microsoft.AspNet.Mvc >= 5.2.7",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 5.0.7",
       "Microsoft.EntityFrameworkCore >= 5.0.7",
@@ -2995,8 +3070,9 @@
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.7",
       "Microsoft.NETCore.App >= 2.2.8",
       "NETCore.MailKit >= 2.0.3",
-      "Npgsql.EntityFrameworkCore.PostgreSQL >= 5.0.6",
-      "Npgsql.EntityFrameworkCore.PostgreSQL.Design >= 1.1.0"
+      "Npgsql.EntityFrameworkCore.PostgreSQL >= 5.0.7",
+      "Npgsql.EntityFrameworkCore.PostgreSQL.Design >= 1.1.0",
+      "ePayco.Net >= 1.0.13"
     ]
   },
   "packageFolders": {
@@ -3071,7 +3147,7 @@
           },
           "MailKit": {
             "target": "Package",
-            "version": "[2.12.0, )"
+            "version": "[2.13.0, )"
           },
           "Microsoft.AspNet.Mvc": {
             "target": "Package",
@@ -3111,11 +3187,15 @@
           },
           "Npgsql.EntityFrameworkCore.PostgreSQL": {
             "target": "Package",
-            "version": "[5.0.6, )"
+            "version": "[5.0.7, )"
           },
           "Npgsql.EntityFrameworkCore.PostgreSQL.Design": {
             "target": "Package",
             "version": "[1.1.0, )"
+          },
+          "ePayco.Net": {
+            "target": "Package",
+            "version": "[1.0.13, )"
           }
         },
         "imports": [
@@ -3138,6 +3218,16 @@
     }
   },
   "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "El paquete \"ePayco.Net 1.0.13\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\" en lugar de la plataforma de destino del proyecto \".NETCoreApp,Version=v3.1\". Puede que el paquete no sea totalmente compatible con el proyecto.",
+      "libraryId": "ePayco.Net",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    },
     {
       "code": "NU1701",
       "level": "Warning",
@@ -3174,6 +3264,16 @@
       "warningLevel": 1,
       "message": "El paquete \"Microsoft.Web.Infrastructure 1.0.0\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\" en lugar de la plataforma de destino del proyecto \".NETCoreApp,Version=v3.1\". Puede que el paquete no sea totalmente compatible con el proyecto.",
       "libraryId": "Microsoft.Web.Infrastructure",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "El paquete \"RestSharp 105.2.3\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\" en lugar de la plataforma de destino del proyecto \".NETCoreApp,Version=v3.1\". Puede que el paquete no sea totalmente compatible con el proyecto.",
+      "libraryId": "RestSharp",
       "targetGraphs": [
         ".NETCoreApp,Version=v3.1"
       ]

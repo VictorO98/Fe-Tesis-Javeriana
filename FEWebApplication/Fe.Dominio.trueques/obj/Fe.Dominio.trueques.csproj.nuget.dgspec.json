@@ -71,7 +71,7 @@
             },
             "MailKit": {
               "target": "Package",
-              "version": "[2.12.0, )"
+              "version": "[2.13.0, )"
             },
             "Microsoft.AspNet.Mvc": {
               "target": "Package",
@@ -111,11 +111,15 @@
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
-              "version": "[5.0.6, )"
+              "version": "[5.0.7, )"
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL.Design": {
               "target": "Package",
               "version": "[1.1.0, )"
+            },
+            "ePayco.Net": {
+              "target": "Package",
+              "version": "[1.0.13, )"
             }
           },
           "imports": [
@@ -197,7 +201,7 @@
             },
             "MailKit": {
               "target": "Package",
-              "version": "[2.12.0, )"
+              "version": "[2.13.0, )"
             },
             "Microsoft.AspNet.Mvc": {
               "target": "Package",
@@ -237,11 +241,15 @@
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
-              "version": "[5.0.6, )"
+              "version": "[5.0.7, )"
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL.Design": {
               "target": "Package",
               "version": "[1.1.0, )"
+            },
+            "ePayco.Net": {
+              "target": "Package",
+              "version": "[1.0.13, )"
             }
           },
           "imports": [
@@ -333,7 +341,7 @@
             },
             "MailKit": {
               "target": "Package",
-              "version": "[2.12.0, )"
+              "version": "[2.13.0, )"
             },
             "Microsoft.AspNet.Mvc": {
               "target": "Package",
@@ -373,11 +381,15 @@
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
-              "version": "[5.0.6, )"
+              "version": "[5.0.7, )"
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL.Design": {
               "target": "Package",
               "version": "[1.1.0, )"
+            },
+            "ePayco.Net": {
+              "target": "Package",
+              "version": "[1.0.13, )"
             }
           },
           "imports": [
@@ -469,7 +481,7 @@
             },
             "MailKit": {
               "target": "Package",
-              "version": "[2.12.0, )"
+              "version": "[2.13.0, )"
             },
             "Microsoft.AspNet.Mvc": {
               "target": "Package",
@@ -509,11 +521,15 @@
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
-              "version": "[5.0.6, )"
+              "version": "[5.0.7, )"
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL.Design": {
               "target": "Package",
               "version": "[1.1.0, )"
+            },
+            "ePayco.Net": {
+              "target": "Package",
+              "version": "[1.0.13, )"
             }
           },
           "imports": [
@@ -599,7 +615,7 @@
             },
             "MailKit": {
               "target": "Package",
-              "version": "[2.12.0, )"
+              "version": "[2.13.0, )"
             },
             "Microsoft.AspNet.Mvc": {
               "target": "Package",
@@ -639,11 +655,15 @@
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
-              "version": "[5.0.6, )"
+              "version": "[5.0.7, )"
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL.Design": {
               "target": "Package",
               "version": "[1.1.0, )"
+            },
+            "ePayco.Net": {
+              "target": "Package",
+              "version": "[1.0.13, )"
             }
           },
           "imports": [
