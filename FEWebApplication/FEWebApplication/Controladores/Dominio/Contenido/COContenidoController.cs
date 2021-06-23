@@ -283,5 +283,35 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
                 throw e;
             }
         }
+
+        // TODO: Decodificacion de JWT para validar el usuario mediante el claim del ID
+        [Route("ValidarPublicacionesPorIdUsuario")]
+        [HttpGet]
+        public int ValidarPublicacionesPorIdUsuario(int idDemografia)
+        {
+            try
+            {
+                return _coFachada.ValidarPublicacionesPorIdUsuario(idDemografia);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+        }
+
+        // TODO: Decodificacion de JWT para validar el usuario mediante el claim del ID
+        [Route("GetPublicacionesPorIdUsuario")]
+        [HttpGet]
+        public List<ContratoPc> GetPublicacionesPorIdUsuario(int idDemografia)
+        {
+            try
+            {
+                return _coFachada.GetPublicacionesPorIdUsuario(idDemografia);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+        }
     }
 }

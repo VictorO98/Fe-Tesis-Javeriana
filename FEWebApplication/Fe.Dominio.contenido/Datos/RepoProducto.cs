@@ -201,5 +201,10 @@ namespace Fe.Dominio.contenido.Datos
             return listado.ToList();
         }
 
+        internal List<ProductosServiciosPc> GetPublicacionesPorIdUsuario(int idDemografia)
+        {
+            using FeContext context = new FeContext();
+            return context.ProductosServiciosPcs.Where(p => p.Idusuario == idDemografia).ToList();
+        }
     }
 }
