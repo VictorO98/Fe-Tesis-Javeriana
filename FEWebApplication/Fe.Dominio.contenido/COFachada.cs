@@ -246,5 +246,41 @@ namespace Fe.Dominio.contenido
                 throw e;
             }
         }
+
+        public int ValidarPublicacionesPorIdUsuario(int idDemografia)
+        {
+            try
+            {
+                DemografiaCor demografiaCor = _cOGeneralFachada.GetDemografiaPorId(idDemografia);
+                return _cOContenidoBiz.ValidarPublicacionesPorIdUsuario(demografiaCor);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+        }
+
+        public List<ContratoPc> GetPublicacionesPorIdUsuario(int idDemografia)
+        {
+            try
+            {
+                DemografiaCor demografiaCor = _cOGeneralFachada.GetDemografiaPorId(idDemografia);
+                return _cOContenidoBiz.GetPublicacionesPorIdUsuario(demografiaCor);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+        }
+
+        public List<ContratoPc> GetPublicacionesPorDescuento()
+        {
+            return _cOContenidoBiz.GetPublicacionesPorDescuento();
+        }
+
+        public List<ContratoPc> BuscarPublicacion(string nombre)
+        {
+            return _cOContenidoBiz.BuscarPublicacion(nombre);
+        }
     }
 }

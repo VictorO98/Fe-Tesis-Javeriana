@@ -345,5 +345,59 @@ namespace Fe.Dominio.contenido
             else { throw new COExcepcion("El usuario ingresado no existe."); }
             return publicaciones;
         }
+        internal int ValidarPublicacionesPorIdUsuario(DemografiaCor demografia)
+        {
+            int validarPublicacion;
+            if (demografia != null)
+            {
+                if (demografia.Rolcorid == 2)
+                {
+                    validarPublicacion = _repoProducto.GetPublicacionesPorIdUsuario(demografia.Id).Count;
+                }
+                else { throw new COExcepcion("El usuario ingresado no es un emprendedor."); }
+            }
+            else { throw new COExcepcion("El usuario ingresado no existe."); }
+            return validarPublicacion;
+        }
+
+        internal List<ContratoPc> GetPublicacionesPorIdUsuario(DemografiaCor demografia)
+        {
+            List<ContratoPc> publicaciones = new List<ContratoPc>();
+            if (demografia != null)
+            {
+                if(demografia.Rolcorid == 2)
+                {
+                    List<ProductosServiciosPc> publicacion = _repoProducto.GetPublicacionesPorIdUsuario(demografia.Id);
+                    for (int i = 0; i < publicacion.Count; i++)
+                    {
+                        publicaciones.Add(DesplegarPublicacion(publicacion[i].Id));
+                    }
+                } else { throw new COExcepcion("El usuario ingresado no es un emprendedor."); }
+            }
+            else { throw new COExcepcion("El usuario ingresado no existe."); }
+            return publicaciones;
+        }
+
+        internal List<ContratoPc> GetPublicacionesPorDescuento()
+        {
+            List<ContratoPc> publicaciones = new List<ContratoPc>();
+            List<ProductosServiciosPc> publicacion = _repoProducto.GetPublicacionesPorDescuento();
+            for (int i = 0; i < publicacion.Count; i++)
+            {
+                publicaciones.Add(DesplegarPublicacion(publicacion[i].Id));
+            }
+            return publicaciones;
+        }
+
+        internal List<ContratoPc> BuscarPublicacion(string nombre)
+        {
+            List<ContratoPc> publicaciones = new List<ContratoPc>();
+            List<ProductosServiciosPc> publicacion = _repoProducto.BuscarPublicacion(nombre);
+            for (int i = 0; i < publicacion.Count; i++)
+            {
+                publicaciones.Add(DesplegarPublicacion(publicacion[i].Id));
+            }
+            return publicaciones;
+        }
     }
 }
