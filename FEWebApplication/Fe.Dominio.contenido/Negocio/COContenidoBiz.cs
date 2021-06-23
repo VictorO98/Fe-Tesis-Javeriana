@@ -377,5 +377,27 @@ namespace Fe.Dominio.contenido
             else { throw new COExcepcion("El usuario ingresado no existe."); }
             return publicaciones;
         }
+
+        internal List<ContratoPc> GetPublicacionesPorDescuento()
+        {
+            List<ContratoPc> publicaciones = new List<ContratoPc>();
+            List<ProductosServiciosPc> publicacion = _repoProducto.GetPublicacionesPorDescuento();
+            for (int i = 0; i < publicacion.Count; i++)
+            {
+                publicaciones.Add(DesplegarPublicacion(publicacion[i].Id));
+            }
+            return publicaciones;
+        }
+
+        internal List<ContratoPc> BuscarPublicacion(string nombre)
+        {
+            List<ContratoPc> publicaciones = new List<ContratoPc>();
+            List<ProductosServiciosPc> publicacion = _repoProducto.BuscarPublicacion(nombre);
+            for (int i = 0; i < publicacion.Count; i++)
+            {
+                publicaciones.Add(DesplegarPublicacion(publicacion[i].Id));
+            }
+            return publicaciones;
+        }
     }
 }

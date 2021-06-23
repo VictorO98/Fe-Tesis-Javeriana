@@ -7,6 +7,7 @@ using Fe.Servidor.Middleware.Modelo.Contexto;
 using Fe.Servidor.Middleware.Modelo.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -205,6 +206,29 @@ namespace Fe.Dominio.contenido.Datos
         {
             using FeContext context = new FeContext();
             return context.ProductosServiciosPcs.Where(p => p.Idusuario == idDemografia).ToList();
+        }
+
+        internal List<ProductosServiciosPc> GetPublicacionesPorDescuento()
+        {
+            using FeContext context = new FeContext();
+            return context.ProductosServiciosPcs.Where(p => p.Descuento > 0).ToList();
+        }
+
+        internal string RemoverAcentos(string s)
+        {
+            string decomposed = s.Normalize(NormalizationForm.FormD);
+            char[] filtered = decomposed
+                .Where(c => char.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+                .ToArray();
+            string newString = new String(filtered);
+            return newString;
+        }
+
+        internal List<ProductosServiciosPc> BuscarPublicacion(string nombre)
+        {
+            nombre = RemoverAcentos(nombre);
+            using FeContext context = new FeContext();
+            return context.ProductosServiciosPcs.Where(p => p.Nombre.ToLower().Contains(nombre.ToLower())).ToList();
         }
     }
 }

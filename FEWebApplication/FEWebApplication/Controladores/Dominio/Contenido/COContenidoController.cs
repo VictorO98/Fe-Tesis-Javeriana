@@ -313,5 +313,19 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
                 throw e;
             }
         }
+
+        [Route("GetPublicacionesPorDescuento")]
+        [HttpGet]
+        public List<ContratoPc> GetPublicacionesPorDescuento()
+        {
+            return _coFachada.GetPublicacionesPorDescuento();
+        }
+
+        [Route("BuscarPublicacion")]
+        [HttpGet]
+        public List<ContratoPc> BuscarPublicacion(string nombre)
+        {
+            return _coFachada.BuscarPublicacion(nombre);
+        }
     }
 }
