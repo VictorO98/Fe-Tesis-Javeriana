@@ -24,8 +24,8 @@ using Fe.Dominio.devoluciones.Negocio;
 using Fe.Dominio.devoluciones;
 using Fe.Dominio.facturas.Negocio;
 using Fe.Dominio.facturas;
-using Fe.Dominio.pedidos.Negocio;
 using Fe.Dominio.pedidos;
+using Fe.Dominio.pedidos.Datos;
 using Fe.Dominio.trueques.Negocio;
 using Fe.Dominio.trueques;
 using Fe.Dominio.trueques.Datos;
@@ -111,6 +111,8 @@ namespace FEWebApplication
             services.AddScoped<RepoRazonSocial>();
             services.AddScoped<RepoFavorito>();
 
+            services.AddScoped<RepoProdSerXVendidosPed>();
+            services.AddScoped<RepoPedidosPed>();
 
             services.AddRazorPages();
             services.AddControllers();
