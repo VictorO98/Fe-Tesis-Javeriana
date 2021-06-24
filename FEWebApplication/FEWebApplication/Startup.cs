@@ -29,6 +29,9 @@ using Fe.Dominio.pedidos.Datos;
 using Fe.Dominio.trueques.Negocio;
 using Fe.Dominio.trueques;
 using Fe.Dominio.trueques.Datos;
+using Microsoft.OpenApi.Models;
+using System.IO;
+using System;
 
 namespace FEWebApplication
 {
@@ -68,6 +71,28 @@ namespace FEWebApplication
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationUserDbContext>()
                 .AddDefaultTokenProviders();
+
+            //Se agrega en generador de Swagger
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                { Title = "FE Controller Test", Version = "v1" });
+                //Obtenemos el directorio actual
+                var basePath = AppContext.BaseDirectory;
+                //Obtenemos el nombre de la dll por medio de reflexión
+                var assemblyName = System.Reflection.Assembly
+                              .GetEntryAssembly().GetName().Name;
+                //Al nombre del assembly le agregamos la extensión xml
+                var fileName = Path
+                              .GetFileName(assemblyName + ".xml");
+                //Agregamos el Path, es importante utilizar el comando
+                // Path.Combine ya que entre windows y linux 
+                // rutas de los archivos
+                // En windows es por ejemplo c:/Uusuarios con / 
+                // y en linux es \usr con \
+                var xmlPath = Path.Combine(basePath, fileName);
+                c.IncludeXmlComments(xmlPath);
+            });
 
             services.AddScoped<DbContext, ApplicationUserDbContext>();
 
@@ -135,6 +160,15 @@ namespace FEWebApplication
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            //Habilitar swagger
+            app.UseSwagger();
+
+            //indica la ruta para generar la configuración de swagger
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "FE Controller Test");
+            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
