@@ -1,0 +1,15 @@
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\bin\Release\netcoreapp3.1\Fe.Servidor.Middleware.deps.json
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\bin\Release\netcoreapp3.1\Fe.Servidor.Middleware.runtimeconfig.json
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\bin\Release\netcoreapp3.1\Fe.Servidor.Middleware.runtimeconfig.dev.json
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\bin\Release\netcoreapp3.1\Fe.Servidor.Middleware.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\bin\Release\netcoreapp3.1\Fe.Servidor.Middleware.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\bin\Release\netcoreapp3.1\Fe.Core.Global.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\bin\Release\netcoreapp3.1\Fe.Core.Global.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\obj\Release\netcoreapp3.1\Fe.Servidor.Middleware.csprojAssemblyReference.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\obj\Release\netcoreapp3.1\Fe.Servidor.Middleware.AssemblyInfoInputs.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\obj\Release\netcoreapp3.1\Fe.Servidor.Middleware.AssemblyInfo.cs
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\obj\Release\netcoreapp3.1\Fe.Servidor.Middleware.csproj.CoreCompileInputs.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\obj\Release\netcoreapp3.1\Fe.Servidor.Middleware.csproj.CopyComplete
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\obj\Release\netcoreapp3.1\Fe.Servidor.Middleware.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\obj\Release\netcoreapp3.1\Fe.Servidor.Middleware.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\obj\Release\netcoreapp3.1\Fe.Servidor.Middleware.genruntimeconfig.cache

@@ -208,3 +208,5 @@ C:\Users\ASUS\Desktop\victor\FEWebApplication\FEWebApplication\obj\Debug\netcore
 C:\Users\ASUS\Desktop\victor\FEWebApplication\FEWebApplication\obj\Debug\netcoreapp3.1\staticwebassets\FEWebApplication.StaticWebAssets.Manifest.cache
 C:\Users\ASUS\Desktop\victor\FEWebApplication\FEWebApplication\obj\Debug\netcoreapp3.1\staticwebassets\FEWebApplication.StaticWebAssets.xml
 C:\Users\ASUS\Desktop\victor\FEWebApplication\FEWebApplication\obj\Debug\netcoreapp3.1\FEWebApplication.genruntimeconfig.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\netcoreapp3.1\epayco.net.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\netcoreapp3.1\RestSharp.dll

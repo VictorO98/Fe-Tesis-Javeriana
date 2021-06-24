@@ -22,3 +22,12 @@ C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.pedidos\obj\Debug\netco
 C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.pedidos\obj\Debug\netcoreapp3.1\Fe.Dominio.pedidos.dll
 C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.pedidos\obj\Debug\netcoreapp3.1\Fe.Dominio.pedidos.pdb
 C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.pedidos\obj\Debug\netcoreapp3.1\Fe.Dominio.pedidos.genruntimeconfig.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.pedidos\bin\Debug\netcoreapp3.1\Fe.Core.General.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.pedidos\bin\Debug\netcoreapp3.1\Fe.Core.Global.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.pedidos\bin\Debug\netcoreapp3.1\Fe.Dominio.contenido.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.pedidos\bin\Debug\netcoreapp3.1\Fe.Servidor.Middleware.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.pedidos\bin\Debug\netcoreapp3.1\Fe.Core.General.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.pedidos\bin\Debug\netcoreapp3.1\Fe.Dominio.contenido.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.pedidos\bin\Debug\netcoreapp3.1\Fe.Servidor.Middleware.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.pedidos\bin\Debug\netcoreapp3.1\Fe.Core.Global.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.pedidos\obj\Debug\netcoreapp3.1\Fe.Dominio.pedidos.csproj.CopyComplete

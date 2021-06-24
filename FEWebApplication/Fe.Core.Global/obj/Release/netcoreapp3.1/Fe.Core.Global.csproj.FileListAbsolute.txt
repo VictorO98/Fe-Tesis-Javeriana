@@ -1,0 +1,12 @@
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Global\bin\Release\netcoreapp3.1\Fe.Core.Global.deps.json
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Global\bin\Release\netcoreapp3.1\Fe.Core.Global.runtimeconfig.json
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Global\bin\Release\netcoreapp3.1\Fe.Core.Global.runtimeconfig.dev.json
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Global\bin\Release\netcoreapp3.1\Fe.Core.Global.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Global\bin\Release\netcoreapp3.1\Fe.Core.Global.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Global\obj\Release\netcoreapp3.1\Fe.Core.Global.csprojAssemblyReference.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Global\obj\Release\netcoreapp3.1\Fe.Core.Global.AssemblyInfoInputs.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Global\obj\Release\netcoreapp3.1\Fe.Core.Global.AssemblyInfo.cs
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Global\obj\Release\netcoreapp3.1\Fe.Core.Global.csproj.CoreCompileInputs.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Global\obj\Release\netcoreapp3.1\Fe.Core.Global.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Global\obj\Release\netcoreapp3.1\Fe.Core.Global.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Global\obj\Release\netcoreapp3.1\Fe.Core.Global.genruntimeconfig.cache
