@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace FEWebApplication.Authentication
@@ -63,6 +64,13 @@ namespace FEWebApplication.Authentication
             }
 
             
+        }
+
+        [HttpGet]
+        [Route("GetRoles")]       
+        public List<RolCor> GetRoles()
+        {
+            return _seguridadBiz.GetRoles();
         }
 
         [HttpPost]

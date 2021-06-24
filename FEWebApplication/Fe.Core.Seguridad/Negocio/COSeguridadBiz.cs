@@ -21,14 +21,17 @@ namespace Fe.Core.Seguridad.Negocio
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RepoDemografia _repoDemografia;
         private readonly RepoDocumento _repoDocumento;
+        private readonly RepoRoles _repoRoles;
         private readonly IConfiguration _configuration;
 
-        public COSeguridadBiz(UserManager<IdentityUser> userManager, RepoDemografia repoDemografia, RepoDocumento repoDocumento, IConfiguration configuration) 
+        public COSeguridadBiz(UserManager<IdentityUser> userManager, RepoDemografia repoDemografia, RepoDocumento repoDocumento,
+                            RepoRoles repoRoles, IConfiguration configuration) 
         {
             _userManager = userManager;
             _repoDemografia = repoDemografia;
             _repoDocumento = repoDocumento;
             _configuration = configuration;
+            _repoRoles = repoRoles;
         }
 
         public async Task<RespuestaLogin> RefreshToken(string token)
@@ -82,6 +85,11 @@ namespace Fe.Core.Seguridad.Negocio
                 claims: authClaims,
                 signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
                 );
+        }
+
+        public List<RolCor> GetRoles()
+        {
+            return _repoRoles.GetRoles();
         }
 
         public async Task<RespuestaLogin> Login(LoginDatos model)

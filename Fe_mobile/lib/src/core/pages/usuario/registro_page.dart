@@ -2,6 +2,7 @@ import 'package:Fe_mobile/config/ui_icons.dart';
 import 'package:Fe_mobile/src/core/models/departamentos_model.dart';
 import 'package:Fe_mobile/src/core/models/municipios_model.dart';
 import 'package:Fe_mobile/src/core/models/registro_model.dart';
+import 'package:Fe_mobile/src/core/models/rol_model.dart';
 import 'package:Fe_mobile/src/core/models/step_manejador_model.dart';
 import 'package:Fe_mobile/src/core/models/tipo_documento_model.dart';
 import 'package:Fe_mobile/src/core/pages/usuario/terminos_y_condiciones_page.dart';
@@ -37,7 +38,7 @@ class _RegistroPageState extends State<RegistroPage> {
   List<TipoDocumentoCorModel> listadoTipoDocumento = [];
   List<DepartamentoModel> listDepartamento = [];
   List<MunicipiosModel> listMunicipios = [];
-  // List<RolModel> listadoRol = [];
+  List<RolModel> listadoRol = [];
 
   final _formKey = GlobalKey<FormState>();
   final _formDatosPersonales = GlobalKey<FormState>();
@@ -93,6 +94,14 @@ class _RegistroPageState extends State<RegistroPage> {
     super.initState();
     _getDocumentos();
     _getDepartamentos();
+    _getRoles();
+  }
+
+  _getRoles() async {
+    List<RolModel> listado = await _generalProvider.getRoles();
+    setState(() {
+      listado = listadoRol;
+    });
   }
 
   _getDocumentos() async {
@@ -520,7 +529,7 @@ class _RegistroPageState extends State<RegistroPage> {
             key: _formTipotuflete,
             child: Column(children: <Widget>[
               Text(
-                "El emprendedor distribuye sus productos o servicio en la plataforma. Tiene la posibilidad de vender, comprar y realizar trueques ¡Para ser emprendedor es necesario registrar un producto o servicio!",
+                "El emprendedor distribuye sus productos o servicio en la plataforma. Tiene la posibilidad de vender, comprar y realizar trueques\n\n¡Para ser emprendedor es necesario registrar un producto o servicio!",
                 style: TextStyle(fontSize: 17),
               ),
               SizedBox(
@@ -532,30 +541,30 @@ class _RegistroPageState extends State<RegistroPage> {
               SizedBox(
                 height: 15,
               ),
-              // DropdownButtonFormField(
-              //   decoration: EstiloUtil.crearInputDecorationFormCustom(''),
-              //   value: registroModel.idTipoClienteStr,
-              //   items: listadoRol.map((e) {
-              //     return DropdownMenuItem(
-              //       value: e.id.toString(),
-              //       child: new Text("${e.nombre}"),
-              //     );
-              //   }).toList(),
-              //   hint: Text("Seleccionar el tipo de tuflete \*"),
-              //   onSaved: (val) {
-              //     setState(() {
-              //       registroModel.idTipoClienteStr = val;
-              //     });
-              //   },
-              //   validator: (value) => value == null || value == 0
-              //       ? 'Seleccione el tipo de tuflete'
-              //       : null,
-              //   onChanged: (Object val) {
-              //     setState(() {
-              //       registroModel.idTipoClienteStr = val;
-              //     });
-              //   },
-              // )
+              DropdownButtonFormField(
+                decoration: EstiloUtil.crearInputDecorationFormCustom(''),
+                value: registroModel.idTipoClienteStr,
+                items: listadoRol.map((e) {
+                  return DropdownMenuItem(
+                    value: e.id.toString(),
+                    child: new Text("${e.nombre}"),
+                  );
+                }).toList(),
+                hint: Text("Seleccionar el tipo de usuario \*"),
+                onSaved: (val) {
+                  setState(() {
+                    registroModel.idTipoClienteStr = val;
+                  });
+                },
+                validator: (value) => value == null || value == 0
+                    ? 'Seleccione el tipo de usuario'
+                    : null,
+                onChanged: (Object val) {
+                  setState(() {
+                    registroModel.idTipoClienteStr = val;
+                  });
+                },
+              )
             ])));
   }
 
