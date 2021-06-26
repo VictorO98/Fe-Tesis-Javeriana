@@ -11,6 +11,10 @@ using Fe.Servidor.Middleware.Contratos.Dominio.Contenido;
 
 namespace FEWebApplication.Controladores.Dominio.Contenido
 {
+    /// <summary>
+    /// Servicios para guardar, modificar, borrar o leer publicaciones
+    /// y su respectivo detalle (categorías, favoritos, preguntas y respuestas, reseñas, tipo de publicación)
+    /// </summary>
     [Route("dominio/[controller]")]
     public class COContenidoController : COApiController
     {   
@@ -21,6 +25,10 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
             _coFachada = cOFachada;
         }
 
+        /// <summary>
+        /// Retorna todas las categorías de publicaciones almacenadas en la base de datos.
+        /// </summary>
+        /// <returns>Una lista en formato JSON con todas las categorías y sus respectivos atributos.</returns>
         [Route("GetCategorias")]
         [HttpGet]
         public List<CategoriaPc> GetCategorias()
@@ -28,6 +36,11 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
             return _coFachada.GetCategorias();
         }
 
+        /// <summary>
+        /// Busca una categoría por su ID y retorna los atributos de esta.
+        /// </summary>
+        /// <returns>Una categoría en formato JSON con sus respectivos atributos.</returns>
+        /// <param name="idCategoria">El id de la categoría a buscar.</param>
         [Route("GetCategoriaPorIdCategoria")]
         [HttpGet]
         public CategoriaPc GetCategoriaPorIdCategoria(int idCategoria)
@@ -36,6 +49,11 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         }
 
         // TODO: Decodificacion de JWT para validar el usuario mediante el claim del ID
+        /// <summary>
+        /// Almacena la categoría en la BD.
+        /// </summary>
+        /// <returns>Respuesta de datos verificando que se realizó la inserción de la categoría.</returns>
+        /// <param name="categoria">Categoría que se desea almacernar en la base de datos.</param>
         [Route("GuardarCategoria")]
         [HttpPost]
         public async Task<RespuestaDatos> GuardarCategoria([FromBody] CategoriaPc categoria)
@@ -53,6 +71,11 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         }
 
         // TODO: Decodificacion de JWT para validar el usuario mediante el claim del ID
+        /// <summary>
+        /// Almacena la publicación en la BD.
+        /// </summary>
+        /// <returns>Respuesta de datos verificando que se realizó la inserción de la publicación.</returns>
+        /// <param name="productosServicios">Publicación que se desea almacenar en la base de datos.</param>
         [Route("GuardarPublicacion")]
         [HttpPost]
         public async Task<RespuestaDatos> GuardarPublicacion([FromBody] ProductosServiciosPc productosServicios)
@@ -69,6 +92,11 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
             return respuestaDatos;
         }
 
+        /// <summary>
+        /// Busca una publicación por su ID y retorna los atributos de esta.
+        /// </summary>
+        /// <returns>Una publicación en formato JSON con sus respectivos atributos.</returns>
+        /// <param name="idPublicacion">El id de la publicación a buscar.</param>
         [Route("GetPublicacionPorIdPublicacion")]
         [HttpGet]
         public ProductosServiciosPc GetPublicacionPorIdPublicacion(int idPublicacion)
@@ -77,6 +105,12 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         }
 
         // TODO: Decodificacion de JWT para validar el usuario mediante el claim del ID
+        /// <summary>
+        /// Busca una publicación por su ID y la desactiva de la aplicación.
+        /// </summary>
+        /// <returns>Respuesta de datos con un código de respuesta y un mensaje que indica si fue o no exitoso la desactivación
+        /// de la publicación.</returns>
+        /// <param name="idPublicacion">El id de la publicación a desactivar.</param>
         [Route("RemoverPublicacion")]
         [HttpDelete]
         public async Task<RespuestaDatos> RemoverPublicacion(int idPublicacion)
@@ -94,6 +128,12 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         }
 
         // TODO: Decodificacion de JWT para validar el usuario mediante el claim del ID
+        /// <summary>
+        /// Modifica la publicación indicada en la base de datos.
+        /// </summary>
+        /// <returns>Respuesta de datos con un código de respuesta y un mensaje que indica si fue o no exitoso la modificación
+        /// de la publicación.</returns>
+        /// <param name="productosServicios">Publicación que se desea modificar en la base de datos.</param>
         [Route("ModificarPublicacion")]
         [HttpPut]
         public async Task<RespuestaDatos> ModificarPublicacion([FromBody] ProductosServiciosPc productosServicios)
@@ -110,6 +150,12 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
             return respuestaDatos;
         }
 
+        /// <summary>
+        /// Busca una categoría por su ID y la borra de la base de datos.
+        /// </summary>
+        /// <returns>Respuesta de datos con un código de respuesta y un mensaje que indica si fue o no la eliminación
+        /// de la categoría.</returns>
+        /// <param name="idCategoria">El id de la categoría a eliminar.</param>
         [Route("RemoverCategoria")]
         [HttpDelete]
         public async Task<RespuestaDatos> RemoverCategoria(int idCategoria)
@@ -126,6 +172,12 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
             return respuestaDatos;
         }
 
+        /// <summary>
+        /// Modifica la categoría indicada en la base de datos.
+        /// </summary>
+        /// <returns>Respuesta de datos con un código de respuesta y un mensaje que indica si fue o no exitoso la modificación
+        /// de la categoría.</returns>
+        /// <param name="categoria">Publicación que se desea modificar en la base de datos.</param>
         [Route("ModificarCategoria")]
         [HttpPut]
         public async Task<RespuestaDatos> ModificarCategoria([FromBody] CategoriaPc categoria)
@@ -143,6 +195,11 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         }
 
         // TODO: Decodificacion de JWT para validar el usuario mediante el claim del ID
+        /// <summary>
+        /// Almacena la reseña en la BD.
+        /// </summary>
+        /// <returns>Respuesta de datos verificando que se realizó la inserción de la reseña.</returns>
+        /// <param name="resena">Reseña que se desea almacenar en la base de datos.</param>
         [Route("GuardarResena")]
         [HttpPost]
         public async Task<RespuestaDatos> GuardarResena([FromBody] ResenasPc resena)
@@ -159,6 +216,11 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
             return respuestaDatos;
         }
 
+        /// <summary>
+        /// Busca una reseña por su ID y retorna los atributos de esta.
+        /// </summary>
+        /// <returns>Una reseña en formato JSON con sus respectivos atributos.</returns>
+        /// <param name="idResena">El id de la reseña a buscar.</param>
         [Route("GetResenaPorIdResena")]
         [HttpGet]
         public ResenasPc GetResenaPorIdResena(int idResena)
@@ -166,6 +228,11 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
             return _coFachada.GetResenaPorIdResena(idResena);
         }
 
+        /// <summary>
+        /// Busca todas las reseñas de una publicación y retorna una lista de ellas.
+        /// </summary>
+        /// <returns>Una lista de reseñas en formato JSON con sus respectivos atributos.</returns>
+        /// <param name="idPublicacion">El id de la publicación de las reseñas a buscar.</param>
         [Route("GetResenasPorIdPublicacion")]
         [HttpGet]
         public ICollection<ResenasPc> GetResenasPorIdPublicacion(int idPublicacion)
@@ -173,6 +240,11 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
             return _coFachada.GetResenasPorIdPublicacion(idPublicacion);
         }
 
+        /// <summary>
+        /// Busca todas las preguntas y respuestas de una publicación y retorna una lista de ellas.
+        /// </summary>
+        /// <returns>Una lista de preguntas y respuestas en formato JSON con sus respectivos atributos.</returns>
+        /// <param name="idPublicacion">El id de la publicación de las preguntas y respuestas a buscar.</param>
         [Route("GetPreguntasyRespuestasPorIdPublicacion")]
         [HttpGet]
         public List<PreguntasRespuestasPc> GetPreguntasyRespuestasPorIdPublicacion(int idPublicacion)
@@ -180,6 +252,11 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
             return _coFachada.GetPreguntasyRespuestasPorIdPublicacion(idPublicacion);
         }
 
+        /// <summary>
+        /// Almacena la pregunta en la BD.
+        /// </summary>
+        /// <returns>Respuesta de datos verificando que se realizó la inserción de la pregunta.</returns>
+        /// <param name="pyr">Pregunta que se desea almacenar en la base de datos.</param>
         [Route("GuardarPreguntasyRespuestas")]
         [HttpPost]
         public async Task<RespuestaDatos> GuardarPreguntasyRespuestas([FromBody] PreguntasRespuestasPc pyr)
@@ -196,6 +273,12 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
             return respuestaDatos;
         }
 
+        /// <summary>
+        /// Modifica la respuesta de la pregunta indicada en la base de datos.
+        /// </summary>
+        /// <returns>Respuesta de datos con un código de respuesta y un mensaje que indica si fue o no exitoso la modificación
+        /// de la respuesta.</returns>
+        /// <param name="categoria">Pregunta que se desea responder o respuesta a modificar en la base de datos.</param>
         [Route("ModificarPreguntasyRespuestas")]
         [HttpPut]
         public async Task<RespuestaDatos> ModificarPreguntasyRespuestas([FromBody] PreguntasRespuestasPc pyr)
@@ -212,6 +295,11 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
             return respuestaDatos;
         }
 
+        /// <summary>
+        /// Despliega una publicación con sus reseñas, preguntas y respuestas, categoría y tipo de publicación.
+        /// </summary>
+        /// <returns>La publicación con sus reseñas, preguntas y respuestas, categoría y tipo de publicación.</returns>
+        /// <param name="idPublicacion">El id de la publicación a desplegar.</param>
         [Route("DesplegarPublicacion")]
         [HttpGet]
         public ContratoPc DesplegarPublicacion(int idPublicacion)
@@ -219,9 +307,20 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
             return _coFachada.DesplegarPublicacion(idPublicacion);
         }
 
+        /// <summary>
+        /// Filtra todas las publicaciones que correspondan a los parámetros dados y los entrega.
+        /// </summary>
+        /// <returns>Una lista de publicaciones filtradas con sus reseñas, preguntas y respuestas, categoría y tipo de publicación.</returns>
+        /// <param name="idCategoria">El id de la categoría de las publicaciones a filtrar.</param>
+        /// <param name="idTipoPublicacion">El tipo de las publicaciones a filtrar.</param>
+        /// <param name="precioMenor">El límite inferior del precio de las publicaciones a filtrar.</param>
+        /// <param name="precioMayor">El límite superior del precio de las publicaciones a filtrar.</param>
+        /// <param name="calificacionMenor">El límite inferior de la calificación de las publicaciones a filtrar.</param>
+        /// <param name="calificacionMayor">El límite superior de la calificación de las publicaciones a filtrar.</param>
+        /// 
         [Route("FiltrarPublicacion")]
         [HttpGet]
-        public List<ContratoPc> FiltrarPublicacion(int idPublicacion = -1, int idCategoria = -1, int idTipoPublicacion = -1, 
+        public List<ContratoPc> FiltrarPublicacion(int idCategoria = -1, int idTipoPublicacion = -1, 
             decimal precioMenor = -1, decimal precioMayor = -1, decimal calificacionMenor = -1, decimal calificacionMayor = -1)
         {
             try
@@ -236,6 +335,11 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         }
 
         // TODO: Decodificacion de JWT para validar el usuario mediante el claim del ID
+        /// <summary>
+        /// Almacena la publicación favorita en la BD.
+        /// </summary>
+        /// <returns>Respuesta de datos verificando que se realizó la inserción de la publicación a favoritos.</returns>
+        /// <param name="favorito">Publicación que se desea agregar a favoritos.</param>
         [Route("GuardarFavorito")]
         [HttpPost]
         public async Task<RespuestaDatos> GuardarFavorito([FromBody] ProductosFavoritosDemografiaPc favorito)
@@ -253,6 +357,12 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         }
 
         // TODO: Decodificacion de JWT para validar el usuario mediante el claim del ID
+        /// <summary>
+        /// Busca una publicación por su ID y la borra de favoritos.
+        /// </summary>
+        /// <returns>Respuesta de datos con un código de respuesta y un mensaje que indica si fue o no la eliminación
+        /// de la publicación de favoritos.</returns>
+        /// <param name="idFavorito">El id de la publicación a eliminar de favoritos.</param>
         [Route("RemoverFavorito")]
         [HttpDelete]
         public async Task<RespuestaDatos> RemoverFavorito(int idFavorito)
@@ -270,6 +380,11 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         }
 
         // TODO: Decodificacion de JWT para validar el usuario mediante el claim del ID
+        /// <summary>
+        /// Busca todas las publicaciones favoritas de un usuario.
+        /// </summary>
+        /// <returns>Una lista de publicaciones favoritas con sus reseñas, preguntas y respuestas, categoría y tipo de publicación.</returns>
+        /// <param name="idDemografia">El id del usuario para buscar sus publicaciones favoritas.</param>
         [Route("GetFavoritosPorIdDemografia")]
         [HttpGet]
         public List<ContratoPc> GetFavoritosPorIdDemografia(int idDemografia)
@@ -285,6 +400,11 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         }
 
         // TODO: Decodificacion de JWT para validar el usuario mediante el claim del ID
+        /// <summary>
+        /// Valida cuántas publicaciones tiene un usuario.
+        /// </summary>
+        /// <returns>Un entero que indica cuántas publicaciones tiene un usuario.</returns>
+        /// <param name="idDemografia">El id del usuario para validar sus publicaciones.</param>
         [Route("ValidarPublicacionesPorIdUsuario")]
         [HttpGet]
         public int ValidarPublicacionesPorIdUsuario(int idDemografia)
@@ -300,6 +420,11 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         }
 
         // TODO: Decodificacion de JWT para validar el usuario mediante el claim del ID
+        /// <summary>
+        /// Obtiene todas las publicaciones de un usuario.
+        /// </summary>
+        /// <returns>Una lista de publicaciones con sus reseñas, preguntas y respuestas, categoría y tipo de publicación.</returns>
+        /// <param name="idDemografia">El id del usuario para obtener sus publicaciones.</param>
         [Route("GetPublicacionesPorIdUsuario")]
         [HttpGet]
         public List<ContratoPc> GetPublicacionesPorIdUsuario(int idDemografia)
@@ -314,6 +439,10 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
             }
         }
 
+        /// <summary>
+        /// Obtiene todas las publicaciones que contengan descuentos.
+        /// </summary>
+        /// <returns>Una lista de publicaciones con sus reseñas, preguntas y respuestas, categoría y tipo de publicación.</returns>
         [Route("GetPublicacionesPorDescuento")]
         [HttpGet]
         public List<ContratoPc> GetPublicacionesPorDescuento()
@@ -321,6 +450,11 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
             return _coFachada.GetPublicacionesPorDescuento();
         }
 
+        /// <summary>
+        /// Obtiene todas las publicaciones que contengan el parámetro dado en su nombre.
+        /// </summary>
+        /// <returns>Una lista de publicaciones con sus reseñas, preguntas y respuestas, categoría y tipo de publicación.</returns>
+        /// <param name="nombre">El nombre de las publicaciones a filtrar.</param>
         [Route("BuscarPublicacion")]
         [HttpGet]
         public List<ContratoPc> BuscarPublicacion(string nombre)
