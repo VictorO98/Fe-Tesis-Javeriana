@@ -15,6 +15,8 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'package:Fe_mobile/src/screens/home.dart';
+
 class RegistroPage extends StatefulWidget {
   @override
   _RegistroPageState createState() => _RegistroPageState();
@@ -100,7 +102,7 @@ class _RegistroPageState extends State<RegistroPage> {
   _getRoles() async {
     List<RolModel> listado = await _generalProvider.getRoles();
     setState(() {
-      listado = listadoRol;
+      listadoRol = listado;
     });
   }
 

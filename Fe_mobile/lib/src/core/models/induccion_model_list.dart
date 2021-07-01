@@ -13,16 +13,16 @@ class OnBoardingList {
   OnBoardingList() {
     _list = [
       new InduccionModelList(
-          image: 'img/onboarding0.png',
+          image: 'img/logo_buya.png',
           description: 'No llores porque se acabó, sonríe porque pasó.'),
       new InduccionModelList(
-          image: 'img/onboarding1.png',
+          image: 'img/logo_buya.png',
           description: 'Se tu mismo, los demas ya están ocupados.'),
       new InduccionModelList(
-          image: 'img/onboarding2.png',
+          image: 'img/logo_buya.png',
           description: 'Muchos libros, poco tiempo'),
       new InduccionModelList(
-          image: 'img/onboarding3.png',
+          image: 'img/logo_buya.png',
           description: 'Una habitación sin libros es como un cuerpo sin alma.'),
     ];
   }

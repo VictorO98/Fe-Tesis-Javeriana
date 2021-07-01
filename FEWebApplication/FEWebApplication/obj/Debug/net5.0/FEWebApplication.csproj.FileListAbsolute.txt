@@ -98,3 +98,9 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\De
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Debug\net5.0\ref\FEWebApplication.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Debug\net5.0\FEWebApplication.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Debug\net5.0\FEWebApplication.genruntimeconfig.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\FEWebApplication.xml
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Microsoft.OpenApi.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Debug\net5.0\FEWebApplication.MvcApplicationPartsAssemblyInfo.cs

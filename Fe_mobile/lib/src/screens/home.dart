@@ -76,7 +76,7 @@ class _HomeWidgetState extends State<HomeWidget>
             ),
             title: Text(
               'Recommended For You',
-              style: Theme.of(context).textTheme.display1,
+              style: Theme.of(context).textTheme.headline4,
             ),
           ),
         ),
@@ -111,7 +111,7 @@ class _HomeWidgetState extends State<HomeWidget>
             ),
             title: Text(
               'Brands',
-              style: Theme.of(context).textTheme.display1,
+              style: Theme.of(context).textTheme.headline4,
             ),
           ),
         ),

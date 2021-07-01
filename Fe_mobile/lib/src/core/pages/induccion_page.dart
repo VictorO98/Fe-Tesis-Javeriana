@@ -29,7 +29,9 @@ class _InduccionPageState extends State<InduccionPage> {
             Padding(
               padding: const EdgeInsets.only(right: 20, top: 50),
               child: FlatButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/Login');
+                },
                 child: Text(
                   'Omitir',
                   style: Theme.of(context).textTheme.button,
