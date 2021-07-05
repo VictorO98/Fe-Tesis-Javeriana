@@ -5,6 +5,7 @@
 import 'dart:convert';
 
 import 'package:Fe_mobile/src/dominio/models/preguntas_respuestas_model.dart';
+import 'package:Fe_mobile/src/dominio/models/resena_model.dart';
 
 ProductoServicioModel productoServicioModelFromJson(String str) =>
     ProductoServicioModel.fromJson(json.decode(str));
@@ -35,25 +36,25 @@ class ProductoServicioModel {
     this.resenas,
   });
 
-  int id;
-  String descripcion;
-  int cantidadtotal;
-  DateTime tiempoentrega;
-  DateTime tiempogarantia;
-  int preciounitario;
-  int descuento;
-  double calificacionpromedio;
-  int habilitatrueque;
-  String nombre;
-  String urlimagenproductoservicio;
-  String nombreCategoria;
-  String tipoPublicacion;
+  int? id;
+  String? descripcion;
+  int? cantidadtotal;
+  DateTime? tiempoentrega;
+  DateTime? tiempogarantia;
+  int? preciounitario;
+  int? descuento;
+  double? calificacionpromedio;
+  int? habilitatrueque;
+  String? nombre;
+  String? urlimagenproductoservicio;
+  String? nombreCategoria;
+  String? tipoPublicacion;
   dynamic idusuarioNavigation;
-  List<PreguntaRespuestaModel> preguntasRespuestas;
+  List<PreguntaRespuestaModel>? preguntasRespuestas;
   dynamic prodSerTruequeTrueIdproductoserviciocompradorNavigations;
   dynamic prodSerTruequeTrueIdproductoserviciovendedorNavigations;
   dynamic prodSerXVendidosPeds;
-  List<Resena> resenas;
+  List<ResenaModel>? resenas;
 
   factory ProductoServicioModel.fromJson(Map<String, dynamic> json) =>
       ProductoServicioModel(
@@ -79,16 +80,16 @@ class ProductoServicioModel {
         prodSerTruequeTrueIdproductoserviciovendedorNavigations:
             json["prodSerTruequeTrueIdproductoserviciovendedorNavigations"],
         prodSerXVendidosPeds: json["prodSerXVendidosPeds"],
-        resenas:
-            List<Resena>.from(json["resenas"].map((x) => Resena.fromJson(x))),
+        resenas: List<ResenaModel>.from(
+            json["resenas"].map((x) => ResenaModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "descripcion": descripcion,
         "cantidadtotal": cantidadtotal,
-        "tiempoentrega": tiempoentrega.toIso8601String(),
-        "tiempogarantia": tiempogarantia.toIso8601String(),
+        "tiempoentrega": tiempoentrega!.toIso8601String(),
+        "tiempogarantia": tiempogarantia!.toIso8601String(),
         "preciounitario": preciounitario,
         "descuento": descuento,
         "calificacionpromedio": calificacionpromedio,
@@ -99,48 +100,12 @@ class ProductoServicioModel {
         "tipoPublicacion": tipoPublicacion,
         "idusuarioNavigation": idusuarioNavigation,
         "preguntasRespuestas":
-            List<dynamic>.from(preguntasRespuestas.map((x) => x.toJson())),
+            List<dynamic>.from(preguntasRespuestas!.map((x) => x.toJson())),
         "prodSerTruequeTrueIdproductoserviciocompradorNavigations":
             prodSerTruequeTrueIdproductoserviciocompradorNavigations,
         "prodSerTruequeTrueIdproductoserviciovendedorNavigations":
             prodSerTruequeTrueIdproductoserviciovendedorNavigations,
         "prodSerXVendidosPeds": prodSerXVendidosPeds,
-        "resenas": List<dynamic>.from(resenas.map((x) => x.toJson())),
-      };
-}
-
-class Resena {
-  Resena({
-    this.id,
-    this.idpublicacion,
-    this.comentarios,
-    this.puntuacion,
-    this.creacion,
-    this.idpublicacionNavigation,
-  });
-
-  int id;
-  int idpublicacion;
-  String comentarios;
-  double puntuacion;
-  DateTime creacion;
-  dynamic idpublicacionNavigation;
-
-  factory Resena.fromJson(Map<String, dynamic> json) => Resena(
-        id: json["id"],
-        idpublicacion: json["idpublicacion"],
-        comentarios: json["comentarios"],
-        puntuacion: json["puntuacion"].toDouble(),
-        creacion: DateTime.parse(json["creacion"]),
-        idpublicacionNavigation: json["idpublicacionNavigation"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "idpublicacion": idpublicacion,
-        "comentarios": comentarios,
-        "puntuacion": puntuacion,
-        "creacion": creacion.toIso8601String(),
-        "idpublicacionNavigation": idpublicacionNavigation,
+        "resenas": List<dynamic>.from(resenas!.map((x) => x.toJson())),
       };
 }
