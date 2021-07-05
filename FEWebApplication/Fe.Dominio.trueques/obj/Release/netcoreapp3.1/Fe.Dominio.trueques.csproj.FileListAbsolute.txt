@@ -11,7 +11,7 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\bin
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\bin\Release\netcoreapp3.1\Fe.Dominio.contenido.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\bin\Release\netcoreapp3.1\Fe.Servidor.Middleware.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\bin\Release\netcoreapp3.1\Fe.Core.Global.pdb
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\obj\Release\netcoreapp3.1\Fe.Dominio.trueques.csprojAssemblyReference.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\obj\Release\netcoreapp3.1\Fe.Dominio.trueques.csproj.AssemblyReference.cache
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\obj\Release\netcoreapp3.1\Fe.Dominio.trueques.AssemblyInfoInputs.cache
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\obj\Release\netcoreapp3.1\Fe.Dominio.trueques.AssemblyInfo.cs
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.trueques\obj\Release\netcoreapp3.1\Fe.Dominio.trueques.csproj.CoreCompileInputs.cache

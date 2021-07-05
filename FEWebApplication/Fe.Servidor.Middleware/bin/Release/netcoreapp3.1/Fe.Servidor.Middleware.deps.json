@@ -10,7 +10,6 @@
         "dependencies": {
           "Dapper": "2.0.90",
           "Dapper.Contrib": "2.0.78",
-          "Fe.Core.Global": "1.0.0",
           "IdentityServer4": "4.1.2",
           "IdentityServer4.Storage": "4.1.2",
           "MailKit": "2.13.0",
@@ -643,28 +642,7 @@
           "Microsoft.NETCore.Platforms": "2.2.4"
         }
       },
-      "System.Text.Encodings.Web/4.7.0": {},
-      "Fe.Core.Global/1.0.0": {
-        "dependencies": {
-          "Dapper": "2.0.90",
-          "Dapper.Contrib": "2.0.78",
-          "IdentityServer4": "4.1.2",
-          "IdentityServer4.Storage": "4.1.2",
-          "MailKit": "2.13.0",
-          "Microsoft.AspNet.Mvc": "5.2.7",
-          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.7",
-          "Microsoft.EntityFrameworkCore": "5.0.7",
-          "Microsoft.EntityFrameworkCore.Relational": "5.0.7",
-          "Microsoft.NETCore.App": "2.2.8",
-          "NETCore.MailKit": "2.0.3",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.7",
-          "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.1.0",
-          "ePayco.Net": "1.0.13"
-        },
-        "runtime": {
-          "Fe.Core.Global.dll": {}
-        }
-      }
+      "System.Text.Encodings.Web/4.7.0": {}
     }
   },
   "libraries": {
@@ -1148,11 +1126,6 @@
       "sha512": "sha512-IJanJWPQvya2sbGStt3Fkdy4IaomUBSadAfYWeJDQw0zclMk9ixSvMeei6cSmTTQ6ZkGIIAbhHZVCoLR7GgX7Q==",
       "path": "system.text.encodings.web/4.7.0",
       "hashPath": "system.text.encodings.web.4.7.0.nupkg.sha512"
-    },
-    "Fe.Core.Global/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
     }
   }
 }

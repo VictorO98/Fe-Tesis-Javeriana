@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Fe.Servidor.Middleware.Contratos.Core;
 using System;
 using Fe.Servidor.Middleware.Contratos.Dominio.Contenido;
+using Fe.Core.Global.Constantes;
 
 namespace Fe.Dominio.contenido
 {
@@ -69,6 +70,7 @@ namespace Fe.Dominio.contenido
                     {
                         try
                         {
+                            productosServicios.Estado = COEstados.VIGENTE;
                             respuestaDatos = await _repoProducto.GuardarPublicacion(productosServicios);
                         }
                         catch (COExcepcion e)

@@ -32,6 +32,7 @@ using Fe.Dominio.trueques.Datos;
 using Microsoft.OpenApi.Models;
 using System.IO;
 using System;
+using Fe.Core.Global.Errores;
 
 namespace FEWebApplication
 {
@@ -140,6 +141,7 @@ namespace FEWebApplication
             services.AddScoped<RepoProdSerXVendidosPed>();
             services.AddScoped<RepoPedidosPed>();
 
+
             services.AddRazorPages();
             services.AddControllers();
         }
@@ -160,6 +162,9 @@ namespace FEWebApplication
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            //Mensajes personalizados
+            app.ConfigureCustomExceptionMiddleware();
 
             //Habilitar swagger
             app.UseSwagger();

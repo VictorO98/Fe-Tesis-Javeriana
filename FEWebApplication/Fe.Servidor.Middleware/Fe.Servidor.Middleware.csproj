@@ -35,8 +35,4 @@
     <Folder Include="Dapper\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Fe.Core.Global\Fe.Core.Global.csproj" />
-  </ItemGroup>
-
 </Project>

@@ -2,7 +2,7 @@ import 'package:Fe_mobile/config/ui_icons.dart';
 import 'package:Fe_mobile/src/screens/account.dart';
 import 'package:Fe_mobile/src/screens/chat.dart';
 import 'package:Fe_mobile/src/screens/favorites.dart';
-import 'package:Fe_mobile/src/screens/home.dart';
+import 'package:Fe_mobile/src/dominio/pages/contenido_home_page.dart';
 import 'package:Fe_mobile/src/screens/messages.dart';
 import 'package:Fe_mobile/src/screens/notifications.dart';
 import 'package:Fe_mobile/src/widgets/DrawerWidget.dart';
@@ -15,7 +15,7 @@ class TabsWidget extends StatefulWidget {
   int? currentTab = 2;
   int? selectedTab = 2;
   String currentTitle = 'Home';
-  Widget currentPage = HomeWidget();
+  Widget currentPage = ContenidoHomePage();
 
   TabsWidget({
     Key? key,
@@ -57,7 +57,7 @@ class _TabsWidgetState extends State<TabsWidget> {
           break;
         case 2:
           widget.currentTitle = 'Home';
-          widget.currentPage = HomeWidget();
+          widget.currentPage = ContenidoHomePage();
           break;
         case 3:
           widget.currentTitle = 'Messages';

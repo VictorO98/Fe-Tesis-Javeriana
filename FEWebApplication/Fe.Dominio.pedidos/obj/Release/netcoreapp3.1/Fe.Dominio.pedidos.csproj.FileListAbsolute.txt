@@ -11,7 +11,7 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.pedidos\bin\
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.pedidos\bin\Release\netcoreapp3.1\Fe.Dominio.contenido.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.pedidos\bin\Release\netcoreapp3.1\Fe.Servidor.Middleware.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.pedidos\bin\Release\netcoreapp3.1\Fe.Core.Global.pdb
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.pedidos\obj\Release\netcoreapp3.1\Fe.Dominio.pedidos.csprojAssemblyReference.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.pedidos\obj\Release\netcoreapp3.1\Fe.Dominio.pedidos.csproj.AssemblyReference.cache
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.pedidos\obj\Release\netcoreapp3.1\Fe.Dominio.pedidos.AssemblyInfoInputs.cache
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.pedidos\obj\Release\netcoreapp3.1\Fe.Dominio.pedidos.AssemblyInfo.cs
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.pedidos\obj\Release\netcoreapp3.1\Fe.Dominio.pedidos.csproj.CoreCompileInputs.cache

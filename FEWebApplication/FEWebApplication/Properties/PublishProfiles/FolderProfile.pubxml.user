@@ -5,6 +5,6 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>D:\Escritorio\core</_PublishTargetUrl>
-    <History>True|2021-06-24T08:18:20.6415865Z;True|2021-06-23T23:11:26.4019062-05:00;True|2021-06-23T21:10:34.5157698-05:00;</History>
+    <History>True|2021-07-05T06:24:16.4120492Z;True|2021-07-05T01:12:43.9880575-05:00;True|2021-07-05T01:08:14.5034583-05:00;True|2021-07-05T00:56:42.7241956-05:00;True|2021-07-05T00:46:33.0759467-05:00;True|2021-07-05T00:35:32.4197621-05:00;True|2021-07-05T00:18:24.1094383-05:00;True|2021-06-24T03:18:20.6415865-05:00;True|2021-06-23T23:11:26.4019062-05:00;True|2021-06-23T21:10:34.5157698-05:00;</History>
   </PropertyGroup>
 </Project>

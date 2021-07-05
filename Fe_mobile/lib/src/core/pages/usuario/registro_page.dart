@@ -19,7 +19,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:Fe_mobile/src/screens/home.dart';
+import 'package:Fe_mobile/src/dominio/pages/contenido_home_page.dart';
 
 class RegistroPage extends StatefulWidget {
   @override
@@ -81,7 +81,7 @@ class _RegistroPageState extends State<RegistroPage> {
     _currentStep = 0;
     labelSiguiente = "SIGUIENTE";
     labelRegresar = "";
-    //registroModel.codigoTelefonoPais = CODIGO_TELEFONO_PAIS_DEFAULT;
+    registroModel.codigoTelefonoPais = CODIGO_TELEFONO_PAIS_DEFAULT;
     controlSteps.add(new StepManejadorModel(
         formulario: STEP_DATOS_PERSONALES,
         numeroStep: 0,
@@ -277,7 +277,9 @@ class _RegistroPageState extends State<RegistroPage> {
                           color: EstiloUtil.COLOR_PRIMARY,
                         )),
                 onSaved: (String? value) {
-                  setState(() {});
+                  setState(() {
+                    registroModel.nombres = value;
+                  });
                 },
                 validator: (String? value) =>
                     (value!.isEmpty) || (value.trim().isEmpty)
@@ -289,7 +291,9 @@ class _RegistroPageState extends State<RegistroPage> {
               ),
               TextFormField(
                   onSaved: (String? value) {
-                    setState(() {});
+                    setState(() {
+                      registroModel.apellidos = value;
+                    });
                   },
                   decoration:
                       EstiloUtil.crearInputDecorationFormCustom('Apellidos \*',
@@ -337,7 +341,7 @@ class _RegistroPageState extends State<RegistroPage> {
               TextFormField(
                   onSaved: (String? value) {
                     setState(() {
-                      //registroModel.numeroDocumento = value;
+                      registroModel.numeroDocumento = value;
                     });
                   },
                   keyboardType: TextInputType.number,
@@ -381,7 +385,7 @@ class _RegistroPageState extends State<RegistroPage> {
               TextFormField(
                   onSaved: (String? value) {
                     setState(() {
-                      //registroModel.email = value;
+                      registroModel.email = value;
                     });
                   },
                   keyboardType: TextInputType.emailAddress,
@@ -402,7 +406,9 @@ class _RegistroPageState extends State<RegistroPage> {
               ),
               TextFormField(
                   onSaved: (String? value) {
-                    setState(() {});
+                    setState(() {
+                      registroModel.direccion = value;
+                    });
                   },
                   decoration: EstiloUtil.crearInputDecorationFormCustom(
                       'Dirección de entregas \*',
@@ -470,7 +476,7 @@ class _RegistroPageState extends State<RegistroPage> {
                   validator: (value) =>
                       value == null ? 'Seleccione la ciudad' : null,
                   onChanged: (c) => setState(() {
-                        //crearServicioModel.ciudadDestinoId = c.id;
+                        registroModel.idPoblacion = c?.id.toString();
                       })),
               SizedBox(
                 height: 15,
@@ -478,7 +484,7 @@ class _RegistroPageState extends State<RegistroPage> {
               TextFormField(
                   onSaved: (String? value) {
                     setState(() {
-                      // registroModel.numeroTelefonico = value;
+                      registroModel.numeroTelefonico = value;
                     });
                   },
                   decoration: InputDecoration(
@@ -602,7 +608,7 @@ class _RegistroPageState extends State<RegistroPage> {
                   TextFormField(
                     onSaved: (String? value) {
                       setState(() {
-                        //registroModel.password = value;
+                        registroModel.password = value;
                       });
                     },
                     obscureText: !_isShowPassword,
@@ -629,7 +635,7 @@ class _RegistroPageState extends State<RegistroPage> {
                   TextFormField(
                     onSaved: (String? value) {
                       setState(() {
-                        // registroModel.confirmPassword = value;
+                        registroModel.confirmPassword = value;
                       });
                     },
                     obscureText: !_isShowPassword,
