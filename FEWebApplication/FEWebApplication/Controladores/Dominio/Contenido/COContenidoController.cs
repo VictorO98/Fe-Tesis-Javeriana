@@ -94,18 +94,6 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         }
 
         /// <summary>
-        /// Busca una publicación por su ID y retorna los atributos de esta.
-        /// </summary>
-        /// <returns>Una publicación en formato JSON con sus respectivos atributos.</returns>
-        /// <param name="idPublicacion">El id de la publicación a buscar.</param>
-        [Route("GetPublicacionPorIdPublicacion")]
-        [HttpGet]
-        public ProductosServiciosPc GetPublicacionPorIdPublicacion(int idPublicacion)
-        {
-            return _coFachada.GetPublicacionPorIdPublicacion(idPublicacion);
-        }
-
-        /// <summary>
         /// Busca las imagens de los productos por su ID.
         /// </summary>
         /// <returns>Retonr la imagen del producto en un formato JPG o PNG.</returns>

@@ -39,6 +39,7 @@ namespace Fe.Dominio.contenido.Datos
             RespuestaDatos respuestaDatos;
             try
             {
+                resena.Creacion = DateTime.Now;
                 context.Add(resena);
                 context.SaveChanges();
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "Reseña creada exitosamente." };

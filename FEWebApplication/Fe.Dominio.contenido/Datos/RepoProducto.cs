@@ -22,6 +22,8 @@ namespace Fe.Dominio.contenido.Datos
             RespuestaDatos respuestaDatos;
             try
             {
+                productoSservicio.Creacion = DateTime.Now;
+                productoSservicio.Calificacionpromedio = 0;
                 context.Add(productoSservicio);
                 context.SaveChanges();
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "Publicación creada exitosamente." };

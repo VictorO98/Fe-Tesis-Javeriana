@@ -13,7 +13,7 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
         public int Idproductoserviciovendedor { get; set; }
         public int? Cantidadcomprador { get; set; }
         public int? Cantidadvendedor { get; set; }
-        public DateTime? Creacion { get; set; } = DateTime.Now;
+        public DateTime? Creacion { get; set; }
 
         public virtual ProductosServiciosPc IdproductoserviciocompradorNavigation { get; set; }
         public virtual ProductosServiciosPc IdproductoserviciovendedorNavigation { get; set; }
