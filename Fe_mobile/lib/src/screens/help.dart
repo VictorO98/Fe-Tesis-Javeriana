@@ -42,7 +42,7 @@ class _HelpWidgetState extends State<HelpWidget> {
             labelColor: Theme.of(context).primaryColor,
           ),
           title: Text(
-            'Help & Support',
+            'Ayuda y Soporte',
             style: Theme.of(context)
                 .textTheme
                 .display1!

@@ -152,6 +152,20 @@ namespace Fe.Dominio.contenido
             return _cOContenidoBiz.GetResenasPorIdPublicacion(idPublicacion);
         }
 
+        public string GetImagenProdcuto(int idPublicacion, int idUsuario)
+        {
+            try
+            {
+                DemografiaCor demografiaCor = _cOGeneralFachada.GetDemografiaPorId(idUsuario);
+                ProductosServiciosPc publicacion = _cOContenidoBiz.GetPublicacionPorIdPublicacion(idPublicacion);
+                return _cOContenidoBiz.GetImagenProdcuto(demografiaCor, publicacion);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+        }
+
         public async Task<RespuestaDatos> GuardarPreguntasyRespuestas(PreguntasRespuestasPc pyr)
         {
             RespuestaDatos respuestaDatos;

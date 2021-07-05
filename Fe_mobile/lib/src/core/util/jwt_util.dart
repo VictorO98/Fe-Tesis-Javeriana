@@ -50,6 +50,9 @@ class JWTUtil {
     await prefs.setPrefStr("email", claims["email"]);
     await prefs.setPrefStr("documento", claims["documento"]);
     await prefs.setPrefStr("tipoDocumento", claims["tipoDocumento"]);
+    await prefs.setPrefStr("direccion", claims["direccion"]);
+    await prefs.setPrefStr("poblacion", claims["poblacion"]);
+    await prefs.setPrefStr("estado", claims["estado"]);
     await prefs.setPrefStr(
         "nombreCompleto", "${claims["nombres"]} ${claims["apellidos"]}");
     await prefs.setPrefStr("roles", claims["roles"]);

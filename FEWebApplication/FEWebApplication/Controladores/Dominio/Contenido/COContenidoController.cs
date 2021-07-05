@@ -8,6 +8,7 @@ using FEWebApplication.Controladores.Core;
 using Fe.Servidor.Middleware.Contratos.Core;
 using System.Threading.Tasks;
 using Fe.Servidor.Middleware.Contratos.Dominio.Contenido;
+using System.IO;
 
 namespace FEWebApplication.Controladores.Dominio.Contenido
 {
@@ -102,6 +103,36 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         public ProductosServiciosPc GetPublicacionPorIdPublicacion(int idPublicacion)
         {
             return _coFachada.GetPublicacionPorIdPublicacion(idPublicacion);
+        }
+
+        /// <summary>
+        /// Busca las imagens de los productos por su ID.
+        /// </summary>
+        /// <returns>Retonr la imagen del producto en un formato JPG o PNG.</returns>
+        /// <param name="idPublicacion">El id de la publicación para buscar.</param>
+        [Route("GetImagenProdcuto")]
+        [HttpGet]
+        public IActionResult GetImagenProdcuto(int idPublicacion, int idUsuario)
+        {
+            string pathImage = _coFachada.GetImagenProdcuto(idPublicacion, idUsuario);
+
+            var ext = Path.GetExtension(pathImage).ToLowerInvariant();
+            string mimeTypeExt = "";
+            switch (ext)
+            {
+                case ".jpg":
+                case ".jpeg":
+                    mimeTypeExt = "jpg";
+                    break;
+                case ".png":
+                    mimeTypeExt = "png";
+                    break;
+                default:
+                    mimeTypeExt = "jpg";
+                    break;
+            }
+
+            return PhysicalFile(pathImage, $@"image/{mimeTypeExt}");
         }
 
         // TODO: Decodificacion de JWT para validar el usuario mediante el claim del ID

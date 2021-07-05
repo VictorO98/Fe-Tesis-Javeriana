@@ -20,6 +20,9 @@ class InfoUsuarioModel {
     this.nombres,
     this.apellidos,
     this.rol,
+    this.direccion,
+    this.poblacion,
+    this.estado,
   });
 
   String? email;
@@ -30,18 +33,23 @@ class InfoUsuarioModel {
   String? nombres;
   String? apellidos;
   String? rol;
+  String? direccion;
+  String? poblacion;
+  String? estado;
 
   factory InfoUsuarioModel.fromJson(Map<String, dynamic> json) =>
       InfoUsuarioModel(
-        email: json["email"],
-        numeroTelefono: json["numeroTelefono"],
-        tipoDocumento: json["tipoDocumento"],
-        documento: json["documento"],
-        nombreCompleto: json["nombreCompleto"],
-        nombres: json["nombres"],
-        apellidos: json["apellidos"],
-        rol: json["rol"],
-      );
+          email: json["email"],
+          numeroTelefono: json["numeroTelefono"],
+          tipoDocumento: json["tipoDocumento"],
+          documento: json["documento"],
+          nombreCompleto: json["nombreCompleto"],
+          nombres: json["nombres"],
+          apellidos: json["apellidos"],
+          rol: json["rol"],
+          direccion: json["direccion"],
+          poblacion: json["poblacion"],
+          estado: json["estado"]);
 
   Map<String, dynamic> toJson() => {
         "email": email,
@@ -52,5 +60,8 @@ class InfoUsuarioModel {
         "nombres": nombres,
         "apellidos": apellidos,
         "rol": rol,
+        "direccion": direccion,
+        "poblacion": poblacion,
+        "estado": estado,
       };
 }

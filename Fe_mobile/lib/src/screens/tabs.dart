@@ -1,8 +1,8 @@
 import 'package:Fe_mobile/config/ui_icons.dart';
-import 'package:Fe_mobile/src/screens/account.dart';
+import 'package:Fe_mobile/src/core/pages/usuario/perfil_usuario_page.dart';
 import 'package:Fe_mobile/src/screens/chat.dart';
 import 'package:Fe_mobile/src/screens/favorites.dart';
-import 'package:Fe_mobile/src/dominio/pages/contenido_home_page.dart';
+import 'package:Fe_mobile/src/dominio/pages/Contenido/contenido_home_page.dart';
 import 'package:Fe_mobile/src/screens/messages.dart';
 import 'package:Fe_mobile/src/screens/notifications.dart';
 import 'package:Fe_mobile/src/widgets/DrawerWidget.dart';
@@ -53,7 +53,7 @@ class _TabsWidgetState extends State<TabsWidget> {
           break;
         case 1:
           widget.currentTitle = 'Account';
-          widget.currentPage = AccountWidget();
+          widget.currentPage = PerfilUsuarioPage();
           break;
         case 2:
           widget.currentTitle = 'Home';

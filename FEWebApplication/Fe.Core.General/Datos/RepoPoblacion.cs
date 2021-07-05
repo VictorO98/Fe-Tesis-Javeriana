@@ -21,5 +21,18 @@ namespace Fe.Core.General.Datos
             using FeContext context = new FeContext();
             return context.PoblacionCors.Where(p => p.Estado == COEstados.VIGENTE && p.Idestadopoblacion == idEstado).ToList();
         }
+
+        public EstadoPoblacionCor GetEstadoPorIdPoblacion(int idPoblacion) 
+        {
+            using FeContext context = new FeContext();
+            var poblacion = GetPoblacionPorIdPoblacion(idPoblacion);
+            return context.EstadoPoblacionCors.Where(p => p.Id == poblacion.Idestadopoblacion).FirstOrDefault();
+        }
+
+        public PoblacionCor GetPoblacionPorIdPoblacion(int idPoblacion)
+        {
+            using FeContext context = new FeContext();
+            return context.PoblacionCors.Where(p => p.Estado == COEstados.VIGENTE && p.Id == idPoblacion).FirstOrDefault();
+        }
     }
 }

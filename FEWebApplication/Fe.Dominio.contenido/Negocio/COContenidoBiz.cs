@@ -7,11 +7,14 @@ using Fe.Servidor.Middleware.Contratos.Core;
 using System;
 using Fe.Servidor.Middleware.Contratos.Dominio.Contenido;
 using Fe.Core.Global.Constantes;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace Fe.Dominio.contenido
 {
     public class COContenidoBiz
     {
+        private readonly IConfiguration _configuration;
         private readonly RepoCategoria _repoCategoria;
         private readonly RepoProducto _repoProducto;
         private readonly RepoTipoPublicacion _repoTipoPublicacion;
@@ -20,8 +23,9 @@ namespace Fe.Dominio.contenido
         private readonly RepoFavorito _repoFavorito;
 
         public COContenidoBiz(RepoCategoria repoCategoria, RepoProducto repoProducto, RepoTipoPublicacion repoTipoPublicacion, 
-            RepoResena repoResena, RepoPyR repoPyR, RepoFavorito repoFavorito)
+            RepoResena repoResena, RepoPyR repoPyR, RepoFavorito repoFavorito, IConfiguration configuration)
         {
+            _configuration = configuration;
             _repoCategoria = repoCategoria;
             _repoProducto = repoProducto;
             _repoTipoPublicacion = repoTipoPublicacion;
@@ -150,6 +154,32 @@ namespace Fe.Dominio.contenido
         internal ResenasPc GetResenaPorIdResena(int idResena)
         {
             return _repoResena.GetResenaPorIdResena(idResena);
+        }
+
+        internal string GetImagenProdcuto(DemografiaCor demografiaCor, ProductosServiciosPc publicacion)
+        {
+            try
+            {
+                if (demografiaCor == null)
+                    throw new COExcepcion("El usuario no existe. ");
+
+                if (publicacion == null)
+                    throw new COExcepcion("La publicación no existe. ");
+
+                string fileName = publicacion.Urlimagenproductoservicio;
+
+                if (!fileName.Contains($@"imagen-producto-{demografiaCor.Id}-{publicacion.Id}"))
+                    throw new COExcepcion("No tiene acceso a esta imagen. ");
+
+                string directorio = _configuration["ImageProductos:DirectorioImagenes"] + "/" + demografiaCor.Email;
+
+                return Path.Combine(directorio, Path.GetFileName(fileName));
+
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
         }
 
         internal List<ResenasPc> GetResenasPorIdPublicacion(int idPublicacion)

@@ -183,6 +183,13 @@
             <returns>Una publicación en formato JSON con sus respectivos atributos.</returns>
             <param name="idPublicacion">El id de la publicación a buscar.</param>
         </member>
+        <member name="M:FEWebApplication.Controladores.Dominio.Contenido.COContenidoController.GetImagenProdcuto(System.Int32,System.Int32)">
+            <summary>
+            Busca las imagens de los productos por su ID.
+            </summary>
+            <returns>Retonr la imagen del producto en un formato JPG o PNG.</returns>
+            <param name="idPublicacion">El id de la publicación para buscar.</param>
+        </member>
         <member name="M:FEWebApplication.Controladores.Dominio.Contenido.COContenidoController.RemoverPublicacion(System.Int32)">
             <summary>
             Busca una publicación por su ID y la desactiva de la aplicación.

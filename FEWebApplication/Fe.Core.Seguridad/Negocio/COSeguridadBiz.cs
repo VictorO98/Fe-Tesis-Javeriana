@@ -22,16 +22,18 @@ namespace Fe.Core.Seguridad.Negocio
         private readonly RepoDemografia _repoDemografia;
         private readonly RepoDocumento _repoDocumento;
         private readonly RepoRoles _repoRoles;
+        private readonly RepoPoblacion _repoPoblacion;
         private readonly IConfiguration _configuration;
 
         public COSeguridadBiz(UserManager<IdentityUser> userManager, RepoDemografia repoDemografia, RepoDocumento repoDocumento,
-                            RepoRoles repoRoles, IConfiguration configuration) 
+                            RepoRoles repoRoles, IConfiguration configuration, RepoPoblacion repoPoblacion) 
         {
             _userManager = userManager;
             _repoDemografia = repoDemografia;
             _repoDocumento = repoDocumento;
             _configuration = configuration;
             _repoRoles = repoRoles;
+            _repoPoblacion = repoPoblacion;
         }
 
         public async Task<RespuestaLogin> RefreshToken(string token)
@@ -58,6 +60,8 @@ namespace Fe.Core.Seguridad.Negocio
             var userRoles = await _userManager.GetRolesAsync(user);
             var demografia = _repoDemografia.GetDemografiaPorEmail(user.Email);
             var tipoDocumento = _repoDocumento.GetTipoDocumentoPorId(demografia.Tipodocumentocorid);
+            var poblacion = _repoPoblacion.GetPoblacionPorIdPoblacion(demografia.Idpoblacion);
+            var estado = _repoPoblacion.GetEstadoPorIdPoblacion(demografia.Idpoblacion);
             var authClaims = new List<Claim>
                 {
                     new Claim("email", user.Email),
@@ -67,8 +71,10 @@ namespace Fe.Core.Seguridad.Negocio
                     new Claim("telefono", demografia.Telefono.ToString()),
                     new Claim("id", demografia.Id.ToString()),
                     new Claim("tipoDocumento", tipoDocumento.Nombre),
-                    new Claim("documento", demografia.Numerodocumento.ToString())
-
+                    new Claim("documento", demografia.Numerodocumento.ToString()),
+                    new Claim("direccion", demografia.Direccion.ToString()),
+                    new Claim("poblacion", poblacion.Nombre.ToString()),
+                    new Claim("estado", estado.Nombre.ToString())
                 };
              
             foreach (var userRole in userRoles)

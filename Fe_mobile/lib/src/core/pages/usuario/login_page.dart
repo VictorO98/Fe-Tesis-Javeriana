@@ -282,6 +282,7 @@ class _LoginPageState extends State<LoginPage> {
       _usuarioProvider.iniciarSesion(_loginModel, context).then((value) async {
         RespuestaLoginModel? respuesta = value;
         if (respuesta?.codigo == 10) {
+          // TODO: Agregar lo de recordar usuario
           await _preferenciasUtil.setPrefStr("token", respuesta!.token!);
           Map<String, dynamic> claims =
               JWTUtil.decodificarToken(respuesta.token!);
@@ -299,7 +300,10 @@ class _LoginPageState extends State<LoginPage> {
                       await _preferenciasUtil.getPrefStr("nombreCompleto"),
                   numeroTelefono:
                       await _preferenciasUtil.getPrefStr("telefono"),
-                  rol: await _preferenciasUtil.getPrefStr("roles"))));
+                  rol: await _preferenciasUtil.getPrefStr("roles"),
+                  direccion: await _preferenciasUtil.getPrefStr("direccion"),
+                  poblacion: await _preferenciasUtil.getPrefStr("poblacion"),
+                  estado: await _preferenciasUtil.getPrefStr("estado"))));
               // 2 number refer the index of Home page
               Navigator.of(context).pushNamed('/Tabs', arguments: 2);
             });
