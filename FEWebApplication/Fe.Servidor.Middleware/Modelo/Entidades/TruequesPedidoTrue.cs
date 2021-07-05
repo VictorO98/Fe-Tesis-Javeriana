@@ -16,7 +16,7 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
         public int Idcomprador { get; set; }
         public int Idvendedor { get; set; }
         public string Estado { get; set; }
-        public DateTime? Fechatrueque { get; set; } = DateTime.Now;
+        public DateTime? Fechatrueque { get; set; }
 
         public virtual DemografiaCor IdcompradorNavigation { get; set; }
         public virtual DemografiaCor IdvendedorNavigation { get; set; }

@@ -18,6 +18,7 @@ namespace Fe.Dominio.contenido.Datos
             RespuestaDatos respuestaDatos;
             try
             {
+                categoria.Creacion = DateTime.Now;
                 context.Add(categoria);
                 context.SaveChanges();
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "Categoría creada exitosamente." };
