@@ -19,6 +19,7 @@ namespace Fe.Dominio.trueques.Datos
             RespuestaDatos respuestaDatos;
             try
             {
+                detalle.Creacion = DateTime.Now;
                 context.Add(detalle);
                 context.SaveChanges();
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "Detalle del trueque creado exitosamente." };

@@ -19,6 +19,8 @@ namespace Fe.Dominio.contenido.Datos
             RespuestaDatos respuestaDatos;
             try
             {
+                pyr.Creacion = DateTime.Now;
+                pyr.Modificacion = DateTime.Now;
                 context.Add(pyr);
                 context.SaveChanges();
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "Pregunta realizada exitosamente." };

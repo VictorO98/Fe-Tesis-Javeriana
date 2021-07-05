@@ -20,6 +20,7 @@ namespace Fe.Dominio.trueques.Datos
             try
             {
                 trueque.Estado = COEstadosTrueque.OFERTADO;
+                trueque.Fechatrueque = DateTime.Now;
                 context.Add(trueque);
                 context.SaveChanges();
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "Trueque creado exitosamente." };
