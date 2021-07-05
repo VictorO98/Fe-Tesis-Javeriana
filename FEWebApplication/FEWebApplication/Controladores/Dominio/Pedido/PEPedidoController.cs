@@ -63,6 +63,18 @@ namespace FEWebApplication.Controladores.Dominio.Pedido
             return _peFachada.GetPedidoPorId(idPedido);
         }
 
+        /// <summary>
+        /// Obtiene los pedidos ascociado al ID de un usuario
+        /// </summary>
+        /// <returns>Pedidos asociado al ID del usuario</returns>
+        /// <param name="idUsuario">Id del usario del cual se desean conocer sus pedidos</param>
+        [Route("GetPedidosPorIdUsuario")]
+        [HttpGet]
+        public List<PedidosPed> GetPedidosPorIdUsuario(int idUsuario)
+        {
+            return _peFachada.GetPedidosPorIdUsuario(idUsuario);
+        }
+
         // TODO: Decodificacion de JWT para validar el usuario mediante el claim del ID
         /// <summary>
         /// Elimina el pedido de la base de datos
@@ -247,5 +259,23 @@ namespace FEWebApplication.Controladores.Dominio.Pedido
             }
         }
 
+        /// <summary>
+        /// Obtiene todos los pedidos de un usuario
+        /// </summary>
+        /// <returns>Lista con todos los pedidos de un usuario</returns>
+        /// <param name="idUsuario">ID usuario del que se desean obtner todos sus pedidos</param>
+        [Route("ListarTodosLosPedidosPorUsuario")]
+        [HttpGet]
+        public List<ContratoPedidos> ListarTodosLosPedidosPorUsuario(int idUsuario)
+        {
+            try
+            {
+                return _peFachada.ListarTodosLosPedidosPorUsuario(idUsuario);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+        }
     }
 }
