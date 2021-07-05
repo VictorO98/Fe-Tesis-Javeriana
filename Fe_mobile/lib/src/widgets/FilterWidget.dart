@@ -53,13 +53,13 @@ class _FilterWidgetState extends State<FilterWidget> {
                   ExpansionTile(
                     title: Text('Categories'),
                     children: List.generate(5, (index) {
-                      var _category = _categoriesList.list.elementAt(index);
+                      var _category = _categoriesList.list!.elementAt(index);
                       return ExpansionTile(
                         leading: Icon(_category.icon),
                         title: Text(_category.name),
                         children: List.generate(5, (index) {
                           var _subCategory =
-                              _subCategoriesList.list.elementAt(index);
+                              _subCategoriesList.list!.elementAt(index);
                           return CheckboxListTile(
                             value: _subCategory.selected,
                             onChanged: (value) {
@@ -82,8 +82,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                   ExpansionTile(
                     initiallyExpanded: true,
                     title: Text('Brands'),
-                    children: List.generate(_brandsList.list.length, (index) {
-                      var _brand = _brandsList.list.elementAt(index);
+                    children: List.generate(_brandsList.list!.length, (index) {
+                      var _brand = _brandsList.list!.elementAt(index);
                       return CheckboxListTile(
                         value: _brand.selected,
                         onChanged: (value) {
@@ -112,7 +112,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                     initiallyExpanded: true,
                     title: Text('Colors'),
                     children: List.generate(5, (index) {
-                      var _color = _productColorsList.list.elementAt(index);
+                      var _color = _productColorsList.list!.elementAt(index);
                       return CheckboxListTile(
                         value: _color.selected,
                         onChanged: (value) {
@@ -140,8 +140,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                   ExpansionTile(
                     title: Text('Size'),
                     children:
-                        List.generate(_productSizesList.list.length, (index) {
-                      var _size = _productSizesList.list.elementAt(index);
+                        List.generate(_productSizesList.list!.length, (index) {
+                      var _size = _productSizesList.list!.elementAt(index);
                       return CheckboxListTile(
                         value: _size.selected,
                         onChanged: (value) {
@@ -183,7 +183,7 @@ class _FilterWidgetState extends State<FilterWidget> {
               onPressed: () {
                 Navigator.of(context).pushNamed('/Category',
                     arguments: RouteArgument(id: 2, argumentsList: [
-                      new CategoriesList().list.elementAt(0)
+                      new CategoriesList().list!.elementAt(0)
                     ]));
               },
               padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),

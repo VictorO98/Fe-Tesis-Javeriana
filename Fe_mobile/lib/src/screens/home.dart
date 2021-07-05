@@ -19,14 +19,14 @@ class HomeWidget extends StatefulWidget {
 
 class _HomeWidgetState extends State<HomeWidget>
     with SingleTickerProviderStateMixin {
-  List<Product> _productsOfCategoryList;
-  List<Product> _productsOfBrandList;
+  List<Product>? _productsOfCategoryList;
+  List<Product>? _productsOfBrandList;
   CategoriesList _categoriesList = new CategoriesList();
   BrandsList _brandsList = new BrandsList();
   ProductsList _productsList = new ProductsList();
 
-  Animation animationOpacity;
-  AnimationController animationController;
+  Animation? animationOpacity;
+  late AnimationController animationController;
 
   @override
   void initState() {
@@ -41,12 +41,12 @@ class _HomeWidgetState extends State<HomeWidget>
 
     animationController.forward();
 
-    _productsOfCategoryList = _categoriesList.list.firstWhere((category) {
+    _productsOfCategoryList = _categoriesList.list!.firstWhere((category) {
       return category.selected;
     }).products;
 
-    _productsOfBrandList = _brandsList.list.firstWhere((brand) {
-      return brand.selected;
+    _productsOfBrandList = _brandsList.list!.firstWhere((brand) {
+      return brand.selected!;
     }).products;
     super.initState();
   }
@@ -88,7 +88,7 @@ class _HomeWidgetState extends State<HomeWidget>
                 setState(() {
                   animationController.reverse().then((f) {
                     _productsOfCategoryList =
-                        _categoriesList.list.firstWhere((category) {
+                        _categoriesList.list!.firstWhere((category) {
                       return category.id == id;
                     }).products;
                     animationController.forward();
@@ -122,7 +122,7 @@ class _HomeWidgetState extends State<HomeWidget>
               onChanged: (id) {
                 setState(() {
                   animationController.reverse().then((f) {
-                    _productsOfBrandList = _brandsList.list.firstWhere((brand) {
+                    _productsOfBrandList = _brandsList.list!.firstWhere((brand) {
                       return brand.id == id;
                     }).products;
                     animationController.forward();

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class EmptyMessagesWidget extends StatelessWidget {
   const EmptyMessagesWidget({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -71,7 +71,7 @@ class EmptyMessagesWidget extends StatelessWidget {
               textAlign: TextAlign.center,
               style: Theme.of(context)
                   .textTheme
-                  .display2
+                  .display2!
                   .merge(TextStyle(fontWeight: FontWeight.w300)),
             ),
           ),

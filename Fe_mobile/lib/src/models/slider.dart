@@ -1,15 +1,15 @@
 class Slider {
-  String image;
-  String button;
-  String description;
+  String? image;
+  String? button;
+  String? description;
 
   Slider({this.image, this.button, this.description});
 }
 
 class SliderList {
-  List<Slider> _list;
+  List<Slider>? _list;
 
-  List<Slider> get list => _list;
+  List<Slider>? get list => _list;
 
   SliderList() {
     _list = [

@@ -141,7 +141,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
                     '\$55.36',
-                    style: Theme.of(context).textTheme.display1.merge(
+                    style: Theme.of(context).textTheme.display1!.merge(
                         TextStyle(color: Theme.of(context).primaryColor)),
                   ),
                 )

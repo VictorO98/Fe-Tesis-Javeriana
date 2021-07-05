@@ -10,10 +10,10 @@ import 'conf_api.dart';
 
 class ServicioUtil {
   //Método GET HTTP
-  static Future<String> get(String api,
-      {Map<String, String> params,
-      bool isMostrarAlertError,
-      BuildContext contextErr}) async {
+  static Future<String?> get(String api,
+      {Map<String, String>? params,
+      bool isMostrarAlertError = false,
+      BuildContext? contextErr}) async {
     var client = http.Client();
     try {
       var uri = Uri.parse(ConfServer.SERVER + api);
@@ -21,21 +21,57 @@ class ServicioUtil {
       final response = await client.get(uri, headers: await formarHeader());
       if (response.statusCode == 200) return response.body;
 
-      controlarError(contextErr, response, isMostrarAlertError);
+      controlarError(contextErr!, response, isMostrarAlertError);
       return null;
     } catch (e) {
       print("Error Get: $e");
-      AlertUtil.error(contextErr, "Ocurrió un problema con los servicios. ");
+      AlertUtil.error(contextErr!, "Ocurrió un problema con los servicios. ");
       throw e;
     } finally {
       client.close();
     }
   }
 
+  static dynamic post(String api, String body,
+      {bool isMostratAlertError = false, BuildContext? contextErr}) async {
+    var client = http.Client();
+    var uri = Uri.http(ConfServer.HOST, api);
+    try {
+      final response =
+          await client.post(uri, body: body, headers: await formarHeader());
+
+      if (response.statusCode == 200) return response.body;
+      controlarError(contextErr!, response, isMostratAlertError);
+      return null;
+    } catch (e) {
+      print("Error en servicio - $e");
+      AlertUtil.error(contextErr!, "Ocurrió un problema con los servicios. ");
+      throw e;
+    } finally {
+      client.close();
+    }
+  }
+
+  static Future<Map<String, String>> formarHeader(
+      {bool isSendAccept = true}) async {
+    final prefs = new PreferenciasUtil();
+    String? token = await prefs.getPrefStr("token");
+    Map<String, String> headers = {};
+    headers["Accept"] = "application/json";
+    if (!isSendAccept) {
+      // headers["Content-Type"] = "multipart/form-data";
+    } else {
+      headers["Content-Type"] = "application/json";
+    }
+    if (token != null && token.isNotEmpty)
+      headers["Authorization"] = "Bearer $token";
+
+    return headers;
+  }
+
   static controlarError(
-      BuildContext context, http.Response response, bool isMostratAlertError,
-      {int statusCode}) {
-    String data = response.body;
+      BuildContext context, http.Response? response, bool isMostratAlertError) {
+    String? data = response?.body;
     if (data == null) return null;
     var respuestaDatos;
 
@@ -64,24 +100,7 @@ class ServicioUtil {
           response.statusCode == 402 ||
           response.statusCode == 404)
         AlertUtil.error(context,
-            "No hay conexión con los servicios de tuflete. Por favor, intentelo más tarde. ");
+            "No hay conexión con los servicios de Buya. Por favor, intentelo más tarde. ");
     }
-  }
-
-  static Future<Map<String, String>> formarHeader(
-      {bool isSendAccept = true}) async {
-    final prefs = new PreferenciasUtil();
-    // String token = await prefs.getPrefStr("token");
-    Map<String, String> headers = {};
-    headers["Accept"] = "application/json";
-    if (!isSendAccept) {
-      // headers["Content-Type"] = "multipart/form-data";
-    } else {
-      headers["Content-Type"] = "application/json";
-    }
-    // if (token != null && token != "")
-    //   headers["Authorization"] = "Bearer $token";
-
-    return headers;
   }
 }

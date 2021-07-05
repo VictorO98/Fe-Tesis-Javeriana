@@ -4,6 +4,33 @@
         <name>FEWebApplication</name>
     </assembly>
     <members>
+        <member name="T:FEWebApplication.Authentication.AuthenticateController">
+            <summary>
+            Servicios para iniciar sesión y registrarse
+            </summary>
+        </member>
+        <member name="M:FEWebApplication.Authentication.AuthenticateController.CreateRole">
+            <summary>
+            Crea los roles en identity Role !NO EJECUTAR!
+            </summary>
+        </member>
+        <member name="M:FEWebApplication.Authentication.AuthenticateController.GetRoles">
+            <summary>
+            Retorna todos los roles de la base de datos.
+            </summary>
+            <returns>Una lista en formato JSON con todos los roles disponibles en la app.</returns>
+        </member>
+        <member name="M:FEWebApplication.Authentication.AuthenticateController.Login(Fe.Servidor.Middleware.Contratos.Core.Seguridad.LoginDatos)">
+            <summary>
+            Método para loguearse en la aplicación
+            </summary>
+            <returns>Retorna un JWT o un accesso denegado.</returns>
+        </member>
+        <member name="M:FEWebApplication.Authentication.AuthenticateController.Register(Fe.Servidor.Middleware.Contratos.Core.Seguridad.RegisterDatos)">
+            <summary>
+            Método para registrarse en la aplicación
+            </summary>
+        </member>
         <member name="T:FEWebApplication.Controladores.Core.COGeneralController">
             <summary>
             Servicios para guardar, modificar o borrar población, documento, demografía, demografía reportada, FAQ y razón social

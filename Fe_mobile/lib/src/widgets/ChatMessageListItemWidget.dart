@@ -3,9 +3,9 @@ import 'package:Fe_mobile/src/models/user.dart';
 import 'package:flutter/material.dart';
 
 class ChatMessageListItem extends StatelessWidget {
-  Chat chat;
+  Chat? chat;
   User currentUser = new User.init().getCurrentUser();
-  final Animation animation;
+  final Animation? animation;
 
   ChatMessageListItem({this.chat, this.animation});
 
@@ -13,8 +13,8 @@ class ChatMessageListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return new SizeTransition(
       sizeFactor:
-          new CurvedAnimation(parent: animation, curve: Curves.decelerate),
-      child: currentUser.name == this.chat.user.name
+          new CurvedAnimation(parent: animation as Animation<double>, curve: Curves.decelerate),
+      child: currentUser.name == this.chat!.user.name
           ? getSentMessageLayout(context)
           : getReceivedMessageLayout(context),
     );
@@ -39,11 +39,11 @@ class ChatMessageListItem extends StatelessWidget {
               child: new Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
-                  new Text(this.chat.user.name,
+                  new Text(this.chat!.user.name!,
                       style: Theme.of(context).textTheme.body2),
                   new Container(
                     margin: const EdgeInsets.only(top: 5.0),
-                    child: new Text(chat.text),
+                    child: new Text(chat!.text),
                   ),
                 ],
               ),
@@ -54,7 +54,7 @@ class ChatMessageListItem extends StatelessWidget {
                 new Container(
                     margin: const EdgeInsets.only(left: 8.0),
                     child: new CircleAvatar(
-                      backgroundImage: AssetImage(this.chat.user.avatar),
+                      backgroundImage: AssetImage(this.chat!.user.avatar!),
                     )),
               ],
             ),
@@ -85,7 +85,7 @@ class ChatMessageListItem extends StatelessWidget {
                 new Container(
                     margin: const EdgeInsets.only(right: 8.0),
                     child: new CircleAvatar(
-                      backgroundImage: AssetImage(this.chat.user.avatar),
+                      backgroundImage: AssetImage(this.chat!.user.avatar!),
                     )),
               ],
             ),
@@ -93,13 +93,13 @@ class ChatMessageListItem extends StatelessWidget {
               child: new Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  new Text(this.chat.user.name,
-                      style: Theme.of(context).textTheme.body2.merge(
+                  new Text(this.chat!.user.name!,
+                      style: Theme.of(context).textTheme.body2!.merge(
                           TextStyle(color: Theme.of(context).primaryColor))),
                   new Container(
                     margin: const EdgeInsets.only(top: 5.0),
                     child: new Text(
-                      chat.text,
+                      chat!.text,
                       style: TextStyle(color: Theme.of(context).primaryColor),
                     ),
                   ),

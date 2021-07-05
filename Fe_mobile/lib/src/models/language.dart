@@ -7,7 +7,7 @@ class Language {
 }
 
 class LanguagesList {
-  List<Language> _languages;
+  List<Language>? _languages;
 
   LanguagesList() {
     this._languages = [
@@ -24,5 +24,5 @@ class LanguagesList {
     ];
   }
 
-  List<Language> get languages => _languages;
+  List<Language>? get languages => _languages;
 }

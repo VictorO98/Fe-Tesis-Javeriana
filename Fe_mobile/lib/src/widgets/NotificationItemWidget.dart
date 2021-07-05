@@ -3,10 +3,10 @@ import 'package:Fe_mobile/src/models/notification.dart' as model;
 import 'package:flutter/material.dart';
 
 class NotificationItemWidget extends StatefulWidget {
-  NotificationItemWidget({Key key, this.notification, this.onDismissed})
+  NotificationItemWidget({Key? key, this.notification, this.onDismissed})
       : super(key: key);
-  model.Notification notification;
-  ValueChanged<model.Notification> onDismissed;
+  model.Notification? notification;
+  ValueChanged<model.Notification?>? onDismissed;
 
   @override
   _NotificationItemWidgetState createState() => _NotificationItemWidgetState();
@@ -33,15 +33,15 @@ class _NotificationItemWidgetState extends State<NotificationItemWidget> {
       onDismissed: (direction) {
         // Remove the item from the data source.
         setState(() {
-          widget.onDismissed(widget.notification);
+          widget.onDismissed!(widget.notification);
         });
 
         // Then show a snackbar.
         Scaffold.of(context).showSnackBar(
-            SnackBar(content: Text("${widget.notification.title} dismissed")));
+            SnackBar(content: Text("${widget.notification!.title} dismissed")));
       },
       child: Container(
-        color: this.widget.notification.read
+        color: this.widget.notification!.read
             ? Colors.transparent
             : Theme.of(context).focusColor.withOpacity(0.15),
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
@@ -54,7 +54,7 @@ class _NotificationItemWidgetState extends State<NotificationItemWidget> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(5)),
                 image: DecorationImage(
-                    image: AssetImage(this.widget.notification.image),
+                    image: AssetImage(this.widget.notification!.image),
                     fit: BoxFit.cover),
               ),
             ),
@@ -65,16 +65,16 @@ class _NotificationItemWidgetState extends State<NotificationItemWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   Text(
-                    this.widget.notification.title,
+                    this.widget.notification!.title,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
-                    style: Theme.of(context).textTheme.body2.merge(TextStyle(
-                        fontWeight: this.widget.notification.read
+                    style: Theme.of(context).textTheme.body2!.merge(TextStyle(
+                        fontWeight: this.widget.notification!.read
                             ? FontWeight.w300
                             : FontWeight.w600)),
                   ),
                   Text(
-                    this.widget.notification.time,
+                    this.widget.notification!.time,
                     style: Theme.of(context).textTheme.caption,
                   )
                 ],

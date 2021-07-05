@@ -30,12 +30,12 @@ class _AccountWidgetState extends State<AccountWidget> {
                   child: Column(
                     children: <Widget>[
                       Text(
-                        _user.name,
+                        _user.name!,
                         textAlign: TextAlign.left,
                         style: Theme.of(context).textTheme.display2,
                       ),
                       Text(
-                        _user.email,
+                        _user.email!,
                         style: Theme.of(context).textTheme.caption,
                       )
                     ],
@@ -51,7 +51,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                         Navigator.of(context).pushNamed('/Tabs', arguments: 1);
                       },
                       child: CircleAvatar(
-                        backgroundImage: AssetImage(_user.avatar),
+                        backgroundImage: AssetImage(_user.avatar!),
                       ),
                     )),
               ],
@@ -277,7 +277,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                     style: Theme.of(context).textTheme.body1,
                   ),
                   trailing: Text(
-                    _user.name,
+                    _user.name!,
                     style: TextStyle(color: Theme.of(context).focusColor),
                   ),
                 ),
@@ -289,7 +289,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                     style: Theme.of(context).textTheme.body1,
                   ),
                   trailing: Text(
-                    _user.email,
+                    _user.email!,
                     style: TextStyle(color: Theme.of(context).focusColor),
                   ),
                 ),
@@ -301,7 +301,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                     style: Theme.of(context).textTheme.body1,
                   ),
                   trailing: Text(
-                    _user.gender,
+                    _user.gender!,
                     style: TextStyle(color: Theme.of(context).focusColor),
                   ),
                 ),

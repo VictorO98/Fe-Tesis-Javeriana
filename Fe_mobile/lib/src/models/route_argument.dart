@@ -1,6 +1,6 @@
 class RouteArgument {
   dynamic id;
-  List<dynamic> argumentsList;
+  List<dynamic>? argumentsList;
 
   RouteArgument({this.id, this.argumentsList});
 

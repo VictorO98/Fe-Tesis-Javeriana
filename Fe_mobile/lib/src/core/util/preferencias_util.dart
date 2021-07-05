@@ -8,38 +8,37 @@ class PreferenciasUtil {
 
   PreferenciasUtil._internal();
 
-  SharedPreferences prefs;
+  SharedPreferences? prefs;
 
   initPrefs() async {
     this.prefs = await SharedPreferences.getInstance();
   }
 
-  setPrefsMap(String key, Map<String, dynamic> values) async =>
-      await prefs.setString(key, json.encode(values));
+  setPrefsMap(String key, Map<String, dynamic> values) async {
+    await prefs!.setString(key, json.encode(values));
+  }
 
   setPrefStr(String key, String value) async {
     try {
-      await prefs.setString(key, value);
+      await prefs!.setString(key, value);
     } catch (e) {
-      print("D1 - $e");
+      print("Error al setear preferencia - $e");
     }
   }
 
-  Future<String> getPrefStr(String key) async {
+  Future<String?> getPrefStr(String key) async {
     try {
-      var a = prefs.getString(key);
-      return a;
+      return prefs!.getString(key);
     } catch (e) {
-      print("C3 - $e");
       return null;
     }
   }
 
   Future<Map<String, dynamic>> getPrefMap(String key) async {
-    String mapStr = await getPrefStr(key);
+    String? mapStr = await getPrefStr(key);
     if (mapStr == null) return {};
     return json.decode(mapStr);
   }
 
-  removePrefStr(String key) async => prefs.remove(key);
+  removePrefStr(String key) async => prefs!.remove(key);
 }

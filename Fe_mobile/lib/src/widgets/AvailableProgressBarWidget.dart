@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class AvailableProgressBarWidget extends StatelessWidget {
   const AvailableProgressBarWidget({
-    Key key,
-    @required this.available,
+    Key? key,
+    required this.available,
   }) : super(key: key);
 
   final double available;

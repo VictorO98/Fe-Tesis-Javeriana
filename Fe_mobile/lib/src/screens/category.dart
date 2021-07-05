@@ -7,11 +7,11 @@ import 'package:Fe_mobile/src/widgets/ShoppingCartButtonWidget.dart';
 import 'package:flutter/material.dart';
 
 class CategoryWidget extends StatefulWidget {
-  RouteArgument routeArgument;
-  Category _category;
+  RouteArgument? routeArgument;
+  Category? _category;
 
-  CategoryWidget({Key key, this.routeArgument}) {
-    _category = this.routeArgument.argumentsList[0] as Category;
+  CategoryWidget({Key? key, this.routeArgument}) {
+    _category = this.routeArgument!.argumentsList![0] as Category?;
   }
 
   @override
@@ -20,29 +20,29 @@ class CategoryWidget extends StatefulWidget {
 
 class _CategoryWidgetState extends State<CategoryWidget>
     with SingleTickerProviderStateMixin {
-  TabController _tabController;
+  TabController? _tabController;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final SubCategoriesList _subCategoriesList = new SubCategoriesList();
 
   @override
   void initState() {
     _tabController = TabController(
-        length: _subCategoriesList.list.length,
-        initialIndex: widget.routeArgument.id,
+        length: _subCategoriesList.list!.length,
+        initialIndex: widget.routeArgument!.id,
         vsync: this);
-    _tabController.addListener(_handleTabSelection);
+    _tabController!.addListener(_handleTabSelection);
     super.initState();
   }
 
   void dispose() {
-    _tabController.dispose();
+    _tabController!.dispose();
     super.dispose();
   }
 
   _handleTabSelection() {
-    if (_tabController.indexIsChanging) {
+    if (_tabController!.indexIsChanging) {
       setState(() {
-        widget.routeArgument.id = _tabController.index;
+        widget.routeArgument!.id = _tabController!.index;
       });
     }
   }
@@ -112,17 +112,17 @@ class _CategoryWidgetState extends State<CategoryWidget>
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Hero(
-                        tag: widget._category.id,
+                        tag: widget._category!.id,
                         child: Icon(
-                          widget._category.icon,
+                          widget._category!.icon,
                           color: Theme.of(context).primaryColor,
                           size: 70,
                         ),
                       ),
                       SizedBox(height: 5),
                       Text(
-                        widget._category.name,
-                        style: Theme.of(context).textTheme.title.merge(
+                        widget._category!.name,
+                        style: Theme.of(context).textTheme.title!.merge(
                             TextStyle(color: Theme.of(context).primaryColor)),
                       )
                     ],
@@ -165,15 +165,15 @@ class _CategoryWidgetState extends State<CategoryWidget>
             unselectedLabelStyle: TextStyle(fontWeight: FontWeight.w300),
             isScrollable: true,
             indicatorColor: Theme.of(context).primaryColor,
-            tabs: List.generate(_subCategoriesList.list.length, (index) {
-              return Tab(text: _subCategoriesList.list.elementAt(index).name);
+            tabs: List.generate(_subCategoriesList.list!.length, (index) {
+              return Tab(text: _subCategoriesList.list!.elementAt(index).name);
             }),
           ),
         ),
         SliverToBoxAdapter(
           child: ProductsByCategoryWidget(
             subCategory:
-                _subCategoriesList.list.elementAt(widget.routeArgument.id),
+                _subCategoriesList.list!.elementAt(widget.routeArgument!.id),
           ),
         ),
       ]),

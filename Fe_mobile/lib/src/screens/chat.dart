@@ -36,9 +36,9 @@ class _ChatWidgetState extends State<ChatWidget> {
               key: _myListKey,
               reverse: true,
               padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-              initialItemCount: _conversationList.conversations[0].chats.length,
+              initialItemCount: _conversationList.conversations![0].chats.length,
               itemBuilder: (context, index, Animation<double> animation) {
-                Chat chat = _conversationList.conversations[0].chats[index];
+                Chat chat = _conversationList.conversations![0].chats[index];
                 return ChatMessageListItem(
                   chat: chat,
                   animation: animation,
@@ -67,11 +67,11 @@ class _ChatWidgetState extends State<ChatWidget> {
                   padding: EdgeInsets.only(right: 30),
                   onPressed: () {
                     setState(() {
-                      _conversationList.conversations[0].chats.insert(
+                      _conversationList.conversations![0].chats.insert(
                           0,
                           new Chat(
                               myController.text, '21min ago', _currentUser));
-                      _myListKey.currentState.insertItem(0);
+                      _myListKey.currentState!.insertItem(0);
                     });
                     Timer(Duration(milliseconds: 100), () {
                       myController.clear();

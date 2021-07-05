@@ -8,7 +8,7 @@ class Notification {
 }
 
 class NotificationList {
-  List<Notification> _notifications;
+  List<Notification>? _notifications;
 
   NotificationList() {
     this._notifications = [
@@ -31,5 +31,5 @@ class NotificationList {
     ];
   }
 
-  List<Notification> get notifications => _notifications;
+  List<Notification>? get notifications => _notifications;
 }

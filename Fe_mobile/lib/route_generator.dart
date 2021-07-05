@@ -41,19 +41,19 @@ class RouteGenerator {
       case '/Tabs':
         return MaterialPageRoute(
             builder: (_) => TabsWidget(
-                  currentTab: args,
+                  currentTab: args as int?,
                 ));
       case '/Category':
         return MaterialPageRoute(
             builder: (_) =>
-                CategoryWidget(routeArgument: args as RouteArgument));
+                CategoryWidget(routeArgument: args as RouteArgument?));
       case '/Brand':
         return MaterialPageRoute(
-            builder: (_) => BrandWidget(routeArgument: args as RouteArgument));
+            builder: (_) => BrandWidget(routeArgument: args as RouteArgument?));
       case '/Product':
         return MaterialPageRoute(
             builder: (_) =>
-                ProductWidget(routeArgument: args as RouteArgument));
+                ProductWidget(routeArgument: args as RouteArgument?));
 //      case '/Food':
 //        return MaterialPageRoute(
 //            builder: (_) => FoodWidget(

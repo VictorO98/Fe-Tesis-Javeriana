@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class FavoriteListItemWidget extends StatefulWidget {
-  String heroTag;
-  Product product;
-  VoidCallback onDismissed;
+  String? heroTag;
+  Product? product;
+  VoidCallback? onDismissed;
 
   FavoriteListItemWidget(
-      {Key key, this.heroTag, this.product, this.onDismissed})
+      {Key? key, this.heroTag, this.product, this.onDismissed})
       : super(key: key);
 
   @override
@@ -38,13 +38,13 @@ class _FavoriteListItemWidgetState extends State<FavoriteListItemWidget> {
       onDismissed: (direction) {
         // Remove the item from the data source.
         setState(() {
-          widget.onDismissed();
+          widget.onDismissed!();
         });
 
         // Then show a snackbar.
         Scaffold.of(context).showSnackBar(SnackBar(
             content: Text(
-                "The ${widget.product.name} product is removed from wish list")));
+                "The ${widget.product!.name} product is removed from wish list")));
       },
       child: InkWell(
         splashColor: Theme.of(context).accentColor,
@@ -54,7 +54,7 @@ class _FavoriteListItemWidgetState extends State<FavoriteListItemWidget> {
           Navigator.of(context).pushNamed('/Product',
               arguments: new RouteArgument(
                   argumentsList: [this.widget.product, this.widget.heroTag],
-                  id: this.widget.product.id));
+                  id: this.widget.product!.id));
         },
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
@@ -71,14 +71,14 @@ class _FavoriteListItemWidgetState extends State<FavoriteListItemWidget> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Hero(
-                tag: widget.heroTag + widget.product.id,
+                tag: widget.heroTag! + widget.product!.id,
                 child: Container(
                   height: 60,
                   width: 60,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(5)),
                     image: DecorationImage(
-                        image: AssetImage(widget.product.image),
+                        image: AssetImage(widget.product!.image),
                         fit: BoxFit.cover),
                   ),
                 ),
@@ -93,7 +93,7 @@ class _FavoriteListItemWidgetState extends State<FavoriteListItemWidget> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            widget.product.name,
+                            widget.product!.name,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
                             style: Theme.of(context).textTheme.subhead,
@@ -102,7 +102,7 @@ class _FavoriteListItemWidgetState extends State<FavoriteListItemWidget> {
                             children: <Widget>[
                               // The title of the product
                               Text(
-                                '${widget.product.sales} Sales',
+                                '${widget.product!.sales} Sales',
                                 style: Theme.of(context).textTheme.body1,
                                 overflow: TextOverflow.fade,
                                 softWrap: false,
@@ -114,7 +114,7 @@ class _FavoriteListItemWidgetState extends State<FavoriteListItemWidget> {
                                 size: 18,
                               ),
                               Text(
-                                widget.product.rate.toString(),
+                                widget.product!.rate.toString(),
                                 style: Theme.of(context).textTheme.body2,
                               )
                             ],
@@ -124,7 +124,7 @@ class _FavoriteListItemWidgetState extends State<FavoriteListItemWidget> {
                       ),
                     ),
                     SizedBox(width: 8),
-                    Text(widget.product.getPrice(),
+                    Text(widget.product!.getPrice(),
                         style: Theme.of(context).textTheme.display1),
                   ],
                 ),

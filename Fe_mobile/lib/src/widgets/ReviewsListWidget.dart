@@ -7,7 +7,7 @@ class ReviewsListWidget extends StatelessWidget {
   ReviewsList _reviewsList = new ReviewsList();
 
   ReviewsListWidget({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -16,14 +16,14 @@ class ReviewsListWidget extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20),
       itemBuilder: (context, index) {
         return ReviewItemWidget(
-            review: _reviewsList.reviewsList.elementAt(index));
+            review: _reviewsList.reviewsList!.elementAt(index));
       },
       separatorBuilder: (context, index) {
         return Divider(
           height: 30,
         );
       },
-      itemCount: _reviewsList.reviewsList.length,
+      itemCount: _reviewsList.reviewsList!.length,
       primary: false,
       shrinkWrap: true,
     );

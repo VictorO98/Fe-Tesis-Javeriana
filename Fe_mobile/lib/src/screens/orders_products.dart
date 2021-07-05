@@ -7,12 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class OrdersProductsWidget extends StatefulWidget {
-  List<Order> ordersList;
+  List<Order>? ordersList;
 
   @override
   _OrdersProductsWidgetState createState() => _OrdersProductsWidgetState();
 
-  OrdersProductsWidget({Key key, this.ordersList}) : super(key: key);
+  OrdersProductsWidget({Key? key, this.ordersList}) : super(key: key);
 }
 
 class _OrdersProductsWidgetState extends State<OrdersProductsWidget> {
@@ -28,7 +28,7 @@ class _OrdersProductsWidgetState extends State<OrdersProductsWidget> {
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
           Offstage(
-            offstage: widget.ordersList.isEmpty,
+            offstage: widget.ordersList!.isEmpty,
             child: Padding(
               padding: const EdgeInsets.only(left: 20, right: 10),
               child: ListTile(
@@ -78,22 +78,22 @@ class _OrdersProductsWidgetState extends State<OrdersProductsWidget> {
             ),
           ),
           Offstage(
-            offstage: this.layout != 'list' || widget.ordersList.isEmpty,
+            offstage: this.layout != 'list' || widget.ordersList!.isEmpty,
             child: ListView.separated(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
               primary: false,
-              itemCount: widget.ordersList.length,
+              itemCount: widget.ordersList!.length,
               separatorBuilder: (context, index) {
                 return SizedBox(height: 10);
               },
               itemBuilder: (context, index) {
                 return OrderListItemWidget(
                   heroTag: 'orders_list',
-                  order: widget.ordersList.elementAt(index),
+                  order: widget.ordersList!.elementAt(index),
                   onDismissed: () {
                     setState(() {
-                      widget.ordersList.removeAt(index);
+                      widget.ordersList!.removeAt(index);
                     });
                   },
                 );
@@ -101,16 +101,16 @@ class _OrdersProductsWidgetState extends State<OrdersProductsWidget> {
             ),
           ),
           Offstage(
-            offstage: this.layout != 'grid' || widget.ordersList.isEmpty,
+            offstage: this.layout != 'grid' || widget.ordersList!.isEmpty,
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: new StaggeredGridView.countBuilder(
                 primary: false,
                 shrinkWrap: true,
                 crossAxisCount: 4,
-                itemCount: widget.ordersList.length,
+                itemCount: widget.ordersList!.length,
                 itemBuilder: (BuildContext context, int index) {
-                  Order order = widget.ordersList.elementAt(index);
+                  Order order = widget.ordersList!.elementAt(index);
                   return OrderGridItemWidget(
                     order: order,
                     heroTag: 'orders_grid',
@@ -124,7 +124,7 @@ class _OrdersProductsWidgetState extends State<OrdersProductsWidget> {
             ),
           ),
           Offstage(
-            offstage: widget.ordersList.isNotEmpty,
+            offstage: widget.ordersList!.isNotEmpty,
             child: EmptyOrdersProductsWidget(),
           )
         ],

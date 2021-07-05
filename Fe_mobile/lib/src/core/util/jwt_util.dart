@@ -11,7 +11,7 @@ class JWTUtil {
   static Future<bool> isTokenExpirado() async {
     PreferenciasUtil prefs = new PreferenciasUtil();
     if (prefs == null) return true;
-    String token = await prefs.getPrefStr("token");
+    String? token = await prefs.getPrefStr("token");
     print((token == null || token == "") || JwtDecoder.isExpired(token));
     if ((token == null || token == "") || JwtDecoder.isExpired(token)) {
       return true;
@@ -24,8 +24,8 @@ class JWTUtil {
     bool isTokenExpired = await isTokenExpirado();
     if (!isTokenExpired) {
       PreferenciasUtil prefs = new PreferenciasUtil();
-      String token = await prefs.getPrefStr("token");
-      Duration tokenTime = JwtDecoder.getTokenTime(token);
+      String? token = await (prefs.getPrefStr("token"));
+      Duration tokenTime = JwtDecoder.getTokenTime(token!);
       if (tokenTime.inDays > 55 && tokenTime.inDays < 60) {
         UsuarioProvider _usuarioProvider = new UsuarioProvider();
         var data = await _usuarioProvider.refreshToken(token);

@@ -16,8 +16,8 @@ class RespuestaDatosModel {
     this.mensaje,
   });
 
-  int codigo;
-  String mensaje;
+  int? codigo;
+  String? mensaje;
 
   factory RespuestaDatosModel.fromJson(Map<String, dynamic> json) =>
       RespuestaDatosModel(

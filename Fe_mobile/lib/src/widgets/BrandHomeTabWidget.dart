@@ -6,7 +6,7 @@ import 'package:Fe_mobile/src/widgets/HomeSliderWidget.dart';
 import 'package:flutter/material.dart';
 
 class BrandHomeTabWidget extends StatefulWidget {
-  Brand brand;
+  Brand? brand;
   ProductsList _productsList = new ProductsList();
 
   BrandHomeTabWidget({this.brand});
@@ -30,7 +30,7 @@ class _BrandHomeTabWidgetState extends State<BrandHomeTabWidget> {
               color: Theme.of(context).hintColor,
             ),
             title: Text(
-              widget.brand.name,
+              widget.brand!.name,
               style: Theme.of(context).textTheme.display1,
             ),
           ),

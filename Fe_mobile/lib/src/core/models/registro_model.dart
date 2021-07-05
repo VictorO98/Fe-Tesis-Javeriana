@@ -19,50 +19,60 @@ class RegistroModel {
     this.numeroDocumento,
     this.codigoTelefonoPais,
     this.numeroTelefonico,
+    this.direccion,
+    this.idPoblacion,
     this.idTipoCliente,
+    this.idTipoClienteStr,
+    this.idTipoDocumentoStr,
     this.idTipoDocumento,
     this.isAceptaTerminosYCondiciones,
   });
 
-  String nombres;
-  String apellidos;
-  String email;
-  String password;
-  String confirmPassword;
-  String numeroDocumento;
-  String codigoTelefonoPais;
-  String numeroTelefonico;
-  int idTipoCliente;
-  String idTipoClienteStr;
-  int idTipoDocumento;
-  String idTipoDocumentoStr;
-  bool isAceptaTerminosYCondiciones;
+  String? nombres;
+  String? apellidos;
+  String? email;
+  String? password;
+  String? confirmPassword;
+  String? numeroDocumento;
+  String? codigoTelefonoPais;
+  String? numeroTelefonico;
+  String? direccion;
+  String? idPoblacion;
+  String? idTipoClienteStr;
+  String? idTipoDocumentoStr;
+  int? idTipoCliente;
+  int? idTipoDocumento;
+  bool? isAceptaTerminosYCondiciones;
 
   factory RegistroModel.fromJson(Map<String, dynamic> json) => RegistroModel(
-        nombres: json["nombres"],
-        apellidos: json["apellidos"],
-        email: json["email"],
-        password: json["password"],
-        confirmPassword: json["confirmPassword"],
-        numeroDocumento: json["numeroDocumento"],
-        codigoTelefonoPais: json["codigoTelefonoPais"],
-        numeroTelefonico: json["numeroTelefonico"],
-        idTipoCliente: json["idTipoCliente"],
-        idTipoDocumento: json["idTipoDocumento"],
-        isAceptaTerminosYCondiciones: json["isAceptaTerminosYCondiciones"],
+        nombres: json["Nombres"],
+        apellidos: json["Apellidos"],
+        email: json["Email"],
+        password: json["Password"],
+        confirmPassword: json["ConfirmPassword"],
+        numeroDocumento: json["NumeroDocumento"],
+        codigoTelefonoPais: json["CodigoTelefonoPais"],
+        numeroTelefonico: json["NumeroTelefonico"],
+        direccion: json["Direccion"],
+        idPoblacion: json["IdPoblacion"],
+        idTipoCliente: json["IdTipoCliente"],
+        idTipoDocumento: json["IdTipoDocumento"],
+        isAceptaTerminosYCondiciones: json["IsAceptaTerminosYCondiciones"],
       );
 
   Map<String, dynamic> toJson() => {
-        "nombres": nombres,
-        "apellidos": apellidos,
-        "email": email,
-        "password": password,
-        "confirmPassword": confirmPassword,
-        "numeroDocumento": numeroDocumento,
-        "codigoTelefonoPais": codigoTelefonoPais,
-        "numeroTelefonico": numeroTelefonico,
-        "idTipoCliente": idTipoCliente,
-        "idTipoDocumento": idTipoDocumento,
-        "isAceptaTerminosYCondiciones": isAceptaTerminosYCondiciones,
+        "Nombres": nombres,
+        "Apellidos": apellidos,
+        "Email": email,
+        "Password": password,
+        "ConfirmPassword": confirmPassword,
+        "NumeroDocumento": numeroDocumento,
+        "CodigoTelefonoPais": codigoTelefonoPais,
+        "NumeroTelefonico": numeroTelefonico,
+        "Direccion": direccion,
+        "IdPoblacion": idPoblacion,
+        "IdTipoCliente": idTipoCliente,
+        "IdTipoDocumento": idTipoDocumento,
+        "IsAceptaTerminosYCondiciones": isAceptaTerminosYCondiciones,
       };
 }

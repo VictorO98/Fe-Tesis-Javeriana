@@ -6,7 +6,7 @@ import 'package:intl/intl.dart' show DateFormat;
 
 class FlashSalesHeaderWidget extends StatefulWidget {
   const FlashSalesHeaderWidget({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -14,7 +14,7 @@ class FlashSalesHeaderWidget extends StatefulWidget {
 }
 
 class _FlashSalesHeaderWidgetState extends State<FlashSalesHeaderWidget> {
-  String _timer;
+  String? _timer;
   @override
   void initState() {
     _initTimer();

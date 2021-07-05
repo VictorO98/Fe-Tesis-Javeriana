@@ -12,13 +12,13 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class TabsWidget extends StatefulWidget {
-  int currentTab = 2;
-  int selectedTab = 2;
+  int? currentTab = 2;
+  int? selectedTab = 2;
   String currentTitle = 'Home';
   Widget currentPage = HomeWidget();
 
   TabsWidget({
-    Key key,
+    Key? key,
     this.currentTab,
   }) : super(key: key);
 
@@ -42,7 +42,7 @@ class _TabsWidgetState extends State<TabsWidget> {
     super.didUpdateWidget(oldWidget);
   }
 
-  void _selectTab(int tabItem) {
+  void _selectTab(int? tabItem) {
     setState(() {
       widget.currentTab = tabItem;
       widget.selectedTab = tabItem;
@@ -90,7 +90,7 @@ class _TabsWidgetState extends State<TabsWidget> {
 //        ),
         leading: new IconButton(
           icon: new Icon(Icons.sort, color: Theme.of(context).hintColor),
-          onPressed: () => _scaffoldKey.currentState.openDrawer(),
+          onPressed: () => _scaffoldKey.currentState!.openDrawer(),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -165,7 +165,7 @@ class _TabsWidgetState extends State<TabsWidget> {
         backgroundColor: Colors.transparent,
         selectedIconTheme: IconThemeData(size: 25),
         unselectedItemColor: Theme.of(context).hintColor.withOpacity(1),
-        currentIndex: widget.selectedTab,
+        currentIndex: widget.selectedTab!,
         onTap: (int i) {
           this._selectTab(i);
         },

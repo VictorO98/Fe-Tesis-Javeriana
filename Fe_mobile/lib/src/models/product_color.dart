@@ -4,15 +4,15 @@ class ProductColor {
   String id = UniqueKey().toString();
   Color color;
   String name;
-  bool selected;
+  bool? selected;
 
   ProductColor(this.color, this.name, this.selected);
 }
 
 class ProductColorsList {
-  List<ProductColor> _list;
+  List<ProductColor>? _list;
 
-  List<ProductColor> get list => _list;
+  List<ProductColor>? get list => _list;
 
   ProductColorsList() {
     _list = [
@@ -25,7 +25,7 @@ class ProductColorsList {
   }
 
   void clearSelection() {
-    _list.forEach((color) {
+    _list!.forEach((color) {
       color.selected = false;
     });
   }

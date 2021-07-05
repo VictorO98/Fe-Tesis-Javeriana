@@ -4,12 +4,12 @@ import 'package:Fe_mobile/src/widgets/CategoryIconWidget.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesIconsCarouselWidget extends StatefulWidget {
-  CategoriesList categoriesList;
-  String heroTag;
-  ValueChanged<String> onChanged;
+  CategoriesList? categoriesList;
+  String? heroTag;
+  ValueChanged<String>? onChanged;
 
   CategoriesIconsCarouselWidget(
-      {Key key, this.categoriesList, this.heroTag, this.onChanged})
+      {Key? key, this.categoriesList, this.heroTag, this.onChanged})
       : super(key: key);
 
   @override
@@ -55,7 +55,7 @@ class _CategoriesIconsCarouselWidgetState
                       topLeft: Radius.circular(60)),
                 ),
                 child: ListView.builder(
-                  itemCount: widget.categoriesList.list.length,
+                  itemCount: widget.categoriesList!.list!.length,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     double _marginLeft = 0;
@@ -63,11 +63,11 @@ class _CategoriesIconsCarouselWidgetState
                     return CategoryIconWidget(
                         heroTag: widget.heroTag,
                         marginLeft: _marginLeft,
-                        category: widget.categoriesList.list.elementAt(index),
+                        category: widget.categoriesList!.list!.elementAt(index),
                         onPressed: (String id) {
                           setState(() {
-                            widget.categoriesList.selectById(id);
-                            widget.onChanged(id);
+                            widget.categoriesList!.selectById(id);
+                            widget.onChanged!(id);
                           });
                         });
                   },

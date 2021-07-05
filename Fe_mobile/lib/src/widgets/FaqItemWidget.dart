@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class FaqItemWidget extends StatelessWidget {
-  FaqItemWidget({Key key, this.index = 1}) : super(key: key);
+  FaqItemWidget({Key? key, this.index = 1}) : super(key: key);
   final index;
 
   @override
@@ -25,7 +25,7 @@ class FaqItemWidget extends StatelessWidget {
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(5), topRight: Radius.circular(5))),
             child: Text(
               'Gluten-free spaghetti with tomatoes ?',
-              style: Theme.of(context).textTheme.body2.merge(TextStyle(color: Theme.of(context).primaryColor)),
+              style: Theme.of(context).textTheme.body2!.merge(TextStyle(color: Theme.of(context).primaryColor)),
             ),
           ),
           Container(

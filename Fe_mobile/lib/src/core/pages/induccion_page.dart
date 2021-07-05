@@ -11,7 +11,7 @@ class InduccionPage extends StatefulWidget {
 
 class _InduccionPageState extends State<InduccionPage> {
   int _current = 0;
-  OnBoardingList _onBoardingList;
+  late OnBoardingList _onBoardingList;
   @override
   void initState() {
     _onBoardingList = new OnBoardingList();
@@ -50,7 +50,7 @@ class _InduccionPageState extends State<InduccionPage> {
                 //   });
                 // }
               ),
-              items: _onBoardingList.list.map((InduccionModelList boarding) {
+              items: _onBoardingList.list!.map((InduccionModelList boarding) {
                 return Builder(
                   builder: (BuildContext context) {
                     return Column(
@@ -60,7 +60,7 @@ class _InduccionPageState extends State<InduccionPage> {
                         Padding(
                           padding: const EdgeInsets.all(20),
                           child: Image.asset(
-                            boarding.image,
+                            boarding.image!,
                             width: 500,
                           ),
                         ),
@@ -68,7 +68,7 @@ class _InduccionPageState extends State<InduccionPage> {
                           width: config.App(context).appWidth(75),
                           padding: const EdgeInsets.only(right: 20),
                           child: Text(
-                            boarding.description,
+                            boarding.description!,
                             style: Theme.of(context).textTheme.display1,
                           ),
                         ),
@@ -83,7 +83,7 @@ class _InduccionPageState extends State<InduccionPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children:
-                    _onBoardingList.list.map((InduccionModelList boarding) {
+                    _onBoardingList.list!.map((InduccionModelList boarding) {
                   return Container(
                     width: 25.0,
                     height: 3.0,
@@ -94,7 +94,7 @@ class _InduccionPageState extends State<InduccionPage> {
                           Radius.circular(8),
                         ),
                         color:
-                            _current == _onBoardingList.list.indexOf(boarding)
+                            _current == _onBoardingList.list!.indexOf(boarding)
                                 ? Theme.of(context).hintColor.withOpacity(0.8)
                                 : Theme.of(context).hintColor.withOpacity(0.2)),
                   );
@@ -114,7 +114,7 @@ class _InduccionPageState extends State<InduccionPage> {
                   children: <Widget>[
                     Text(
                       'Registrate',
-                      style: Theme.of(context).textTheme.display1.merge(
+                      style: Theme.of(context).textTheme.display1!.merge(
                             TextStyle(color: Theme.of(context).primaryColor),
                           ),
                     ),

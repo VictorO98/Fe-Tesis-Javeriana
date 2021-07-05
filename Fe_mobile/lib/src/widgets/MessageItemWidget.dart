@@ -4,10 +4,10 @@ import 'package:Fe_mobile/src/models/user.dart';
 import 'package:flutter/material.dart';
 
 class MessageItemWidget extends StatefulWidget {
-  MessageItemWidget({Key key, this.message, this.onDismissed})
+  MessageItemWidget({Key? key, this.message, this.onDismissed})
       : super(key: key);
-  model.Conversation message;
-  ValueChanged<model.Conversation> onDismissed;
+  model.Conversation? message;
+  ValueChanged<model.Conversation?>? onDismissed;
 
   @override
   _MessageItemWidgetState createState() => _MessageItemWidgetState();
@@ -34,20 +34,20 @@ class _MessageItemWidgetState extends State<MessageItemWidget> {
       onDismissed: (direction) {
         // Remove the item from the data source.
         setState(() {
-          widget.onDismissed(widget.message);
+          widget.onDismissed!(widget.message);
         });
 
         // Then show a snackbar.
         Scaffold.of(context).showSnackBar(SnackBar(
             content: Text(
-                "The conversation with ${widget.message.user.name} is dismissed")));
+                "The conversation with ${widget.message!.user.name} is dismissed")));
       },
       child: InkWell(
         onTap: () {
           Navigator.of(context).pushNamed('/Tabs', arguments: 5);
         },
         child: Container(
-          color: this.widget.message.read
+          color: this.widget.message!.read
               ? Colors.transparent
               : Theme.of(context).focusColor.withOpacity(0.15),
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
@@ -61,7 +61,7 @@ class _MessageItemWidgetState extends State<MessageItemWidget> {
                     height: 60,
                     child: CircleAvatar(
                       backgroundImage:
-                          AssetImage(this.widget.message.user.avatar),
+                          AssetImage(this.widget.message!.user.avatar!),
                     ),
                   ),
                   Positioned(
@@ -71,10 +71,10 @@ class _MessageItemWidgetState extends State<MessageItemWidget> {
                     height: 12,
                     child: Container(
                       decoration: BoxDecoration(
-                        color: widget.message.user.userState ==
+                        color: widget.message!.user.userState ==
                                 UserState.available
                             ? Colors.green
-                            : widget.message.user.userState == UserState.away
+                            : widget.message!.user.userState == UserState.away
                                 ? Colors.orange
                                 : Colors.red,
                         shape: BoxShape.circle,
@@ -90,7 +90,7 @@ class _MessageItemWidgetState extends State<MessageItemWidget> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     Text(
-                      this.widget.message.user.name,
+                      this.widget.message!.user.name!,
                       overflow: TextOverflow.fade,
                       softWrap: false,
                       style: Theme.of(context).textTheme.body2,
@@ -100,18 +100,18 @@ class _MessageItemWidgetState extends State<MessageItemWidget> {
                       children: <Widget>[
                         Expanded(
                           child: Text(
-                            this.widget.message.chats[0].text,
+                            this.widget.message!.chats[0].text,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
-                            style: Theme.of(context).textTheme.caption.merge(
+                            style: Theme.of(context).textTheme.caption!.merge(
                                 TextStyle(
-                                    fontWeight: this.widget.message.read
+                                    fontWeight: this.widget.message!.read
                                         ? FontWeight.w300
                                         : FontWeight.w600)),
                           ),
                         ),
                         Text(
-                          this.widget.message.chats[0].time,
+                          this.widget.message!.chats[0].time,
                           overflow: TextOverflow.fade,
                           softWrap: false,
                           style: Theme.of(context).textTheme.body1,

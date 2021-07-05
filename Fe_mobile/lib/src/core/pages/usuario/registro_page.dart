@@ -2,11 +2,15 @@ import 'package:Fe_mobile/config/ui_icons.dart';
 import 'package:Fe_mobile/src/core/models/departamentos_model.dart';
 import 'package:Fe_mobile/src/core/models/municipios_model.dart';
 import 'package:Fe_mobile/src/core/models/registro_model.dart';
+import 'package:Fe_mobile/src/core/models/respuesta_datos_model.dart';
+import 'package:Fe_mobile/src/core/contract/validar_registro_contract.dart';
 import 'package:Fe_mobile/src/core/models/rol_model.dart';
 import 'package:Fe_mobile/src/core/models/step_manejador_model.dart';
 import 'package:Fe_mobile/src/core/models/tipo_documento_model.dart';
 import 'package:Fe_mobile/src/core/pages/usuario/terminos_y_condiciones_page.dart';
 import 'package:Fe_mobile/src/core/providers/general_provider.dart';
+import 'package:Fe_mobile/src/core/providers/usuario_provider.dart';
+import 'package:Fe_mobile/src/core/util/alert_util.dart';
 import 'package:Fe_mobile/src/core/util/estilo_util.dart';
 import 'package:Fe_mobile/src/widgets/SocialMediaWidget.dart';
 import 'package:country_code_picker/country_code_picker.dart';
@@ -24,6 +28,7 @@ class RegistroPage extends StatefulWidget {
 
 class _RegistroPageState extends State<RegistroPage> {
   RegistroModel registroModel = new RegistroModel();
+  UsuarioProvider _usuarioProvider = new UsuarioProvider();
   GeneralProvider _generalProvider = new GeneralProvider();
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -34,7 +39,7 @@ class _RegistroPageState extends State<RegistroPage> {
   static const CODIGO_PAIS_DEFAULT = 'CO';
   static const CODIGO_TELEFONO_PAIS_DEFAULT = '+57';
 
-  int _currentStep;
+  int? _currentStep;
 
   List<StepManejadorModel> controlSteps = <StepManejadorModel>[];
   List<TipoDocumentoCorModel> listadoTipoDocumento = [];
@@ -45,24 +50,24 @@ class _RegistroPageState extends State<RegistroPage> {
   final _formKey = GlobalKey<FormState>();
   final _formDatosPersonales = GlobalKey<FormState>();
   final _formDatosContacto = GlobalKey<FormState>();
-  final _formTipotuflete = GlobalKey<FormState>();
+  final _formTipoBuya = GlobalKey<FormState>();
   final _formPassword = GlobalKey<FormState>();
   final nombresCtrl = TextEditingController();
 
   double _fontSizeRegrsar = 0;
   double _fontSizeSiguiente = 0;
 
-  String labelSiguiente;
-  String labelRegresar;
+  late String labelSiguiente;
+  late String labelRegresar;
 
-  ButtonStyle _styleButtonSiguiente;
+  ButtonStyle? _styleButtonSiguiente;
 
   bool _isShowPassword = false;
   bool _isModifica = false;
-  bool isLoadingRegistro;
+  late bool isLoadingRegistro;
 
-  MunicipiosModel _municipioSeleccionado;
-  DepartamentoModel _departamentoSeleccionado;
+  MunicipiosModel? _municipioSeleccionado;
+  DepartamentoModel? _departamentoSeleccionado;
 
   @override
   void initState() {
@@ -121,7 +126,7 @@ class _RegistroPageState extends State<RegistroPage> {
     });
   }
 
-  _getMunicipios(int idEstado) async {
+  _getMunicipios(int? idEstado) async {
     List<MunicipiosModel> listado =
         await _generalProvider.getMunicipioPorIdEstado(idEstado);
     setState(() {
@@ -130,7 +135,7 @@ class _RegistroPageState extends State<RegistroPage> {
   }
 
   Future<bool> _onWillPop() async {
-    return (await showDialog(
+    return (await (showDialog(
           context: context,
           builder: (context) => new AlertDialog(
             title: new Text('¿Se encuentra seguro?'),
@@ -148,7 +153,7 @@ class _RegistroPageState extends State<RegistroPage> {
             ],
           ),
         )) ??
-        false;
+        false);
   }
 
   Widget build(BuildContext context) {
@@ -211,7 +216,7 @@ class _RegistroPageState extends State<RegistroPage> {
           key: _formKey,
           child: Stepper(
             controlsBuilder: (BuildContext context,
-                {VoidCallback onStepContinue, VoidCallback onStepCancel}) {
+                {VoidCallback? onStepContinue, VoidCallback? onStepCancel}) {
               return !isLoadingRegistro
                   ? Row(
                       children: <Widget>[
@@ -234,7 +239,7 @@ class _RegistroPageState extends State<RegistroPage> {
                   : CircularProgressIndicator();
             },
             steps: getStep(),
-            currentStep: this._currentStep,
+            currentStep: this._currentStep!,
             onStepContinue: () => {_gestionarSiguiente(context)},
             onStepCancel: () => {_gestionarRegresar(context)},
             type: StepperType.vertical,
@@ -258,7 +263,7 @@ class _RegistroPageState extends State<RegistroPage> {
         state: controlSteps
             .firstWhere(
                 (element) => element.formulario == STEP_DATOS_PERSONALES)
-            .stepEstado,
+            .stepEstado!,
         content: Form(
           key: _formDatosPersonales,
           child: Column(
@@ -271,11 +276,11 @@ class _RegistroPageState extends State<RegistroPage> {
                           Icons.person,
                           color: EstiloUtil.COLOR_PRIMARY,
                         )),
-                onSaved: (String value) {
+                onSaved: (String? value) {
                   setState(() {});
                 },
-                validator: (String value) =>
-                    (value.isEmpty) || (value.trim().isEmpty)
+                validator: (String? value) =>
+                    (value!.isEmpty) || (value.trim().isEmpty)
                         ? 'Registre su nombre'
                         : null,
               ),
@@ -283,7 +288,7 @@ class _RegistroPageState extends State<RegistroPage> {
                 height: 15,
               ),
               TextFormField(
-                  onSaved: (String value) {
+                  onSaved: (String? value) {
                     setState(() {});
                   },
                   decoration:
@@ -292,8 +297,8 @@ class _RegistroPageState extends State<RegistroPage> {
                             Icons.person,
                             color: EstiloUtil.COLOR_PRIMARY,
                           )),
-                  validator: (String value) =>
-                      (value.isEmpty) || (value.trim().isEmpty)
+                  validator: (String? value) =>
+                      (value!.isEmpty) || (value.trim().isEmpty)
                           ? 'Registre sus apellidos'
                           : null),
               SizedBox(
@@ -330,7 +335,7 @@ class _RegistroPageState extends State<RegistroPage> {
                 height: 15,
               ),
               TextFormField(
-                  onSaved: (String value) {
+                  onSaved: (String? value) {
                     setState(() {
                       //registroModel.numeroDocumento = value;
                     });
@@ -342,8 +347,8 @@ class _RegistroPageState extends State<RegistroPage> {
                         Icons.credit_card,
                         color: EstiloUtil.COLOR_PRIMARY,
                       )),
-                  validator: (String value) {
-                    if (value.isEmpty || value.trim().isEmpty)
+                  validator: (String? value) {
+                    if (value!.isEmpty || value.trim().isEmpty)
                       return 'Registre su número de identificación.';
 
                     if (int.tryParse(value) == null)
@@ -360,7 +365,7 @@ class _RegistroPageState extends State<RegistroPage> {
         isActive: false,
         state: controlSteps
             .firstWhere((element) => element.formulario == STEP_DATOS_CONTACTO)
-            .stepEstado,
+            .stepEstado!,
         title: const Text('Datos de contacto',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         subtitle: Text(
@@ -374,7 +379,7 @@ class _RegistroPageState extends State<RegistroPage> {
                 height: 5,
               ),
               TextFormField(
-                  onSaved: (String value) {
+                  onSaved: (String? value) {
                     setState(() {
                       //registroModel.email = value;
                     });
@@ -386,8 +391,8 @@ class _RegistroPageState extends State<RegistroPage> {
                         Icons.email,
                         color: EstiloUtil.COLOR_PRIMARY,
                       )),
-                  validator: (String value) =>
-                      (value.isEmpty) || (value.trim().isEmpty)
+                  validator: (String? value) =>
+                      (value!.isEmpty) || (value.trim().isEmpty)
                           ? 'Registre su correo electrónico'
                           : !EmailValidator.validate(value)
                               ? 'El formato del correo es incorrecto'
@@ -396,7 +401,7 @@ class _RegistroPageState extends State<RegistroPage> {
                 height: 15,
               ),
               TextFormField(
-                  onSaved: (String value) {
+                  onSaved: (String? value) {
                     setState(() {});
                   },
                   decoration: EstiloUtil.crearInputDecorationFormCustom(
@@ -405,8 +410,8 @@ class _RegistroPageState extends State<RegistroPage> {
                         Icons.home,
                         color: EstiloUtil.COLOR_PRIMARY,
                       )),
-                  validator: (String value) =>
-                      (value.isEmpty) || (value.trim().isEmpty)
+                  validator: (String? value) =>
+                      (value!.isEmpty) || (value.trim().isEmpty)
                           ? 'Registre su dirección de entrega'
                           : null),
               SizedBox(
@@ -422,7 +427,7 @@ class _RegistroPageState extends State<RegistroPage> {
                   searchBoxDecoration:
                       EstiloUtil.crearInputDecorationFormCustom(''),
                   items: listDepartamento,
-                  itemAsString: (DepartamentoModel e) => e.nombre,
+                  itemAsString: (DepartamentoModel e) => e.nombre!,
                   label: "Departamento \*",
                   hint: "Seleccione el departamento",
                   validator: (value) =>
@@ -455,7 +460,7 @@ class _RegistroPageState extends State<RegistroPage> {
                   searchBoxDecoration:
                       EstiloUtil.crearInputDecorationFormCustom(''),
                   items: listMunicipios,
-                  itemAsString: (MunicipiosModel e) => e.nombre,
+                  itemAsString: (MunicipiosModel e) => e.nombre!,
                   onBeforeChange: (prevItem, nextItem) async {
                     _municipioSeleccionado = nextItem;
                     return true;
@@ -471,7 +476,7 @@ class _RegistroPageState extends State<RegistroPage> {
                 height: 15,
               ),
               TextFormField(
-                  onSaved: (String value) {
+                  onSaved: (String? value) {
                     setState(() {
                       // registroModel.numeroTelefonico = value;
                     });
@@ -503,8 +508,8 @@ class _RegistroPageState extends State<RegistroPage> {
                       )),
                   keyboardType: TextInputType.numberWithOptions(
                       decimal: true, signed: false),
-                  validator: (String value) {
-                    if (value.isEmpty || value.trim().isEmpty)
+                  validator: (String? value) {
+                    if (value!.isEmpty || value.trim().isEmpty)
                       return 'Registre su número de teléfono';
 
                     if (int.tryParse(value) == null)
@@ -518,7 +523,7 @@ class _RegistroPageState extends State<RegistroPage> {
     return Step(
         state: controlSteps
             .firstWhere((element) => element.formulario == STEP_TIPO_USUARIO)
-            .stepEstado,
+            .stepEstado!,
         title: const Text(
           'Tipo de usuario',
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -528,7 +533,7 @@ class _RegistroPageState extends State<RegistroPage> {
           style: TextStyle(fontSize: 15),
         ),
         content: Form(
-            key: _formTipotuflete,
+            key: _formTipoBuya,
             child: Column(children: <Widget>[
               Text(
                 "El emprendedor distribuye sus productos o servicio en la plataforma. Tiene la posibilidad de vender, comprar y realizar trueques\n\n¡Para ser emprendedor es necesario registrar un producto o servicio!",
@@ -553,17 +558,17 @@ class _RegistroPageState extends State<RegistroPage> {
                   );
                 }).toList(),
                 hint: Text("Seleccionar el tipo de usuario \*"),
-                onSaved: (val) {
+                onSaved: (dynamic val) {
                   setState(() {
                     registroModel.idTipoClienteStr = val;
                   });
                 },
-                validator: (value) => value == null || value == 0
+                validator: (dynamic value) => value == null || value == 0
                     ? 'Seleccione el tipo de usuario'
                     : null,
-                onChanged: (Object val) {
+                onChanged: (Object? val) {
                   setState(() {
-                    registroModel.idTipoClienteStr = val;
+                    registroModel.idTipoClienteStr = val as String?;
                   });
                 },
               )
@@ -575,7 +580,7 @@ class _RegistroPageState extends State<RegistroPage> {
         isActive: false,
         state: controlSteps
             .firstWhere((element) => element.formulario == STEP_PASWWORD)
-            .stepEstado,
+            .stepEstado!,
         title: const Text('Contraseña',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         subtitle: Text(
@@ -595,7 +600,7 @@ class _RegistroPageState extends State<RegistroPage> {
                     height: 15,
                   ),
                   TextFormField(
-                    onSaved: (String value) {
+                    onSaved: (String? value) {
                       setState(() {
                         //registroModel.password = value;
                       });
@@ -609,7 +614,7 @@ class _RegistroPageState extends State<RegistroPage> {
                             onPressed: () => setState(
                                 () => _isShowPassword = !_isShowPassword))),
                     validator: (value) {
-                      if (value.isEmpty || (value.trim().isEmpty)) {
+                      if (value!.isEmpty || (value.trim().isEmpty)) {
                         if (value.length < 8) {
                           return "La contraseña es muy corta";
                         }
@@ -622,7 +627,7 @@ class _RegistroPageState extends State<RegistroPage> {
                     height: 15,
                   ),
                   TextFormField(
-                    onSaved: (String value) {
+                    onSaved: (String? value) {
                       setState(() {
                         // registroModel.confirmPassword = value;
                       });
@@ -636,7 +641,7 @@ class _RegistroPageState extends State<RegistroPage> {
                                 () => _isShowPassword = !_isShowPassword))),
                     keyboardType: TextInputType.visiblePassword,
                     validator: (value) {
-                      if (value.isEmpty || (value.trim().isEmpty)) {
+                      if (value!.isEmpty || (value.trim().isEmpty)) {
                         if (value.length < 8) {
                           return "La contraseña es muy corta";
                         }
@@ -672,9 +677,9 @@ class _RegistroPageState extends State<RegistroPage> {
         final stepManejador = controlSteps
             .where((element) => element.formulario == STEP_DATOS_PERSONALES)
             .first;
-        if (_formDatosPersonales.currentState.validate()) {
+        if (_formDatosPersonales.currentState!.validate()) {
           setState(() {
-            _currentStep++;
+            _currentStep = _currentStep! + 1;
             labelRegresar = "REGRESAR";
             stepManejador.stepEstado = StepState.complete;
           });
@@ -688,10 +693,9 @@ class _RegistroPageState extends State<RegistroPage> {
         final stepManejador = controlSteps
             .where((element) => element.formulario == STEP_DATOS_CONTACTO)
             .first;
-        if (_formDatosContacto.currentState.validate()) {
+        if (_formDatosContacto.currentState!.validate()) {
           setState(() {
-            _currentStep++;
-
+            _currentStep = _currentStep! + 1;
             stepManejador.stepEstado = StepState.complete;
           });
         } else {
@@ -704,9 +708,9 @@ class _RegistroPageState extends State<RegistroPage> {
         final stepManejador = controlSteps
             .where((element) => element.formulario == STEP_TIPO_USUARIO)
             .first;
-        if (_formTipotuflete.currentState.validate()) {
+        if (_formTipoBuya.currentState!.validate()) {
           setState(() {
-            _currentStep++;
+            _currentStep = _currentStep! + 1;
             _styleButtonSiguiente = TextButton.styleFrom(
               primary: Colors.white,
               backgroundColor: EstiloUtil.COLOR_PRIMARY,
@@ -727,7 +731,7 @@ class _RegistroPageState extends State<RegistroPage> {
         final stepManejador = controlSteps
             .where((element) => element.formulario == STEP_PASWWORD)
             .first;
-        if (_formPassword.currentState.validate()) {
+        if (_formPassword.currentState!.validate()) {
           setState(() {
             stepManejador.stepEstado = StepState.complete;
             _registrarUsuario(context);
@@ -749,7 +753,7 @@ class _RegistroPageState extends State<RegistroPage> {
             .where((element) => element.formulario == STEP_DATOS_CONTACTO)
             .first;
         setState(() {
-          _currentStep--;
+          _currentStep = _currentStep! - 1;
           labelRegresar = "";
           stepManejador.stepEstado = StepState.editing;
         });
@@ -759,7 +763,7 @@ class _RegistroPageState extends State<RegistroPage> {
             .where((element) => element.formulario == STEP_TIPO_USUARIO)
             .first;
         setState(() {
-          _currentStep--;
+          _currentStep = _currentStep! - 1;
           stepManejador.stepEstado = StepState.editing;
         });
         break;
@@ -768,7 +772,7 @@ class _RegistroPageState extends State<RegistroPage> {
             .where((element) => element.formulario == STEP_PASWWORD)
             .first;
         setState(() {
-          _currentStep--;
+          _currentStep = _currentStep! - 1;
           labelSiguiente = "SIGUIENTE";
           _styleButtonSiguiente = TextButton.styleFrom();
           _fontSizeSiguiente = 15;
@@ -780,5 +784,38 @@ class _RegistroPageState extends State<RegistroPage> {
     }
   }
 
-  void _registrarUsuario(BuildContext context) async {}
+  void _registrarUsuario(BuildContext context) async {
+    if (_formDatosPersonales.currentState!.validate() &&
+        _formDatosContacto.currentState!.validate() &&
+        _formTipoBuya.currentState!.validate() &&
+        _formPassword.currentState!.validate()) {
+      _formDatosPersonales.currentState!.save();
+      _formDatosContacto.currentState!.save();
+      _formTipoBuya.currentState!.save();
+      _formPassword.currentState!.save();
+      registroModel.isAceptaTerminosYCondiciones = true;
+      registroModel.idTipoCliente =
+          int.parse(registroModel.idTipoClienteStr ?? '0');
+      registroModel.idTipoDocumento =
+          int.parse(registroModel.idTipoDocumentoStr ?? '0');
+      registroModel.isAceptaTerminosYCondiciones = true;
+      setState(() {
+        isLoadingRegistro = true;
+      });
+      _usuarioProvider.registrarUsuario(registroModel, context).then((value) {
+        RespuestaDatosModel? respuesta = value;
+        if (respuesta?.codigo == 10) {
+          final funcionNavegar = () {
+            WidgetsBinding.instance!.addPostFrameCallback((_) {
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  "login", (Route<dynamic> route) => false,
+                  arguments: new ValidaRegistroContract(isRegistro: true));
+            });
+          };
+          AlertUtil.success(context, respuesta!.mensaje!,
+              respuesta: funcionNavegar, title: '¡Registro exitoso!');
+        }
+      }).whenComplete(() => setState(() => isLoadingRegistro = false));
+    }
+  }
 }

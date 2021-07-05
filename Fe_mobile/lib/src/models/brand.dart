@@ -6,7 +6,7 @@ class Brand {
   String id = UniqueKey().toString();
   String name;
   String logo;
-  bool selected;
+  bool? selected;
   double rate;
   List<Product> products;
   Color color;
@@ -16,9 +16,9 @@ class Brand {
 }
 
 class BrandsList {
-  List<Brand> _list;
+  List<Brand>? _list;
 
-  List<Brand> get list => _list;
+  List<Brand>? get list => _list;
 
   BrandsList() {
     _list = [
@@ -189,7 +189,7 @@ class BrandsList {
   }
 
   selectById(String id) {
-    this._list.forEach((Brand brand) {
+    this._list!.forEach((Brand brand) {
       brand.selected = false;
       if (brand.id == id) {
         brand.selected = true;

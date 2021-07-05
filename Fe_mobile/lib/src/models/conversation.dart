@@ -12,7 +12,7 @@ class Conversation {
 }
 
 class ConversationsList {
-  List<Conversation> _conversations;
+  List<Conversation>? _conversations;
   User _currentUser = new User.init().getCurrentUser();
 
   ConversationsList() {
@@ -158,5 +158,5 @@ class ConversationsList {
     ];
   }
 
-  List<Conversation> get conversations => _conversations;
+  List<Conversation>? get conversations => _conversations;
 }

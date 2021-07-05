@@ -1,6 +1,16 @@
+import 'dart:async';
+
 import 'package:Fe_mobile/config/ui_icons.dart';
+import 'package:Fe_mobile/src/core/models/info_usuario_model.dart';
+import 'package:Fe_mobile/src/core/models/login_model.dart';
+import 'package:Fe_mobile/src/core/models/respuesta_login_model.dart';
+import 'package:Fe_mobile/src/core/providers/usuario_provider.dart';
+import 'package:Fe_mobile/src/core/util/jwt_util.dart';
+import 'package:Fe_mobile/src/core/util/preferencias_util.dart';
+import 'package:Fe_mobile/src/core/pages/usuario/bloc/info_perfil/info_usuario_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -9,10 +19,49 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final _usuarioProvider = new UsuarioProvider();
+  final _loginModel = new LoginModel();
+  final _preferenciasUtil = new PreferenciasUtil();
   bool _showPassword = false;
+  bool _isLoadingIniciarSesion = false;
+  bool isValidandoToken = true;
+
+  bool _isRecordarUsuario = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _isLoadingIniciarSesion = false;
+    _redirectRouteInicial();
+    _recordarUsuario();
+  }
+
+  void _redirectRouteInicial() async {
+    Timer(Duration(seconds: 2), () {
+      _redirect();
+    });
+  }
+
+  _recordarUsuario() async {
+    _preferenciasUtil.getPrefStr("isRecordarUsuario").then((value) {
+      if (value != null) {
+        setState(() {
+          _isRecordarUsuario = true;
+        });
+        _preferenciasUtil.getPrefStr("email").then((value) {
+          _loginModel.email = value;
+        });
+        _preferenciasUtil.getPrefStr("pass").then((value) {
+          _loginModel.password = value;
+        });
+      }
+    });
+  }
 
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Theme.of(context).accentColor,
       body: SingleChildScrollView(
         child: Column(
@@ -56,16 +105,22 @@ class _LoginPageState extends State<LoginPage> {
                           key: _formKey,
                           child: Column(
                             children: <Widget>[
-                              new TextFormField(
+                              TextFormField(
                                 style: TextStyle(
                                   color: Theme.of(context).accentColor,
                                 ),
                                 keyboardType: TextInputType.emailAddress,
+                                initialValue: _loginModel.email,
+                                onSaved: (String? value) {
+                                  setState(() {
+                                    _loginModel.email = value;
+                                  });
+                                },
                                 decoration: new InputDecoration(
                                   hintText: 'Correo electrónico',
                                   hintStyle: Theme.of(context)
                                       .textTheme
-                                      .body1
+                                      .bodyText2!
                                       .merge(
                                         TextStyle(
                                           color: Theme.of(context).accentColor,
@@ -85,22 +140,32 @@ class _LoginPageState extends State<LoginPage> {
                                     color: Theme.of(context).accentColor,
                                   ),
                                 ),
-                                validator: (String value) =>
+                                validator: (String? value) =>
                                     (value == null || value.isEmpty)
                                         ? 'Por favor diligencie el campo'
                                         : null,
                               ),
                               SizedBox(height: 20),
-                              new TextField(
+                              TextFormField(
                                 style: TextStyle(
                                     color: Theme.of(context).accentColor),
                                 keyboardType: TextInputType.text,
                                 obscureText: !_showPassword,
+                                initialValue: _loginModel.password,
+                                onSaved: (String? value) {
+                                  setState(() {
+                                    _loginModel.password = value;
+                                  });
+                                },
+                                validator: (String? value) =>
+                                    (value == null || value.isEmpty)
+                                        ? 'Por favor diligencie el campo'
+                                        : null,
                                 decoration: new InputDecoration(
                                   hintText: 'Contraseña',
                                   hintStyle: Theme.of(context)
                                       .textTheme
-                                      .body1
+                                      .bodyText2!
                                       .merge(
                                         TextStyle(
                                             color:
@@ -138,22 +203,25 @@ class _LoginPageState extends State<LoginPage> {
                           )),
 
                       SizedBox(height: 20),
-                      FlatButton(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 12, horizontal: 70),
-                        onPressed: () {
-                          _iniciarSesion(context);
-                        },
-                        child: Text(
-                          'Iniciar Sesión',
-                          style: Theme.of(context).textTheme.title.merge(
-                                TextStyle(
-                                    color: Theme.of(context).primaryColor),
+                      _isLoadingIniciarSesion
+                          ? Center(child: CircularProgressIndicator())
+                          : FlatButton(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 12, horizontal: 70),
+                              onPressed: () {
+                                _iniciarSesion(context);
+                              },
+                              child: Text(
+                                'Iniciar Sesión',
+                                style: Theme.of(context).textTheme.title!.merge(
+                                      TextStyle(
+                                          color:
+                                              Theme.of(context).primaryColor),
+                                    ),
                               ),
-                        ),
-                        color: Theme.of(context).accentColor,
-                        shape: StadiumBorder(),
-                      ),
+                              color: Theme.of(context).accentColor,
+                              shape: StadiumBorder(),
+                            ),
                       SizedBox(height: 8),
                       FlatButton(
                         onPressed: () {},
@@ -181,7 +249,7 @@ class _LoginPageState extends State<LoginPage> {
               },
               child: RichText(
                 text: TextSpan(
-                  style: Theme.of(context).textTheme.title.merge(
+                  style: Theme.of(context).textTheme.headline6!.merge(
                         TextStyle(color: Theme.of(context).primaryColor),
                       ),
                   children: [
@@ -199,8 +267,48 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void _iniciarSesion(BuildContext context) {
-    // 2 number refer the index of Home page
-    Navigator.of(context).pushNamed('/Tabs', arguments: 2);
+  void _redirect() {
+    //TODO: falta recordar usuario
+    print("Recordar usuario");
+  }
+
+  void _iniciarSesion(BuildContext context) async {
+    if (_formKey.currentState!.validate()) {
+      setState(() {
+        _isLoadingIniciarSesion = true;
+      });
+      _formKey.currentState!.save();
+
+      _usuarioProvider.iniciarSesion(_loginModel, context).then((value) async {
+        RespuestaLoginModel? respuesta = value;
+        if (respuesta?.codigo == 10) {
+          await _preferenciasUtil.setPrefStr("token", respuesta!.token!);
+          Map<String, dynamic> claims =
+              JWTUtil.decodificarToken(respuesta.token!);
+          if (claims.isNotEmpty) {
+            JWTUtil.addPreferenciasUsuario(claims).then((value) async {
+              final infoUsuarioBloc = BlocProvider.of<InfoUsuarioBloc>(context);
+              infoUsuarioBloc.add(OnSetearInfoUsuario(new InfoUsuarioModel(
+                  documento: await _preferenciasUtil.getPrefStr("documento"),
+                  tipoDocumento:
+                      await _preferenciasUtil.getPrefStr("tipoDocumento"),
+                  email: await _preferenciasUtil.getPrefStr("email"),
+                  nombres: await _preferenciasUtil.getPrefStr("nombres"),
+                  apellidos: await _preferenciasUtil.getPrefStr("apellidos"),
+                  nombreCompleto:
+                      await _preferenciasUtil.getPrefStr("nombreCompleto"),
+                  numeroTelefono:
+                      await _preferenciasUtil.getPrefStr("telefono"),
+                  rol: await _preferenciasUtil.getPrefStr("roles"))));
+              // 2 number refer the index of Home page
+              Navigator.of(context).pushNamed('/Tabs', arguments: 2);
+            });
+          } else if (respuesta?.codigo == 11) {
+            // TODO: Impelemtar este pedazo de cogido en el login
+            print("Entro aqui");
+          }
+        }
+      }).whenComplete(() => setState(() => _isLoadingIniciarSesion = false));
+    }
   }
 }

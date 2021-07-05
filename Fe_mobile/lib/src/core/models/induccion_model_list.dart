@@ -1,14 +1,14 @@
 class InduccionModelList {
-  String image;
-  String description;
+  String? image;
+  String? description;
 
   InduccionModelList({this.image, this.description});
 }
 
 class OnBoardingList {
-  List<InduccionModelList> _list;
+  List<InduccionModelList>? _list;
 
-  List<InduccionModelList> get list => _list;
+  List<InduccionModelList>? get list => _list;
 
   OnBoardingList() {
     _list = [

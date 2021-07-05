@@ -17,9 +17,9 @@ class DepartamentoModel {
     this.poblacionCors,
   });
 
-  int id;
-  String nombre;
-  List<dynamic> poblacionCors;
+  int? id;
+  String? nombre;
+  List<dynamic>? poblacionCors;
 
   factory DepartamentoModel.fromJson(Map<String, dynamic> json) =>
       DepartamentoModel(
@@ -31,6 +31,6 @@ class DepartamentoModel {
   Map<String, dynamic> toJson() => {
         "id": id,
         "nombre": nombre,
-        "poblacionCors": List<dynamic>.from(poblacionCors.map((x) => x)),
+        "poblacionCors": List<dynamic>.from(poblacionCors!.map((x) => x)),
       };
 }

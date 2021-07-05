@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class BrandIconWidget extends StatefulWidget {
-  Brand brand;
-  String heroTag;
-  double marginLeft;
-  ValueChanged<String> onPressed;
+  Brand? brand;
+  String? heroTag;
+  double? marginLeft;
+  ValueChanged<String>? onPressed;
 
   BrandIconWidget(
-      {Key key, this.brand, this.heroTag, this.marginLeft, this.onPressed})
+      {Key? key, this.brand, this.heroTag, this.marginLeft, this.onPressed})
       : super(key: key);
 
   @override
@@ -22,7 +22,7 @@ class _BrandIconWidgetState extends State<BrandIconWidget>
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 0),
-      margin: EdgeInsets.only(right: widget.marginLeft, top: 10, bottom: 10),
+      margin: EdgeInsets.only(right: widget.marginLeft!, top: 10, bottom: 10),
       child: buildSelectedBrand(context),
     );
   }
@@ -33,7 +33,7 @@ class _BrandIconWidgetState extends State<BrandIconWidget>
       highlightColor: Theme.of(context).accentColor,
       onTap: () {
         setState(() {
-          widget.onPressed(widget.brand.id);
+          widget.onPressed!(widget.brand!.id);
         });
       },
       child: AnimatedContainer(
@@ -41,7 +41,7 @@ class _BrandIconWidgetState extends State<BrandIconWidget>
         curve: Curves.easeInOut,
         padding: EdgeInsets.symmetric(horizontal: 15),
         decoration: BoxDecoration(
-          color: widget.brand.selected
+          color: widget.brand!.selected!
               ? Theme.of(context).primaryColor
               : Colors.transparent,
           borderRadius: BorderRadius.circular(50),
@@ -49,10 +49,10 @@ class _BrandIconWidgetState extends State<BrandIconWidget>
         child: Row(
           children: <Widget>[
             Hero(
-              tag: widget.heroTag + widget.brand.id,
+              tag: widget.heroTag! + widget.brand!.id,
               child: SvgPicture.asset(
-                widget.brand.logo,
-                color: widget.brand.selected
+                widget.brand!.logo,
+                color: widget.brand!.selected!
                     ? Theme.of(context).accentColor
                     : Theme.of(context).primaryColor,
                 width: 50,
@@ -69,10 +69,10 @@ class _BrandIconWidgetState extends State<BrandIconWidget>
                   Icon(
                     Icons.star,
                     color: Colors.amber,
-                    size: widget.brand.selected ? 18 : 0,
+                    size: widget.brand!.selected! ? 18 : 0,
                   ),
                   Text(
-                    widget.brand.selected ? widget.brand.rate.toString() : '',
+                    widget.brand!.selected! ? widget.brand!.rate.toString() : '',
                     style: Theme.of(context).textTheme.body2,
                   )
                 ],

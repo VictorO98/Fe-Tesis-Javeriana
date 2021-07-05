@@ -6,7 +6,7 @@ import 'package:Fe_mobile/src/widgets/FlashSalesCarouselWidget.dart';
 import 'package:flutter/material.dart';
 
 class ProductHomeTabWidget extends StatefulWidget {
-  Product product;
+  Product? product;
   ProductsList _productsList = new ProductsList();
 
   ProductHomeTabWidget({this.product});
@@ -28,7 +28,7 @@ class productHomeTabWidgetState extends State<ProductHomeTabWidget> {
             children: <Widget>[
               Expanded(
                 child: Text(
-                  widget.product.name,
+                  widget.product!.name,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                   style: Theme.of(context).textTheme.display2,
@@ -39,8 +39,8 @@ class productHomeTabWidgetState extends State<ProductHomeTabWidget> {
                 label: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(widget.product.rate.toString(),
-                        style: Theme.of(context).textTheme.body2.merge(
+                    Text(widget.product!.rate.toString(),
+                        style: Theme.of(context).textTheme.body2!.merge(
                             TextStyle(color: Theme.of(context).primaryColor))),
                     Icon(
                       Icons.star_border,
@@ -60,19 +60,19 @@ class productHomeTabWidgetState extends State<ProductHomeTabWidget> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Text(widget.product.getPrice(),
+              Text(widget.product!.getPrice(),
                   style: Theme.of(context).textTheme.display3),
               SizedBox(width: 10),
               Text(
-                widget.product.getPrice(myPrice: widget.product.price + 10.0),
-                style: Theme.of(context).textTheme.headline.merge(TextStyle(
+                widget.product!.getPrice(myPrice: widget.product!.price + 10.0),
+                style: Theme.of(context).textTheme.headline!.merge(TextStyle(
                     color: Theme.of(context).focusColor,
                     decoration: TextDecoration.lineThrough)),
               ),
               SizedBox(width: 10),
               Expanded(
                 child: Text(
-                  '${widget.product.sales.toString()} Sales',
+                  '${widget.product!.sales.toString()} Sales',
                   textAlign: TextAlign.right,
                 ),
               )
@@ -183,7 +183,7 @@ class productHomeTabWidgetState extends State<ProductHomeTabWidget> {
 
 class SelectColorWidget extends StatefulWidget {
   SelectColorWidget({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -198,8 +198,8 @@ class _SelectColorWidgetState extends State<SelectColorWidget> {
     return Wrap(
       spacing: 8,
       runSpacing: 8,
-      children: List.generate(_productColorsList.list.length, (index) {
-        var _color = _productColorsList.list.elementAt(index);
+      children: List.generate(_productColorsList.list!.length, (index) {
+        var _color = _productColorsList.list!.elementAt(index);
         return buildColor(_color);
       }),
     );
@@ -214,7 +214,7 @@ class _SelectColorWidgetState extends State<SelectColorWidget> {
         padding: EdgeInsets.symmetric(horizontal: 7, vertical: 7),
         backgroundColor: color.color,
         selectedColor: color.color,
-        selected: color.selected,
+        selected: color.selected!,
         shape: StadiumBorder(),
         avatar: Text(''),
         onSelected: (bool value) {
@@ -229,7 +229,7 @@ class _SelectColorWidgetState extends State<SelectColorWidget> {
 
 class SelectSizeWidget extends StatefulWidget {
   SelectSizeWidget({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -244,8 +244,8 @@ class _SelectSizeWidgetState extends State<SelectSizeWidget> {
     return Wrap(
       spacing: 8,
       runSpacing: 8,
-      children: List.generate(_productSizesList.list.length, (index) {
-        var _size = _productSizesList.list.elementAt(index);
+      children: List.generate(_productSizesList.list!.length, (index) {
+        var _size = _productSizesList.list!.elementAt(index);
         return buildSize(_size);
       }),
     );
@@ -260,7 +260,7 @@ class _SelectSizeWidgetState extends State<SelectSizeWidget> {
         padding: EdgeInsets.symmetric(horizontal: 7, vertical: 7),
         backgroundColor: Theme.of(context).focusColor.withOpacity(0.05),
         selectedColor: Theme.of(context).focusColor.withOpacity(0.2),
-        selected: size.selected,
+        selected: size.selected!,
         shape: StadiumBorder(
             side: BorderSide(
                 color: Theme.of(context).focusColor.withOpacity(0.05))),

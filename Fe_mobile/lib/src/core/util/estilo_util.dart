@@ -23,11 +23,11 @@ class EstiloUtil {
   static const Color COLOR_3 = Color(0xFFE4F9FF);
 
   static InputDecoration crearInputDecorationFormCustom(String labelText,
-          {String hintText,
-          String helperText,
-          String counterText,
-          IconButton suffixIcon,
-          Icon icon}) =>
+          {String? hintText,
+          String? helperText,
+          String? counterText,
+          IconButton? suffixIcon,
+          Icon? icon}) =>
       InputDecoration(
           labelText: labelText,
           hintText: hintText,

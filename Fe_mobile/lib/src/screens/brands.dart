@@ -25,7 +25,7 @@ class _BrandsWidgetState extends State<BrandsWidget> {
         automaticallyImplyLeading: false,
         leading: new IconButton(
           icon: new Icon(Icons.sort, color: Theme.of(context).hintColor),
-          onPressed: () => _scaffoldKey.currentState.openDrawer(),
+          onPressed: () => _scaffoldKey.currentState!.openDrawer(),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,

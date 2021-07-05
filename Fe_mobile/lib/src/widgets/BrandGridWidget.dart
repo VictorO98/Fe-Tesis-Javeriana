@@ -6,8 +6,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class BrandGridWidget extends StatelessWidget {
   const BrandGridWidget({
-    Key key,
-    @required BrandsList brandsList,
+    Key? key,
+    required BrandsList brandsList,
   })  : _brandsList = brandsList,
         super(key: key);
 
@@ -21,9 +21,9 @@ class BrandGridWidget extends StatelessWidget {
       padding: EdgeInsets.only(top: 15),
       crossAxisCount:
           MediaQuery.of(context).orientation == Orientation.portrait ? 2 : 4,
-      itemCount: _brandsList.list.length,
+      itemCount: _brandsList.list!.length,
       itemBuilder: (BuildContext context, int index) {
-        Brand brand = _brandsList.list.elementAt(index);
+        Brand brand = _brandsList.list!.elementAt(index);
         return InkWell(
           onTap: () {
             Navigator.of(context).pushNamed('/Brand',

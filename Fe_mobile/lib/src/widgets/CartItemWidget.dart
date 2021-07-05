@@ -3,11 +3,11 @@ import 'package:Fe_mobile/src/models/route_argument.dart';
 import 'package:flutter/material.dart';
 
 class CartItemWidget extends StatefulWidget {
-  String heroTag;
-  Product product;
+  String? heroTag;
+  Product? product;
   int quantity;
 
-  CartItemWidget({Key key, this.product, this.heroTag, this.quantity = 1})
+  CartItemWidget({Key? key, this.product, this.heroTag, this.quantity = 1})
       : super(key: key);
 
   @override
@@ -24,7 +24,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
       onTap: () {
         Navigator.of(context).pushNamed('/Product',
             arguments: RouteArgument(
-                id: widget.product.id,
+                id: widget.product!.id,
                 argumentsList: [widget.product, widget.heroTag]));
       },
       child: Container(
@@ -42,14 +42,14 @@ class _CartItemWidgetState extends State<CartItemWidget> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Hero(
-              tag: widget.heroTag + widget.product.id,
+              tag: widget.heroTag! + widget.product!.id,
               child: Container(
                 height: 90,
                 width: 90,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(5)),
                   image: DecorationImage(
-                      image: AssetImage(widget.product.image),
+                      image: AssetImage(widget.product!.image),
                       fit: BoxFit.cover),
                 ),
               ),
@@ -64,13 +64,13 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          widget.product.name,
+                          widget.product!.name,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: Theme.of(context).textTheme.subhead,
                         ),
                         Text(
-                          widget.product.getPrice(),
+                          widget.product!.getPrice(),
                           style: Theme.of(context).textTheme.display1,
                         ),
                       ],

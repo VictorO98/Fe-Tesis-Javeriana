@@ -5,13 +5,13 @@ enum UserState { available, away, busy }
 
 class User {
   String id = UniqueKey().toString();
-  String name;
-  String email;
-  String gender;
-  DateTime dateOfBirth;
-  String avatar;
-  String address;
-  UserState userState;
+  String? name;
+  String? email;
+  String? gender;
+  DateTime? dateOfBirth;
+  String? avatar;
+  String? address;
+  UserState? userState;
 
   User.init();
 
@@ -32,6 +32,6 @@ class User {
   }
 
   getDateOfBirth() {
-    return DateFormat('yyyy-MM-dd').format(this.dateOfBirth);
+    return DateFormat('yyyy-MM-dd').format(this.dateOfBirth!);
   }
 }

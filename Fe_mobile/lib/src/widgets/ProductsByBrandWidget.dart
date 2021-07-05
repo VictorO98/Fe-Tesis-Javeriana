@@ -8,9 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class ProductsByBrandWidget extends StatefulWidget {
-  Brand brand;
+  Brand? brand;
 
-  ProductsByBrandWidget({Key key, this.brand}) : super(key: key);
+  ProductsByBrandWidget({Key? key, this.brand}) : super(key: key);
 
   @override
   _ProductsByBrandWidgetState createState() => _ProductsByBrandWidgetState();
@@ -36,7 +36,7 @@ class _ProductsByBrandWidgetState extends State<ProductsByBrandWidget> {
               color: Theme.of(context).hintColor,
             ),
             title: Text(
-              '${widget.brand.name} Products',
+              '${widget.brand!.name} Products',
               overflow: TextOverflow.fade,
               softWrap: false,
               style: Theme.of(context).textTheme.display1,
@@ -80,7 +80,7 @@ class _ProductsByBrandWidgetState extends State<ProductsByBrandWidget> {
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
             primary: false,
-            itemCount: widget.brand.products.length,
+            itemCount: widget.brand!.products.length,
             separatorBuilder: (context, index) {
               return SizedBox(height: 10);
             },
@@ -88,10 +88,10 @@ class _ProductsByBrandWidgetState extends State<ProductsByBrandWidget> {
               // TODO replace with products list item
               return FavoriteListItemWidget(
                 heroTag: 'products_by_category_list',
-                product: widget.brand.products.elementAt(index),
+                product: widget.brand!.products.elementAt(index),
                 onDismissed: () {
                   setState(() {
-                    widget.brand.products.removeAt(index);
+                    widget.brand!.products.removeAt(index);
                   });
                 },
               );
@@ -106,9 +106,9 @@ class _ProductsByBrandWidgetState extends State<ProductsByBrandWidget> {
               primary: false,
               shrinkWrap: true,
               crossAxisCount: 4,
-              itemCount: widget.brand.products.length,
+              itemCount: widget.brand!.products.length,
               itemBuilder: (BuildContext context, int index) {
-                Product product = widget.brand.products.elementAt(index);
+                Product product = widget.brand!.products.elementAt(index);
                 return ProductGridItemWidget(
                   product: product,
                   heroTag: 'products_by_category_grid',

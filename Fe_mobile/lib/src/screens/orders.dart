@@ -5,8 +5,8 @@ import 'package:Fe_mobile/src/widgets/ShoppingCartButtonWidget.dart';
 import 'package:flutter/material.dart';
 
 class OrdersWidget extends StatefulWidget {
-  int currentTab;
-  OrdersWidget({Key key, this.currentTab}) : super(key: key);
+  int? currentTab;
+  OrdersWidget({Key? key, this.currentTab}) : super(key: key);
   @override
   _OrdersWidgetState createState() => _OrdersWidgetState();
 }
@@ -32,7 +32,7 @@ class _OrdersWidgetState extends State<OrdersWidget> {
             // ),
             leading: new IconButton(
               icon: new Icon(Icons.sort, color: Theme.of(context).hintColor),
-              onPressed: () => _scaffoldKey.currentState.openDrawer(),
+              onPressed: () => _scaffoldKey.currentState!.openDrawer(),
             ),
             backgroundColor: Colors.transparent,
             elevation: 0,
@@ -138,20 +138,20 @@ class _OrdersWidgetState extends State<OrdersWidget> {
           body: TabBarView(children: [
             OrdersProductsWidget(ordersList: _orderList.list),
             OrdersProductsWidget(
-                ordersList: _orderList.list
+                ordersList: _orderList.list!
                     .where((order) => order.orderState == OrderState.unpaid)
                     .toList()),
             OrdersProductsWidget(
-                ordersList: _orderList.list
+                ordersList: _orderList.list!
                     .where((order) => order.orderState == OrderState.shipped)
                     .toList()),
             OrdersProductsWidget(
-                ordersList: _orderList.list
+                ordersList: _orderList.list!
                     .where(
                         (order) => order.orderState == OrderState.toBeShipped)
                     .toList()),
             OrdersProductsWidget(
-                ordersList: _orderList.list
+                ordersList: _orderList.list!
                     .where((order) => order.orderState == OrderState.inDispute)
                     .toList()),
           ]),

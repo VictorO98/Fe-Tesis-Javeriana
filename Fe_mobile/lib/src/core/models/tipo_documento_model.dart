@@ -18,10 +18,10 @@ class TipoDocumentoCorModel {
     this.demografiaCors,
   });
 
-  int id;
-  String nombre;
-  DateTime creacion;
-  List<dynamic> demografiaCors;
+  int? id;
+  String? nombre;
+  DateTime? creacion;
+  List<dynamic>? demografiaCors;
 
   factory TipoDocumentoCorModel.fromJson(Map<String, dynamic> json) =>
       TipoDocumentoCorModel(
@@ -35,7 +35,7 @@ class TipoDocumentoCorModel {
   Map<String, dynamic> toJson() => {
         "id": id,
         "nombre": nombre,
-        "creacion": creacion.toIso8601String(),
-        "demografiaCors": List<dynamic>.from(demografiaCors.map((x) => x)),
+        "creacion": creacion!.toIso8601String(),
+        "demografiaCors": List<dynamic>.from(demografiaCors!.map((x) => x)),
       };
 }

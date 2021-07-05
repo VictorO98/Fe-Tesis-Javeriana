@@ -9,7 +9,7 @@ class CartWidget extends StatefulWidget {
 }
 
 class _CartWidgetState extends State<CartWidget> {
-  ProductsList _productsList;
+  late ProductsList _productsList;
   @override
   void initState() {
     _productsList = new ProductsList();
@@ -89,13 +89,13 @@ class _CartWidgetState extends State<CartWidget> {
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     primary: false,
-                    itemCount: _productsList.cartList.length,
+                    itemCount: _productsList.cartList!.length,
                     separatorBuilder: (context, index) {
                       return SizedBox(height: 15);
                     },
                     itemBuilder: (context, index) {
                       return CartItemWidget(
-                          product: _productsList.cartList.elementAt(index),
+                          product: _productsList.cartList!.elementAt(index),
                           heroTag: 'cart');
                     },
                   ),
@@ -176,7 +176,7 @@ class _CartWidgetState extends State<CartWidget> {
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: Text(
                             '\$55.36',
-                            style: Theme.of(context).textTheme.display1.merge(
+                            style: Theme.of(context).textTheme.display1!.merge(
                                 TextStyle(
                                     color: Theme.of(context).primaryColor)),
                           ),

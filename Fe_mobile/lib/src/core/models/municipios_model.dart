@@ -20,12 +20,12 @@ class MunicipiosModel {
     this.demografiaCors,
   });
 
-  int id;
-  String nombre;
-  int idestadopoblacion;
-  String estado;
+  int? id;
+  String? nombre;
+  int? idestadopoblacion;
+  String? estado;
   dynamic idestadopoblacionNavigation;
-  List<dynamic> demografiaCors;
+  List<dynamic>? demografiaCors;
 
   factory MunicipiosModel.fromJson(Map<String, dynamic> json) =>
       MunicipiosModel(
@@ -44,6 +44,6 @@ class MunicipiosModel {
         "idestadopoblacion": idestadopoblacion,
         "estado": estado,
         "idestadopoblacionNavigation": idestadopoblacionNavigation,
-        "demografiaCors": List<dynamic>.from(demografiaCors.map((x) => x)),
+        "demografiaCors": List<dynamic>.from(demografiaCors!.map((x) => x)),
       };
 }

@@ -4,7 +4,7 @@ import 'package:Fe_mobile/src/widgets/FlashSalesCarouselWidget.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetailsTabWidget extends StatefulWidget {
-  Product product;
+  Product? product;
   ProductsList _productsList = new ProductsList();
 
   ProductDetailsTabWidget({this.product});
@@ -64,7 +64,7 @@ class ProductDetailsTabWidgetState extends State<ProductDetailsTabWidget> {
 
 class SelectColorWidget extends StatefulWidget {
   SelectColorWidget({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -117,7 +117,7 @@ class _SelectColorWidgetState extends State<SelectColorWidget> {
 
 class SelectSizeWidget extends StatefulWidget {
   SelectSizeWidget({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

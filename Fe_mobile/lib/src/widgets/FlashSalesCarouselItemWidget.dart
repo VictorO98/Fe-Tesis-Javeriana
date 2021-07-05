@@ -4,12 +4,12 @@ import 'package:Fe_mobile/src/widgets/AvailableProgressBarWidget.dart';
 import 'package:flutter/material.dart';
 
 class FlashSalesCarouselItemWidget extends StatelessWidget {
-  String heroTag;
-  double marginLeft;
-  Product product;
+  String? heroTag;
+  double? marginLeft;
+  Product? product;
 
   FlashSalesCarouselItemWidget({
-    Key key,
+    Key? key,
     this.heroTag,
     this.marginLeft,
     this.product,
@@ -21,15 +21,15 @@ class FlashSalesCarouselItemWidget extends StatelessWidget {
       onTap: () {
         Navigator.of(context).pushNamed('/Product',
             arguments: new RouteArgument(
-                id: product.id, argumentsList: [product, heroTag]));
+                id: product!.id, argumentsList: [product, heroTag]));
       },
       child: Container(
-        margin: EdgeInsets.only(left: this.marginLeft, right: 20),
+        margin: EdgeInsets.only(left: this.marginLeft!, right: 20),
         child: Stack(
           alignment: AlignmentDirectional.topCenter,
           children: <Widget>[
             Hero(
-              tag: heroTag + product.id,
+              tag: heroTag! + product!.id,
               child: Container(
                 width: 160,
                 height: 200,
@@ -37,7 +37,7 @@ class FlashSalesCarouselItemWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(6),
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: AssetImage(product.image),
+                    image: AssetImage(product!.image),
                   ),
                 ),
               ),
@@ -52,10 +52,10 @@ class FlashSalesCarouselItemWidget extends StatelessWidget {
                     color: Theme.of(context).accentColor),
                 alignment: AlignmentDirectional.topEnd,
                 child: Text(
-                  '${product.discount} %',
+                  '${product!.discount} %',
                   style: Theme.of(context)
                       .textTheme
-                      .body2
+                      .body2!
                       .merge(TextStyle(color: Theme.of(context).primaryColor)),
                 ),
               ),
@@ -78,7 +78,7 @@ class FlashSalesCarouselItemWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    product.name,
+                    product!.name,
                     style: Theme.of(context).textTheme.body2,
                     maxLines: 1,
                     softWrap: false,
@@ -89,7 +89,7 @@ class FlashSalesCarouselItemWidget extends StatelessWidget {
                       // The title of the product
                       Expanded(
                         child: Text(
-                          '${product.sales} Sales',
+                          '${product!.sales} Sales',
                           style: Theme.of(context).textTheme.body1,
                           overflow: TextOverflow.fade,
                           softWrap: false,
@@ -101,7 +101,7 @@ class FlashSalesCarouselItemWidget extends StatelessWidget {
                         size: 18,
                       ),
                       Text(
-                        product.rate.toString(),
+                        product!.rate.toString(),
                         style: Theme.of(context).textTheme.body2,
                       )
                     ],
@@ -109,12 +109,12 @@ class FlashSalesCarouselItemWidget extends StatelessWidget {
                   ),
                   SizedBox(height: 7),
                   Text(
-                    '${product.available} Available',
+                    '${product!.available} Available',
                     style: Theme.of(context).textTheme.body1,
                     overflow: TextOverflow.ellipsis,
                   ),
                   AvailableProgressBarWidget(
-                      available: product.available.toDouble())
+                      available: product!.available.toDouble())
                 ],
               ),
             )

@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 
 class AlertUtil {
   static success(BuildContext context, String message,
-      {Function() respuesta, String title = "Exitoso!!!"}) {
+      {Function()? respuesta, String title = "Exitoso!!!"}) {
     CoolAlert.show(
         context: context,
         type: CoolAlertType.success,
@@ -13,12 +13,12 @@ class AlertUtil {
         onConfirmBtnTap: respuesta);
   }
 
-  static error(BuildContext context, String message, {Function() respuesta}) {
+  static error(BuildContext context, String? message, {Function()? respuesta}) {
     CoolAlert.show(context: context, type: CoolAlertType.error, text: message);
   }
 
   static confirm(BuildContext context, String message, Function() respuesta,
-      {String confirmBtnText, String title = "CONFIRMAR"}) {
+      {required String confirmBtnText, String title = "CONFIRMAR"}) {
     CoolAlert.show(
         context: context,
         type: CoolAlertType.confirm,
@@ -29,7 +29,7 @@ class AlertUtil {
         onConfirmBtnTap: respuesta);
   }
 
-  static info(BuildContext context, String message, {Function() respuesta}) {
+  static info(BuildContext context, String message, {Function()? respuesta}) {
     CoolAlert.show(
         context: context,
         type: CoolAlertType.info,

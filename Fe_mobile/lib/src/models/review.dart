@@ -20,9 +20,9 @@ class Review {
 }
 
 class ReviewsList {
-  List<Review> _reviewsList;
+  List<Review>? _reviewsList;
 
-  List<Review> get reviewsList => _reviewsList;
+  List<Review>? get reviewsList => _reviewsList;
 
   ReviewsList() {
     this._reviewsList = [

@@ -13,7 +13,7 @@ class LanguagesWidget extends StatefulWidget {
 
 class _LanguagesWidgetState extends State<LanguagesWidget> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  LanguagesList languagesList;
+  late LanguagesList languagesList;
   @override
   void initState() {
     languagesList = new LanguagesList();
@@ -92,13 +92,13 @@ class _LanguagesWidgetState extends State<LanguagesWidget> {
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 primary: false,
-                itemCount: languagesList.languages.length,
+                itemCount: languagesList.languages!.length,
                 separatorBuilder: (context, index) {
                   return SizedBox(height: 10);
                 },
                 itemBuilder: (context, index) {
                   return LanguageItemWidget(
-                      language: languagesList.languages.elementAt(index));
+                      language: languagesList.languages!.elementAt(index));
                 },
               ),
             ],

@@ -4,12 +4,12 @@ import 'package:Fe_mobile/src/widgets/BrandIconWidget.dart';
 import 'package:flutter/material.dart';
 
 class BrandsIconsCarouselWidget extends StatefulWidget {
-  BrandsList brandsList;
-  String heroTag;
-  ValueChanged<String> onChanged;
+  BrandsList? brandsList;
+  String? heroTag;
+  ValueChanged<String>? onChanged;
 
   BrandsIconsCarouselWidget(
-      {Key key, this.brandsList, this.heroTag, this.onChanged})
+      {Key? key, this.brandsList, this.heroTag, this.onChanged})
       : super(key: key);
 
   @override
@@ -37,18 +37,18 @@ class _BrandsIconsCarouselWidgetState extends State<BrandsIconsCarouselWidget> {
                 ),
                 child: ListView.builder(
                   shrinkWrap: true,
-                  itemCount: widget.brandsList.list.length,
+                  itemCount: widget.brandsList!.list!.length,
                   itemBuilder: (context, index) {
                     double _marginLeft = 0;
                     (index == 0) ? _marginLeft = 12 : _marginLeft = 0;
                     return BrandIconWidget(
                         heroTag: widget.heroTag,
                         marginLeft: _marginLeft,
-                        brand: widget.brandsList.list.elementAt(index),
+                        brand: widget.brandsList!.list!.elementAt(index),
                         onPressed: (String id) {
                           setState(() {
-                            widget.brandsList.selectById(id);
-                            widget.onChanged(id);
+                            widget.brandsList!.selectById(id);
+                            widget.onChanged!(id);
                           });
                         });
                   },

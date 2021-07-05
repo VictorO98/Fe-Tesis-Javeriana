@@ -27,7 +27,7 @@ class _HelpWidgetState extends State<HelpWidget> {
 //        ),
           leading: new IconButton(
             icon: new Icon(Icons.sort, color: Theme.of(context).primaryColor),
-            onPressed: () => _scaffoldKey.currentState.openDrawer(),
+            onPressed: () => _scaffoldKey.currentState!.openDrawer(),
           ),
           backgroundColor: Theme.of(context).accentColor,
           elevation: 0,
@@ -45,7 +45,7 @@ class _HelpWidgetState extends State<HelpWidget> {
             'Help & Support',
             style: Theme.of(context)
                 .textTheme
-                .display1
+                .display1!
                 .merge(TextStyle(color: Theme.of(context).primaryColor)),
           ),
           actions: <Widget>[

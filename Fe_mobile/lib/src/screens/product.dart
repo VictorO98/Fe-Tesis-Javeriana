@@ -9,13 +9,13 @@ import 'package:Fe_mobile/src/widgets/ShoppingCartButtonWidget.dart';
 import 'package:flutter/material.dart';
 
 class ProductWidget extends StatefulWidget {
-  RouteArgument routeArgument;
-  Product _product;
-  String _heroTag;
+  RouteArgument? routeArgument;
+  Product? _product;
+  String? _heroTag;
 
-  ProductWidget({Key key, this.routeArgument}) {
-    _product = this.routeArgument.argumentsList[0] as Product;
-    _heroTag = this.routeArgument.argumentsList[1] as String;
+  ProductWidget({Key? key, this.routeArgument}) {
+    _product = this.routeArgument!.argumentsList![0] as Product?;
+    _heroTag = this.routeArgument!.argumentsList![1] as String?;
   }
 
   @override
@@ -24,7 +24,7 @@ class ProductWidget extends StatefulWidget {
 
 class _ProductWidgetState extends State<ProductWidget>
     with SingleTickerProviderStateMixin {
-  TabController _tabController;
+  TabController? _tabController;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   int _tabIndex = 0;
 
@@ -32,19 +32,19 @@ class _ProductWidgetState extends State<ProductWidget>
   void initState() {
     _tabController =
         TabController(length: 3, initialIndex: _tabIndex, vsync: this);
-    _tabController.addListener(_handleTabSelection);
+    _tabController!.addListener(_handleTabSelection);
     super.initState();
   }
 
   void dispose() {
-    _tabController.dispose();
+    _tabController!.dispose();
     super.dispose();
   }
 
   _handleTabSelection() {
-    if (_tabController.indexIsChanging) {
+    if (_tabController!.indexIsChanging) {
       setState(() {
-        _tabIndex = _tabController.index;
+        _tabIndex = _tabController!.index;
       });
     }
   }
@@ -117,7 +117,7 @@ class _ProductWidgetState extends State<ProductWidget>
                       color: Theme.of(context).primaryColor,
                     ),
                     Text('2',
-                        style: Theme.of(context).textTheme.subhead.merge(
+                        style: Theme.of(context).textTheme.subhead!.merge(
                             TextStyle(color: Theme.of(context).primaryColor))),
                     IconButton(
                       onPressed: () {
@@ -173,7 +173,7 @@ class _ProductWidgetState extends State<ProductWidget>
           flexibleSpace: FlexibleSpaceBar(
             collapseMode: CollapseMode.parallax,
             background: Hero(
-              tag: widget._heroTag + widget.routeArgument.id,
+              tag: widget._heroTag! + widget.routeArgument!.id,
               child: Stack(
                 fit: StackFit.expand,
                 children: <Widget>[
@@ -183,7 +183,7 @@ class _ProductWidgetState extends State<ProductWidget>
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: AssetImage(widget._product.image),
+                        image: AssetImage(widget._product!.image),
                       ),
                     ),
                   ),

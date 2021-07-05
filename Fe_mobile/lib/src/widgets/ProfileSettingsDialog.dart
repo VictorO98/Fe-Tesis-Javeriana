@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' show DateFormat;
 
 class ProfileSettingsDialog extends StatefulWidget {
-  User user;
-  VoidCallback onChanged;
+  User? user;
+  VoidCallback? onChanged;
 
-  ProfileSettingsDialog({Key key, this.user, this.onChanged}) : super(key: key);
+  ProfileSettingsDialog({Key? key, this.user, this.onChanged}) : super(key: key);
 
   @override
   _ProfileSettingsDialogState createState() => _ProfileSettingsDialogState();
@@ -48,11 +48,11 @@ class _ProfileSettingsDialogState extends State<ProfileSettingsDialog> {
                           keyboardType: TextInputType.text,
                           decoration: getInputDecoration(
                               hintText: 'John Doe', labelText: 'Full Name'),
-                          initialValue: widget.user.name,
-                          validator: (input) => input.trim().length < 3
+                          initialValue: widget.user!.name,
+                          validator: (input) => input!.trim().length < 3
                               ? 'Not a valid full name'
                               : null,
-                          onSaved: (input) => widget.user.name = input,
+                          onSaved: (input) => widget.user!.name = input,
                         ),
                         new TextFormField(
                           style: TextStyle(color: Theme.of(context).hintColor),
@@ -60,10 +60,10 @@ class _ProfileSettingsDialogState extends State<ProfileSettingsDialog> {
                           decoration: getInputDecoration(
                               hintText: 'johndo@gmail.com',
                               labelText: 'Email Address'),
-                          initialValue: widget.user.email,
+                          initialValue: widget.user!.email,
                           validator: (input) =>
-                              !input.contains('@') ? 'Not a valid email' : null,
-                          onSaved: (input) => widget.user.email = input,
+                              !input!.contains('@') ? 'Not a valid email' : null,
+                          onSaved: (input) => widget.user!.email = input,
                         ),
                         FormField<String>(
                           builder: (FormFieldState<String> state) {
@@ -71,14 +71,14 @@ class _ProfileSettingsDialogState extends State<ProfileSettingsDialog> {
                               decoration: getInputDecoration(
                                   hintText: 'Female', labelText: 'Gender'),
                               hint: Text("Select Device"),
-                              value: widget.user.gender,
+                              value: widget.user!.gender,
                               onChanged: (input) {
                                 setState(() {
-                                  widget.user.gender = input;
-                                  widget.onChanged();
+                                  widget.user!.gender = input;
+                                  widget.onChanged!();
                                 });
                               },
-                              onSaved: (input) => widget.user.gender = input,
+                              onSaved: (input) => widget.user!.gender = input,
                               items: [
                                 new DropdownMenuItem(
                                     value: 'Male', child: Text('Male')),
@@ -95,7 +95,7 @@ class _ProfileSettingsDialogState extends State<ProfileSettingsDialog> {
                                   hintText: '1996-12-31',
                                   labelText: 'Birth Date'),
                               format: new DateFormat('yyyy-MM-dd'),
-                              initialValue: widget.user.dateOfBirth,
+                              initialValue: widget.user!.dateOfBirth,
                               onShowPicker: (context, currentValue) {
                                 return showDatePicker(
                                     context: context,
@@ -104,8 +104,8 @@ class _ProfileSettingsDialogState extends State<ProfileSettingsDialog> {
                                     lastDate: DateTime(2100));
                               },
                               onSaved: (input) => setState(() {
-                                widget.user.dateOfBirth = input;
-                                widget.onChanged();
+                                widget.user!.dateOfBirth = input;
+                                widget.onChanged!();
                               }),
                             );
                           },
@@ -145,11 +145,11 @@ class _ProfileSettingsDialogState extends State<ProfileSettingsDialog> {
     );
   }
 
-  InputDecoration getInputDecoration({String hintText, String labelText}) {
+  InputDecoration getInputDecoration({String? hintText, String? labelText}) {
     return new InputDecoration(
       hintText: hintText,
       labelText: labelText,
-      hintStyle: Theme.of(context).textTheme.body1.merge(
+      hintStyle: Theme.of(context).textTheme.body1!.merge(
             TextStyle(color: Theme.of(context).focusColor),
           ),
       enabledBorder: UnderlineInputBorder(
@@ -158,15 +158,15 @@ class _ProfileSettingsDialogState extends State<ProfileSettingsDialog> {
       focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: Theme.of(context).hintColor)),
       hasFloatingPlaceholder: true,
-      labelStyle: Theme.of(context).textTheme.body1.merge(
+      labelStyle: Theme.of(context).textTheme.body1!.merge(
             TextStyle(color: Theme.of(context).hintColor),
           ),
     );
   }
 
   void _submit() {
-    if (_profileSettingsFormKey.currentState.validate()) {
-      _profileSettingsFormKey.currentState.save();
+    if (_profileSettingsFormKey.currentState!.validate()) {
+      _profileSettingsFormKey.currentState!.save();
       Navigator.pop(context);
     }
   }

@@ -10,11 +10,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class BrandWidget extends StatefulWidget {
-  RouteArgument routeArgument;
-  Brand _brand;
+  RouteArgument? routeArgument;
+  Brand? _brand;
 
-  BrandWidget({Key key, this.routeArgument}) {
-    _brand = this.routeArgument.argumentsList[0] as Brand;
+  BrandWidget({Key? key, this.routeArgument}) {
+    _brand = this.routeArgument!.argumentsList![0] as Brand?;
   }
 
   @override
@@ -23,7 +23,7 @@ class BrandWidget extends StatefulWidget {
 
 class _BrandWidgetState extends State<BrandWidget>
     with SingleTickerProviderStateMixin {
-  TabController _tabController;
+  TabController? _tabController;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   int _tabIndex = 0;
 
@@ -31,19 +31,19 @@ class _BrandWidgetState extends State<BrandWidget>
   void initState() {
     _tabController =
         TabController(length: 3, initialIndex: _tabIndex, vsync: this);
-    _tabController.addListener(_handleTabSelection);
+    _tabController!.addListener(_handleTabSelection);
     super.initState();
   }
 
   void dispose() {
-    _tabController.dispose();
+    _tabController!.dispose();
     super.dispose();
   }
 
   _handleTabSelection() {
-    if (_tabController.indexIsChanging) {
+    if (_tabController!.indexIsChanging) {
       setState(() {
-        _tabIndex = _tabController.index;
+        _tabIndex = _tabController!.index;
       });
     }
   }
@@ -81,7 +81,7 @@ class _BrandWidgetState extends State<BrandWidget>
                   ),
                 )),
           ],
-          backgroundColor: widget._brand.color,
+          backgroundColor: widget._brand!.color,
           expandedHeight: 250,
           elevation: 0,
           flexibleSpace: FlexibleSpaceBar(
@@ -96,14 +96,14 @@ class _BrandWidgetState extends State<BrandWidget>
                           begin: Alignment.bottomLeft,
                           end: Alignment.topRight,
                           colors: [
-                        widget._brand.color,
+                        widget._brand!.color,
                         Theme.of(context).primaryColor.withOpacity(0.5),
                       ])),
                   child: Center(
                     child: Hero(
-                      tag: widget._brand.id,
+                      tag: widget._brand!.id,
                       child: SvgPicture.asset(
-                        widget._brand.logo,
+                        widget._brand!.logo,
                         color: Theme.of(context).primaryColor,
                         width: 130,
                       ),

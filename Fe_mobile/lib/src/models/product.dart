@@ -4,7 +4,7 @@ class Product {
   String id = UniqueKey().toString();
   String name;
   String image;
-  String description;
+  String? description;
   double price;
   int available;
   int quantity;
@@ -15,7 +15,7 @@ class Product {
   Product(this.name, this.image, this.available, this.price, this.quantity,
       this.sales, this.rate, this.discount);
 
-  String getPrice({double myPrice}) {
+  String getPrice({double? myPrice}) {
     if (myPrice != null) {
       return '\$${myPrice.toStringAsFixed(2)}';
     }
@@ -24,22 +24,22 @@ class Product {
 }
 
 class ProductsList {
-  List<Product> _flashSalesList;
-  List<Product> _list;
-  List<Product> _categorized;
-  List<Product> _favoritesList;
-  List<Product> _cartList;
+  List<Product>? _flashSalesList;
+  List<Product>? _list;
+  List<Product>? _categorized;
+  List<Product>? _favoritesList;
+  List<Product>? _cartList;
 
-  set categorized(List<Product> value) {
+  set categorized(List<Product>? value) {
     _categorized = value;
   }
 
-  List<Product> get categorized => _categorized;
+  List<Product>? get categorized => _categorized;
 
-  List<Product> get list => _list;
-  List<Product> get flashSalesList => _flashSalesList;
-  List<Product> get favoritesList => _favoritesList;
-  List<Product> get cartList => _cartList;
+  List<Product>? get list => _list;
+  List<Product>? get flashSalesList => _flashSalesList;
+  List<Product>? get favoritesList => _favoritesList;
+  List<Product>? get cartList => _cartList;
 
   ProductsList() {
     _flashSalesList = [

@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace FEWebApplication.Authentication
 {
+    /// <summary>
+    /// Servicios para iniciar sesión y registrarse
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class AuthenticateController : ControllerBase
@@ -32,6 +35,9 @@ namespace FEWebApplication.Authentication
             _roleManager = roleManager;
         }
 
+        /// <summary>
+        /// Crea los roles en identity Role !NO EJECUTAR!
+        /// </summary>
         [HttpGet]
         [Route("CreateRole")]
         public async Task CreateRole()
@@ -66,6 +72,10 @@ namespace FEWebApplication.Authentication
             
         }
 
+        /// <summary>
+        /// Retorna todos los roles de la base de datos.
+        /// </summary>
+        /// <returns>Una lista en formato JSON con todos los roles disponibles en la app.</returns>
         [HttpGet]
         [Route("GetRoles")]       
         public List<RolCor> GetRoles()
@@ -73,6 +83,10 @@ namespace FEWebApplication.Authentication
             return _seguridadBiz.GetRoles();
         }
 
+        /// <summary>
+        /// Método para loguearse en la aplicación
+        /// </summary>
+        /// <returns>Retorna un JWT o un accesso denegado.</returns>
         [HttpPost]
         [Route("Login")]
         public async Task<RespuestaLogin> Login([FromBody] LoginDatos model)
@@ -80,6 +94,9 @@ namespace FEWebApplication.Authentication
             return await _seguridadBiz.Login(model);
         }
 
+        /// <summary>
+        /// Método para registrarse en la aplicación
+        /// </summary>
         //TODO: Implementar el envio de correos para los usuarios que se registran.
         [HttpPost]
         [Route("Register")]

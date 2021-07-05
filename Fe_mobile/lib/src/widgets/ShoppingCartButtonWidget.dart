@@ -8,11 +8,11 @@ class ShoppingCartButtonWidget extends StatelessWidget {
     this.iconColor,
     this.labelColor,
     this.labelCount = 0,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
-  final Color iconColor;
-  final Color labelColor;
+  final Color? iconColor;
+  final Color? labelColor;
   final int labelCount;
 
   @override
@@ -36,7 +36,7 @@ class ShoppingCartButtonWidget extends StatelessWidget {
             child: Text(
               this.labelCount.toString(),
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.caption.merge(
+              style: Theme.of(context).textTheme.caption!.merge(
                     TextStyle(
                         color: Theme.of(context).primaryColor, fontSize: 9),
                   ),

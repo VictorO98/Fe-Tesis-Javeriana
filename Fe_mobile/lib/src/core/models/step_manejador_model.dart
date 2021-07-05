@@ -19,9 +19,9 @@ class StepManejadorModel {
     this.stepEstado,
   });
 
-  String formulario;
-  int numeroStep;
-  StepState stepEstado;
+  String? formulario;
+  int? numeroStep;
+  StepState? stepEstado;
 
   factory StepManejadorModel.fromJson(Map<String, dynamic> json) =>
       StepManejadorModel(

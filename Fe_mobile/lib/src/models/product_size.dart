@@ -4,15 +4,15 @@ class ProductSize {
   String id = UniqueKey().toString();
   String code;
   String name;
-  bool selected;
+  bool? selected;
 
   ProductSize(this.code, this.name, this.selected);
 }
 
 class ProductSizesList {
-  List<ProductSize> _list;
+  List<ProductSize>? _list;
 
-  List<ProductSize> get list => _list;
+  List<ProductSize>? get list => _list;
 
   ProductSizesList() {
     _list = [
@@ -25,7 +25,7 @@ class ProductSizesList {
     ];
   }
   void clearSelection() {
-    _list.forEach((size) {
+    _list!.forEach((size) {
       size.selected = false;
     });
   }

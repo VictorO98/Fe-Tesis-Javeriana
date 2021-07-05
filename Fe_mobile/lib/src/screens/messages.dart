@@ -10,7 +10,7 @@ class MessagesWidget extends StatefulWidget {
 }
 
 class _MessagesWidgetState extends State<MessagesWidget> {
-  model.ConversationsList _conversationList;
+  late model.ConversationsList _conversationList;
   @override
   void initState() {
     this._conversationList = new model.ConversationsList();
@@ -29,21 +29,21 @@ class _MessagesWidgetState extends State<MessagesWidget> {
             child: SearchBarWidget(),
           ),
           Offstage(
-            offstage: _conversationList.conversations.isEmpty,
+            offstage: _conversationList.conversations!.isEmpty,
             child: ListView.separated(
               padding: EdgeInsets.symmetric(vertical: 15),
               shrinkWrap: true,
               primary: false,
-              itemCount: _conversationList.conversations.length,
+              itemCount: _conversationList.conversations!.length,
               separatorBuilder: (context, index) {
                 return SizedBox(height: 7);
               },
               itemBuilder: (context, index) {
                 return MessageItemWidget(
-                  message: _conversationList.conversations.elementAt(index),
+                  message: _conversationList.conversations!.elementAt(index),
                   onDismissed: (conversation) {
                     setState(() {
-                      _conversationList.conversations.removeAt(index);
+                      _conversationList.conversations!.removeAt(index);
                     });
                   },
                 );
@@ -51,7 +51,7 @@ class _MessagesWidgetState extends State<MessagesWidget> {
             ),
           ),
           Offstage(
-            offstage: _conversationList.conversations.isNotEmpty,
+            offstage: _conversationList.conversations!.isNotEmpty,
             child: EmptyMessagesWidget(),
           )
         ],

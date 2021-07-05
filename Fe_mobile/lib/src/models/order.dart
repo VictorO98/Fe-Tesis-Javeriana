@@ -45,9 +45,9 @@ class Order {
 }
 
 class OrderList {
-  List<Order> _list;
+  List<Order>? _list;
 
-  List<Order> get list => _list;
+  List<Order>? get list => _list;
 
   OrderList() {
     this._list = [

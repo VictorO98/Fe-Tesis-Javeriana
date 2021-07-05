@@ -30,7 +30,7 @@ class _HomeSliderWidgetState extends State<HomeSliderWidget> {
             //   });
             // },
           ),
-          items: _sliderList.list.map((prefix0.Slider slide) {
+          items: _sliderList.list!.map((prefix0.Slider slide) {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
@@ -39,7 +39,7 @@ class _HomeSliderWidgetState extends State<HomeSliderWidget> {
                   height: 200,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage(slide.image), fit: BoxFit.cover),
+                        image: AssetImage(slide.image!), fit: BoxFit.cover),
                     borderRadius: BorderRadius.circular(6),
                     boxShadow: [
                       BoxShadow(
@@ -60,10 +60,10 @@ class _HomeSliderWidgetState extends State<HomeSliderWidget> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           Text(
-                            slide.description,
+                            slide.description!,
                             style: Theme.of(context)
                                 .textTheme
-                                .title
+                                .title!
                                 .merge(TextStyle(height: 0.8)),
                             textAlign: TextAlign.right,
                             overflow: TextOverflow.fade,
@@ -77,7 +77,7 @@ class _HomeSliderWidgetState extends State<HomeSliderWidget> {
                             color: Theme.of(context).accentColor,
                             shape: StadiumBorder(),
                             child: Text(
-                              slide.button,
+                              slide.button!,
                               textAlign: TextAlign.start,
                               style: TextStyle(
                                   color: Theme.of(context).primaryColor),
@@ -98,7 +98,7 @@ class _HomeSliderWidgetState extends State<HomeSliderWidget> {
 //          width: config.App(context).appWidth(100),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: _sliderList.list.map((prefix0.Slider slide) {
+            children: _sliderList.list!.map((prefix0.Slider slide) {
               return Container(
                 width: 20.0,
                 height: 3.0,
@@ -107,7 +107,7 @@ class _HomeSliderWidgetState extends State<HomeSliderWidget> {
                     borderRadius: BorderRadius.all(
                       Radius.circular(8),
                     ),
-                    color: _current == _sliderList.list.indexOf(slide)
+                    color: _current == _sliderList.list!.indexOf(slide)
                         ? Theme.of(context).hintColor
                         : Theme.of(context).hintColor.withOpacity(0.3)),
               );

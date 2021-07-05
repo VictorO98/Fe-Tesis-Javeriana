@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class OrderListItemWidget extends StatefulWidget {
-  String heroTag;
-  Order order;
-  VoidCallback onDismissed;
+  String? heroTag;
+  Order? order;
+  VoidCallback? onDismissed;
 
-  OrderListItemWidget({Key key, this.heroTag, this.order, this.onDismissed})
+  OrderListItemWidget({Key? key, this.heroTag, this.order, this.onDismissed})
       : super(key: key);
 
   @override
@@ -37,13 +37,13 @@ class _OrderListItemWidgetState extends State<OrderListItemWidget> {
       onDismissed: (direction) {
         // Remove the item from the data source.
         setState(() {
-          widget.onDismissed();
+          widget.onDismissed!();
         });
 
         // Then show a snackbar.
         Scaffold.of(context).showSnackBar(SnackBar(
             content: Text(
-                "The ${widget.order.product.name} order is removed from wish list")));
+                "The ${widget.order!.product.name} order is removed from wish list")));
       },
       child: InkWell(
         splashColor: Theme.of(context).accentColor,
@@ -53,7 +53,7 @@ class _OrderListItemWidgetState extends State<OrderListItemWidget> {
           Navigator.of(context).pushNamed('/Product',
               arguments: new RouteArgument(
                   argumentsList: [this.widget.heroTag],
-                  id: this.widget.order.product.id));
+                  id: this.widget.order!.product.id));
         },
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
@@ -70,14 +70,14 @@ class _OrderListItemWidgetState extends State<OrderListItemWidget> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Hero(
-                tag: widget.heroTag + widget.order.product.id,
+                tag: widget.heroTag! + widget.order!.product.id,
                 child: Container(
                   height: 60,
                   width: 60,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(5)),
                     image: DecorationImage(
-                        image: AssetImage(widget.order.product.image),
+                        image: AssetImage(widget.order!.product.image),
                         fit: BoxFit.cover),
                   ),
                 ),
@@ -92,7 +92,7 @@ class _OrderListItemWidgetState extends State<OrderListItemWidget> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            widget.order.product.name,
+                            widget.order!.product.name,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
                             style: Theme.of(context).textTheme.subhead,
@@ -126,7 +126,7 @@ class _OrderListItemWidgetState extends State<OrderListItemWidget> {
                                   ),
                                   SizedBox(width: 10),
                                   Text(
-                                    widget.order.trackingNumber,
+                                    widget.order!.trackingNumber,
                                     style: Theme.of(context).textTheme.body1,
                                     overflow: TextOverflow.fade,
                                     softWrap: false,
@@ -143,7 +143,7 @@ class _OrderListItemWidgetState extends State<OrderListItemWidget> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: <Widget>[
-                        Text(widget.order.product.getPrice(),
+                        Text(widget.order!.product.getPrice(),
                             style: Theme.of(context).textTheme.display1),
                         SizedBox(height: 6),
                         Chip(
@@ -153,7 +153,7 @@ class _OrderListItemWidgetState extends State<OrderListItemWidget> {
                               side: BorderSide(
                                   color: Theme.of(context).focusColor)),
                           label: Text(
-                            'x ${widget.order.quantity}',
+                            'x ${widget.order!.quantity}',
                             style:
                                 TextStyle(color: Theme.of(context).focusColor),
                           ),

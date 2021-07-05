@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CreditCardsWidget extends StatelessWidget {
   const CreditCardsWidget({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -62,7 +62,7 @@ class CreditCardsWidget extends StatelessWidget {
                 SizedBox(height: 5),
                 Text(
                   '8154  3265  0045  1582',
-                  style: Theme.of(context).textTheme.body2.merge(TextStyle(letterSpacing: 1.4)),
+                  style: Theme.of(context).textTheme.body2!.merge(TextStyle(letterSpacing: 1.4)),
                 ),
                 SizedBox(height: 15),
                 Row(
@@ -83,11 +83,11 @@ class CreditCardsWidget extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       '07/21',
-                      style: Theme.of(context).textTheme.body2.merge(TextStyle(letterSpacing: 1.4)),
+                      style: Theme.of(context).textTheme.body2!.merge(TextStyle(letterSpacing: 1.4)),
                     ),
                     Text(
                       '007',
-                      style: Theme.of(context).textTheme.body2.merge(TextStyle(letterSpacing: 1.4)),
+                      style: Theme.of(context).textTheme.body2!.merge(TextStyle(letterSpacing: 1.4)),
                     ),
                   ],
                 )

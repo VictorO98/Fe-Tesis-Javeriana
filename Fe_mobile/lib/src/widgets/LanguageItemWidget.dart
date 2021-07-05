@@ -2,10 +2,10 @@ import 'package:Fe_mobile/src/models/language.dart';
 import 'package:flutter/material.dart';
 
 class LanguageItemWidget extends StatefulWidget {
-  final Language language;
+  final Language? language;
 
   const LanguageItemWidget({
-    Key key,
+    Key? key,
     this.language,
   }) : super(key: key);
 
@@ -15,12 +15,12 @@ class LanguageItemWidget extends StatefulWidget {
 
 class _LanguageItemWidgetState extends State<LanguageItemWidget>
     with SingleTickerProviderStateMixin {
-  Animation animation;
-  AnimationController animationController;
-  Animation<double> sizeCheckAnimation;
-  Animation<double> rotateCheckAnimation;
-  Animation<double> opacityAnimation;
-  Animation opacityCheckAnimation;
+  late Animation animation;
+  late AnimationController animationController;
+  late Animation<double> sizeCheckAnimation;
+  late Animation<double> rotateCheckAnimation;
+  late Animation<double> opacityAnimation;
+  late Animation opacityCheckAnimation;
   bool checked = false;
 
   @override
@@ -93,7 +93,7 @@ class _LanguageItemWidgetState extends State<LanguageItemWidget>
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(40)),
                     image: DecorationImage(
-                        image: AssetImage(widget.language.flag),
+                        image: AssetImage(widget.language!.flag),
                         fit: BoxFit.cover),
                   ),
                 ),
@@ -125,13 +125,13 @@ class _LanguageItemWidgetState extends State<LanguageItemWidget>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    widget.language.englishName,
+                    widget.language!.englishName,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                     style: Theme.of(context).textTheme.subhead,
                   ),
                   Text(
-                    widget.language.localName,
+                    widget.language!.localName,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                     style: Theme.of(context).textTheme.caption,

@@ -8,9 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class ProductsByCategoryWidget extends StatefulWidget {
-  SubCategory subCategory;
+  SubCategory? subCategory;
 
-  ProductsByCategoryWidget({Key key, this.subCategory}) : super(key: key);
+  ProductsByCategoryWidget({Key? key, this.subCategory}) : super(key: key);
 
   @override
   _ProductsByCategoryWidgetState createState() =>
@@ -37,7 +37,7 @@ class _ProductsByCategoryWidgetState extends State<ProductsByCategoryWidget> {
               color: Theme.of(context).hintColor,
             ),
             title: Text(
-              '${widget.subCategory.name} Category',
+              '${widget.subCategory!.name} Category',
               overflow: TextOverflow.fade,
               softWrap: false,
               style: Theme.of(context).textTheme.display1,
@@ -81,7 +81,7 @@ class _ProductsByCategoryWidgetState extends State<ProductsByCategoryWidget> {
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
             primary: false,
-            itemCount: widget.subCategory.products.length,
+            itemCount: widget.subCategory!.products.length,
             separatorBuilder: (context, index) {
               return SizedBox(height: 10);
             },
@@ -89,10 +89,10 @@ class _ProductsByCategoryWidgetState extends State<ProductsByCategoryWidget> {
               // TODO replace with products list item
               return FavoriteListItemWidget(
                 heroTag: 'products_by_category_list',
-                product: widget.subCategory.products.elementAt(index),
+                product: widget.subCategory!.products.elementAt(index),
                 onDismissed: () {
                   setState(() {
-                    widget.subCategory.products.removeAt(index);
+                    widget.subCategory!.products.removeAt(index);
                   });
                 },
               );
@@ -107,9 +107,9 @@ class _ProductsByCategoryWidgetState extends State<ProductsByCategoryWidget> {
               primary: false,
               shrinkWrap: true,
               crossAxisCount: 4,
-              itemCount: widget.subCategory.products.length,
+              itemCount: widget.subCategory!.products.length,
               itemBuilder: (BuildContext context, int index) {
-                Product product = widget.subCategory.products.elementAt(index);
+                Product product = widget.subCategory!.products.elementAt(index);
                 return ProductGridItemWidget(
                   product: product,
                   heroTag: 'products_by_category_grid',

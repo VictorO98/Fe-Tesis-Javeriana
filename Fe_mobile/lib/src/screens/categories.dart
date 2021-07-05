@@ -57,8 +57,8 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
             SearchBarWidget(),
             Wrap(
               runSpacing: 30,
-              children: List.generate(_categoriesList.list.length, (index) {
-                Category category = _categoriesList.list.elementAt(index);
+              children: List.generate(_categoriesList.list!.length, (index) {
+                Category category = _categoriesList.list!.elementAt(index);
                 return index.isEven
                     ? buildEvenCategory(context, category)
                     : buildOddCategory(context, category);
@@ -166,9 +166,9 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
               runAlignment: WrapAlignment.center,
               spacing: 10,
               runSpacing: 5,
-              children: List.generate(_subCategoriesList.list.length, (index) {
+              children: List.generate(_subCategoriesList.list!.length, (index) {
                 SubCategory subCategory =
-                    _subCategoriesList.list.elementAt(index);
+                    _subCategoriesList.list!.elementAt(index);
                 return Material(
                   borderRadius: BorderRadius.circular(30),
                   child: InkWell(
@@ -228,9 +228,9 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
               runAlignment: WrapAlignment.center,
               spacing: 10,
               runSpacing: 5,
-              children: List.generate(_subCategoriesList.list.length, (index) {
+              children: List.generate(_subCategoriesList.list!.length, (index) {
                 SubCategory subCategory =
-                    _subCategoriesList.list.elementAt(index);
+                    _subCategoriesList.list!.elementAt(index);
                 return Material(
                   borderRadius: BorderRadius.circular(30),
                   child: InkWell(

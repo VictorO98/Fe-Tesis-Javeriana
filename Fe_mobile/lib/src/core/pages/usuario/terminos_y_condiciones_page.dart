@@ -2,7 +2,7 @@ import 'package:Fe_mobile/src/core/util/estilo_util.dart';
 import 'package:flutter/material.dart';
 
 class TerminosYCondicionesPage extends StatefulWidget {
-  TerminosYCondicionesPage({Key key}) : super(key: key);
+  TerminosYCondicionesPage({Key? key}) : super(key: key);
 
   @override
   _TerminosYCondicionesPageState createState() =>

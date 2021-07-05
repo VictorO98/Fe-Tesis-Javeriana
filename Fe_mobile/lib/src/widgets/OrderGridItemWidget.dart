@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 class OrderGridItemWidget extends StatelessWidget {
   const OrderGridItemWidget({
-    Key key,
-    @required this.order,
-    @required this.heroTag,
+    Key? key,
+    required this.order,
+    required this.heroTag,
   }) : super(key: key);
 
   final Order order;

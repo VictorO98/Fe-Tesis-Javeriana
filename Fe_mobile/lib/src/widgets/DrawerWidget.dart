@@ -20,16 +20,16 @@ class DrawerWidget extends StatelessWidget {
 //              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(35)),
               ),
               accountName: Text(
-                _user.name,
+                _user.name!,
                 style: Theme.of(context).textTheme.title,
               ),
               accountEmail: Text(
-                _user.email,
+                _user.email!,
                 style: Theme.of(context).textTheme.caption,
               ),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Theme.of(context).accentColor,
-                backgroundImage: AssetImage(_user.avatar),
+                backgroundImage: AssetImage(_user.avatar!),
               ),
             ),
           ),

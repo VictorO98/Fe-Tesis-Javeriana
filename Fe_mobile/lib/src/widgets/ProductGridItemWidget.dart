@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 class ProductGridItemWidget extends StatelessWidget {
   const ProductGridItemWidget({
-    Key key,
-    @required this.product,
-    @required this.heroTag,
+    Key? key,
+    required this.product,
+    required this.heroTag,
   }) : super(key: key);
 
   final Product product;

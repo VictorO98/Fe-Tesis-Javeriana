@@ -18,10 +18,10 @@ class RolModel {
     this.demografiaCors,
   });
 
-  int id;
-  String nombre;
-  DateTime creacion;
-  List<dynamic> demografiaCors;
+  int? id;
+  String? nombre;
+  DateTime? creacion;
+  List<dynamic>? demografiaCors;
 
   factory RolModel.fromJson(Map<String, dynamic> json) => RolModel(
         id: json["id"],
@@ -34,7 +34,7 @@ class RolModel {
   Map<String, dynamic> toJson() => {
         "id": id,
         "nombre": nombre,
-        "creacion": creacion.toIso8601String(),
-        "demografiaCors": List<dynamic>.from(demografiaCors.map((x) => x)),
+        "creacion": creacion!.toIso8601String(),
+        "demografiaCors": List<dynamic>.from(demografiaCors!.map((x) => x)),
       };
 }

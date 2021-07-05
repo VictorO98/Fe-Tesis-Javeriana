@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class ReviewItemWidget extends StatelessWidget {
-  Review review;
+  Review? review;
 
-  ReviewItemWidget({Key key, this.review}) : super(key: key);
+  ReviewItemWidget({Key? key, this.review}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class ReviewItemWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(100)),
                 image: DecorationImage(
-                    image: AssetImage(this.review.user.avatar),
+                    image: AssetImage(this.review!.user.avatar!),
                     fit: BoxFit.cover),
               ),
             ),
@@ -40,11 +40,11 @@ class ReviewItemWidget extends StatelessWidget {
                         child: Column(
                           children: <Widget>[
                             Text(
-                              review.user.name,
+                              review!.user.name!,
                               overflow: TextOverflow.fade,
                               softWrap: false,
                               maxLines: 2,
-                              style: Theme.of(context).textTheme.title.merge(
+                              style: Theme.of(context).textTheme.title!.merge(
                                   TextStyle(
                                       color: Theme.of(context).hintColor)),
                             ),
@@ -73,8 +73,8 @@ class ReviewItemWidget extends StatelessWidget {
                         label: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Text(review.rate.toString(),
-                                style: Theme.of(context).textTheme.body2.merge(
+                            Text(review!.rate.toString(),
+                                style: Theme.of(context).textTheme.body2!.merge(
                                     TextStyle(
                                         color:
                                             Theme.of(context).primaryColor))),
@@ -97,7 +97,7 @@ class ReviewItemWidget extends StatelessWidget {
           ],
         ),
         Text(
-          review.review,
+          review!.review,
           style: Theme.of(context).textTheme.body1,
           overflow: TextOverflow.ellipsis,
           softWrap: false,

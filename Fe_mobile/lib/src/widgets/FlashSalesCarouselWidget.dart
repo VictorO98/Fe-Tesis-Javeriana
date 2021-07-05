@@ -3,11 +3,11 @@ import 'package:Fe_mobile/src/widgets/FlashSalesCarouselItemWidget.dart';
 import 'package:flutter/material.dart';
 
 class FlashSalesCarouselWidget extends StatelessWidget {
-  List<Product> productsList;
-  String heroTag;
+  List<Product>? productsList;
+  String? heroTag;
 
   FlashSalesCarouselWidget({
-    Key key,
+    Key? key,
     this.productsList,
     this.heroTag,
   }) : super(key: key);
@@ -18,14 +18,14 @@ class FlashSalesCarouselWidget extends StatelessWidget {
         height: 300,
         margin: EdgeInsets.only(top: 10),
         child: ListView.builder(
-          itemCount: productsList.length,
+          itemCount: productsList!.length,
           itemBuilder: (context, index) {
             double _marginLeft = 0;
             (index == 0) ? _marginLeft = 20 : _marginLeft = 0;
             return FlashSalesCarouselItemWidget(
               heroTag: this.heroTag,
               marginLeft: _marginLeft,
-              product: productsList.elementAt(index),
+              product: productsList!.elementAt(index),
             );
           },
           scrollDirection: Axis.horizontal,

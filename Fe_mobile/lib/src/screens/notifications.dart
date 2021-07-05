@@ -10,7 +10,7 @@ class NotificationsWidget extends StatefulWidget {
 }
 
 class _NotificationsWidgetState extends State<NotificationsWidget> {
-  model.NotificationList _notificationList;
+  late model.NotificationList _notificationList;
 
   @override
   void initState() {
@@ -30,22 +30,22 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
               child: SearchBarWidget(),
             ),
             Offstage(
-              offstage: _notificationList.notifications.isEmpty,
+              offstage: _notificationList.notifications!.isEmpty,
               child: ListView.separated(
                 padding: EdgeInsets.symmetric(vertical: 15),
                 shrinkWrap: true,
                 primary: false,
-                itemCount: _notificationList.notifications.length,
+                itemCount: _notificationList.notifications!.length,
                 separatorBuilder: (context, index) {
                   return SizedBox(height: 7);
                 },
                 itemBuilder: (context, index) {
                   return NotificationItemWidget(
                     notification:
-                        _notificationList.notifications.elementAt(index),
+                        _notificationList.notifications!.elementAt(index),
                     onDismissed: (notification) {
                       setState(() {
-                        _notificationList.notifications.removeAt(index);
+                        _notificationList.notifications!.removeAt(index);
                       });
                     },
                   );
@@ -53,7 +53,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
               ),
             ),
             Offstage(
-              offstage: _notificationList.notifications.isNotEmpty,
+              offstage: _notificationList.notifications!.isNotEmpty,
               child: EmptyNotificationsWidget(),
             )
           ],

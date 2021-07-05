@@ -15,16 +15,16 @@ class Category {
 class SubCategory {
   String id = UniqueKey().toString();
   String name;
-  bool selected;
+  bool? selected;
   List<Product> products;
 
   SubCategory(this.name, this.selected, this.products);
 }
 
 class CategoriesList {
-  List<Category> _list;
+  List<Category>? _list;
 
-  List<Category> get list => _list;
+  List<Category>? get list => _list;
 
   CategoriesList() {
     this._list = [
@@ -268,7 +268,7 @@ class CategoriesList {
   }
 
   selectById(String id) {
-    this._list.forEach((Category category) {
+    this._list!.forEach((Category category) {
       category.selected = false;
       if (category.id == id) {
         category.selected = true;
@@ -277,16 +277,16 @@ class CategoriesList {
   }
 
   void clearSelection() {
-    _list.forEach((category) {
+    _list!.forEach((category) {
       category.selected = false;
     });
   }
 }
 
 class SubCategoriesList {
-  List<SubCategory> _list;
+  List<SubCategory>? _list;
 
-  List<SubCategory> get list => _list;
+  List<SubCategory>? get list => _list;
 
   SubCategoriesList() {
     this._list = [
@@ -454,7 +454,7 @@ class SubCategoriesList {
   }
 
   selectById(String id) {
-    this._list.forEach((SubCategory subCategory) {
+    this._list!.forEach((SubCategory subCategory) {
       subCategory.selected = false;
       if (subCategory.id == id) {
         subCategory.selected = true;
@@ -463,7 +463,7 @@ class SubCategoriesList {
   }
 
   void clearSelection() {
-    _list.forEach((category) {
+    _list!.forEach((category) {
       category.selected = false;
     });
   }
