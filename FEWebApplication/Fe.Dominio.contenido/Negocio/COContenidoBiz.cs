@@ -226,6 +226,8 @@ namespace Fe.Dominio.contenido
             {
                 try
                 {
+                    pyr.Creacion = DateTime.Now;
+                    pyr.Modificacion = DateTime.Now;
                     respuestaDatos = await _repoPyR.GuardarPreguntasyRespuestas(pyr);
                 }
                 catch (COExcepcion e)
