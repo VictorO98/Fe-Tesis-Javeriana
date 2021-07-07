@@ -1,4 +1,6 @@
 import 'package:Fe_mobile/config/ui_icons.dart';
+import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
+import 'package:Fe_mobile/src/dominio/providers/contenido_provider.dart';
 import 'package:Fe_mobile/src/models/brand.dart';
 import 'package:Fe_mobile/src/models/category.dart';
 import 'package:Fe_mobile/src/models/product.dart';
@@ -19,14 +21,17 @@ class ContenidoHomePage extends StatefulWidget {
 
 class _ContenidoHomePageState extends State<ContenidoHomePage>
     with SingleTickerProviderStateMixin {
-  List<Product>? _productsOfCategoryList;
-  List<Product>? _productsOfBrandList;
   CategoriesList _categoriesList = new CategoriesList();
   BrandsList _brandsList = new BrandsList();
-  ProductsList _productsList = new ProductsList();
 
   Animation? animationOpacity;
   late AnimationController animationController;
+
+  ContenidoProvider _contenidoProvider = new ContenidoProvider();
+
+  List<ProductoServicioModel>? _productosServiciosModel;
+
+  bool _cargarProductosDescuento = false;
 
   @override
   void initState() {
@@ -39,16 +44,25 @@ class _ContenidoHomePageState extends State<ContenidoHomePage>
         setState(() {});
       });
 
+    _getProductosEnDescuento();
+
     animationController.forward();
 
-    _productsOfCategoryList = _categoriesList.list!.firstWhere((category) {
-      return category.selected;
-    }).products;
+    // _productsOfCategoryList = _categoriesList.list!.firstWhere((category) {
+    //   return category.selected;
+    // }).products;
 
-    _productsOfBrandList = _brandsList.list!.firstWhere((brand) {
-      return brand.selected!;
-    }).products;
+    // _productsOfBrandList = _brandsList.list!.firstWhere((brand) {
+    //   return brand.selected!;
+    // }).products;
     super.initState();
+  }
+
+  _getProductosEnDescuento() async {
+    _productosServiciosModel = await _contenidoProvider.getProductosDescuento();
+    setState(() {
+      _cargarProductosDescuento = true;
+    });
   }
 
   @override
@@ -61,9 +75,11 @@ class _ContenidoHomePageState extends State<ContenidoHomePage>
         ),
         HomeSliderWidget(),
         FlashSalesHeaderWidget(),
-        FlashSalesCarouselWidget(
-            heroTag: 'home_flash_sales',
-            productsList: _productsList.flashSalesList),
+        _cargarProductosDescuento
+            ? FlashSalesCarouselWidget(
+                heroTag: 'home_flash_sales',
+                productsList: _productosServiciosModel)
+            : Center(child: CircularProgressIndicator()),
         // Heading (Recommended for you)
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
@@ -80,25 +96,25 @@ class _ContenidoHomePageState extends State<ContenidoHomePage>
             ),
           ),
         ),
-        StickyHeader(
-          header: CategoriesIconsCarouselWidget(
-              heroTag: 'home_categories_1',
-              categoriesList: _categoriesList,
-              onChanged: (id) {
-                setState(() {
-                  animationController.reverse().then((f) {
-                    _productsOfCategoryList =
-                        _categoriesList.list!.firstWhere((category) {
-                      return category.id == id;
-                    }).products;
-                    animationController.forward();
-                  });
-                });
-              }),
-          content: CategorizedProductsWidget(
-              animationOpacity: animationOpacity,
-              productsList: _productsOfCategoryList),
-        ),
+        // StickyHeader(
+        //   header: CategoriesIconsCarouselWidget(
+        //       heroTag: 'home_categories_1',
+        //       categoriesList: _categoriesList,
+        //       onChanged: (id) {
+        //         setState(() {
+        //           animationController.reverse().then((f) {
+        //             _productsOfCategoryList =
+        //                 _categoriesList.list!.firstWhere((category) {
+        //               return category.id == id;
+        //             }).products;
+        //             animationController.forward();
+        //           });
+        //         });
+        //       }),
+        //   content: CategorizedProductsWidget(
+        //       animationOpacity: animationOpacity,
+        //       productsList: _productsOfCategoryList),
+        // ),
         // Heading (Brands)
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
@@ -115,25 +131,25 @@ class _ContenidoHomePageState extends State<ContenidoHomePage>
             ),
           ),
         ),
-        StickyHeader(
-          header: BrandsIconsCarouselWidget(
-              heroTag: 'home_brand_1',
-              brandsList: _brandsList,
-              onChanged: (id) {
-                setState(() {
-                  animationController.reverse().then((f) {
-                    _productsOfBrandList =
-                        _brandsList.list!.firstWhere((brand) {
-                      return brand.id == id;
-                    }).products;
-                    animationController.forward();
-                  });
-                });
-              }),
-          content: CategorizedProductsWidget(
-              animationOpacity: animationOpacity,
-              productsList: _productsOfBrandList),
-        ),
+        // StickyHeader(
+        //   header: BrandsIconsCarouselWidget(
+        //       heroTag: 'home_brand_1',
+        //       brandsList: _brandsList,
+        //       onChanged: (id) {
+        //         setState(() {
+        //           animationController.reverse().then((f) {
+        //             _productsOfBrandList =
+        //                 _brandsList.list!.firstWhere((brand) {
+        //               return brand.id == id;
+        //             }).products;
+        //             animationController.forward();
+        //           });
+        //         });
+        //       }),
+        //   content: CategorizedProductsWidget(
+        //       animationOpacity: animationOpacity,
+        //       productsList: _productsOfBrandList),
+        // ),
       ],
     );
 //      ],

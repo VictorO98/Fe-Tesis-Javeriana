@@ -71,9 +71,9 @@ class _BrandHomeTabWidgetState extends State<BrandHomeTabWidget> {
             ),
           ),
         ),
-        FlashSalesCarouselWidget(
-            heroTag: 'brand_featured_products',
-            productsList: widget._productsList.flashSalesList),
+        // FlashSalesCarouselWidget(
+        //     heroTag: 'brand_featured_products',
+        //     productsList: widget._productsList.flashSalesList),
       ],
     );
   }

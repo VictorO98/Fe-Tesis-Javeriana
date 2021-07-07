@@ -42,7 +42,7 @@ class ProductoServicioModel {
   DateTime? tiempoentrega;
   DateTime? tiempogarantia;
   int? preciounitario;
-  int? descuento;
+  double? descuento;
   double? calificacionpromedio;
   int? habilitatrueque;
   String? nombre;

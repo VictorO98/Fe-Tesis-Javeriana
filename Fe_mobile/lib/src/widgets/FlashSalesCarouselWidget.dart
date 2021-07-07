@@ -1,9 +1,9 @@
-import 'package:Fe_mobile/src/models/product.dart';
+import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:Fe_mobile/src/widgets/FlashSalesCarouselItemWidget.dart';
 import 'package:flutter/material.dart';
 
 class FlashSalesCarouselWidget extends StatelessWidget {
-  List<Product>? productsList;
+  List<ProductoServicioModel>? productsList;
   String? heroTag;
 
   FlashSalesCarouselWidget({

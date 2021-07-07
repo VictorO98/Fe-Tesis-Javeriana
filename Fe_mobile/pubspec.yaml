@@ -43,7 +43,11 @@ dependencies:
   shared_preferences: ^2.0.6
   cool_alert: ^1.1.0
   jwt_decoder: ^2.0.1
+  image_cropper: ^1.4.0
+  image_picker: ^0.8.0+3
   dropdown_search: ^0.6.3
+  image_gallery_saver: ^1.6.9
+  card_swiper: ^1.0.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -64,6 +68,8 @@ flutter:
     - img/logo_buya.png
     - img/onboarding0.png
     - img/onboarding1.png
+    - img/loading.gif
+    - img/LogoApp.png
     - img/onboarding2.png
     - img/onboarding3.png
     - img/twitter.png

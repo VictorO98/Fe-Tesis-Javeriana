@@ -173,9 +173,9 @@ class productHomeTabWidgetState extends State<ProductHomeTabWidget> {
             ),
           ),
         ),
-        FlashSalesCarouselWidget(
-            heroTag: 'product_related_products',
-            productsList: widget._productsList.flashSalesList),
+        // FlashSalesCarouselWidget(
+        //     heroTag: 'product_related_products',
+        //     productsList: widget._productsList.flashSalesList),
       ],
     );
   }

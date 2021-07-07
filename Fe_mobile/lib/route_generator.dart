@@ -1,3 +1,4 @@
+import 'package:Fe_mobile/src/dominio/pages/Contenido/crear_servicio_producto_page.dart';
 import 'package:Fe_mobile/src/models/route_argument.dart';
 import 'package:Fe_mobile/src/screens/brand.dart';
 import 'package:Fe_mobile/src/screens/brands.dart';
@@ -32,6 +33,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => CategoriesWidget());
       case '/Orders':
         return MaterialPageRoute(builder: (_) => OrdersWidget());
+      case '/Create':
+        return MaterialPageRoute(builder: (_) => CrearServicioProductoPage());
       case '/Brands':
         return MaterialPageRoute(builder: (_) => BrandsWidget());
 //      case '/MobileVerification':

@@ -1,4 +1,4 @@
-import 'package:Fe_mobile/src/models/product.dart';
+import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:Fe_mobile/src/models/route_argument.dart';
 import 'package:Fe_mobile/src/widgets/AvailableProgressBarWidget.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class FlashSalesCarouselItemWidget extends StatelessWidget {
   String? heroTag;
   double? marginLeft;
-  Product? product;
+  ProductoServicioModel? product;
 
   FlashSalesCarouselItemWidget({
     Key? key,
@@ -29,16 +29,16 @@ class FlashSalesCarouselItemWidget extends StatelessWidget {
           alignment: AlignmentDirectional.topCenter,
           children: <Widget>[
             Hero(
-              tag: heroTag! + product!.id,
+              tag: heroTag! + product!.id.toString(),
               child: Container(
                 width: 160,
                 height: 200,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(6),
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage(product!.image),
-                  ),
+                  // image: DecorationImage(
+                  //   fit: BoxFit.cover,
+                  //   image: AssetImage(product!.urlimagenproductoservicio),
+                  // ),
                 ),
               ),
             ),
@@ -52,7 +52,7 @@ class FlashSalesCarouselItemWidget extends StatelessWidget {
                     color: Theme.of(context).accentColor),
                 alignment: AlignmentDirectional.topEnd,
                 child: Text(
-                  '${product!.discount} %',
+                  '${product!.descuento} %',
                   style: Theme.of(context)
                       .textTheme
                       .body2!
@@ -78,7 +78,7 @@ class FlashSalesCarouselItemWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    product!.name,
+                    product!.nombre.toString(),
                     style: Theme.of(context).textTheme.body2,
                     maxLines: 1,
                     softWrap: false,
@@ -89,7 +89,7 @@ class FlashSalesCarouselItemWidget extends StatelessWidget {
                       // The title of the product
                       Expanded(
                         child: Text(
-                          '${product!.sales} Sales',
+                          '${product!.descuento} Sales',
                           style: Theme.of(context).textTheme.body1,
                           overflow: TextOverflow.fade,
                           softWrap: false,
@@ -101,7 +101,7 @@ class FlashSalesCarouselItemWidget extends StatelessWidget {
                         size: 18,
                       ),
                       Text(
-                        product!.rate.toString(),
+                        product!.calificacionpromedio.toString(),
                         style: Theme.of(context).textTheme.body2,
                       )
                     ],
@@ -109,12 +109,12 @@ class FlashSalesCarouselItemWidget extends StatelessWidget {
                   ),
                   SizedBox(height: 7),
                   Text(
-                    '${product!.available} Available',
+                    '${product!.cantidadtotal} Available',
                     style: Theme.of(context).textTheme.body1,
                     overflow: TextOverflow.ellipsis,
                   ),
                   AvailableProgressBarWidget(
-                      available: product!.available.toDouble())
+                      available: product!.cantidadtotal!.toDouble())
                 ],
               ),
             )

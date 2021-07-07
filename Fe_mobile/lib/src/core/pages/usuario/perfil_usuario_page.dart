@@ -101,6 +101,9 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
           ),
           _tabPrincipal(context),
           _userOrders(context),
+          _infoUsuarioBloc!.state.infoUsuarioModel!.rol == "Emprendedor"
+              ? _infoProductosEmprendedores(context)
+              : _infoUsuarios(context),
           _cargandoUsuario
               ? Center(child: CircularProgressIndicator())
               : _userProfile(context),
@@ -292,6 +295,94 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
         ],
       ),
     );
+  }
+
+  Widget _infoProductosEmprendedores(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      decoration: BoxDecoration(
+        color: Theme.of(context).primaryColor,
+        borderRadius: BorderRadius.circular(6),
+        boxShadow: [
+          BoxShadow(
+              color: Theme.of(context).hintColor.withOpacity(0.15),
+              offset: Offset(0, 3),
+              blurRadius: 10)
+        ],
+      ),
+      child: ListView(
+        shrinkWrap: true,
+        primary: false,
+        children: <Widget>[
+          ListTile(
+            leading: Icon(UiIcons.inbox),
+            title: Text(
+              'Productos',
+              style: Theme.of(context).textTheme.body2,
+            ),
+            trailing: ButtonTheme(
+              padding: EdgeInsets.all(0),
+              minWidth: 50.0,
+              height: 25.0,
+              child: FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/Create');
+                },
+                child: Text(
+                  "Vender",
+                  style: Theme.of(context).textTheme.body1,
+                ),
+              ),
+            ),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.of(context).pushNamed('/Orders');
+            },
+            dense: true,
+            title: Text(
+              'Productos',
+              style: Theme.of(context).textTheme.body1,
+            ),
+            trailing: Chip(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              backgroundColor: Colors.transparent,
+              shape: StadiumBorder(
+                  side: BorderSide(color: Theme.of(context).focusColor)),
+              label: Text(
+                '1',
+                style: TextStyle(color: Theme.of(context).focusColor),
+              ),
+            ),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.of(context).pushNamed('/Orders');
+            },
+            dense: true,
+            title: Text(
+              'Servicios',
+              style: Theme.of(context).textTheme.body1,
+            ),
+            trailing: Chip(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              backgroundColor: Colors.transparent,
+              shape: StadiumBorder(
+                  side: BorderSide(color: Theme.of(context).focusColor)),
+              label: Text(
+                '5',
+                style: TextStyle(color: Theme.of(context).focusColor),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+    ;
+  }
+
+  Widget _infoUsuarios(BuildContext context) {
+    return SizedBox(height: 0);
   }
 
   Widget _userProfile(BuildContext context) {
