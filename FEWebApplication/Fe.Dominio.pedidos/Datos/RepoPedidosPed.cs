@@ -38,6 +38,12 @@ namespace Fe.Dominio.pedidos.Datos
             return context.PedidosPeds.SingleOrDefault(p => p.Id == idPedido);
         }
 
+        internal List<PedidosPed> GetPedidosPorIdUsuario(int idUsuario)
+        {
+            using FeContext context = new FeContext();
+            return context.PedidosPeds.Where(p => p.Idusuario == idUsuario).ToList();
+        }
+
         internal async Task<RespuestaDatos> RemoverPedido(int idPedido)
         {
             using FeContext context = new FeContext();

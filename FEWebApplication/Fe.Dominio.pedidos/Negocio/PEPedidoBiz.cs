@@ -44,6 +44,11 @@ namespace Fe.Dominio.pedidos
             return _repoPedidosPed.GetPedidoPorId(idPedido);
         }
 
+        internal List<PedidosPed> GetPedidosPorIdUsuario(int idUsuario)
+        {
+            return _repoPedidosPed.GetPedidosPorIdUsuario(idUsuario);
+        }
+
         internal async Task<RespuestaDatos> RemoverPedido(int idPedido)
         {
             RespuestaDatos respuestaDatos;
