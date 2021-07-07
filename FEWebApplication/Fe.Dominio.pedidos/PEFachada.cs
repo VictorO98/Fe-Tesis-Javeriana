@@ -47,6 +47,11 @@ namespace Fe.Dominio.pedidos
             return _pEPedidoBiz.GetPedidoPorId(idPedido);
         }
 
+        public List<PedidosPed> GetPedidosPorIdUsuario(int idUsuario)
+        {
+            return _pEPedidoBiz.GetPedidosPorIdUsuario(idUsuario);
+        }
+
         public async Task<RespuestaDatos> RemoverPedido(int idPedido)
         {
             RespuestaDatos respuestaDatos;
@@ -252,6 +257,21 @@ namespace Fe.Dominio.pedidos
             }
             else { throw new COExcepcion("El pedido ingresado no existe."); }
             return cabeceraPedido;
+        }
+
+        public List<ContratoPedidos> ListarTodosLosPedidosPorUsuario(int idUsuario)
+        {
+            List<ContratoPedidos> pedidos = new List<ContratoPedidos>();
+            if(idUsuario != -1)
+            {
+                List<PedidosPed> ps = _pEPedidoBiz.GetPedidosPorIdUsuario(idUsuario);
+                for (int i = 0; i < ps.Count; i++)
+                {
+                    pedidos.Add(CabeceraPedido(ps[i]));
+                }
+            }
+            else { throw new COExcepcion("El usuario ingresado no existe."); }
+            return pedidos;
         }
     }
 }
