@@ -282,5 +282,17 @@ namespace Fe.Dominio.contenido
         {
             return _cOContenidoBiz.BuscarPublicacion(nombre);
         }
+        public List<ContratoPc> GetPublicacionesHabilitadasTrueque(int idDemografia)
+        {
+            try
+            {
+                DemografiaCor demografiaCor = _cOGeneralFachada.GetDemografiaPorId(idDemografia);
+                return _cOContenidoBiz.GetPublicacionesHabilitadasTrueque(demografiaCor);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+        }
     }
 }

@@ -230,5 +230,11 @@ namespace Fe.Dominio.contenido.Datos
             using FeContext context = new FeContext();
             return context.ProductosServiciosPcs.Where(p => p.Nombre.ToLower().Contains(nombre.ToLower())).ToList();
         }
+
+        internal List<ProductosServiciosPc> GetPublicacionesHabilitadasTrueque(int idDemografia)
+        {
+            using FeContext context = new FeContext();
+            return context.ProductosServiciosPcs.Where(p => p.Idusuario == idDemografia && p.Habilitatrueque == 1).ToList();
+        }
     }
 }
