@@ -21,8 +21,8 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
-        public int Numerodocumento { get; set; }
-        public int Telefono { get; set; }
+        public long Numerodocumento { get; set; }
+        public long Telefono { get; set; }
         public int Aceptoterminoscondiciones { get; set; }
         public DateTime Creacion { get; set; }
         public DateTime Modificacion { get; set; }

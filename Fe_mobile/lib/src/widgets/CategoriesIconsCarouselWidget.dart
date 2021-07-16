@@ -1,15 +1,16 @@
 import 'package:Fe_mobile/config/ui_icons.dart';
+import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:Fe_mobile/src/models/category.dart';
 import 'package:Fe_mobile/src/widgets/CategoryIconWidget.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesIconsCarouselWidget extends StatefulWidget {
-  CategoriesList? categoriesList;
+  List<ProductoServicioModel>? publicacion;
   String? heroTag;
   ValueChanged<String>? onChanged;
 
   CategoriesIconsCarouselWidget(
-      {Key? key, this.categoriesList, this.heroTag, this.onChanged})
+      {Key? key, this.publicacion, this.heroTag, this.onChanged})
       : super(key: key);
 
   @override
@@ -55,7 +56,7 @@ class _CategoriesIconsCarouselWidgetState
                       topLeft: Radius.circular(60)),
                 ),
                 child: ListView.builder(
-                  itemCount: widget.categoriesList!.list!.length,
+                  itemCount: 10,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     double _marginLeft = 0;
@@ -63,12 +64,12 @@ class _CategoriesIconsCarouselWidgetState
                     return CategoryIconWidget(
                         heroTag: widget.heroTag,
                         marginLeft: _marginLeft,
-                        category: widget.categoriesList!.list!.elementAt(index),
+                        producto: widget.publicacion!.elementAt(index),
                         onPressed: (String id) {
-                          setState(() {
-                            widget.categoriesList!.selectById(id);
-                            widget.onChanged!(id);
-                          });
+                          // setState(() {
+                          //   widget.categoriesList!.selectById(id);
+                          //   widget.onChanged!(id);
+                          // });
                         });
                   },
                   scrollDirection: Axis.horizontal,

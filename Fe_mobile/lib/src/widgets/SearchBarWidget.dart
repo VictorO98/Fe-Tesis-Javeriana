@@ -25,7 +25,7 @@ class SearchBarWidget extends StatelessWidget {
           TextField(
             decoration: InputDecoration(
               contentPadding: EdgeInsets.all(12),
-              hintText: 'Search',
+              hintText: 'Buscar',
               hintStyle: TextStyle(
                   color: Theme.of(context).focusColor.withOpacity(0.8)),
               prefixIcon: Icon(UiIcons.loupe,

@@ -182,17 +182,17 @@ namespace Fe.Core.Seguridad.Negocio
                         Apellido = model.Apellidos,
                         Estado = COEstados.VIGENTE,
                         Tipodocumentocorid = model.IdTipoDocumento,
-                        Numerodocumento = int.Parse(model.NumeroDocumento),
+                        Numerodocumento = Convert.ToInt64(model.NumeroDocumento),
                         Creacion = DateTime.Now,
                         Codigotelefonopais = model.CodigoTelefonoPais,
-                        Telefono = int.Parse(model.NumeroTelefonico),
+                        Telefono = Convert.ToInt64(model.NumeroTelefonico),
                         Rolcorid = model.IdTipoCliente,
                         Modificacion = DateTime.Now,
                         Direccion = model.Direccion,
                         Idpoblacion = int.Parse(model.IdPoblacion),
                     };
 
-                    _repoDemografia.GuardarDemografia(demografia);
+                    await _repoDemografia.GuardarDemografia(demografia);
                 }
                 else
                 {

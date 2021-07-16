@@ -797,7 +797,9 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
 
                 entity.Property(e => e.Creacion).HasColumnName("creacion");
 
-                entity.Property(e => e.DireccionDocumento).HasColumnName("direccion_documento");
+                entity.Property(e => e.DocumentoCamaraComercio).HasColumnName("documento_camara_comercio");
+
+                entity.Property(e => e.DocumentoCedula).HasColumnName("documento_cedula");
 
                 entity.Property(e => e.Estado)
                     .IsRequired()

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:Fe_mobile/src/core/util/servicio_util.dart';
+import 'package:Fe_mobile/src/dominio/models/categoria_model.dart';
 import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:flutter/widgets.dart';
 
@@ -16,7 +17,7 @@ class ContenidoProvider {
     return listado;
   }
 
-  Future<List<ProductoServicioModel>> _filtroTipoPublicacion(
+  Future<List<ProductoServicioModel>> filtroTipoPublicacion(
       BuildContext context, int idTipoPublicacion) async {
     String? data = await ServicioUtil.get(
         "dominio/COContenido/FiltrarPublicacion",
@@ -26,6 +27,15 @@ class ContenidoProvider {
     final List<ProductoServicioModel> listado =
         List<ProductoServicioModel>.from(
             decodedData.map((model) => ProductoServicioModel.fromJson(model)));
+    return listado;
+  }
+
+  Future<List<CategoriaModel>> getAllCategorias() async {
+    String? data = await ServicioUtil.get("dominio/COContenido/GetCategorias");
+    if (data == null) return [];
+    final List<dynamic> decodedData = json.decode(data);
+    final List<CategoriaModel> listado = List<CategoriaModel>.from(
+        decodedData.map((model) => CategoriaModel.fromJson(model)));
     return listado;
   }
 }

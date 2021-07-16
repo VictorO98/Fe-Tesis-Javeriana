@@ -176,13 +176,6 @@
             <returns>Respuesta de datos verificando que se realizó la inserción de la publicación.</returns>
             <param name="productosServicios">Publicación que se desea almacenar en la base de datos.</param>
         </member>
-        <member name="M:FEWebApplication.Controladores.Dominio.Contenido.COContenidoController.GetPublicacionPorIdPublicacion(System.Int32)">
-            <summary>
-            Busca una publicación por su ID y retorna los atributos de esta.
-            </summary>
-            <returns>Una publicación en formato JSON con sus respectivos atributos.</returns>
-            <param name="idPublicacion">El id de la publicación a buscar.</param>
-        </member>
         <member name="M:FEWebApplication.Controladores.Dominio.Contenido.COContenidoController.GetImagenProdcuto(System.Int32,System.Int32)">
             <summary>
             Busca las imagens de los productos por su ID.
@@ -359,6 +352,13 @@
             <returns>Pedido asociado al ID</returns>
             <param name="idPedido">Id del pedido deseado</param>
         </member>
+        <member name="M:FEWebApplication.Controladores.Dominio.Pedido.PEPedidoController.GetPedidosPorIdUsuario(System.Int32)">
+            <summary>
+            Obtiene los pedidos ascociado al ID de un usuario
+            </summary>
+            <returns>Pedidos asociado al ID del usuario</returns>
+            <param name="idUsuario">Id del usario del cual se desean conocer sus pedidos</param>
+        </member>
         <member name="M:FEWebApplication.Controladores.Dominio.Pedido.PEPedidoController.RemoverPedido(System.Int32)">
             <summary>
             Elimina el pedido de la base de datos
@@ -428,6 +428,13 @@
             </summary>
             <returns>Contrato de un pedido con sus productos</returns>
             <param name="pedido">Pedido del que se desea obtener su contrato</param>
+        </member>
+        <member name="M:FEWebApplication.Controladores.Dominio.Pedido.PEPedidoController.ListarTodosLosPedidosPorUsuario(System.Int32)">
+            <summary>
+            Obtiene todos los pedidos de un usuario
+            </summary>
+            <returns>Lista con todos los pedidos de un usuario</returns>
+            <param name="idUsuario">ID usuario del que se desean obtner todos sus pedidos</param>
         </member>
         <member name="T:FEWebApplication.Controladores.Dominio.Trueque.TRTruequeController">
             <summary>

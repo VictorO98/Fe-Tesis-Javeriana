@@ -1,3 +1,4 @@
+import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:Fe_mobile/src/models/product.dart';
 import 'package:Fe_mobile/src/models/route_argument.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,7 @@ class ProductGridItemWidget extends StatelessWidget {
     required this.heroTag,
   }) : super(key: key);
 
-  final Product product;
+  final ProductoServicioModel product;
   final String heroTag;
 
   @override
@@ -38,21 +39,21 @@ class ProductGridItemWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Hero(
-              tag: this.heroTag + product.id,
-              child: Image.asset(product.image),
+              tag: this.heroTag + product.id.toString(),
+              child: Image.asset(product.urlimagenproductoservicio.toString()),
             ),
             SizedBox(height: 12),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
               child: Text(
-                product.name,
+                product.nombre!,
                 style: Theme.of(context).textTheme.body2,
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Text(
-                product.getPrice(),
+                product.preciounitario.toString(),
                 style: Theme.of(context).textTheme.title,
               ),
             ),
@@ -61,21 +62,14 @@ class ProductGridItemWidget extends StatelessWidget {
               child: Row(
                 children: <Widget>[
                   // The title of the product
-                  Expanded(
-                    child: Text(
-                      '${product.sales} Sales',
-                      style: Theme.of(context).textTheme.body1,
-                      overflow: TextOverflow.fade,
-                      softWrap: false,
-                    ),
-                  ),
+
                   Icon(
                     Icons.star,
                     color: Colors.amber,
                     size: 18,
                   ),
                   Text(
-                    product.rate.toString(),
+                    product.calificacionpromedio.toString(),
                     style: Theme.of(context).textTheme.body2,
                   )
                 ],

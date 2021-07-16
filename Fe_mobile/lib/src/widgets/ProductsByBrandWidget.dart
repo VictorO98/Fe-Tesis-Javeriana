@@ -1,4 +1,5 @@
 import 'package:Fe_mobile/config/ui_icons.dart';
+import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:Fe_mobile/src/models/brand.dart';
 import 'package:Fe_mobile/src/models/product.dart';
 import 'package:Fe_mobile/src/widgets/FavoriteListItemWidget.dart';
@@ -74,30 +75,30 @@ class _ProductsByBrandWidgetState extends State<ProductsByBrandWidget> {
             ),
           ),
         ),
-        Offstage(
-          offstage: this.layout != 'list',
-          child: ListView.separated(
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            primary: false,
-            itemCount: widget.brand!.products.length,
-            separatorBuilder: (context, index) {
-              return SizedBox(height: 10);
-            },
-            itemBuilder: (context, index) {
-              // TODO replace with products list item
-              return FavoriteListItemWidget(
-                heroTag: 'products_by_category_list',
-                product: widget.brand!.products.elementAt(index),
-                onDismissed: () {
-                  setState(() {
-                    widget.brand!.products.removeAt(index);
-                  });
-                },
-              );
-            },
-          ),
-        ),
+        // Offstage(
+        //   offstage: this.layout != 'list',
+        //   child: ListView.separated(
+        //     scrollDirection: Axis.vertical,
+        //     shrinkWrap: true,
+        //     primary: false,
+        //     itemCount: widget.brand!.products.length,
+        //     separatorBuilder: (context, index) {
+        //       return SizedBox(height: 10);
+        //     },
+        //     itemBuilder: (context, index) {
+        //       // TODO replace with products list item
+        //       // return FavoriteListItemWidget(
+        //       //   heroTag: 'products_by_category_list',
+        //       //   product: widget.brand!.products.elementAt(index),
+        //       //   onDismissed: () {
+        //       //     setState(() {
+        //       //       widget.brand!.products.removeAt(index);
+        //       //     });
+        //       //   },
+        //       // );
+        //     },
+        //   ),
+        // ),
         Offstage(
           offstage: this.layout != 'grid',
           child: Container(
@@ -108,7 +109,8 @@ class _ProductsByBrandWidgetState extends State<ProductsByBrandWidget> {
               crossAxisCount: 4,
               itemCount: widget.brand!.products.length,
               itemBuilder: (BuildContext context, int index) {
-                Product product = widget.brand!.products.elementAt(index);
+                ProductoServicioModel product =
+                    widget.brand!.products.elementAt(index);
                 return ProductGridItemWidget(
                   product: product,
                   heroTag: 'products_by_category_grid',

@@ -1,4 +1,6 @@
-import 'package:Fe_mobile/config/ui_icons.dart';
+import 'dart:async';
+import 'dart:io';
+
 import 'package:Fe_mobile/src/core/models/departamentos_model.dart';
 import 'package:Fe_mobile/src/core/models/municipios_model.dart';
 import 'package:Fe_mobile/src/core/models/registro_model.dart';
@@ -12,14 +14,15 @@ import 'package:Fe_mobile/src/core/providers/general_provider.dart';
 import 'package:Fe_mobile/src/core/providers/usuario_provider.dart';
 import 'package:Fe_mobile/src/core/util/alert_util.dart';
 import 'package:Fe_mobile/src/core/util/estilo_util.dart';
-import 'package:Fe_mobile/src/widgets/SocialMediaWidget.dart';
+import 'package:Fe_mobile/src/widgets/ver_imagen_widget.dart';
+import 'package:card_swiper/card_swiper.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'package:Fe_mobile/src/dominio/pages/Contenido/contenido_home_page.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
 
 class RegistroPage extends StatefulWidget {
   @override
@@ -41,11 +44,19 @@ class _RegistroPageState extends State<RegistroPage> {
 
   int? _currentStep;
 
+  final _picker = ImagePicker();
+
+  MediaQueryData? queryData;
+  SwiperController? _scrollController;
+
   List<StepManejadorModel> controlSteps = <StepManejadorModel>[];
   List<TipoDocumentoCorModel> listadoTipoDocumento = [];
   List<DepartamentoModel> listDepartamento = [];
   List<MunicipiosModel> listMunicipios = [];
   List<RolModel> listadoRol = [];
+
+  List<File> listadoFotoCedula = [];
+  List<File> listadoDocumentoCamaraComercio = [];
 
   final _formKey = GlobalKey<FormState>();
   final _formDatosPersonales = GlobalKey<FormState>();
@@ -64,10 +75,14 @@ class _RegistroPageState extends State<RegistroPage> {
 
   bool _isShowPassword = false;
   bool _isModifica = false;
+  bool isShowImageID = false;
+  bool isShowImageCC = false;
   late bool isLoadingRegistro;
 
   MunicipiosModel? _municipioSeleccionado;
   DepartamentoModel? _departamentoSeleccionado;
+
+  static const int LIMITE_IMAGENES = 2;
 
   @override
   void initState() {
@@ -247,6 +262,286 @@ class _RegistroPageState extends State<RegistroPage> {
         ))
       ],
     );
+  }
+
+  _crearBotonSeleccionarGaleria(BuildContext context, int idDoc) {
+    return Container(
+        width: MediaQuery.of(context).size.width,
+        child: ElevatedButton.icon(
+            icon: Icon(Icons.image, color: Colors.white),
+            label: Text("SELECCIONAR FOTOS DE GALERÍA",
+                style: TextStyle(color: Colors.white)),
+            style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(EstiloUtil.COLOR_PRIMARY)),
+            onPressed: () {
+              _gestionFoto(context, ImageSource.gallery, idDoc);
+            }));
+  }
+
+  _crearBotonTomarFoto(BuildContext context, int idDoc) {
+    return Container(
+        width: MediaQuery.of(context).size.width,
+        child: ElevatedButton.icon(
+            icon: Icon(Icons.camera_alt, color: Colors.white),
+            label: Text("TOMAR FOTO", style: TextStyle(color: Colors.white)),
+            style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(EstiloUtil.COLOR_PRIMARY)),
+            onPressed: () {
+              _gestionFoto(context, ImageSource.camera, idDoc);
+            }));
+  }
+
+  void _gestionFoto(
+      BuildContext context, ImageSource typeOption, int idDoc) async {
+    if (idDoc == 1) {
+      // Listado para la cedula
+      if (listadoFotoCedula.length < LIMITE_IMAGENES) {
+        setState(() {
+          isShowImageID = false;
+        });
+        var foto = await _picker.getImage(source: typeOption);
+
+        if (foto != null) {
+          File? croppedFile = await ImageCropper.cropImage(
+              sourcePath: foto?.path ?? '',
+              aspectRatioPresets: [
+                CropAspectRatioPreset.square,
+                CropAspectRatioPreset.ratio3x2,
+                CropAspectRatioPreset.original,
+                CropAspectRatioPreset.ratio4x3,
+                CropAspectRatioPreset.ratio16x9
+              ],
+              androidUiSettings: AndroidUiSettings(
+                  toolbarTitle: 'Editar imagen',
+                  toolbarColor: EstiloUtil.COLOR_PRIMARY,
+                  toolbarWidgetColor: Colors.white,
+                  initAspectRatio: CropAspectRatioPreset.original,
+                  backgroundColor: EstiloUtil.COLOR_CLEAR,
+                  statusBarColor: EstiloUtil.COLOR_PRIMARY,
+                  cropFrameColor: EstiloUtil.COLOR_PRIMARY,
+                  lockAspectRatio: false),
+              iosUiSettings: IOSUiSettings(
+                minimumAspectRatio: 1.0,
+              ));
+
+          if (croppedFile != null) {
+            setState(() {
+              listadoFotoCedula.add(croppedFile);
+            });
+            Timer(Duration(seconds: 2), () {
+              setState(() {
+                isShowImageID = true;
+              });
+            });
+          } else {
+            if (listadoFotoCedula.length != 0)
+              setState(() {
+                isShowImageID = true;
+              });
+          }
+        }
+      } else {
+        AlertUtil.info(context,
+            "Solo se puede subir un máximo de $LIMITE_IMAGENES evidencias");
+      }
+    } else {
+      // Listado para la camaria de comercio
+      if (listadoDocumentoCamaraComercio.length < LIMITE_IMAGENES) {
+        setState(() {
+          isShowImageCC = false;
+        });
+        var foto = await _picker.getImage(source: typeOption);
+
+        if (foto != null) {
+          File? croppedFile = await ImageCropper.cropImage(
+              sourcePath: foto?.path ?? '',
+              aspectRatioPresets: [
+                CropAspectRatioPreset.square,
+                CropAspectRatioPreset.ratio3x2,
+                CropAspectRatioPreset.original,
+                CropAspectRatioPreset.ratio4x3,
+                CropAspectRatioPreset.ratio16x9
+              ],
+              androidUiSettings: AndroidUiSettings(
+                  toolbarTitle: 'Editar imagen',
+                  toolbarColor: EstiloUtil.COLOR_PRIMARY,
+                  toolbarWidgetColor: Colors.white,
+                  initAspectRatio: CropAspectRatioPreset.original,
+                  backgroundColor: EstiloUtil.COLOR_CLEAR,
+                  statusBarColor: EstiloUtil.COLOR_PRIMARY,
+                  cropFrameColor: EstiloUtil.COLOR_PRIMARY,
+                  lockAspectRatio: false),
+              iosUiSettings: IOSUiSettings(
+                minimumAspectRatio: 1.0,
+              ));
+
+          if (croppedFile != null) {
+            setState(() {
+              listadoDocumentoCamaraComercio.add(croppedFile);
+            });
+            Timer(Duration(seconds: 2), () {
+              setState(() {
+                isShowImageCC = true;
+              });
+            });
+          } else {
+            if (listadoDocumentoCamaraComercio.length != 0)
+              setState(() {
+                isShowImageCC = true;
+              });
+          }
+        }
+      } else {
+        AlertUtil.info(context,
+            "Solo se puede subir un máximo de $LIMITE_IMAGENES evidencias");
+      }
+    }
+  }
+
+  Widget _crearViewerImagenes(BuildContext context, int idDoc) {
+    return idDoc == 1
+        ? SizedBox(
+            child: isShowImageID
+                ? new Swiper(
+                    scrollDirection: Axis.horizontal,
+                    pagination: new SwiperPagination(),
+                    controller: _scrollController,
+                    itemCount: listadoFotoCedula.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Stack(
+                          fit: StackFit.expand,
+                          alignment: Alignment.center,
+                          children: [
+                            // Image(
+                            //   fit: BoxFit.cover,
+                            //   image: AssetImage(listadoFotoEvidencia[index].path),
+                            // ),
+                            Image.file(listadoFotoCedula[index]),
+                            Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  ElevatedButton(
+                                      style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all<Color>(
+                                                  Colors.transparent)),
+                                      onPressed: () {
+                                        idDoc == 1
+                                            ? _visualizarImagenID(index)
+                                            : _visualizarImagenCC(index);
+                                      },
+                                      child: Icon(Icons.more_horiz_sharp,
+                                          color: Colors.white))
+                                ])
+                          ]);
+                    })
+                : SizedBox(height: 0.0),
+            height: listadoFotoCedula.length > 0 ? 300.0 : 20,
+          )
+        : SizedBox(
+            child: isShowImageCC
+                ? new Swiper(
+                    scrollDirection: Axis.horizontal,
+                    pagination: new SwiperPagination(),
+                    controller: _scrollController,
+                    itemCount: listadoDocumentoCamaraComercio.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Stack(
+                          fit: StackFit.expand,
+                          alignment: Alignment.center,
+                          children: [
+                            // Image(
+                            //   fit: BoxFit.cover,
+                            //   image: AssetImage(listadoFotoEvidencia[index].path),
+                            // ),
+                            Image.file(listadoDocumentoCamaraComercio[index]),
+                            Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  ElevatedButton(
+                                      style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all<Color>(
+                                                  Colors.transparent)),
+                                      onPressed: () {
+                                        idDoc == 1
+                                            ? _visualizarImagenID(index)
+                                            : _visualizarImagenCC(index);
+                                      },
+                                      child: Icon(Icons.more_horiz_sharp,
+                                          color: Colors.white))
+                                ])
+                          ]);
+                    })
+                : SizedBox(height: 0.0),
+            height: listadoDocumentoCamaraComercio.length > 0 ? 300.0 : 20,
+          );
+  }
+
+  _visualizarImagenID(int index) {
+    try {
+      if (listadoFotoCedula.length > 0) {
+        File file = listadoFotoCedula[index];
+        Navigator.push(
+            context,
+            new MaterialPageRoute(
+                builder: (BuildContext context) => new VerImagenWidget(
+                    pathImage: file.path,
+                    indexImage: index,
+                    callback: callbackID)));
+      }
+    } catch (e) {}
+  }
+
+  callbackID(bool isDelete, int index) {
+    if (isDelete) {
+      Navigator.of(context).pop();
+      setState(() {
+        isShowImageID = false;
+      });
+      setState(() {
+        listadoFotoCedula.removeAt(index);
+      });
+      Timer(Duration(seconds: 2), () {
+        setState(() {
+          isShowImageID = true;
+        });
+      });
+    }
+  }
+
+  _visualizarImagenCC(int index) {
+    try {
+      if (listadoDocumentoCamaraComercio.length > 0) {
+        File file = listadoDocumentoCamaraComercio[index];
+        Navigator.push(
+            context,
+            new MaterialPageRoute(
+                builder: (BuildContext context) => new VerImagenWidget(
+                    pathImage: file.path,
+                    indexImage: index,
+                    callback: callbackCC)));
+      }
+    } catch (e) {}
+  }
+
+  callbackCC(bool isDelete, int index) {
+    if (isDelete) {
+      Navigator.of(context).pop();
+      setState(() {
+        isShowImageCC = false;
+      });
+      setState(() {
+        listadoDocumentoCamaraComercio.removeAt(index);
+      });
+      Timer(Duration(seconds: 2), () {
+        setState(() {
+          isShowImageCC = true;
+        });
+      });
+    }
   }
 
   Step _getFormFieldDatosPersonales() {
@@ -577,7 +872,50 @@ class _RegistroPageState extends State<RegistroPage> {
                     registroModel.idTipoClienteStr = val as String?;
                   });
                 },
-              )
+              ),
+              registroModel.idTipoClienteStr == "2"
+                  ? Column(children: <Widget>[
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        onSaved: (String? value) {
+                          setState(() {
+                            //registroModel.direccion = value;
+                          });
+                        },
+                        decoration: EstiloUtil.crearInputDecorationFormCustom(
+                            'Nombre razón social',
+                            icon: Icon(
+                              Icons.home,
+                              color: EstiloUtil.COLOR_PRIMARY,
+                            )),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text("Adjunta tú documento de identificación",
+                          style: TextStyle(fontSize: 17)),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      _crearViewerImagenes(context, 1),
+                      _crearBotonSeleccionarGaleria(context, 1),
+                      _crearBotonTomarFoto(context, 1),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                          "Adjunta el registro de camara de comercio (Si aplica)",
+                          style: TextStyle(fontSize: 17)),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      _crearViewerImagenes(context, 2),
+                      _crearBotonSeleccionarGaleria(context, 2),
+                      _crearBotonTomarFoto(context, 2)
+                    ])
+                  : SizedBox(height: 0)
             ])));
   }
 
@@ -714,23 +1052,51 @@ class _RegistroPageState extends State<RegistroPage> {
         final stepManejador = controlSteps
             .where((element) => element.formulario == STEP_TIPO_USUARIO)
             .first;
-        if (_formTipoBuya.currentState!.validate()) {
-          setState(() {
-            _currentStep = _currentStep! + 1;
-            _styleButtonSiguiente = TextButton.styleFrom(
-              primary: Colors.white,
-              backgroundColor: EstiloUtil.COLOR_PRIMARY,
-              onSurface: Colors.grey,
-            );
-            _fontSizeSiguiente = 18;
-            _fontSizeRegrsar = 14;
-            labelSiguiente = "REGISTRAR";
-            stepManejador.stepEstado = StepState.complete;
-          });
+        if (registroModel.idTipoClienteStr == "2" &&
+            listadoFotoCedula.length != 0) {
+          if (_formTipoBuya.currentState!.validate()) {
+            setState(() {
+              _currentStep = _currentStep! + 1;
+              _styleButtonSiguiente = TextButton.styleFrom(
+                primary: Colors.white,
+                backgroundColor: EstiloUtil.COLOR_PRIMARY,
+                onSurface: Colors.grey,
+              );
+              _fontSizeSiguiente = 18;
+              _fontSizeRegrsar = 14;
+              labelSiguiente = "REGISTRAR";
+              stepManejador.stepEstado = StepState.complete;
+            });
+          } else {
+            setState(() {
+              stepManejador.stepEstado = StepState.error;
+            });
+          }
         } else {
-          setState(() {
-            stepManejador.stepEstado = StepState.error;
-          });
+          registroModel.idTipoClienteStr == "3"
+              ? SizedBox()
+              : AlertUtil.error(
+                  context, "Debes adjuntar tu documento de identificación");
+        }
+        if (registroModel.idTipoClienteStr == "3") {
+          if (_formTipoBuya.currentState!.validate()) {
+            setState(() {
+              _currentStep = _currentStep! + 1;
+              _styleButtonSiguiente = TextButton.styleFrom(
+                primary: Colors.white,
+                backgroundColor: EstiloUtil.COLOR_PRIMARY,
+                onSurface: Colors.grey,
+              );
+              _fontSizeSiguiente = 18;
+              _fontSizeRegrsar = 14;
+              labelSiguiente = "REGISTRAR";
+              stepManejador.stepEstado = StepState.complete;
+            });
+          } else {
+            setState(() {
+              stepManejador.stepEstado = StepState.error;
+            });
+          }
         }
         break;
       case 3:

@@ -1,14 +1,15 @@
+import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:Fe_mobile/src/models/category.dart';
 import 'package:flutter/material.dart';
 
 class CategoryIconWidget extends StatefulWidget {
-  Category? category;
+  ProductoServicioModel? producto;
   String? heroTag;
   double? marginLeft;
   ValueChanged<String>? onPressed;
 
   CategoryIconWidget(
-      {Key? key, this.category, this.heroTag, this.marginLeft, this.onPressed})
+      {Key? key, this.producto, this.heroTag, this.marginLeft, this.onPressed})
       : super(key: key);
 
   @override
@@ -31,42 +32,42 @@ class _CategoryIconWidgetState extends State<CategoryIconWidget>
       splashColor: Theme.of(context).accentColor,
       highlightColor: Theme.of(context).accentColor,
       onTap: () {
-        setState(() {
-          widget.onPressed!(widget.category!.id);
-        });
+        // setState(() {
+        //   widget.onPressed!(widget.producto!.id);
+        // });
       },
       child: AnimatedContainer(
         duration: Duration(milliseconds: 350),
         curve: Curves.easeInOut,
         padding: EdgeInsets.symmetric(horizontal: 15),
         decoration: BoxDecoration(
-          color: widget.category!.selected
-              ? Theme.of(context).primaryColor
-              : Colors.transparent,
+          // color: widget.producto!.selected
+          //     ? Theme.of(context).primaryColor
+          //     : Colors.transparent,
           borderRadius: BorderRadius.circular(50),
         ),
         child: Row(
           children: <Widget>[
-            Hero(
-              tag: widget.heroTag! + widget.category!.id,
-              child: Icon(
-                widget.category!.icon,
-                color: widget.category!.selected
-                    ? Theme.of(context).accentColor
-                    : Theme.of(context).primaryColor,
-                size: 32,
-              ),
-            ),
+            // Hero(
+            //   tag: widget.heroTag! + widget.producto!.id,
+            //   child: Icon(
+            //     widget.producto!.icon,
+            //     color: widget.producto!.selected
+            //         ? Theme.of(context).accentColor
+            //         : Theme.of(context).primaryColor,
+            //     size: 32,
+            //   ),
+            // ),
             SizedBox(width: 10),
             AnimatedSize(
               duration: Duration(milliseconds: 350),
               curve: Curves.easeInOut,
               vsync: this,
-              child: Text(
-                widget.category!.selected ? widget.category!.name : '',
-                style: TextStyle(
-                    fontSize: 14, color: Theme.of(context).accentColor),
-              ),
+              // child: Text(
+              //   widget.producto!.selected ? widget.producto!.name : '',
+              //   style: TextStyle(
+              //       fontSize: 14, color: Theme.of(context).accentColor),
+              // ),
             )
           ],
         ),

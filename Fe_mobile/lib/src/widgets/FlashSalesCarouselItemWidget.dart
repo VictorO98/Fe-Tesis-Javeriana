@@ -35,10 +35,11 @@ class FlashSalesCarouselItemWidget extends StatelessWidget {
                 height: 200,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(6),
-                  // image: DecorationImage(
-                  //   fit: BoxFit.cover,
-                  //   image: AssetImage(product!.urlimagenproductoservicio),
-                  // ),
+                  image: DecorationImage(
+                    image: NetworkImage(
+                        product!.urlimagenproductoservicio.toString()),
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ),
             ),

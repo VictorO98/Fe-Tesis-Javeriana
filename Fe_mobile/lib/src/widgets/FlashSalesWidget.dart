@@ -33,10 +33,10 @@ class _FlashSalesHeaderWidgetState extends State<FlashSalesHeaderWidget> {
           color: Theme.of(context).hintColor,
         ),
         title: Text(
-          'Flash Sales',
+          'Publicaciones en descuento',
           style: Theme.of(context).textTheme.display1,
         ),
-        trailing: Text('End in $_timer'),
+        //trailing: Text('End in $_timer'),
       ),
     );
   }

@@ -171,7 +171,7 @@ namespace Fe.Dominio.contenido
                 if (!fileName.Contains($@"imagen-producto-{demografiaCor.Id}-{publicacion.Id}"))
                     throw new COExcepcion("No tiene acceso a esta imagen. ");
 
-                string directorio = _configuration["ImageProductos:DirectorioImagenes"] + "/" + demografiaCor.Email;
+                string directorio = _configuration["ImageProductos:DirectorioImagenes"] + "/" + demografiaCor.Email + "/Productos";
 
                 return Path.Combine(directorio, Path.GetFileName(fileName));
 

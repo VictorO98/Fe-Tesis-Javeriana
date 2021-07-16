@@ -54,7 +54,7 @@ namespace Fe.Core.General.Datos
                 {
                     context.Attach(rs);
                     rs.Nombre = razonSocial.Nombre;
-                    rs.DireccionDocumento = razonSocial.DireccionDocumento;
+                    //rs.DireccionDocumento = razonSocial.DireccionDocumento;
                     rs.Telefono = razonSocial.Telefono;
                     rs.Estado = razonSocial.Estado;
                     rs.Nit = razonSocial.Nit;

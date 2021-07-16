@@ -99,29 +99,29 @@ class _ProductsByCategoryWidgetState extends State<ProductsByCategoryWidget> {
             },
           ),
         ),
-        Offstage(
-          offstage: this.layout != 'grid',
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: new StaggeredGridView.countBuilder(
-              primary: false,
-              shrinkWrap: true,
-              crossAxisCount: 4,
-              itemCount: widget.subCategory!.products.length,
-              itemBuilder: (BuildContext context, int index) {
-                Product product = widget.subCategory!.products.elementAt(index);
-                return ProductGridItemWidget(
-                  product: product,
-                  heroTag: 'products_by_category_grid',
-                );
-              },
-//                  staggeredTileBuilder: (int index) => new StaggeredTile.fit(index % 2 == 0 ? 1 : 2),
-              staggeredTileBuilder: (int index) => new StaggeredTile.fit(2),
-              mainAxisSpacing: 15.0,
-              crossAxisSpacing: 15.0,
-            ),
-          ),
-        ),
+//         Offstage(
+//           offstage: this.layout != 'grid',
+//           child: Container(
+//             padding: EdgeInsets.symmetric(horizontal: 20),
+//             child: new StaggeredGridView.countBuilder(
+//               primary: false,
+//               shrinkWrap: true,
+//               crossAxisCount: 4,
+//               itemCount: widget.subCategory!.products.length,
+//               itemBuilder: (BuildContext context, int index) {
+//                 Product product = widget.subCategory!.products.elementAt(index);
+//                 return ProductGridItemWidget(
+//                   product: product,
+//                   heroTag: 'products_by_category_grid',
+//                 );
+//               },
+// //                  staggeredTileBuilder: (int index) => new StaggeredTile.fit(index % 2 == 0 ? 1 : 2),
+//               staggeredTileBuilder: (int index) => new StaggeredTile.fit(2),
+//               mainAxisSpacing: 15.0,
+//               crossAxisSpacing: 15.0,
+//             ),
+//           ),
+//         ),
       ],
     );
   }

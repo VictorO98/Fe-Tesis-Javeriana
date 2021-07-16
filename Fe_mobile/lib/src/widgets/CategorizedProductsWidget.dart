@@ -1,3 +1,4 @@
+import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:Fe_mobile/src/models/product.dart';
 import 'package:Fe_mobile/src/widgets/ProductGridItemWidget.dart';
 import 'package:flutter/material.dart';
@@ -7,12 +8,12 @@ class CategorizedProductsWidget extends StatelessWidget {
   const CategorizedProductsWidget({
     Key? key,
     required this.animationOpacity,
-    required List<Product>? productsList,
+    required List<ProductoServicioModel>? productsList,
   })  : _productsList = productsList,
         super(key: key);
 
   final Animation? animationOpacity;
-  final List<Product>? _productsList;
+  final List<ProductoServicioModel>? _productsList;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class CategorizedProductsWidget extends StatelessWidget {
           crossAxisCount: 4,
           itemCount: _productsList!.length,
           itemBuilder: (BuildContext context, int index) {
-            Product product = _productsList!.elementAt(index);
+            ProductoServicioModel product = _productsList!.elementAt(index);
             return ProductGridItemWidget(
               product: product,
               heroTag: 'categorized_products_grid',

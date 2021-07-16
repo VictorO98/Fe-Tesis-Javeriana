@@ -1,11 +1,17 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:Fe_mobile/src/core/models/step_manejador_model.dart';
 import 'package:Fe_mobile/src/core/util/alert_util.dart';
 import 'package:Fe_mobile/src/core/util/estilo_util.dart';
+import 'package:Fe_mobile/src/dominio/models/categoria_model.dart';
+import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
+import 'package:Fe_mobile/src/dominio/providers/contenido_provider.dart';
 import 'package:Fe_mobile/src/widgets/ShoppingCartButtonWidget.dart';
+import 'package:Fe_mobile/src/widgets/check_box_form_field_widget.dart';
 import 'package:Fe_mobile/src/widgets/ver_imagen_widget.dart';
 import 'package:card_swiper/card_swiper.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -17,101 +23,129 @@ class CrearServicioProductoPage extends StatefulWidget {
 }
 
 class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
+  ProductoServicioModel _productoServicioModel = new ProductoServicioModel();
+  ContenidoProvider _contenidoProvider = new ContenidoProvider();
+
+  static const STEP_DATOS_BASICOS = "stepDatosBasicos";
+  static const STEP_DATOS_TIEMPOS = "stepDatosTiempos";
+  static const STEP_PRECIOS = "stepPrecios";
+  static const STEP_IMAGEN = "stepImagen";
+
+  int? _currentStep;
+
+  TextEditingController dateCtl = TextEditingController();
+
   List<File> listadoFotoProductos = [];
+  List<CategoriaModel> _listCategoriaModel = [];
+  List<StepManejadorModel> controlSteps = <StepManejadorModel>[];
+  List<String> _tipoPublicacion = ["Producto", "Servicio"];
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  final _formProductoServicio = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
+  final _formDatosBasicos = GlobalKey<FormState>();
+  final _formDatosTiempos = GlobalKey<FormState>();
+  final _formPrecio = GlobalKey<FormState>();
+  final _formImagen = GlobalKey<FormState>();
+  final nombresCtrl = TextEditingController();
   final _picker = ImagePicker();
+
+  double _fontSizeRegrsar = 0;
+  double _fontSizeSiguiente = 0;
+
+  late String labelSiguiente;
+  late String labelRegresar;
+
+  ButtonStyle? _styleButtonSiguiente;
 
   MediaQueryData? queryData;
   SwiperController? _scrollController;
 
-  int _tipoPublicacion = 0;
-  int _estadoInfoProducto = 0;
+  CategoriaModel? _categoriaSeleccionada;
+  String? _publicacionSeleccionada;
+  String? _tipoVenta;
 
   bool _isLoading = false;
   bool isShowImages = false;
+  bool _isModifica = false;
+  late bool _isProducto;
 
-  static const int LIMITE_IMAGENES = 5;
+  // TODO cambiar este dato para subir varias
+  static const int LIMITE_IMAGENES = 1;
 
   @override
   void initState() {
+    _isProducto = false;
     _scrollController = new SwiperController();
     _scrollController!.addListener(() {});
+    _fontSizeRegrsar = 15;
+    _fontSizeSiguiente = 15;
+
+    _styleButtonSiguiente = TextButton.styleFrom(
+        // primary: Colors.black,
+        // onSurface: Colors.grey,
+        );
+    _currentStep = 0;
+    labelSiguiente = "SIGUIENTE";
+    labelRegresar = "";
+
+    controlSteps.add(new StepManejadorModel(
+        formulario: STEP_DATOS_BASICOS,
+        numeroStep: 0,
+        stepEstado: StepState.editing));
+    controlSteps.add(new StepManejadorModel(
+        formulario: STEP_DATOS_TIEMPOS,
+        numeroStep: 1,
+        stepEstado: StepState.editing));
+    controlSteps.add(new StepManejadorModel(
+        formulario: STEP_PRECIOS,
+        numeroStep: 2,
+        stepEstado: StepState.editing));
+    controlSteps.add(new StepManejadorModel(
+        formulario: STEP_IMAGEN, numeroStep: 3, stepEstado: StepState.editing));
+
     super.initState();
+    _getCategorias();
+  }
+
+  _getCategorias() async {
+    List<CategoriaModel> list = await _contenidoProvider.getAllCategorias();
+    setState(() {
+      _listCategoriaModel = list;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      initialIndex: 0,
-      length: 5,
-      child: WillPopScope(
-        onWillPop: _onWillPop,
-        child: Scaffold(
-          backgroundColor: _isLoading ? Colors.white : Colors.lightBlue[100],
-          key: _scaffoldKey,
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            leading: new IconButton(
-              icon: new Icon(Icons.sort, color: Theme.of(context).hintColor),
-              onPressed: () => _scaffoldKey.currentState!.openDrawer(),
-            ),
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            title: Text(
-              'Producto o Servicio',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            actions: <Widget>[
-              new ShoppingCartButtonWidget(
-                  iconColor: Theme.of(context).hintColor,
-                  labelColor: Theme.of(context).accentColor),
-              Container(
-                  width: 30,
-                  height: 30,
-                  margin: EdgeInsets.only(top: 12.5, bottom: 12.5, right: 20),
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(300),
-                    onTap: () {
-                      Navigator.of(context).pushNamed('/Tabs', arguments: 1);
-                    },
-                    child: CircleAvatar(
-                      backgroundImage: AssetImage('img/user2.jpg'),
-                    ),
-                  )),
-            ],
-          ),
-          body: Container(
-            height: MediaQuery.of(context).size.height,
-            child: SingleChildScrollView(
-              // controller: controller,
-              child: _tipoPublicacion == 0
-                  ? Column(
-                      children: <Widget>[_createProductService(context)],
-                    )
-                  : _tipoPublicacion == 1
-                      ? _isLoading
-                          ? Column(
-                              children: <Widget>[
-                                _crearViewerImagenes(context),
-                                _crearProducto(context)
-                              ],
-                            )
-                          : Center(child: CircularProgressIndicator())
-                      : _isLoading
-                          ? Column(
-                              children: <Widget>[
-                                _crearViewerImagenes(context),
-                                _crearServicio(context)
-                              ],
-                            )
-                          : Center(child: CircularProgressIndicator()),
-            ),
-          ),
-        ),
-      ),
-    );
+    return Scaffold(
+        backgroundColor: Colors.blue[100],
+        body: Stack(
+          children: <Widget>[
+            Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+                margin: EdgeInsets.only(top: 80, bottom: 20),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Theme.of(context).primaryColor,
+                  boxShadow: [
+                    BoxShadow(
+                        color: Theme.of(context).hintColor.withOpacity(0.2),
+                        offset: Offset(0, 10),
+                        blurRadius: 20)
+                  ],
+                ),
+                child: WillPopScope(
+                    onWillPop: _onWillPop,
+                    child: Scaffold(
+                        key: _scaffoldKey,
+                        body: GestureDetector(
+                            behavior: HitTestBehavior.opaque,
+                            onPanDown: (_) {
+                              FocusScope.of(context).requestFocus(FocusNode());
+                            },
+                            child: _crearProducto(context)))))
+          ],
+        ));
   }
 
   Future<bool> _onWillPop() async {
@@ -143,115 +177,66 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
 
     return Container(
         alignment: Alignment.center,
-        child: Form(
-            key: _formProductoServicio,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 45,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 45,
+            ),
+            Text("¿Qué quieres publicar?",
+                style: Theme.of(context).textTheme.headline3),
+            SizedBox(
+              height: 45,
+            ),
+            ClipOval(
+              child: Material(
+                color: Colors.blue[100], // Button color
+                child: InkWell(
+                  splashColor: Colors.limeAccent, // Splash color
+                  onTap: () {
+                    setState(() {});
+                    Timer(Duration(seconds: 1), () {
+                      setState(() {
+                        _isLoading = true;
+                      });
+                    });
+                  },
+                  child: SizedBox(
+                      width: heightScreen / 5.3,
+                      height: heightScreen / 5.3,
+                      child: Icon(Icons.watch,
+                          color: Colors.lightBlue, size: heightScreen / 12)),
                 ),
-                Text("¿Qué quieres publicar?",
-                    style: Theme.of(context).textTheme.headline3),
-                SizedBox(
-                  height: 45,
+              ),
+            ),
+            SizedBox(height: 10),
+            Text("Producto", style: Theme.of(context).textTheme.headline4),
+            SizedBox(height: 35),
+            ClipOval(
+              child: Material(
+                color: Colors.white, // Button color
+                child: InkWell(
+                  splashColor: Colors.limeAccent, // Splash color
+                  onTap: () {
+                    setState(() {});
+                    Timer(Duration(seconds: 1), () {
+                      setState(() {
+                        _isLoading = true;
+                      });
+                    });
+                  },
+                  child: SizedBox(
+                      width: heightScreen / 5.3,
+                      height: heightScreen / 5.3,
+                      child: Icon(Icons.dry_cleaning,
+                          color: Colors.lightBlue, size: heightScreen / 12)),
                 ),
-                ClipOval(
-                  child: Material(
-                    color: Colors.white, // Button color
-                    child: InkWell(
-                      splashColor: Colors.limeAccent, // Splash color
-                      onTap: () {
-                        _tipoPublicacion = 1;
-                        setState(() {});
-                        Timer(Duration(seconds: 1), () {
-                          setState(() {
-                            _isLoading = true;
-                          });
-                        });
-                      },
-                      child: SizedBox(
-                          width: heightScreen / 5.3,
-                          height: heightScreen / 5.3,
-                          child: Icon(Icons.watch,
-                              color: Colors.lightBlue,
-                              size: heightScreen / 12)),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 10),
-                Text("Producto", style: Theme.of(context).textTheme.headline4),
-                SizedBox(height: 35),
-                ClipOval(
-                  child: Material(
-                    color: Colors.white, // Button color
-                    child: InkWell(
-                      splashColor: Colors.limeAccent, // Splash color
-                      onTap: () {
-                        _tipoPublicacion = 2;
-                        setState(() {});
-                        Timer(Duration(seconds: 1), () {
-                          setState(() {
-                            _isLoading = true;
-                          });
-                        });
-                      },
-                      child: SizedBox(
-                          width: heightScreen / 5.3,
-                          height: heightScreen / 5.3,
-                          child: Icon(Icons.dry_cleaning,
-                              color: Colors.lightBlue,
-                              size: heightScreen / 12)),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 10),
-                Text("Servicio", style: Theme.of(context).textTheme.headline4)
-              ],
-            )
-            // Column(
-            //   children: [
-            //     SizedBox(height: 15),
-            //     DropdownButtonFormField<String>(
-            //         decoration: EstiloUtil.crearInputDecorationFormCustom('',
-            //             icon: Icon(
-            //               Icons.credit_card,
-            //               color: EstiloUtil.COLOR_PRIMARY,
-            //             )),
-            //         value: null,
-            //         items: ["Producto", "Servicio"]
-            //             .map((label) => DropdownMenuItem(
-            //                   child: Row(
-            //                     mainAxisAlignment:
-            //                         MainAxisAlignment.spaceAround,
-            //                     children: <Widget>[
-            //                       Image.asset(
-            //                         'icons/currency/${label.toLowerCase()}.png',
-            //                         package: 'currency_icons',
-            //                         width: 30,
-            //                       ),
-            //                       Text(label),
-            //                     ],
-            //                   ),
-            //                   value: label,
-            //                 ))
-            //             .toList(),
-            //         hint: Text("Tipo de documento \*"),
-            //         onSaved: (val) {
-            //           setState(() {
-            //             //registroModel.idTipoDocumentoStr = val;
-            //           });
-            //         },
-            //         onChanged: (val) {
-            //           setState(() {
-            //             //registroModel.idTipoDocumentoStr = val;
-            //           });
-            //         },
-            //         validator: (value) => value == null //|| value == 0
-            //             ? 'Seleccione el tipo de documento'
-            //             : null),
-
-            ));
+              ),
+            ),
+            SizedBox(height: 10),
+            Text("Servicio", style: Theme.of(context).textTheme.headline4)
+          ],
+        ));
   }
 
   _crearBotonSeleccionarGaleria(BuildContext context) {
@@ -290,42 +275,44 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
       });
       var foto = await _picker.getImage(source: typeOption);
 
-      File? croppedFile = await ImageCropper.cropImage(
-          sourcePath: foto?.path ?? '',
-          aspectRatioPresets: [
-            CropAspectRatioPreset.square,
-            CropAspectRatioPreset.ratio3x2,
-            CropAspectRatioPreset.original,
-            CropAspectRatioPreset.ratio4x3,
-            CropAspectRatioPreset.ratio16x9
-          ],
-          androidUiSettings: AndroidUiSettings(
-              toolbarTitle: 'Editar imagen',
-              toolbarColor: EstiloUtil.COLOR_PRIMARY,
-              toolbarWidgetColor: Colors.white,
-              initAspectRatio: CropAspectRatioPreset.original,
-              backgroundColor: EstiloUtil.COLOR_CLEAR,
-              statusBarColor: EstiloUtil.COLOR_PRIMARY,
-              cropFrameColor: EstiloUtil.COLOR_PRIMARY,
-              lockAspectRatio: false),
-          iosUiSettings: IOSUiSettings(
-            minimumAspectRatio: 1.0,
-          ));
+      if (foto != null) {
+        File? croppedFile = await ImageCropper.cropImage(
+            sourcePath: foto?.path ?? '',
+            aspectRatioPresets: [
+              CropAspectRatioPreset.square,
+              CropAspectRatioPreset.ratio3x2,
+              CropAspectRatioPreset.original,
+              CropAspectRatioPreset.ratio4x3,
+              CropAspectRatioPreset.ratio16x9
+            ],
+            androidUiSettings: AndroidUiSettings(
+                toolbarTitle: 'Editar imagen',
+                toolbarColor: EstiloUtil.COLOR_PRIMARY,
+                toolbarWidgetColor: Colors.white,
+                initAspectRatio: CropAspectRatioPreset.original,
+                backgroundColor: EstiloUtil.COLOR_CLEAR,
+                statusBarColor: EstiloUtil.COLOR_PRIMARY,
+                cropFrameColor: EstiloUtil.COLOR_PRIMARY,
+                lockAspectRatio: false),
+            iosUiSettings: IOSUiSettings(
+              minimumAspectRatio: 1.0,
+            ));
 
-      if (croppedFile != null) {
-        setState(() {
-          listadoFotoProductos.add(croppedFile);
-        });
-        Timer(Duration(seconds: 2), () {
+        if (croppedFile != null) {
           setState(() {
-            isShowImages = true;
+            listadoFotoProductos.add(croppedFile);
           });
-        });
-      } else {
-        if (listadoFotoProductos.length != 0)
-          setState(() {
-            isShowImages = true;
+          Timer(Duration(seconds: 2), () {
+            setState(() {
+              isShowImages = true;
+            });
           });
+        } else {
+          if (listadoFotoProductos.length != 0)
+            setState(() {
+              isShowImages = true;
+            });
+        }
       }
     } else {
       AlertUtil.info(context,
@@ -404,106 +391,304 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
     }
   }
 
-  Widget _crearProducto(BuildContext context) {
-    return Container(
-        margin: const EdgeInsets.only(left: 15, right: 15),
-        alignment: Alignment.center,
-        child: Form(
-            key: _formProductoServicio,
-            child: Column(
-              children: [
-                SizedBox(height: 20),
-                _crearBotonSeleccionarGaleria(context),
-                _crearBotonTomarFoto(context),
-                SizedBox(height: 5),
-                TextFormField(
-                  decoration: EstiloUtil.crearInputDecorationFormCustom(
-                      "Nombre producto \*",
-                      icon: Icon(
-                        Icons.person,
-                        color: EstiloUtil.COLOR_PRIMARY,
-                      )),
-                  onSaved: (String? value) {
-                    setState(() {
-                      //registroModel.nombres = value;
-                    });
-                  },
-                  validator: (String? value) =>
-                      (value!.isEmpty) || (value.trim().isEmpty)
-                          ? 'Registre el nombre del producto'
-                          : null,
-                ),
-                SizedBox(height: 10),
-                TextFormField(
-                    keyboardType: TextInputType.number,
-                    decoration:
-                        EstiloUtil.crearInputDecorationFormCustom("Cantidad \*",
-                            icon: Icon(
-                              Icons.person,
-                              color: EstiloUtil.COLOR_PRIMARY,
-                            )),
-                    onSaved: (String? value) {
-                      setState(() {
-                        //registroModel.nombres = value;
-                      });
-                    },
-                    validator: (String? value) {
-                      if (value!.isEmpty || value.trim().isEmpty)
-                        return 'Registre la cantidad del producto.';
+  List<Step> getStepProductos() {
+    return [
+      _getFormFieldDatosBasicos(),
+      _getFormFieldDatosTiempos(),
+      _getFormFieldPrecios(),
+      _getFormFieldImagen()
+    ];
+  }
 
-                      if (int.tryParse(value) == null)
-                        return 'Solo se aceptan números.';
-                      return null;
-                    }),
-                SizedBox(height: 10),
-                TextFormField(
-                    keyboardType: TextInputType.number,
-                    decoration: EstiloUtil.crearInputDecorationFormCustom(
-                        "Precio unitario (Sin puntos y comas) \*",
+  Widget _crearProducto(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Expanded(
+            child: Form(
+          key: _formKey,
+          child: Stepper(
+            controlsBuilder: (BuildContext context,
+                {VoidCallback? onStepContinue, VoidCallback? onStepCancel}) {
+              return !_isProducto
+                  ? Row(
+                      children: <Widget>[
+                        TextButton(
+                          onPressed: onStepContinue,
+                          child: Text(
+                            labelSiguiente,
+                            style: TextStyle(fontSize: _fontSizeSiguiente),
+                          ),
+                          style: _styleButtonSiguiente,
+                        ),
+                        TextButton(
+                            onPressed: onStepCancel,
+                            child: Text(
+                              labelRegresar,
+                              style: TextStyle(fontSize: _fontSizeRegrsar),
+                            ))
+                      ],
+                    )
+                  : CircularProgressIndicator();
+            },
+            steps: getStepProductos(),
+            currentStep: this._currentStep!,
+            onStepContinue: () => {_gestionarSiguiente(context)},
+            onStepCancel: () => {_gestionarRegresar(context)},
+            type: StepperType.vertical,
+          ),
+        ))
+      ],
+    );
+  }
+
+  Step _getFormFieldDatosBasicos() {
+    return Step(
+      title: const Text(
+        'Tipo de publicación',
+        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      ),
+      subtitle: Text(
+        '¿ Que deseas vender ?',
+        style: TextStyle(fontSize: 15),
+      ),
+      isActive: true,
+      state: controlSteps
+          .firstWhere((element) => element.formulario == STEP_DATOS_BASICOS)
+          .stepEstado!,
+      content: Form(
+        key: _formDatosBasicos,
+        child: Column(
+          children: <Widget>[
+            SizedBox(height: 5),
+            DropdownButtonFormField<String>(
+              decoration: EstiloUtil.crearInputDecorationFormCustom('',
+                  icon: Icon(
+                    Icons.shopping_cart,
+                    color: EstiloUtil.COLOR_PRIMARY,
+                  )),
+              value: _tipoVenta,
+              items: _tipoPublicacion.map((String val) {
+                return DropdownMenuItem<String>(
+                  value: val,
+                  child: new Text(
+                    val,
+                  ),
+                );
+              }).toList(),
+              validator: (value) =>
+                  value == null ? 'Seleccione un tipo de publicación' : null,
+              onChanged: (c) => setState(() {
+                _tipoVenta = c!;
+                //registroModel.idPoblacion = c?.id.toString();
+              }),
+            ),
+
+            //   SizedBox(height: 5),
+            //
+            //
+          ],
+        ),
+      ),
+    );
+  }
+
+  Step _getFormFieldDatosTiempos() {
+    return Step(
+        title: const Text(
+          'Datos basicos',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        subtitle: Text(
+          'Diligencie los datos',
+          style: TextStyle(fontSize: 15),
+        ),
+        isActive: true,
+        state: controlSteps
+            .firstWhere((element) => element.formulario == STEP_DATOS_TIEMPOS)
+            .stepEstado!,
+        content: Form(
+            key: _formDatosTiempos,
+            child: Column(children: <Widget>[
+              SizedBox(height: 5),
+              TextFormField(
+                decoration:
+                    EstiloUtil.crearInputDecorationFormCustom("Nombre \*",
                         icon: Icon(
                           Icons.person,
                           color: EstiloUtil.COLOR_PRIMARY,
                         )),
-                    onSaved: (String? value) {
-                      setState(() {
-                        //registroModel.nombres = value;
-                      });
-                    },
-                    validator: (String? value) {
-                      if (value!.isEmpty || value.trim().isEmpty)
-                        return 'Registre la cantidad del producto.';
+                onSaved: (String? value) {
+                  setState(() {
+                    //registroModel.nombres = value;
+                  });
+                },
+                validator: (String? value) =>
+                    (value!.isEmpty) || (value.trim().isEmpty)
+                        ? 'Registra el nombre de tu publicacion'
+                        : null,
+              ),
+              SizedBox(height: 10),
+              _tipoVenta == "Producto"
+                  ? TextFormField(
+                      onSaved: (String? value) {
+                        setState(() {
+                          //registroModel.numeroDocumento = value;
+                        });
+                      },
+                      keyboardType: TextInputType.number,
+                      decoration: EstiloUtil.crearInputDecorationFormCustom(
+                          'Cantidad disponible \*',
+                          icon: Icon(
+                            Icons.credit_card,
+                            color: EstiloUtil.COLOR_PRIMARY,
+                          )),
+                      validator: (String? value) {
+                        if (value!.isEmpty || value.trim().isEmpty)
+                          return 'Registre la cantidad del producto.';
 
-                      if (int.tryParse(value) == null)
-                        return 'Solo se aceptan números.';
-                      return null;
-                    }),
-                SizedBox(height: 10),
-                TextFormField(
-                  decoration: EstiloUtil.crearInputDecorationFormCustom(
-                      "Descripción \*",
-                      icon: Icon(
-                        Icons.person,
-                        color: EstiloUtil.COLOR_PRIMARY,
-                      )),
+                        if (int.tryParse(value) == null)
+                          return 'Solo se aceptan números.';
+                        return null;
+                      })
+                  : SizedBox(),
+              SizedBox(height: 10),
+              DropdownSearch<CategoriaModel>(
+                  mode: Mode.MENU,
+                  showSearchBox: true,
+                  showClearButton: true,
+                  selectedItem: _isModifica ? _categoriaSeleccionada : null,
+                  dropdownSearchDecoration:
+                      EstiloUtil.crearInputDecorationFormCustom(''),
+                  searchBoxDecoration:
+                      EstiloUtil.crearInputDecorationFormCustom(''),
+                  items: _listCategoriaModel,
+                  itemAsString: (CategoriaModel e) => e.nombre!,
+                  label: "Categorías \*",
+                  hint: "Seleccione la categoría",
+                  validator: (value) =>
+                      value == null ? 'Seleccione una categoría' : null,
+                  onChanged: (c) => setState(() {
+                        //registroModel.idPoblacion = c?.id.toString();
+                      })),
+              SizedBox(height: 10),
+              TextFormField(
+                keyboardType: TextInputType.multiline,
+                decoration:
+                    EstiloUtil.crearInputDecorationFormCustom("Descripción \*",
+                        icon: Icon(
+                          Icons.text_snippet_rounded,
+                          color: EstiloUtil.COLOR_PRIMARY,
+                        )),
+                onSaved: (String? value) {
+                  setState(() {
+                    //registroModel.nombres = value;
+                  });
+                },
+                validator: (String? value) =>
+                    (value!.isEmpty) || (value.trim().isEmpty)
+                        ? 'Registre la descripción'
+                        : null,
+              ),
+            ])));
+  }
+
+  Step _getFormFieldPrecios() {
+    return Step(
+        title: const Text(
+          'Precio',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        subtitle: Text(
+          'Diligencie los datos',
+          style: TextStyle(fontSize: 15),
+        ),
+        isActive: true,
+        state: controlSteps
+            .firstWhere((element) => element.formulario == STEP_PRECIOS)
+            .stepEstado!,
+        content: Form(
+            key: _formPrecio,
+            child: Column(children: <Widget>[
+              SizedBox(height: 5),
+              TextFormField(
                   onSaved: (String? value) {
                     setState(() {
-                      //registroModel.nombres = value;
+                      //registroModel.numeroDocumento = value;
                     });
                   },
-                  validator: (String? value) =>
-                      (value!.isEmpty) || (value.trim().isEmpty)
-                          ? 'Registre la descripción del producto'
-                          : null,
-                ),
-              ],
-            )));
+                  keyboardType: TextInputType.number,
+                  decoration: EstiloUtil.crearInputDecorationFormCustom(
+                      'Precio (Sin puntos y comas) \*',
+                      icon: Icon(
+                        Icons.credit_card,
+                        color: EstiloUtil.COLOR_PRIMARY,
+                      )),
+                  validator: (String? value) {
+                    if (value!.isEmpty || value.trim().isEmpty)
+                      return 'Registre el precio de tu publicacion';
+
+                    if (int.tryParse(value) == null)
+                      return 'Solo se aceptan números.';
+                    return null;
+                  }),
+              SizedBox(height: 10),
+              TextFormField(
+                  onSaved: (String? value) {
+                    setState(() {
+                      //registroModel.numeroDocumento = value;
+                    });
+                  },
+                  keyboardType: TextInputType.number,
+                  decoration: EstiloUtil.crearInputDecorationFormCustom(
+                      'Descuento (Opcional - Sin puntos y comas) \*',
+                      icon: Icon(
+                        Icons.credit_card,
+                        color: EstiloUtil.COLOR_PRIMARY,
+                      )),
+                  validator: (String? value) {
+                    if (int.tryParse(value!) == null)
+                      return 'Solo se aceptan números.';
+
+                    // TODO validar que el valor este no sea mayor al original
+                    return null;
+                  }),
+              SizedBox(height: 8),
+              CheckboxFormField(
+                title: Text(
+                    "Habilitar trueque (Intercambia tu producto con el de otro emprendedor)"),
+              )
+            ])));
+  }
+
+  Step _getFormFieldImagen() {
+    return Step(
+        title: const Text(
+          'Imagenes',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        subtitle: Text(
+          'Adjunte las images de su producto',
+          style: TextStyle(fontSize: 15),
+        ),
+        isActive: true,
+        state: controlSteps
+            .firstWhere((element) => element.formulario == STEP_IMAGEN)
+            .stepEstado!,
+        content: Form(
+            key: _formImagen,
+            child: Column(children: <Widget>[
+              SizedBox(height: 5),
+              _crearViewerImagenes(context),
+              _crearBotonSeleccionarGaleria(context),
+              _crearBotonTomarFoto(context)
+            ])));
   }
 
   Widget _crearServicio(BuildContext context) {
     return Container(
         alignment: Alignment.center,
         child: Form(
-            key: _formProductoServicio,
+            key: _formKey,
             child: Column(
               children: [
                 SizedBox(height: 20),
@@ -527,4 +712,120 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
               ],
             )));
   }
+
+  _gestionarSiguiente(BuildContext context) {
+    switch (_currentStep) {
+      case 0:
+        final stepManejador = controlSteps
+            .where((element) => element.formulario == STEP_DATOS_BASICOS)
+            .first;
+        if (_formDatosBasicos.currentState!.validate()) {
+          setState(() {
+            _currentStep = _currentStep! + 1;
+            labelRegresar = "REGRESAR";
+            stepManejador.stepEstado = StepState.complete;
+          });
+        } else {
+          setState(() {
+            stepManejador.stepEstado = StepState.error;
+          });
+        }
+        break;
+      case 1:
+        final stepManejador = controlSteps
+            .where((element) => element.formulario == STEP_DATOS_TIEMPOS)
+            .first;
+        if (_formDatosTiempos.currentState!.validate()) {
+          setState(() {
+            _currentStep = _currentStep! + 1;
+            stepManejador.stepEstado = StepState.complete;
+          });
+        } else {
+          setState(() {
+            stepManejador.stepEstado = StepState.error;
+          });
+        }
+        break;
+      case 2:
+        final stepManejador = controlSteps
+            .where((element) => element.formulario == STEP_PRECIOS)
+            .first;
+        if (_formPrecio.currentState!.validate()) {
+          setState(() {
+            _currentStep = _currentStep! + 1;
+            _styleButtonSiguiente = TextButton.styleFrom(
+              primary: Colors.white,
+              backgroundColor: EstiloUtil.COLOR_PRIMARY,
+              onSurface: Colors.grey,
+            );
+            _fontSizeSiguiente = 18;
+            _fontSizeRegrsar = 14;
+            labelSiguiente = "GUARDAR";
+            stepManejador.stepEstado = StepState.complete;
+          });
+        } else {
+          setState(() {
+            stepManejador.stepEstado = StepState.error;
+          });
+        }
+
+        break;
+      case 3:
+        final stepManejador = controlSteps
+            .where((element) => element.formulario == STEP_IMAGEN)
+            .first;
+        if (_formImagen.currentState!.validate()) {
+          setState(() {
+            stepManejador.stepEstado = StepState.complete;
+            _registrarProducto(context);
+          });
+        } else {
+          setState(() {
+            stepManejador.stepEstado = StepState.error;
+          });
+        }
+        break;
+      default:
+    }
+  }
+
+  _gestionarRegresar(BuildContext context) {
+    switch (_currentStep) {
+      case 1:
+        final stepManejador = controlSteps
+            .where((element) => element.formulario == STEP_DATOS_TIEMPOS)
+            .first;
+        setState(() {
+          _currentStep = _currentStep! - 1;
+          labelRegresar = "";
+          stepManejador.stepEstado = StepState.editing;
+        });
+        break;
+      case 2:
+        final stepManejador = controlSteps
+            .where((element) => element.formulario == STEP_PRECIOS)
+            .first;
+        setState(() {
+          _currentStep = _currentStep! - 1;
+          stepManejador.stepEstado = StepState.editing;
+        });
+        break;
+      case 3:
+        final stepManejador = controlSteps
+            .where((element) => element.formulario == STEP_IMAGEN)
+            .first;
+        setState(() {
+          _currentStep = _currentStep! - 1;
+          labelSiguiente = "SIGUIENTE";
+          _styleButtonSiguiente = TextButton.styleFrom();
+          _fontSizeSiguiente = 15;
+          _fontSizeRegrsar = 15;
+          stepManejador.stepEstado = StepState.editing;
+        });
+        break;
+      default:
+    }
+  }
+
+  _registrarProducto(context) {}
 }
