@@ -480,5 +480,25 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         {
             return _coFachada.BuscarPublicacion(nombre);
         }
+
+        // TODO: Decodificacion de JWT para validar el usuario mediante el claim del ID
+        /// <summary>
+        /// Retorna una lista con las publicaciones que tienen el truque habilitado
+        /// </summary>
+        /// <returns>Lista de publicaciones con trueque habilitado</returns>
+        /// <param name="idDemografia">ID del usuario que se desea obtener sus pubicaciones con truque habilitado</param>
+        [Route("GetPublicacionesHabilitadasTrueque")]
+        [HttpGet]
+        public List<ContratoPc> GetPublicacionesHabilitadasTrueque(int idDemografia)
+        {
+            try
+            {
+                return _coFachada.GetPublicacionesHabilitadasTrueque(idDemografia);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+        }
     }
 }

@@ -433,5 +433,24 @@ namespace Fe.Dominio.contenido
             }
             return publicaciones;
         }
+
+        internal List<ContratoPc> GetPublicacionesHabilitadasTrueque(DemografiaCor demografia)
+        {
+            List<ContratoPc> publicaciones = new List<ContratoPc>();
+            if (demografia != null)
+            {
+                if (demografia.Rolcorid == 2)
+                {
+                    List<ProductosServiciosPc> publicacion = _repoProducto.GetPublicacionesHabilitadasTrueque(demografia.Id);
+                    for (int i = 0; i < publicacion.Count; i++)
+                    {
+                        publicaciones.Add(DesplegarPublicacion(publicacion[i].Id));
+                    }
+                }
+                else { throw new COExcepcion("El usuario ingresado no es un emprendedor."); }
+            }
+            else { throw new COExcepcion("El usuario ingresado no existe."); }
+            return publicaciones;
+        }
     }
 }
