@@ -17,16 +17,16 @@ class ReviewItemWidget extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Container(
-              height: 60,
-              width: 60,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(100)),
-                image: DecorationImage(
-                    image: AssetImage(this.review!.user.avatar!),
-                    fit: BoxFit.cover),
-              ),
-            ),
+            // Container(
+            //   height: 60,
+            //   width: 60,
+            //   decoration: BoxDecoration(
+            //     borderRadius: BorderRadius.all(Radius.circular(100)),
+            //     image: DecorationImage(
+            //         image: AssetImage(this.review!.user.avatar!),
+            //         fit: BoxFit.cover),
+            //   ),
+            // ),
             SizedBox(width: 15),
             Flexible(
               child: Column(
@@ -48,20 +48,23 @@ class ReviewItemWidget extends StatelessWidget {
                                   TextStyle(
                                       color: Theme.of(context).hintColor)),
                             ),
+                            SizedBox(
+                              height: 5,
+                            ),
                             Row(
                               children: <Widget>[
                                 Icon(
-                                  UiIcons.calendar,
+                                  Icons.calendar_today_outlined,
                                   color: Theme.of(context).focusColor,
                                   size: 20,
                                 ),
                                 SizedBox(width: 10),
-                                // Text(
-                                //   review.getDateTime(),
-                                //   style: Theme.of(context).textTheme.caption,
-                                //   overflow: TextOverflow.fade,
-                                //   softWrap: false,
-                                // ),
+                                Text(
+                                  '2021-07-15',
+                                  style: Theme.of(context).textTheme.caption,
+                                  overflow: TextOverflow.fade,
+                                  softWrap: false,
+                                ),
                               ],
                             ),
                           ],

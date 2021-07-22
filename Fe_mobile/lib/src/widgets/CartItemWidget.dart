@@ -7,7 +7,7 @@ class CartItemWidget extends StatefulWidget {
   Product? product;
   int quantity;
 
-  CartItemWidget({Key? key, this.product, this.heroTag, this.quantity = 1})
+  CartItemWidget({Key? key, this.product, this.heroTag, this.quantity = 0})
       : super(key: key);
 
   @override

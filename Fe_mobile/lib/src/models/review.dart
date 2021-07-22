@@ -27,30 +27,29 @@ class ReviewsList {
   ReviewsList() {
     this._reviewsList = [
       new Review(
-          new User.basic(
-              'Maria R. Garza', 'img/user0.jpg', UserState.available),
-          'There are a few foods that predate colonization, and the European colonization of the Americas brought about the introduction of a large number of new ingredients',
-          3.2),
+          new User.basic('Maria alvarez', 'img/user0.jpg', UserState.available),
+          'Excelente producto me ha ayudado a verme más bonita',
+          4.7),
+      new Review(
+          new User.basic('Arreglos de joyas a domicilio', 'img/user1.jpg',
+              UserState.available),
+          'Fue un excelente regalo para mi esposa',
+          4.5),
       new Review(
           new User.basic(
-              'George T. Larkin', 'img/user1.jpg', UserState.available),
-          'There are a few foods that predate colonization, and the European colonization of the Americas brought about the introduction of a large number of new ingredients',
-          3.2),
+              'Eduardo Ezequiel', 'img/user3.jpg', UserState.available),
+          'Muy buena calidad',
+          4.9),
       new Review(
           new User.basic(
-              'Edward E. Linn', 'img/user3.jpg', UserState.available),
-          'There are a few foods that predate colonization, and the European colonization of the Americas brought about the introduction of a large number of new ingredients',
-          3.2),
+              'Jorge T. Ospina', 'img/user0.jpg', UserState.available),
+          'Me gusto mucho el acabado que tenía cada uno',
+          5.0),
       new Review(
           new User.basic(
-              'George T. Larkin', 'img/user0.jpg', UserState.available),
-          'There are a few foods that predate colonization, and the European colonization of the Americas brought about the introduction of a large number of new ingredients',
-          3.2),
-      new Review(
-          new User.basic(
-              'Laurie Z. Bergeron', 'img/user1.jpg', UserState.available),
-          'There are a few foods that predate colonization, and the European colonization of the Americas brought',
-          3.2)
+              'Laura C. Benavidez', 'img/user1.jpg', UserState.available),
+          'Muy buenos pero se pierde el brillo después de un tiempo',
+          4.1)
     ];
   }
 }

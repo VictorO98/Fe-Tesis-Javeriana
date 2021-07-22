@@ -23,14 +23,13 @@ class _CartWidgetState extends State<CartWidget> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         leading: new IconButton(
-          icon:
-              new Icon(UiIcons.return_icon, color: Theme.of(context).hintColor),
+          icon: new Icon(Icons.arrow_back, color: Theme.of(context).hintColor),
           onPressed: () => Navigator.of(context).pop(),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
-          'Cart',
+          'Atrás',
           style: Theme.of(context).textTheme.display1,
         ),
         actions: <Widget>[
@@ -67,17 +66,17 @@ class _CartWidgetState extends State<CartWidget> {
                     child: ListTile(
                       contentPadding: EdgeInsets.symmetric(vertical: 0),
                       leading: Icon(
-                        UiIcons.shopping_cart,
+                        Icons.add_shopping_cart_outlined,
                         color: Theme.of(context).hintColor,
                       ),
                       title: Text(
-                        'Shopping Cart',
+                        'Carrito de compras',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.display1,
                       ),
                       subtitle: Text(
-                        'Verify your quantity and click checkout',
+                        'Verifique su cantidad y dirijase al checkout',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.caption,
@@ -133,7 +132,7 @@ class _CartWidgetState extends State<CartWidget> {
                             style: Theme.of(context).textTheme.body2,
                           ),
                         ),
-                        Text('\$50.23',
+                        Text('\$130.230',
                             style: Theme.of(context).textTheme.subhead),
                       ],
                     ),
@@ -142,11 +141,11 @@ class _CartWidgetState extends State<CartWidget> {
                       children: <Widget>[
                         Expanded(
                           child: Text(
-                            'TAX (20%)',
+                            'Comisión (2%)',
                             style: Theme.of(context).textTheme.body2,
                           ),
                         ),
-                        Text('\$13.23',
+                        Text('\$2.604',
                             style: Theme.of(context).textTheme.subhead),
                       ],
                     ),
@@ -175,7 +174,7 @@ class _CartWidgetState extends State<CartWidget> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: Text(
-                            '\$55.36',
+                            '\$132.834',
                             style: Theme.of(context).textTheme.display1!.merge(
                                 TextStyle(
                                     color: Theme.of(context).primaryColor)),

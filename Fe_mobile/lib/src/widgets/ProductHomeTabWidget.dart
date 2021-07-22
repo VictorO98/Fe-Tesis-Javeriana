@@ -1,23 +1,47 @@
 import 'package:Fe_mobile/config/ui_icons.dart';
+import 'package:Fe_mobile/src/core/util/currency_util.dart';
+import 'package:Fe_mobile/src/core/util/preferencias_util.dart';
+import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:Fe_mobile/src/models/product.dart';
 import 'package:Fe_mobile/src/models/product_color.dart';
 import 'package:Fe_mobile/src/models/product_size.dart';
 import 'package:Fe_mobile/src/widgets/FlashSalesCarouselWidget.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class ProductHomeTabWidget extends StatefulWidget {
-  Product? product;
+  ProductoServicioModel? product;
   ProductsList _productsList = new ProductsList();
 
   ProductHomeTabWidget({this.product});
 
   @override
-  productHomeTabWidgetState createState() => productHomeTabWidgetState();
+  ProductHomeTabWidgetState createState() => ProductHomeTabWidgetState();
 }
 
-class productHomeTabWidgetState extends State<ProductHomeTabWidget> {
+class ProductHomeTabWidgetState extends State<ProductHomeTabWidget> {
+  final _prefs = new PreferenciasUtil();
+
+  String? idRoleUsuario;
+
+  @override
+  void initState() {
+    super.initState();
+    _initialConfiguration();
+  }
+
+  _initialConfiguration() async {
+    var id = await _prefs.getPrefStr("roles");
+    setState(() {
+      idRoleUsuario = id!;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    var descuento = widget.product!.preciounitario! -
+        (widget.product!.preciounitario! * (widget.product!.descuento! / 100));
+    var calificacionProducto = widget.product!.calificacionpromedio! * 10;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -28,7 +52,7 @@ class productHomeTabWidgetState extends State<ProductHomeTabWidget> {
             children: <Widget>[
               Expanded(
                 child: Text(
-                  widget.product!.name,
+                  widget.product!.nombre!,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                   style: Theme.of(context).textTheme.display2,
@@ -39,7 +63,7 @@ class productHomeTabWidgetState extends State<ProductHomeTabWidget> {
                 label: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(widget.product!.rate.toString(),
+                    Text(calificacionProducto.toString(),
                         style: Theme.of(context).textTheme.body2!.merge(
                             TextStyle(color: Theme.of(context).primaryColor))),
                     Icon(
@@ -60,115 +84,154 @@ class productHomeTabWidgetState extends State<ProductHomeTabWidget> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Text(widget.product!.getPrice(),
-                  style: Theme.of(context).textTheme.display3),
+              widget.product!.descuento != 0.0 // Widget que tiene descuento
+                  ? Text(
+                      "${CurrencyUtil.convertFormatMoney('COP', descuento.round())}",
+                      style: Theme.of(context).textTheme.headline2)
+                  : SizedBox(),
               SizedBox(width: 10),
-              Text(
-                widget.product!.getPrice(myPrice: widget.product!.price + 10.0),
-                style: Theme.of(context).textTheme.headline!.merge(TextStyle(
-                    color: Theme.of(context).focusColor,
-                    decoration: TextDecoration.lineThrough)),
-              ),
+              widget.product!.descuento != 0.0
+                  ? Text(
+                      // widget.product!.getPrice(myPrice: widget.product!.price + 10.0),
+                      "${CurrencyUtil.convertFormatMoney('COP', widget.product!.preciounitario!.round())}",
+                      style: Theme.of(context).textTheme.headline5!.merge(
+                          TextStyle(
+                              color: Theme.of(context).focusColor,
+                              decoration: TextDecoration.lineThrough)),
+                    )
+                  : Text(
+                      "${CurrencyUtil.convertFormatMoney('COP', widget.product!.preciounitario!.round())}",
+                      style: Theme.of(context).textTheme.headline2),
               SizedBox(width: 10),
               Expanded(
                 child: Text(
-                  '${widget.product!.sales.toString()} Sales',
+                  //'${widget.product!.descuento.toString()} Ventas',
+                  '100 Vendidos',
                   textAlign: TextAlign.right,
                 ),
               )
             ],
           ),
         ),
-        Container(
-          width: double.infinity,
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-          decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor.withOpacity(0.9),
-            boxShadow: [
-              BoxShadow(
-                  color: Theme.of(context).focusColor.withOpacity(0.15),
-                  blurRadius: 5,
-                  offset: Offset(0, 2)),
-            ],
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      'Select Color',
-                      style: Theme.of(context).textTheme.body2,
+        SizedBox(
+          height: 10,
+        ),
+        idRoleUsuario == "Emprendedor"
+            ? Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushNamed('/Trueque');
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).accentColor,
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    padding: const EdgeInsets.all(10),
+                    child: const Text(
+                      'Realizar intercambio',
+                      style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
-                  MaterialButton(
-                    onPressed: () {},
-                    padding: EdgeInsets.all(0),
-                    minWidth: 0,
-                    child: Text(
-                      'Clear All',
-                      style: Theme.of(context).textTheme.body1,
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(height: 10),
-              SelectColorWidget()
-            ],
-          ),
-        ),
-        Container(
-          width: double.infinity,
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-          margin: EdgeInsets.symmetric(vertical: 20),
-          decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor.withOpacity(0.9),
-            boxShadow: [
-              BoxShadow(
-                  color: Theme.of(context).focusColor.withOpacity(0.15),
-                  blurRadius: 5,
-                  offset: Offset(0, 2)),
-            ],
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      'Select Size',
-                      style: Theme.of(context).textTheme.body2,
-                    ),
-                  ),
-                  MaterialButton(
-                    onPressed: () {},
-                    padding: EdgeInsets.all(0),
-                    minWidth: 0,
-                    child: Text(
-                      'Clear All',
-                      style: Theme.of(context).textTheme.body1,
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(height: 10),
-              SelectSizeWidget()
-            ],
-          ),
-        ),
+                ),
+              )
+            : SizedBox(),
+        // Container(
+        //   width: double.infinity,
+        //   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        //   decoration: BoxDecoration(
+        //     color: Theme.of(context).primaryColor.withOpacity(0.9),
+        //     boxShadow: [
+        //       BoxShadow(
+        //           color: Theme.of(context).focusColor.withOpacity(0.15),
+        //           blurRadius: 5,
+        //           offset: Offset(0, 2)),
+        //     ],
+        //   ),
+        //   child: Column(
+        //     crossAxisAlignment: CrossAxisAlignment.start,
+        //     children: <Widget>[
+        //       // TODO Futura implementacion para colores de ropa
+        //       // Row(
+        //       //   children: <Widget>[
+        //       //     Expanded(
+        //       //       child: Text(
+        //       //         'Select Color',
+        //       //         style: Theme.of(context).textTheme.body2,
+        //       //       ),
+        //       //     ),
+        //       //     MaterialButton(
+        //       //       onPressed: () {},
+        //       //       padding: EdgeInsets.all(0),
+        //       //       minWidth: 0,
+        //       //       child: Text(
+        //       //         'Clear All',
+        //       //         style: Theme.of(context).textTheme.body1,
+        //       //       ),
+        //       //     )
+        //       //   ],
+        //       // ),
+        //       // SizedBox(height: 10),
+        //       // SelectColorWidget()
+        //     ],
+        //   ),
+        // ),
+        // Container(
+        //   width: double.infinity,
+        //   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        //   margin: EdgeInsets.symmetric(vertical: 20),
+        //   decoration: BoxDecoration(
+        //     color: Theme.of(context).primaryColor.withOpacity(0.9),
+        //     boxShadow: [
+        //       BoxShadow(
+        //           color: Theme.of(context).focusColor.withOpacity(0.15),
+        //           blurRadius: 5,
+        //           offset: Offset(0, 2)),
+        //     ],
+        //   ),
+        //   child: Column(
+        //     crossAxisAlignment: CrossAxisAlignment.start,
+        //     children: <Widget>[
+        //       // Row( // TODO Futura implementación para camisetas y ropa Tallas de camiseta
+        //       //   children: <Widget>[
+        //       //     Expanded(
+        //       //       child: Text(
+        //       //         'Select Size',
+        //       //         style: Theme.of(context).textTheme.body2,
+        //       //       ),
+        //       //     ),
+        //       //     MaterialButton(
+        //       //       onPressed: () {},
+        //       //       padding: EdgeInsets.all(0),
+        //       //       minWidth: 0,
+        //       //       child: Text(
+        //       //         'Clear All',
+        //       //         style: Theme.of(context).textTheme.body1,
+        //       //       ),
+        //       //     )
+        //       //   ],
+        //       // ),
+        //       // SizedBox(height: 10),
+        //       // SelectSizeWidget()
+        //     ],
+        //   ),
+        // ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
           child: ListTile(
             dense: true,
             contentPadding: EdgeInsets.symmetric(vertical: 0),
             leading: Icon(
-              UiIcons.box,
+              Icons.more_outlined,
               color: Theme.of(context).hintColor,
             ),
             title: Text(
-              'Related Poducts',
+              'Productos Relacionados',
               style: Theme.of(context).textTheme.display1,
             ),
           ),

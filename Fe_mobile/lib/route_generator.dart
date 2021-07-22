@@ -1,4 +1,5 @@
 import 'package:Fe_mobile/src/dominio/pages/Contenido/crear_servicio_producto_page.dart';
+import 'package:Fe_mobile/src/dominio/pages/trueques/ofertar_trueque_page.dart';
 import 'package:Fe_mobile/src/models/route_argument.dart';
 import 'package:Fe_mobile/src/screens/brand.dart';
 import 'package:Fe_mobile/src/screens/brands.dart';
@@ -11,7 +12,7 @@ import 'package:Fe_mobile/src/screens/help.dart';
 import 'package:Fe_mobile/src/screens/languages.dart';
 import 'package:Fe_mobile/src/core/pages/induccion_page.dart';
 import 'package:Fe_mobile/src/screens/orders.dart';
-import 'package:Fe_mobile/src/screens/product.dart';
+import 'package:Fe_mobile/src/dominio/pages/contenido/producto_detalle_page.dart';
 import 'package:Fe_mobile/src/core/pages/usuario/login_page.dart';
 import 'package:Fe_mobile/src/core/pages/usuario/registro_page.dart';
 import 'package:Fe_mobile/src/screens/tabs.dart';
@@ -35,6 +36,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => OrdersWidget());
       case '/Create':
         return MaterialPageRoute(builder: (_) => CrearServicioProductoPage());
+      case '/Trueque':
+        return MaterialPageRoute(builder: (_) => OfertarTruequePage());
       case '/Brands':
         return MaterialPageRoute(builder: (_) => BrandsWidget());
 //      case '/MobileVerification':
@@ -56,7 +59,7 @@ class RouteGenerator {
       case '/Product':
         return MaterialPageRoute(
             builder: (_) =>
-                ProductWidget(routeArgument: args as RouteArgument?));
+                ProductoDetallePage(routeArgument: args as RouteArgument?));
 //      case '/Food':
 //        return MaterialPageRoute(
 //            builder: (_) => FoodWidget(

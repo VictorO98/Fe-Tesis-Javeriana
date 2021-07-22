@@ -9,6 +9,8 @@ using Fe.Servidor.Middleware.Contratos.Dominio.Contenido;
 using Fe.Core.Global.Constantes;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 namespace Fe.Dominio.contenido
 {
@@ -72,15 +74,22 @@ namespace Fe.Dominio.contenido
                 {
                     if (GetTipoPublicacionPorID(productosServicios.Idtipopublicacion) != null)
                     {
-                        try
+                        if (Convert.ToInt32(productosServicios.Descuento) <= productosServicios.Preciounitario)
                         {
-                            productosServicios.Estado = COEstados.VIGENTE;
-                            respuestaDatos = await _repoProducto.GuardarPublicacion(productosServicios);
+                            try
+                            {
+                                productosServicios.Estado = COEstados.VIGENTE;
+                                // TODO : queda pendiente definir bien estas fechas
+                                productosServicios.Tiempoentrega = DateTime.Today.AddDays(10); // Tiempo de entrega aproximado a 10 días
+                                productosServicios.Tiempogarantia = productosServicios.Tiempoentrega.AddDays(15); // TIempo de garantía aproximado de 15 días
+                                respuestaDatos = await _repoProducto.GuardarPublicacion(productosServicios);
+                            }
+                            catch (COExcepcion e)
+                            {
+                                throw e;
+                            }
                         }
-                        catch (COExcepcion e)
-                        {
-                            throw e;
-                        }
+                        else { throw new COExcepcion("El descuento es mayor al valor de tu producto"); }
                     }
                     else { throw new COExcepcion("El tipo de publicación ingresado no existe."); }
                 }
@@ -107,6 +116,11 @@ namespace Fe.Dominio.contenido
                 throw e;
             }
             return respuestaDatos;
+        }
+
+        internal Task<RespuestaDatos> SubirFotosPublicacion(IFormFileCollection files)
+        {
+            throw new NotImplementedException();
         }
 
         internal async Task<RespuestaDatos> ModificarPublicacion(ProductosServiciosPc productosServicios)

@@ -15,11 +15,16 @@ class SliderList {
     _list = [
       new Slider(
           image: 'img/slider3.jpg',
-          button: 'Collection',
-          description: 'A room without books is like a body without a soul.'),
+          button: 'Colleción',
+          description: 'Bienvenido a Buy@.'),
       new Slider(
-          image: 'img/slider1.jpg', button: 'Explore', description: 'Be yourself, everyone else is already taken.'),
-      new Slider(image: 'img/slider2.jpg', button: 'Visit Store', description: 'So many books, so little time.'),
+          image: 'img/slider1.jpg',
+          button: 'Explora',
+          description: 'Se tu mismo y se libre de escoger tus gustos'),
+      new Slider(
+          image: 'img/slider2.jpg',
+          button: 'Visita nuestra tienda',
+          description: 'So many books, so little time.'),
     ];
   }
 }

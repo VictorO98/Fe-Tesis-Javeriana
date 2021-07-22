@@ -9,6 +9,7 @@ using Fe.Servidor.Middleware.Contratos.Core;
 using Fe.Core.Global.Constantes;
 using Fe.Core.General;
 using Fe.Servidor.Middleware.Contratos.Dominio.Contenido;
+using Microsoft.AspNetCore.Http;
 
 namespace Fe.Dominio.contenido
 {
@@ -134,6 +135,20 @@ namespace Fe.Dominio.contenido
             try
             {
                 respuestaDatos = respuestaDatos = await _cOContenidoBiz.GuardarResena(resena);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
+
+        public RespuestaDatos SubirFotosPublicacion(IFormFileCollection files)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = respuestaDatos = await _cOContenidoBiz.SubirFotosPublicacion(files);
             }
             catch (COExcepcion e)
             {

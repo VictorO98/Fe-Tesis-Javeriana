@@ -9,6 +9,8 @@ using Fe.Servidor.Middleware.Contratos.Core;
 using System.Threading.Tasks;
 using Fe.Servidor.Middleware.Contratos.Dominio.Contenido;
 using System.IO;
+using Microsoft.AspNetCore.Http;
+using System;
 
 namespace FEWebApplication.Controladores.Dominio.Contenido
 {
@@ -91,6 +93,25 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
             }
             return respuestaDatos;
+        }
+
+        [Route("SubirFotosPublicacion")]
+        public RespuestaDatos SubirFotosPublicacion(IFormCollection collection)
+        {
+            try
+            {
+                var formData = Request.Form;
+                var files = Request.Form.Files;
+                formData = Request.Form;
+                if (formData == null)
+                    throw new COExcepcion("El formulario de la petición enviada se encuentra vacío. ");
+
+                return _coFachada.SubirFotosPublicacion(files);
+            }
+            catch (Exception e)
+            {
+                throw new COExcepcion("Error al subir el documento. " + e.Message);
+            }
         }
 
         /// <summary>

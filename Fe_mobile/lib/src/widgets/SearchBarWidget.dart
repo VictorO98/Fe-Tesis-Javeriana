@@ -28,7 +28,7 @@ class SearchBarWidget extends StatelessWidget {
               hintText: 'Buscar',
               hintStyle: TextStyle(
                   color: Theme.of(context).focusColor.withOpacity(0.8)),
-              prefixIcon: Icon(UiIcons.loupe,
+              prefixIcon: Icon(Icons.find_in_page_outlined,
                   size: 20, color: Theme.of(context).hintColor),
               border: UnderlineInputBorder(borderSide: BorderSide.none),
               enabledBorder: UnderlineInputBorder(borderSide: BorderSide.none),
@@ -39,7 +39,7 @@ class SearchBarWidget extends StatelessWidget {
             onPressed: () {
               Scaffold.of(context).openEndDrawer();
             },
-            icon: Icon(UiIcons.settings_2,
+            icon: Icon(Icons.settings,
                 size: 20, color: Theme.of(context).hintColor.withOpacity(0.5)),
           ),
         ],

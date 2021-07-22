@@ -8,7 +8,8 @@ class ProfileSettingsDialog extends StatefulWidget {
   User? user;
   VoidCallback? onChanged;
 
-  ProfileSettingsDialog({Key? key, this.user, this.onChanged}) : super(key: key);
+  ProfileSettingsDialog({Key? key, this.user, this.onChanged})
+      : super(key: key);
 
   @override
   _ProfileSettingsDialogState createState() => _ProfileSettingsDialogState();
@@ -61,8 +62,9 @@ class _ProfileSettingsDialogState extends State<ProfileSettingsDialog> {
                               hintText: 'johndo@gmail.com',
                               labelText: 'Email Address'),
                           initialValue: widget.user!.email,
-                          validator: (input) =>
-                              !input!.contains('@') ? 'Not a valid email' : null,
+                          validator: (input) => !input!.contains('@')
+                              ? 'Not a valid email'
+                              : null,
                           onSaved: (input) => widget.user!.email = input,
                         ),
                         FormField<String>(
@@ -139,7 +141,7 @@ class _ProfileSettingsDialogState extends State<ProfileSettingsDialog> {
             });
       },
       child: Text(
-        "Edit",
+        "Editar",
         style: Theme.of(context).textTheme.body1,
       ),
     );

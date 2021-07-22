@@ -1,10 +1,11 @@
 import 'package:Fe_mobile/config/ui_icons.dart';
+import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:Fe_mobile/src/models/product.dart';
 import 'package:Fe_mobile/src/widgets/FlashSalesCarouselWidget.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetailsTabWidget extends StatefulWidget {
-  Product? product;
+  ProductoServicioModel? product;
   ProductsList _productsList = new ProductsList();
 
   ProductDetailsTabWidget({this.product});
@@ -25,19 +26,18 @@ class ProductDetailsTabWidgetState extends State<ProductDetailsTabWidget> {
             dense: true,
             contentPadding: EdgeInsets.symmetric(vertical: 0),
             leading: Icon(
-              UiIcons.file_2,
+              Icons.insert_drive_file_outlined,
               color: Theme.of(context).hintColor,
             ),
             title: Text(
-              'Description',
+              'Descripción',
               style: Theme.of(context).textTheme.display1,
             ),
           ),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-          child: Text(
-              'We’re all going somewhere. And whether it’s the podcast blaring from your headphones as you walk down the street or the essay that encourages you to take on that big project, there’s a real joy in getting lost in the kind of story that feels like a destination unto itself.'),
+          child: Text(widget.product!.descripcion!),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
@@ -45,11 +45,11 @@ class ProductDetailsTabWidgetState extends State<ProductDetailsTabWidget> {
             dense: true,
             contentPadding: EdgeInsets.symmetric(vertical: 0),
             leading: Icon(
-              UiIcons.box,
+              Icons.more_outlined,
               color: Theme.of(context).hintColor,
             ),
             title: Text(
-              'Related Poducts',
+              'Productos Relacionados',
               style: Theme.of(context).textTheme.display1,
             ),
           ),

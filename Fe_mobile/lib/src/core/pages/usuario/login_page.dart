@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:Fe_mobile/config/ui_icons.dart';
 import 'package:Fe_mobile/src/core/models/info_usuario_model.dart';
 import 'package:Fe_mobile/src/core/models/login_model.dart';
 import 'package:Fe_mobile/src/core/models/respuesta_login_model.dart';
@@ -136,7 +135,7 @@ class _LoginPageState extends State<LoginPage> {
                                           color:
                                               Theme.of(context).accentColor)),
                                   prefixIcon: Icon(
-                                    UiIcons.envelope,
+                                    Icons.email_outlined,
                                     color: Theme.of(context).accentColor,
                                   ),
                                 ),
@@ -181,7 +180,7 @@ class _LoginPageState extends State<LoginPage> {
                                           color:
                                               Theme.of(context).accentColor)),
                                   prefixIcon: Icon(
-                                    UiIcons.padlock_1,
+                                    Icons.lock_open_sharp,
                                     color: Theme.of(context).accentColor,
                                   ),
                                   suffixIcon: IconButton(

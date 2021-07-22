@@ -17,6 +17,7 @@ class FlashSalesCarouselItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var calificacionPromedio = product!.calificacionpromedio! * 10;
     return InkWell(
       onTap: () {
         Navigator.of(context).pushNamed('/Product',
@@ -90,8 +91,9 @@ class FlashSalesCarouselItemWidget extends StatelessWidget {
                       // The title of the product
                       Expanded(
                         child: Text(
-                          '${product!.descuento} Sales',
-                          style: Theme.of(context).textTheme.body1,
+                          //'${product!.descuento} Ventas',
+                          '100 Ventas', // TODO Esperar método que traiga el numero de ventas
+                          style: Theme.of(context).textTheme.bodyText2,
                           overflow: TextOverflow.fade,
                           softWrap: false,
                         ),
@@ -102,18 +104,20 @@ class FlashSalesCarouselItemWidget extends StatelessWidget {
                         size: 18,
                       ),
                       Text(
-                        product!.calificacionpromedio.toString(),
+                        calificacionPromedio.toString(),
                         style: Theme.of(context).textTheme.body2,
                       )
                     ],
                     crossAxisAlignment: CrossAxisAlignment.center,
                   ),
                   SizedBox(height: 7),
-                  Text(
-                    '${product!.cantidadtotal} Available',
-                    style: Theme.of(context).textTheme.body1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                  product!.tipoPublicacion == "Producto"
+                      ? Text(
+                          '${product!.cantidadtotal} Disponible',
+                          style: Theme.of(context).textTheme.body1,
+                          overflow: TextOverflow.ellipsis,
+                        )
+                      : SizedBox(),
                   AvailableProgressBarWidget(
                       available: product!.cantidadtotal!.toDouble())
                 ],

@@ -30,6 +30,7 @@ class TabsWidget extends StatefulWidget {
 
 class _TabsWidgetState extends State<TabsWidget> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  var sizeIcons = 22.0;
   @override
   initState() {
     _selectTab(widget.currentTab);
@@ -56,7 +57,7 @@ class _TabsWidgetState extends State<TabsWidget> {
           widget.currentPage = PerfilUsuarioPage();
           break;
         case 2:
-          widget.currentTitle = 'Home';
+          widget.currentTitle = 'Inicio';
           widget.currentPage = ContenidoHomePage();
           break;
         case 3:
@@ -172,11 +173,11 @@ class _TabsWidgetState extends State<TabsWidget> {
         // this will be set when a new tab is tapped
         items: [
           BottomNavigationBarItem(
-            icon: Icon(UiIcons.bell),
+            icon: Icon(Icons.notifications_active_outlined, size: sizeIcons),
             title: new Container(height: 0.0),
           ),
           BottomNavigationBarItem(
-            icon: Icon(UiIcons.user_1),
+            icon: Icon(Icons.person_outline_outlined, size: sizeIcons),
             title: new Container(height: 0.0),
           ),
           BottomNavigationBarItem(
@@ -200,15 +201,15 @@ class _TabsWidgetState extends State<TabsWidget> {
                         offset: Offset(0, 3))
                   ],
                 ),
-                child: new Icon(UiIcons.home,
-                    color: Theme.of(context).primaryColor),
+                child: new Icon(Icons.home,
+                    color: Theme.of(context).primaryColor, size: sizeIcons + 4),
               )),
           BottomNavigationBarItem(
-            icon: new Icon(UiIcons.chat),
+            icon: new Icon(Icons.chat_outlined, size: sizeIcons),
             title: new Container(height: 0.0),
           ),
           BottomNavigationBarItem(
-            icon: new Icon(UiIcons.heart),
+            icon: new Icon(Icons.favorite_border_outlined, size: sizeIcons),
             title: new Container(height: 0.0),
           ),
         ],

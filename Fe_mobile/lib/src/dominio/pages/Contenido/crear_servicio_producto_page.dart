@@ -1,10 +1,13 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:Fe_mobile/src/core/models/respuesta_datos_model.dart';
 import 'package:Fe_mobile/src/core/models/step_manejador_model.dart';
 import 'package:Fe_mobile/src/core/util/alert_util.dart';
 import 'package:Fe_mobile/src/core/util/estilo_util.dart';
+import 'package:Fe_mobile/src/core/util/preferencias_util.dart';
 import 'package:Fe_mobile/src/dominio/models/categoria_model.dart';
+import 'package:Fe_mobile/src/dominio/models/crear_publicacion_model.dart';
 import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:Fe_mobile/src/dominio/providers/contenido_provider.dart';
 import 'package:Fe_mobile/src/widgets/ShoppingCartButtonWidget.dart';
@@ -23,7 +26,7 @@ class CrearServicioProductoPage extends StatefulWidget {
 }
 
 class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
-  ProductoServicioModel _productoServicioModel = new ProductoServicioModel();
+  CrearPublicacionModel _crearPublicacionModel = new CrearPublicacionModel();
   ContenidoProvider _contenidoProvider = new ContenidoProvider();
 
   static const STEP_DATOS_BASICOS = "stepDatosBasicos";
@@ -48,6 +51,7 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
   final _formImagen = GlobalKey<FormState>();
   final nombresCtrl = TextEditingController();
   final _picker = ImagePicker();
+  final _prefs = new PreferenciasUtil();
 
   double _fontSizeRegrsar = 0;
   double _fontSizeSiguiente = 0;
@@ -65,12 +69,13 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
   String? _tipoVenta;
 
   bool _isLoading = false;
+  bool checkboxValue = false;
   bool isShowImages = false;
   bool _isModifica = false;
   late bool _isProducto;
 
   // TODO cambiar este dato para subir varias
-  static const int LIMITE_IMAGENES = 1;
+  static const int LIMITE_IMAGENES = 5;
 
   @override
   void initState() {
@@ -479,7 +484,9 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
                   value == null ? 'Seleccione un tipo de publicación' : null,
               onChanged: (c) => setState(() {
                 _tipoVenta = c!;
-                //registroModel.idPoblacion = c?.id.toString();
+                _tipoVenta == "Producto"
+                    ? _crearPublicacionModel.idtipopublicacion = 1
+                    : _crearPublicacionModel.idtipopublicacion = 2;
               }),
             ),
 
@@ -519,7 +526,12 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
                         )),
                 onSaved: (String? value) {
                   setState(() {
-                    //registroModel.nombres = value;
+                    _crearPublicacionModel.nombre = value;
+                  });
+                },
+                onChanged: (String? value) {
+                  setState(() {
+                    _crearPublicacionModel.nombre = value;
                   });
                 },
                 validator: (String? value) =>
@@ -532,7 +544,14 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
                   ? TextFormField(
                       onSaved: (String? value) {
                         setState(() {
-                          //registroModel.numeroDocumento = value;
+                          _crearPublicacionModel.cantidadtotal =
+                              int.parse(value!);
+                        });
+                      },
+                      onChanged: (String? value) {
+                        setState(() {
+                          _crearPublicacionModel.cantidadtotal =
+                              int.parse(value!);
                         });
                       },
                       keyboardType: TextInputType.number,
@@ -568,7 +587,7 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
                   validator: (value) =>
                       value == null ? 'Seleccione una categoría' : null,
                   onChanged: (c) => setState(() {
-                        //registroModel.idPoblacion = c?.id.toString();
+                        _crearPublicacionModel.idcategoria = c!.id;
                       })),
               SizedBox(height: 10),
               TextFormField(
@@ -579,9 +598,14 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
                           Icons.text_snippet_rounded,
                           color: EstiloUtil.COLOR_PRIMARY,
                         )),
+                onChanged: (String? value) {
+                  setState(() {
+                    _crearPublicacionModel.descripcion = value;
+                  });
+                },
                 onSaved: (String? value) {
                   setState(() {
-                    //registroModel.nombres = value;
+                    _crearPublicacionModel.descripcion = value;
                   });
                 },
                 validator: (String? value) =>
@@ -613,7 +637,12 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
               TextFormField(
                   onSaved: (String? value) {
                     setState(() {
-                      //registroModel.numeroDocumento = value;
+                      _crearPublicacionModel.preciounitario = int.parse(value!);
+                    });
+                  },
+                  onChanged: (String? value) {
+                    setState(() {
+                      _crearPublicacionModel.preciounitario = int.parse(value!);
                     });
                   },
                   keyboardType: TextInputType.number,
@@ -633,29 +662,42 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
                   }),
               SizedBox(height: 10),
               TextFormField(
-                  onSaved: (String? value) {
-                    setState(() {
-                      //registroModel.numeroDocumento = value;
-                    });
-                  },
-                  keyboardType: TextInputType.number,
-                  decoration: EstiloUtil.crearInputDecorationFormCustom(
-                      'Descuento (Opcional - Sin puntos y comas) \*',
-                      icon: Icon(
-                        Icons.credit_card,
-                        color: EstiloUtil.COLOR_PRIMARY,
-                      )),
-                  validator: (String? value) {
-                    if (int.tryParse(value!) == null)
-                      return 'Solo se aceptan números.';
-
-                    // TODO validar que el valor este no sea mayor al original
-                    return null;
-                  }),
+                onSaved: (String? value) {
+                  setState(() {
+                    value == ""
+                        ? _crearPublicacionModel.descuento = 0
+                        : _crearPublicacionModel.descuento = int.parse(value!);
+                  });
+                },
+                onChanged: (String? value) {
+                  setState(() {
+                    value == ""
+                        ? _crearPublicacionModel.descuento = 0
+                        : _crearPublicacionModel.descuento = int.parse(value!);
+                  });
+                },
+                keyboardType: TextInputType.number,
+                decoration: EstiloUtil.crearInputDecorationFormCustom(
+                    'Descuento (%) (Opcional - Sin puntos y comas) \*',
+                    icon: Icon(
+                      Icons.credit_card,
+                      color: EstiloUtil.COLOR_PRIMARY,
+                    )),
+              ),
               SizedBox(height: 8),
-              CheckboxFormField(
+              CheckboxListTile(
+                value: checkboxValue,
                 title: Text(
                     "Habilitar trueque (Intercambia tu producto con el de otro emprendedor)"),
+                controlAffinity: ListTileControlAffinity.leading,
+                onChanged: (bool? value) {
+                  setState(() {
+                    checkboxValue = value!;
+                    checkboxValue
+                        ? _crearPublicacionModel.habilitatrueque = 1
+                        : _crearPublicacionModel.habilitatrueque = 0;
+                  });
+                },
               )
             ])));
   }
@@ -682,35 +724,6 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
               _crearBotonSeleccionarGaleria(context),
               _crearBotonTomarFoto(context)
             ])));
-  }
-
-  Widget _crearServicio(BuildContext context) {
-    return Container(
-        alignment: Alignment.center,
-        child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                SizedBox(height: 20),
-                TextFormField(
-                  decoration: EstiloUtil.crearInputDecorationFormCustom(
-                      "Nombre Servicio \*",
-                      icon: Icon(
-                        Icons.person,
-                        color: EstiloUtil.COLOR_PRIMARY,
-                      )),
-                  onSaved: (String? value) {
-                    setState(() {
-                      //registroModel.nombres = value;
-                    });
-                  },
-                  validator: (String? value) =>
-                      (value!.isEmpty) || (value.trim().isEmpty)
-                          ? 'Registre el nombre del producto o del servicio'
-                          : null,
-                ),
-              ],
-            )));
   }
 
   _gestionarSiguiente(BuildContext context) {
@@ -777,7 +790,11 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
         if (_formImagen.currentState!.validate()) {
           setState(() {
             stepManejador.stepEstado = StepState.complete;
-            _registrarProducto(context);
+            if (listadoFotoProductos.length != 0) {
+              _registrarProducto(context);
+            } else {
+              AlertUtil.error(context, '¡No has anexado imagenes!');
+            }
           });
         } else {
           setState(() {
@@ -827,5 +844,53 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
     }
   }
 
-  _registrarProducto(context) {}
+  _registrarProducto(context) async {
+    if (_formDatosBasicos.currentState!.validate() &&
+        _formDatosTiempos.currentState!.validate() &&
+        _formPrecio.currentState!.validate() &&
+        _formImagen.currentState!.validate()) {
+      _formDatosBasicos.currentState!.save();
+      _formDatosTiempos.currentState!.save();
+      _formPrecio.currentState!.save();
+      _formImagen.currentState!.save();
+
+      var idUsuario = await _prefs.getPrefStr("id");
+      _crearPublicacionModel.idusuario = int.parse(idUsuario!);
+      _crearPublicacionModel.tiempoentrega = DateTime.now();
+      _crearPublicacionModel.tiempogarantia = DateTime.now();
+      _crearPublicacionModel.urlimagenproductoservicio = "";
+
+      _crearPublicacionModel.idtipopublicacion == 2
+          ? _crearPublicacionModel.cantidadtotal = 0
+          : null;
+
+      // Map<String, dynamic> data = {
+      //   "Idcategoria": _crearPublicacionModel.idusuario,
+      //   "Idtipopublicacion": _documento!.idVehiculoTransportista,
+      //   "Idusuario": _documento!.tipoDocumento,
+      //   "Nombre": listadoDeImagenesMP
+      // };
+
+      setState(() {
+        _isLoading = true;
+      });
+      _contenidoProvider
+          .guardarPublicacion(_crearPublicacionModel, context)
+          .then((value) {
+        RespuestaDatosModel? respuesta = value;
+        if (respuesta?.codigo == 10) {
+          final funcionNavegar = () {
+            WidgetsBinding.instance!.addPostFrameCallback((_) {
+              Navigator.of(context).pushNamed(
+                '/Tabs',
+                arguments: 1,
+              );
+            });
+          };
+          AlertUtil.success(context, respuesta!.mensaje!,
+              respuesta: funcionNavegar, title: '¡Publicación creada!');
+        }
+      }).whenComplete(() => setState(() => _isLoading = false));
+    }
+  }
 }

@@ -29,7 +29,7 @@ namespace Fe.Dominio.trueques.Negocio
             {
                 if (demografiaComprador != null)
                 {
-                    if(demografiaVendedor.Rolcorid == 2 && demografiaComprador.Rolcorid == 2)
+                    if(demografiaVendedor.Rolcorid == CORol.EMPRENDEDOR && demografiaComprador.Rolcorid == CORol.EMPRENDEDOR)
                     {
                         try
                         {

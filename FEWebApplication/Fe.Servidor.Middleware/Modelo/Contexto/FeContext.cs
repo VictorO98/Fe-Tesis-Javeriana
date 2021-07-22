@@ -35,6 +35,7 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
         public virtual DbSet<IdentityuserloginString> IdentityuserloginStrings { get; set; }
         public virtual DbSet<IdentityuserroleString> IdentityuserroleStrings { get; set; }
         public virtual DbSet<IdentityusertokenString> IdentityusertokenStrings { get; set; }
+        public virtual DbSet<ImagenesPublicacionesPc> ImagenesPublicacionesPcs { get; set; }
         public virtual DbSet<NotificacionesCor> NotificacionesCors { get; set; }
         public virtual DbSet<PedidosPed> PedidosPeds { get; set; }
         public virtual DbSet<PoblacionCor> PoblacionCors { get; set; }
@@ -145,6 +146,8 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                     .IsRequired()
                     .HasMaxLength(5)
                     .HasColumnName("estado");
+
+                entity.Property(e => e.Idepayco).HasColumnName("idepayco");
 
                 entity.Property(e => e.Idpoblacion).HasColumnName("idpoblacion");
 
@@ -463,6 +466,33 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                     .HasForeignKey(d => d.UserId);
             });
 
+            modelBuilder.Entity<ImagenesPublicacionesPc>(entity =>
+            {
+                entity.ToTable("imagenes_publicaciones_pc");
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id");
+
+                entity.Property(e => e.Creacion)
+                    .HasColumnType("time without time zone")
+                    .HasColumnName("creacion");
+
+                entity.Property(e => e.Idpublicacion).HasColumnName("idpublicacion");
+
+                entity.Property(e => e.Modificacion).HasColumnName("modificacion");
+
+                entity.Property(e => e.UrlImagen)
+                    .IsRequired()
+                    .HasColumnName("urlImagen");
+
+                entity.HasOne(d => d.IdpublicacionNavigation)
+                    .WithMany(p => p.ImagenesPublicacionesPcs)
+                    .HasForeignKey(d => d.Idpublicacion)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_idproducto");
+            });
+
             modelBuilder.Entity<NotificacionesCor>(entity =>
             {
                 entity.ToTable("notificaciones_cor");
@@ -767,6 +797,8 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                 entity.Property(e => e.Urlimagenproductoservicio)
                     .IsRequired()
                     .HasColumnName("urlimagenproductoservicio");
+
+                entity.Property(e => e.Ventas).HasColumnName("ventas");
 
                 entity.HasOne(d => d.IdcategoriaNavigation)
                     .WithMany(p => p.ProductosServiciosPcs)

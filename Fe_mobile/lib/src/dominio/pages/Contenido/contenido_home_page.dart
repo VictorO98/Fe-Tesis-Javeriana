@@ -79,8 +79,6 @@ class _ContenidoHomePageState extends State<ContenidoHomePage>
 
   _initialConfiguration() async {
     idUsuario = await _prefs.getPrefStr("id");
-    print("ESTE ES EL IDDDDDDDDDDDDD");
-    print(idUsuario);
   }
 
   _getProductosEnDescuento() async {

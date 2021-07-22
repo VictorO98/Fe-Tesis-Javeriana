@@ -23,14 +23,14 @@ namespace Fe.Dominio.contenido.Datos
             try
             {
                 productoSservicio.Creacion = DateTime.Now;
-                productoSservicio.Calificacionpromedio = 0;
+                productoSservicio.Calificacionpromedio = 0.0m;
                 context.Add(productoSservicio);
                 context.SaveChanges();
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "Publicación creada exitosamente." };
             }
             catch (Exception e)
             {
-                throw new COExcepcion("Ocurrió un problema al intentar realizar la publicación");
+                throw new COExcepcion("Ocurrió un problema al intentar realizar la publicación: " + e.Message);
             }
             return respuestaDatos;
         }

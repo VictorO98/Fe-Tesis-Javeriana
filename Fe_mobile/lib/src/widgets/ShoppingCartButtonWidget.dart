@@ -27,7 +27,7 @@ class ShoppingCartButtonWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 6),
             child: Icon(
-              UiIcons.shopping_cart,
+              Icons.add_shopping_cart_outlined,
               color: this.iconColor,
               size: 28,
             ),

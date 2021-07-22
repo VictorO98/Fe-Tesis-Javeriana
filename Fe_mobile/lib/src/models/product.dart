@@ -17,9 +17,9 @@ class Product {
 
   String getPrice({double? myPrice}) {
     if (myPrice != null) {
-      return '\$${myPrice.toStringAsFixed(2)}';
+      return '\$${myPrice.toStringAsFixed(3)}';
     }
-    return '\$${this.price.toStringAsFixed(2)}';
+    return '\$${this.price.toStringAsFixed(3)}';
   }
 }
 
@@ -176,20 +176,10 @@ class ProductsList {
     ];
 
     _cartList = [
-      new Product(
-          'Plant Vases', 'img/home6.webp', 80, 63.98, 200, 2554, 3.1, 10.5),
-      new Product('Maxi Dress For Women Summer', 'img/pro1.webp', 25, 36.12,
-          200, 130, 4.3, 12.1),
-      new Product('Foldable Silicone Colander Fruit Vegetable',
-          'img/home10.webp', 80, 63.98, 200, 2554, 3.1, 10.5),
-      new Product(
-          'Robe pin up', 'img/pro3.webp', 10, 66.96, 200, 415, 4.9, 15.3),
-      new Product(
-          'Wrist Watch', 'img/watch5.webp', 80, 63.98, 200, 2554, 3.1, 10.5),
-      new Product('Alarm Waterproof Sports Army', 'img/watch9.webp', 80, 63.98,
-          200, 2554, 3.1, 10.5),
-      new Product('Black Checked Retro Hepburn Style', 'img/pro2.webp', 60,
-          12.65, 200, 63, 5.0, 20.2),
+      new Product('Velas aromaticas', 'img/hola1.jpeg', 80, 63.980, 200, 2554,
+          3.1, 10.5),
+      new Product('Estatua de colección', 'img/hola2.jpeg', 25, 36.120, 200,
+          130, 4.3, 12.1)
     ];
   }
 }

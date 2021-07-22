@@ -29,8 +29,9 @@ class _FlashSalesHeaderWidgetState extends State<FlashSalesHeaderWidget> {
         dense: true,
         contentPadding: EdgeInsets.symmetric(vertical: 0),
         leading: Icon(
-          UiIcons.megaphone,
+          Icons.campaign_outlined,
           color: Theme.of(context).hintColor,
+          size: 35,
         ),
         title: Text(
           'Publicaciones en descuento',

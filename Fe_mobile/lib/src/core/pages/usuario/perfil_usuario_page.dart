@@ -2,6 +2,8 @@ import 'package:Fe_mobile/config/ui_icons.dart';
 import 'package:Fe_mobile/src/core/models/info_usuario_model.dart';
 import 'package:Fe_mobile/src/core/pages/usuario/bloc/info_perfil/info_usuario_bloc.dart';
 import 'package:Fe_mobile/src/core/util/preferencias_util.dart';
+import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
+import 'package:Fe_mobile/src/dominio/providers/contenido_provider.dart';
 import 'package:Fe_mobile/src/models/user.dart';
 import 'package:Fe_mobile/src/widgets/ProfileSettingsDialog.dart';
 import 'package:Fe_mobile/src/widgets/SearchBarWidget.dart';
@@ -136,7 +138,8 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
               },
               child: Column(
                 children: <Widget>[
-                  Icon(UiIcons.heart),
+                  Icon(Icons.favorite_border_outlined,
+                      color: Theme.of(context).hintColor),
                   Text(
                     'Favoritos',
                     style: Theme.of(context).textTheme.body1,
@@ -153,7 +156,8 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
               },
               child: Column(
                 children: <Widget>[
-                  Icon(UiIcons.favorites),
+                  Icon(Icons.notifications_active_outlined,
+                      color: Theme.of(context).hintColor),
                   Text(
                     'Notificaciones',
                     style: Theme.of(context).textTheme.body1,
@@ -170,7 +174,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
               },
               child: Column(
                 children: <Widget>[
-                  Icon(UiIcons.chat_1),
+                  Icon(Icons.chat_outlined, color: Theme.of(context).hintColor),
                   Text(
                     'Mensajes',
                     style: Theme.of(context).textTheme.body1,
@@ -202,7 +206,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
         primary: false,
         children: <Widget>[
           ListTile(
-            leading: Icon(UiIcons.inbox),
+            leading: Icon(Icons.inbox_outlined),
             title: Text(
               'Mis pedidos',
               style: Theme.of(context).textTheme.body2,
@@ -315,9 +319,9 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
         primary: false,
         children: <Widget>[
           ListTile(
-            leading: Icon(UiIcons.inbox),
+            leading: Icon(Icons.file_present_outlined),
             title: Text(
-              'Productos',
+              'Publicaciones',
               style: Theme.of(context).textTheme.body2,
             ),
             trailing: ButtonTheme(
@@ -378,7 +382,6 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
         ],
       ),
     );
-    ;
   }
 
   Widget _infoUsuarios(BuildContext context) {
@@ -403,7 +406,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
         primary: false,
         children: <Widget>[
           ListTile(
-            leading: Icon(UiIcons.user_1),
+            leading: new Icon(Icons.person_outline_outlined),
             title: Text(
               'Configuración de perfil',
               style: Theme.of(context).textTheme.body2,
@@ -476,7 +479,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
               style: Theme.of(context).textTheme.body1,
             ),
             trailing: Text(
-              _infoUsuarioBloc!.state.infoUsuarioModel!.estado.toString(),
+              _infoUsuarioBloc!.state.infoUsuarioModel!.poblacion.toString(),
               style: TextStyle(color: Theme.of(context).focusColor),
             ),
           ),
@@ -488,7 +491,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
               style: Theme.of(context).textTheme.body1,
             ),
             trailing: Text(
-              _infoUsuarioBloc!.state.infoUsuarioModel!.poblacion.toString(),
+              _infoUsuarioBloc!.state.infoUsuarioModel!.estado.toString(),
               style: TextStyle(color: Theme.of(context).focusColor),
             ),
           )
@@ -515,7 +518,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
         primary: false,
         children: <Widget>[
           ListTile(
-            leading: Icon(UiIcons.settings_1),
+            leading: Icon(Icons.settings),
             title: Text(
               'Configuración',
               style: Theme.of(context).textTheme.body2,
@@ -553,7 +556,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             title: Row(
               children: <Widget>[
                 Icon(
-                  UiIcons.information,
+                  Icons.perm_device_information,
                   size: 22,
                   color: Theme.of(context).focusColor,
                 ),
