@@ -24,6 +24,7 @@ namespace Fe.Dominio.contenido.Datos
             {
                 productoSservicio.Creacion = DateTime.Now;
                 productoSservicio.Calificacionpromedio = 0.0m;
+                productoSservicio.Ventas = 0;
                 context.Add(productoSservicio);
                 context.SaveChanges();
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "Publicación creada exitosamente." };
@@ -88,6 +89,7 @@ namespace Fe.Dominio.contenido.Datos
                     publicacion.Habilitatrueque = productoSservicio.Habilitatrueque;
                     publicacion.Urlimagenproductoservicio = productoSservicio.Urlimagenproductoservicio;
                     publicacion.Modificacion = DateTime.Now;
+                    publicacion.Ventas = productoSservicio.Ventas;
                     context.SaveChanges();
                     respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "Publicación modificada exitosamente." };
                 }
