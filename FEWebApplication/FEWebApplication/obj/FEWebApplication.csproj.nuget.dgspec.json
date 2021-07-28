@@ -55,6 +55,10 @@
               "target": "Package",
               "version": "[2.0.78, )"
             },
+            "DotLiquid": {
+              "target": "Package",
+              "version": "[2.2.508, )"
+            },
             "IdentityServer4": {
               "target": "Package",
               "version": "[4.1.2, )"
@@ -182,6 +186,10 @@
             "Dapper.Contrib": {
               "target": "Package",
               "version": "[2.0.78, )"
+            },
+            "DotLiquid": {
+              "target": "Package",
+              "version": "[2.2.508, )"
             },
             "IdentityServer4": {
               "target": "Package",
@@ -317,6 +325,10 @@
               "target": "Package",
               "version": "[2.0.78, )"
             },
+            "DotLiquid": {
+              "target": "Package",
+              "version": "[2.2.508, )"
+            },
             "IdentityServer4": {
               "target": "Package",
               "version": "[4.1.2, )"
@@ -432,6 +444,10 @@
             "Dapper.Contrib": {
               "target": "Package",
               "version": "[2.0.78, )"
+            },
+            "DotLiquid": {
+              "target": "Package",
+              "version": "[2.2.508, )"
             },
             "IdentityServer4": {
               "target": "Package",
@@ -557,6 +573,10 @@
               "target": "Package",
               "version": "[2.0.78, )"
             },
+            "DotLiquid": {
+              "target": "Package",
+              "version": "[2.2.508, )"
+            },
             "IdentityServer4": {
               "target": "Package",
               "version": "[4.1.2, )"
@@ -680,6 +700,10 @@
             "Dapper.Contrib": {
               "target": "Package",
               "version": "[2.0.78, )"
+            },
+            "DotLiquid": {
+              "target": "Package",
+              "version": "[2.2.508, )"
             },
             "IdentityServer4": {
               "target": "Package",
@@ -815,6 +839,10 @@
               "target": "Package",
               "version": "[2.0.78, )"
             },
+            "DotLiquid": {
+              "target": "Package",
+              "version": "[2.2.508, )"
+            },
             "IdentityServer4": {
               "target": "Package",
               "version": "[4.1.2, )"
@@ -949,6 +977,10 @@
               "target": "Package",
               "version": "[2.0.78, )"
             },
+            "DotLiquid": {
+              "target": "Package",
+              "version": "[2.2.508, )"
+            },
             "IdentityServer4": {
               "target": "Package",
               "version": "[4.1.2, )"
@@ -1029,6 +1061,78 @@
         }
       }
     },
+    "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Servidor.Integracion\\Fe.Servidor.Integracion.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Servidor.Integracion\\Fe.Servidor.Integracion.csproj",
+        "projectName": "Fe.Servidor.Integracion",
+        "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Servidor.Integracion\\Fe.Servidor.Integracion.csproj",
+        "packagesPath": "C:\\Users\\vospi\\.nuget\\packages\\",
+        "outputPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Servidor.Integracion\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\vospi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj": {
+                "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "DotLiquid": {
+              "target": "Package",
+              "version": "[2.2.508, )"
+            },
+            "MailKit": {
+              "target": "Package",
+              "version": "[2.13.0, )"
+            },
+            "MimeKit": {
+              "target": "Package",
+              "version": "[2.14.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -1072,6 +1176,10 @@
             "Dapper.Contrib": {
               "target": "Package",
               "version": "[2.0.78, )"
+            },
+            "DotLiquid": {
+              "target": "Package",
+              "version": "[2.2.508, )"
             },
             "IdentityServer4": {
               "target": "Package",
@@ -1201,6 +1309,9 @@
               "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Dominio.trueques\\Fe.Dominio.trueques.csproj": {
                 "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Dominio.trueques\\Fe.Dominio.trueques.csproj"
               },
+              "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Servidor.Integracion\\Fe.Servidor.Integracion.csproj": {
+                "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Servidor.Integracion\\Fe.Servidor.Integracion.csproj"
+              },
               "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj": {
                 "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj"
               }
@@ -1224,6 +1335,10 @@
             "Dapper.Contrib": {
               "target": "Package",
               "version": "[2.0.78, )"
+            },
+            "DotLiquid": {
+              "target": "Package",
+              "version": "[2.2.508, )"
             },
             "IdentityServer4": {
               "target": "Package",

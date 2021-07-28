@@ -1,10 +1,64 @@
 import 'package:Fe_mobile/config/ui_icons.dart';
+import 'package:Fe_mobile/src/core/util/conf_api.dart';
+import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
+import 'package:Fe_mobile/src/dominio/providers/contenido_provider.dart';
+import 'package:Fe_mobile/src/models/route_argument.dart';
 import 'package:flutter/material.dart';
 
-class SearchBarWidget extends StatelessWidget {
+class SearchBarWidget extends StatefulWidget {
   SearchBarWidget({
     Key? key,
   }) : super(key: key);
+
+  @override
+  _SearchBarWidgetState createState() => _SearchBarWidgetState();
+}
+
+class _SearchBarWidgetState extends State<SearchBarWidget> {
+  final globalKey = new GlobalKey<ScaffoldState>();
+
+  List<ProductoServicioModel>? _listaFiltro;
+
+  TextEditingController busqueda = TextEditingController();
+  ContenidoProvider _contenidoProvider = new ContenidoProvider();
+
+  List<dynamic>? _list;
+  bool? _isSearching;
+  String _searchText = "";
+  List searchresult = [];
+
+  _SearchBarWidgetState() {
+    busqueda.addListener(() {
+      if (busqueda.text.isEmpty) {
+        setState(() {
+          _isSearching = false;
+          _searchText = "";
+        });
+      } else {
+        setState(() {
+          _isSearching = true;
+          _searchText = busqueda.text;
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _isSearching = false;
+  }
+
+  void values() async {
+    _listaFiltro = await _contenidoProvider.busquedaProductosPorNombre(
+        context, _searchText);
+    for (var i = 0; i < _listaFiltro!.length; i++) {
+      _listaFiltro![i].urlimagenproductoservicio =
+          "${ConfServer.SERVER}dominio/COContenido/GetImagenProdcuto?idPublicacion=${_listaFiltro![i].id}&idUsuario=5";
+    }
+    Navigator.of(context).pushNamed('/Busqueda',
+        arguments: new RouteArgument(argumentsList: ['', _listaFiltro]));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +77,7 @@ class SearchBarWidget extends StatelessWidget {
         alignment: Alignment.centerRight,
         children: <Widget>[
           TextField(
+            controller: busqueda,
             decoration: InputDecoration(
               contentPadding: EdgeInsets.all(12),
               hintText: 'Buscar',
@@ -36,12 +91,17 @@ class SearchBarWidget extends StatelessWidget {
             ),
           ),
           IconButton(
-            onPressed: () {
-              Scaffold.of(context).openEndDrawer();
-            },
-            icon: Icon(Icons.settings,
-                size: 20, color: Theme.of(context).hintColor.withOpacity(0.5)),
-          ),
+              onPressed: () {
+                // Scaffold.of(context).openEndDrawer();
+                values();
+              },
+              icon: _isSearching!
+                  ? Icon(Icons.search,
+                      size: 25,
+                      color: Theme.of(context).hintColor.withOpacity(0.5))
+                  : Icon(Icons.search_off,
+                      size: 25,
+                      color: Theme.of(context).hintColor.withOpacity(0.5))),
         ],
       ),
     );

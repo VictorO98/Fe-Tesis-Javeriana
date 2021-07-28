@@ -28,6 +28,20 @@
           "lib/netstandard2.0/Dapper.Contrib.dll": {}
         }
       },
+      "DotLiquid/2.2.508": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/DotLiquid.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/DotLiquid.dll": {}
+        },
+        "resource": {
+          "lib/netstandard2.0/it/DotLiquid.resources.dll": {
+            "locale": "it"
+          }
+        }
+      },
       "ePayco.Net/1.0.13": {
         "type": "package",
         "dependencies": {
@@ -965,6 +979,7 @@
         "dependencies": {
           "Dapper": "2.0.90",
           "Dapper.Contrib": "2.0.78",
+          "DotLiquid": "2.2.508",
           "Fe.Servidor.Middleware": "1.0.0",
           "IdentityServer4": "4.1.2",
           "IdentityServer4.Storage": "4.1.2",
@@ -992,6 +1007,7 @@
         "dependencies": {
           "Dapper": "2.0.90",
           "Dapper.Contrib": "2.0.78",
+          "DotLiquid": "2.2.508",
           "IdentityServer4": "4.1.2",
           "IdentityServer4.Storage": "4.1.2",
           "MailKit": "2.13.0",
@@ -1048,6 +1064,28 @@
         "lib/net5.0/Dapper.Contrib.xml",
         "lib/netstandard2.0/Dapper.Contrib.dll",
         "lib/netstandard2.0/Dapper.Contrib.xml"
+      ]
+    },
+    "DotLiquid/2.2.508": {
+      "sha512": "VLpfY1HwcR7AIE3YnSnk9nBELfJDuZioqSwuE9L7ij3N1ifsgYDvEfFnTDNL/VmdIxr1WMmNo01Gy2bBW9CSDg==",
+      "type": "package",
+      "path": "dotliquid/2.2.508",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "dotliquid.2.2.508.nupkg.sha512",
+        "dotliquid.nuspec",
+        "lib/net45/DotLiquid.dll",
+        "lib/net45/DotLiquid.xml",
+        "lib/net45/it/DotLiquid.resources.dll",
+        "lib/netstandard1.3/DotLiquid.dll",
+        "lib/netstandard1.3/DotLiquid.xml",
+        "lib/netstandard1.3/it/DotLiquid.resources.dll",
+        "lib/netstandard2.0/DotLiquid.dll",
+        "lib/netstandard2.0/DotLiquid.xml",
+        "lib/netstandard2.0/it/DotLiquid.resources.dll",
+        "readme.txt"
       ]
     },
     "ePayco.Net/1.0.13": {
@@ -3059,6 +3097,7 @@
     ".NETCoreApp,Version=v3.1": [
       "Dapper >= 2.0.90",
       "Dapper.Contrib >= 2.0.78",
+      "DotLiquid >= 2.2.508",
       "Fe.Core.Global >= 1.0.0",
       "Fe.Servidor.Middleware >= 1.0.0",
       "IdentityServer4 >= 4.1.2",
@@ -3130,6 +3169,10 @@
           "Dapper.Contrib": {
             "target": "Package",
             "version": "[2.0.78, )"
+          },
+          "DotLiquid": {
+            "target": "Package",
+            "version": "[2.2.508, )"
           },
           "IdentityServer4": {
             "target": "Package",

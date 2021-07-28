@@ -8,6 +8,19 @@ import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:flutter/widgets.dart';
 
 class ContenidoProvider {
+  Future<List<ProductoServicioModel>> getPublicacionesPorIdDemografia(
+      String idDemografia) async {
+    String? data = await ServicioUtil.get(
+        "dominio/COContenido/GetPublicacionesPorIdUsuario",
+        params: {"idDemografia": idDemografia});
+    if (data == null) return [];
+    final List<dynamic> decodedData = json.decode(data);
+    final List<ProductoServicioModel> listado =
+        List<ProductoServicioModel>.from(
+            decodedData.map((model) => ProductoServicioModel.fromJson(model)));
+    return listado;
+  }
+
   Future<List<ProductoServicioModel>> getProductosDescuento() async {
     String? data = await ServicioUtil.get(
         "dominio/COContenido/GetPublicacionesPorDescuento");
@@ -24,6 +37,19 @@ class ContenidoProvider {
     String? data = await ServicioUtil.get(
         "dominio/COContenido/FiltrarPublicacion",
         params: {"idTipoPublicacion": idTipoPublicacion.toString()});
+    if (data == null) return [];
+    final List<dynamic> decodedData = json.decode(data);
+    final List<ProductoServicioModel> listado =
+        List<ProductoServicioModel>.from(
+            decodedData.map((model) => ProductoServicioModel.fromJson(model)));
+    return listado;
+  }
+
+  Future<List<ProductoServicioModel>> busquedaProductosPorNombre(
+      BuildContext context, String nombrePublicacion) async {
+    String? data = await ServicioUtil.get(
+        "dominio/COContenido/BuscarPublicacion",
+        params: {"nombre": nombrePublicacion.toString()});
     if (data == null) return [];
     final List<dynamic> decodedData = json.decode(data);
     final List<ProductoServicioModel> listado =

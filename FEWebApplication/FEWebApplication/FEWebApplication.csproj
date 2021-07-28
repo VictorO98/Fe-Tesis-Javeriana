@@ -11,6 +11,7 @@
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.90" />
     <PackageReference Include="Dapper.Contrib" Version="2.0.78" />
+    <PackageReference Include="DotLiquid" Version="2.2.508" />
     <PackageReference Include="ePayco.Net" Version="1.0.13" />
     <PackageReference Include="IdentityServer4" Version="4.1.2" />
     <PackageReference Include="IdentityServer4.Storage" Version="4.1.2" />
@@ -47,6 +48,7 @@
     <ProjectReference Include="..\Fe.Dominio.facturas\Fe.Dominio.facturas.csproj" />
     <ProjectReference Include="..\Fe.Dominio.pedidos\Fe.Dominio.pedidos.csproj" />
     <ProjectReference Include="..\Fe.Dominio.trueques\Fe.Dominio.trueques.csproj" />
+    <ProjectReference Include="..\Fe.Servidor.Integracion\Fe.Servidor.Integracion.csproj" />
     <ProjectReference Include="..\Fe.Servidor.Middleware\Fe.Servidor.Middleware.csproj" />
   </ItemGroup>
 

@@ -23,6 +23,20 @@
           "lib/net5.0/Dapper.Contrib.dll": {}
         }
       },
+      "DotLiquid/2.2.508": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/DotLiquid.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/DotLiquid.dll": {}
+        },
+        "resource": {
+          "lib/netstandard2.0/it/DotLiquid.resources.dll": {
+            "locale": "it"
+          }
+        }
+      },
       "ePayco.Net/1.0.13": {
         "type": "package",
         "dependencies": {
@@ -710,7 +724,7 @@
           "lib/net40/Microsoft.Web.Infrastructure.dll": {}
         }
       },
-      "MimeKit/2.13.0": {
+      "MimeKit/2.14.0": {
         "type": "package",
         "dependencies": {
           "Portable.BouncyCastle": "1.8.10",
@@ -1011,6 +1025,7 @@
         "dependencies": {
           "Dapper": "2.0.90",
           "Dapper.Contrib": "2.0.78",
+          "DotLiquid": "2.2.508",
           "Fe.Core.Global": "1.0.0",
           "Fe.Servidor.Middleware": "1.0.0",
           "IdentityServer4": "4.1.2",
@@ -1039,6 +1054,7 @@
         "dependencies": {
           "Dapper": "2.0.90",
           "Dapper.Contrib": "2.0.78",
+          "DotLiquid": "2.2.508",
           "Fe.Servidor.Middleware": "1.0.0",
           "IdentityServer4": "4.1.2",
           "IdentityServer4.Storage": "4.1.2",
@@ -1066,6 +1082,7 @@
         "dependencies": {
           "Dapper": "2.0.90",
           "Dapper.Contrib": "2.0.78",
+          "DotLiquid": "2.2.508",
           "Fe.Core.General": "1.0.0",
           "Fe.Core.Global": "1.0.0",
           "Fe.Servidor.Middleware": "1.0.0",
@@ -1092,6 +1109,7 @@
         "dependencies": {
           "Dapper": "2.0.90",
           "Dapper.Contrib": "2.0.78",
+          "DotLiquid": "2.2.508",
           "Fe.Core.General": "1.0.0",
           "Fe.Core.Global": "1.0.0",
           "Fe.Servidor.Middleware": "1.0.0",
@@ -1121,6 +1139,7 @@
         "dependencies": {
           "Dapper": "2.0.90",
           "Dapper.Contrib": "2.0.78",
+          "DotLiquid": "2.2.508",
           "IdentityServer4": "4.1.2",
           "IdentityServer4.Storage": "4.1.2",
           "MailKit": "2.13.0",
@@ -1147,6 +1166,7 @@
         "dependencies": {
           "Dapper": "2.0.90",
           "Dapper.Contrib": "2.0.78",
+          "DotLiquid": "2.2.508",
           "IdentityServer4": "4.1.2",
           "IdentityServer4.Storage": "4.1.2",
           "MailKit": "2.13.0",
@@ -1173,6 +1193,7 @@
         "dependencies": {
           "Dapper": "2.0.90",
           "Dapper.Contrib": "2.0.78",
+          "DotLiquid": "2.2.508",
           "Fe.Core.General": "1.0.0",
           "Fe.Dominio.contenido": "1.0.0",
           "Fe.Servidor.Middleware": "1.0.0",
@@ -1202,6 +1223,7 @@
         "dependencies": {
           "Dapper": "2.0.90",
           "Dapper.Contrib": "2.0.78",
+          "DotLiquid": "2.2.508",
           "Fe.Core.General": "1.0.0",
           "Fe.Dominio.contenido": "1.0.0",
           "Fe.Servidor.Middleware": "1.0.0",
@@ -1225,12 +1247,29 @@
           "bin/placeholder/Fe.Dominio.trueques.dll": {}
         }
       },
+      "Fe.Servidor.Integracion/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "DotLiquid": "2.2.508",
+          "Fe.Servidor.Middleware": "1.0.0",
+          "MailKit": "2.13.0",
+          "MimeKit": "2.14.0"
+        },
+        "compile": {
+          "bin/placeholder/Fe.Servidor.Integracion.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Fe.Servidor.Integracion.dll": {}
+        }
+      },
       "Fe.Servidor.Middleware/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
           "Dapper": "2.0.90",
           "Dapper.Contrib": "2.0.78",
+          "DotLiquid": "2.2.508",
           "IdentityServer4": "4.1.2",
           "IdentityServer4.Storage": "4.1.2",
           "MailKit": "2.13.0",
@@ -1287,6 +1326,28 @@
         "lib/net5.0/Dapper.Contrib.xml",
         "lib/netstandard2.0/Dapper.Contrib.dll",
         "lib/netstandard2.0/Dapper.Contrib.xml"
+      ]
+    },
+    "DotLiquid/2.2.508": {
+      "sha512": "VLpfY1HwcR7AIE3YnSnk9nBELfJDuZioqSwuE9L7ij3N1ifsgYDvEfFnTDNL/VmdIxr1WMmNo01Gy2bBW9CSDg==",
+      "type": "package",
+      "path": "dotliquid/2.2.508",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "dotliquid.2.2.508.nupkg.sha512",
+        "dotliquid.nuspec",
+        "lib/net45/DotLiquid.dll",
+        "lib/net45/DotLiquid.xml",
+        "lib/net45/it/DotLiquid.resources.dll",
+        "lib/netstandard1.3/DotLiquid.dll",
+        "lib/netstandard1.3/DotLiquid.xml",
+        "lib/netstandard1.3/it/DotLiquid.resources.dll",
+        "lib/netstandard2.0/DotLiquid.dll",
+        "lib/netstandard2.0/DotLiquid.xml",
+        "lib/netstandard2.0/it/DotLiquid.resources.dll",
+        "readme.txt"
       ]
     },
     "ePayco.Net/1.0.13": {
@@ -2428,10 +2489,10 @@
         "microsoft.web.infrastructure.nuspec"
       ]
     },
-    "MimeKit/2.13.0": {
-      "sha512": "wkHUQzy/sAtWCifZfNDq24DB/xshYoc+QeynSCJPSNeeA51DzZWjVaRslyix/9OEGhdSsUtvisL66dpGp0THjw==",
+    "MimeKit/2.14.0": {
+      "sha512": "Z8ONAYytB/P8O7tpqMShcfL/2b+cF8Uq6UHqhcE9jiFMZsXocwu4Tg1r3Dpa2/uESJsdXtc+gvFj08PBAJ9YOg==",
       "type": "package",
-      "path": "mimekit/2.13.0",
+      "path": "mimekit/2.14.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2457,7 +2518,7 @@
         "lib/netstandard2.1/MimeKit.dll",
         "lib/netstandard2.1/MimeKit.pdb",
         "lib/netstandard2.1/MimeKit.xml",
-        "mimekit.2.13.0.nupkg.sha512",
+        "mimekit.2.14.0.nupkg.sha512",
         "mimekit.nuspec"
       ]
     },
@@ -3327,6 +3388,11 @@
       "path": "../Fe.Dominio.trueques/Fe.Dominio.trueques.csproj",
       "msbuildProject": "../Fe.Dominio.trueques/Fe.Dominio.trueques.csproj"
     },
+    "Fe.Servidor.Integracion/1.0.0": {
+      "type": "project",
+      "path": "../Fe.Servidor.Integracion/Fe.Servidor.Integracion.csproj",
+      "msbuildProject": "../Fe.Servidor.Integracion/Fe.Servidor.Integracion.csproj"
+    },
     "Fe.Servidor.Middleware/1.0.0": {
       "type": "project",
       "path": "../Fe.Servidor.Middleware/Fe.Servidor.Middleware.csproj",
@@ -3337,6 +3403,7 @@
     "net5.0": [
       "Dapper >= 2.0.90",
       "Dapper.Contrib >= 2.0.78",
+      "DotLiquid >= 2.2.508",
       "Fe.Core.General >= 1.0.0",
       "Fe.Core.Global >= 1.0.0",
       "Fe.Core.Seguridad >= 1.0.0",
@@ -3345,6 +3412,7 @@
       "Fe.Dominio.facturas >= 1.0.0",
       "Fe.Dominio.pedidos >= 1.0.0",
       "Fe.Dominio.trueques >= 1.0.0",
+      "Fe.Servidor.Integracion >= 1.0.0",
       "Fe.Servidor.Middleware >= 1.0.0",
       "IdentityServer4 >= 4.1.2",
       "IdentityServer4.Storage >= 4.1.2",
@@ -3414,6 +3482,9 @@
             "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Dominio.trueques\\Fe.Dominio.trueques.csproj": {
               "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Dominio.trueques\\Fe.Dominio.trueques.csproj"
             },
+            "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Servidor.Integracion\\Fe.Servidor.Integracion.csproj": {
+              "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Servidor.Integracion\\Fe.Servidor.Integracion.csproj"
+            },
             "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj": {
               "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj"
             }
@@ -3437,6 +3508,10 @@
           "Dapper.Contrib": {
             "target": "Package",
             "version": "[2.0.78, )"
+          },
+          "DotLiquid": {
+            "target": "Package",
+            "version": "[2.2.508, )"
           },
           "IdentityServer4": {
             "target": "Package",

@@ -37,7 +37,7 @@ class _OrdersWidgetState extends State<OrdersWidget> {
             backgroundColor: Colors.transparent,
             elevation: 0,
             title: Text(
-              'My Orders',
+              'Mis pedidos',
               style: Theme.of(context).textTheme.display1,
             ),
             actions: <Widget>[
@@ -77,7 +77,7 @@ class _OrdersWidgetState extends State<OrdersWidget> {
                               color: Theme.of(context).accentColor, width: 1)),
                       child: Align(
                         alignment: Alignment.center,
-                        child: Text("All"),
+                        child: Text("Todos"),
                       ),
                     ),
                   ),
@@ -90,7 +90,7 @@ class _OrdersWidgetState extends State<OrdersWidget> {
                               color: Theme.of(context).accentColor, width: 1)),
                       child: Align(
                         alignment: Alignment.center,
-                        child: Text("Unpaid"),
+                        child: Text("Pendiente"),
                       ),
                     ),
                   ),
@@ -103,7 +103,7 @@ class _OrdersWidgetState extends State<OrdersWidget> {
                               color: Theme.of(context).accentColor, width: 1)),
                       child: Align(
                         alignment: Alignment.center,
-                        child: Text("Shipped"),
+                        child: Text("Empaquetados"),
                       ),
                     ),
                   ),
@@ -116,7 +116,7 @@ class _OrdersWidgetState extends State<OrdersWidget> {
                               color: Theme.of(context).accentColor, width: 1)),
                       child: Align(
                         alignment: Alignment.center,
-                        child: Text("To be shipped"),
+                        child: Text("Enviado"),
                       ),
                     ),
                   ),
@@ -129,7 +129,7 @@ class _OrdersWidgetState extends State<OrdersWidget> {
                               color: Theme.of(context).accentColor, width: 1)),
                       child: Align(
                         alignment: Alignment.center,
-                        child: Text("In Dispute"),
+                        child: Text("Devoluciones"),
                       ),
                     ),
                   ),

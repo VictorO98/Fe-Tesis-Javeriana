@@ -49,11 +49,11 @@ class _TabsWidgetState extends State<TabsWidget> {
       widget.selectedTab = tabItem;
       switch (tabItem) {
         case 0:
-          widget.currentTitle = 'Notifications';
+          widget.currentTitle = 'Notificaciones';
           widget.currentPage = NotificationsWidget();
           break;
         case 1:
-          widget.currentTitle = 'Account';
+          widget.currentTitle = 'Cuenta';
           widget.currentPage = PerfilUsuarioPage();
           break;
         case 2:

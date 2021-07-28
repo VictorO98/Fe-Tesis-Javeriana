@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "L7e1vf8OtYCaTie5wm/f0ILiRi5Y1qhZ78AUIVQnHFLOwtZCUhxgJVO75+44uTBgHf9B8Kij5kqSXJ6EoQPGpg==",
+  "dgSpecHash": "wCqgF2flERSorGkQBw+wUcphSiLfhOfHNyrI6uexupJNfIKaVFKKp5n3QcZfVUIqJVA8MMYWNy2VbPpb98SyFA==",
   "success": true,
   "projectFilePath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\FEWebApplication\\FEWebApplication.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vospi\\.nuget\\packages\\dapper\\2.0.90\\dapper.2.0.90.nupkg.sha512",
     "C:\\Users\\vospi\\.nuget\\packages\\dapper.contrib\\2.0.78\\dapper.contrib.2.0.78.nupkg.sha512",
+    "C:\\Users\\vospi\\.nuget\\packages\\dotliquid\\2.2.508\\dotliquid.2.2.508.nupkg.sha512",
     "C:\\Users\\vospi\\.nuget\\packages\\epayco.net\\1.0.13\\epayco.net.1.0.13.nupkg.sha512",
     "C:\\Users\\vospi\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\vospi\\.nuget\\packages\\identitymodel\\4.4.0\\identitymodel.4.4.0.nupkg.sha512",
@@ -52,7 +53,7 @@
     "C:\\Users\\vospi\\.nuget\\packages\\microsoft.netcore.targets\\2.0.0\\microsoft.netcore.targets.2.0.0.nupkg.sha512",
     "C:\\Users\\vospi\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\vospi\\.nuget\\packages\\microsoft.web.infrastructure\\1.0.0\\microsoft.web.infrastructure.1.0.0.nupkg.sha512",
-    "C:\\Users\\vospi\\.nuget\\packages\\mimekit\\2.13.0\\mimekit.2.13.0.nupkg.sha512",
+    "C:\\Users\\vospi\\.nuget\\packages\\mimekit\\2.14.0\\mimekit.2.14.0.nupkg.sha512",
     "C:\\Users\\vospi\\.nuget\\packages\\netcore.mailkit\\2.0.3\\netcore.mailkit.2.0.3.nupkg.sha512",
     "C:\\Users\\vospi\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
     "C:\\Users\\vospi\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",

@@ -32,7 +32,7 @@ class EmptyOrdersProductsWidget extends StatelessWidget {
                           Theme.of(context).focusColor.withOpacity(0.1),
                         ])),
                 child: Icon(
-                  UiIcons.inbox,
+                  Icons.inbox,
                   color: Theme.of(context).primaryColor,
                   size: 70,
                 ),
@@ -67,7 +67,7 @@ class EmptyOrdersProductsWidget extends StatelessWidget {
           Opacity(
             opacity: 0.4,
             child: Text(
-              'D\'ont have any orderd item',
+              'No tienes ordenes aquí',
               textAlign: TextAlign.center,
               style: Theme.of(context)
                   .textTheme
@@ -84,7 +84,7 @@ class EmptyOrdersProductsWidget extends StatelessWidget {
             color: Theme.of(context).focusColor.withOpacity(0.15),
             shape: StadiumBorder(),
             child: Text(
-              'Start Shopping',
+              'Empieza a comprar',
               style: Theme.of(context).textTheme.title,
             ),
           ),

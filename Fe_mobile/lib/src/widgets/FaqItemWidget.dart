@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class FaqItemWidget extends StatelessWidget {
-  FaqItemWidget({Key? key, this.index = 1}) : super(key: key);
+  String? pregunta;
+  String? respuesta;
+  FaqItemWidget({Key? key, this.index = 1, this.pregunta, this.respuesta})
+      : super(key: key);
   final index;
 
   @override
@@ -22,10 +25,14 @@ class FaqItemWidget extends StatelessWidget {
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
                 color: Theme.of(context).accentColor,
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(5), topRight: Radius.circular(5))),
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(5), topRight: Radius.circular(5))),
             child: Text(
-              'Gluten-free spaghetti with tomatoes ?',
-              style: Theme.of(context).textTheme.body2!.merge(TextStyle(color: Theme.of(context).primaryColor)),
+              pregunta!,
+              style: Theme.of(context)
+                  .textTheme
+                  .body2!
+                  .merge(TextStyle(color: Theme.of(context).primaryColor)),
             ),
           ),
           Container(
@@ -33,9 +40,11 @@ class FaqItemWidget extends StatelessWidget {
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
                 color: Theme.of(context).primaryColor,
-                borderRadius: BorderRadius.only(bottomRight: Radius.circular(5), bottomLeft: Radius.circular(5))),
+                borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(5),
+                    bottomLeft: Radius.circular(5))),
             child: Text(
-              'Gluten-free spaghetti with tomatoes Gluten-free spaghetti with tomatoes',
+              respuesta!,
               style: Theme.of(context).textTheme.body1,
             ),
           ),

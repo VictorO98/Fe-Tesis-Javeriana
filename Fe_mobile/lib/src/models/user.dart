@@ -22,8 +22,8 @@ class User {
 
   User getCurrentUser() {
     return User.advanced(
-        'Andrew R. Whitesides',
-        'andrew@gmail.com',
+        'Manuel Ospina',
+        'manuel@gmail.com',
         'Male',
         DateTime(1993, 12, 31),
         'img/user2.jpg',

@@ -1,6 +1,7 @@
 ﻿using Fe.Core.General.Datos;
 using Fe.Core.Global.Constantes;
 using Fe.Core.Seguridad.Negocio;
+using Fe.Servidor.Integracion.Mensajes.DotLiquid;
 using Fe.Servidor.Middleware.Contratos.Core;
 using Fe.Servidor.Middleware.Contratos.Core.Seguridad;
 using Fe.Servidor.Middleware.Modelo.Entidades;
@@ -24,7 +25,7 @@ namespace FEWebApplication.Authentication
         private readonly IConfiguration _configuration;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        //private readonly WorkflowMensaje _workflowMensaje;
+        private readonly WorkflowMensaje _workflowMensaje;
 
         public AuthenticateController(COSeguridadBiz seguridadBiz, IConfiguration configuration
             , UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)

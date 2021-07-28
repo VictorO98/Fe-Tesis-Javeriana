@@ -34,10 +34,10 @@ class _HelpWidgetState extends State<HelpWidget> {
           iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
           bottom: TabBar(
             tabs: [
-              Tab(text: 'Products'),
-              Tab(text: 'Services'),
-              Tab(text: 'Delivery'),
-              Tab(text: 'Misc'),
+              Tab(text: 'Productos'),
+              Tab(text: 'Servicios'),
+              Tab(text: 'Compras'),
+              Tab(text: 'Devoluciones'),
             ],
             labelColor: Theme.of(context).primaryColor,
           ),
@@ -63,8 +63,6 @@ class _HelpWidgetState extends State<HelpWidget> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
-                  SearchBarWidget(),
-                  SizedBox(height: 15),
                   ListTile(
                     contentPadding: EdgeInsets.symmetric(vertical: 0),
                     leading: Icon(
@@ -72,7 +70,7 @@ class _HelpWidgetState extends State<HelpWidget> {
                       color: Theme.of(context).hintColor,
                     ),
                     title: Text(
-                      'Faq',
+                      'Prefuntas frecuentes',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.display1,
@@ -83,12 +81,52 @@ class _HelpWidgetState extends State<HelpWidget> {
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     primary: false,
-                    itemCount: 10,
+                    itemCount: 1,
                     separatorBuilder: (context, index) {
                       return SizedBox(height: 15);
                     },
                     itemBuilder: (context, index) {
-                      return FaqItemWidget(index: index);
+                      return FaqItemWidget(
+                          index: index,
+                          pregunta:
+                              "¿Cómo puede subir mis productos o servicios?",
+                          respuesta:
+                              "Dirigite a la configuración de perfil y la sección de vender");
+                    },
+                  ),
+                  ListView.separated(
+                    padding: EdgeInsets.symmetric(vertical: 5),
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    primary: false,
+                    itemCount: 1,
+                    separatorBuilder: (context, index) {
+                      return SizedBox(height: 15);
+                    },
+                    itemBuilder: (context, index) {
+                      return FaqItemWidget(
+                          index: index,
+                          pregunta:
+                              "¿ Que hago si no estoy de acuerdo con mi producto ?",
+                          respuesta:
+                              "Puedes realizar la devolución en tu sección de pedidos");
+                    },
+                  ),
+                  ListView.separated(
+                    padding: EdgeInsets.symmetric(vertical: 5),
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    primary: false,
+                    itemCount: 1,
+                    separatorBuilder: (context, index) {
+                      return SizedBox(height: 15);
+                    },
+                    itemBuilder: (context, index) {
+                      return FaqItemWidget(
+                          index: index,
+                          pregunta: "¿ Cómo reporto un producto ?",
+                          respuesta:
+                              "En la sección del producto lo puedes reportar");
                     },
                   ),
                 ],

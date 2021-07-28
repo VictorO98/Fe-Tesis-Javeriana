@@ -12,6 +12,7 @@ String infoUsuarioModelToJson(InfoUsuarioModel data) =>
 
 class InfoUsuarioModel {
   InfoUsuarioModel({
+    this.id,
     this.email,
     this.numeroTelefono,
     this.tipoDocumento,
@@ -25,6 +26,7 @@ class InfoUsuarioModel {
     this.estado,
   });
 
+  String? id;
   String? email;
   String? numeroTelefono;
   String? tipoDocumento;
@@ -39,6 +41,7 @@ class InfoUsuarioModel {
 
   factory InfoUsuarioModel.fromJson(Map<String, dynamic> json) =>
       InfoUsuarioModel(
+          id: json["id"],
           email: json["email"],
           numeroTelefono: json["numeroTelefono"],
           tipoDocumento: json["tipoDocumento"],
@@ -52,6 +55,7 @@ class InfoUsuarioModel {
           estado: json["estado"]);
 
   Map<String, dynamic> toJson() => {
+        "id": id,
         "email": email,
         "numeroTelefono": numeroTelefono,
         "tipoDocumento": tipoDocumento,

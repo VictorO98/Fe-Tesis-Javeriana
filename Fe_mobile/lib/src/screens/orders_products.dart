@@ -34,11 +34,11 @@ class _OrdersProductsWidgetState extends State<OrdersProductsWidget> {
               child: ListTile(
                 contentPadding: EdgeInsets.symmetric(vertical: 0),
                 leading: Icon(
-                  UiIcons.inbox,
+                  Icons.inbox,
                   color: Theme.of(context).hintColor,
                 ),
                 title: Text(
-                  'Orders List',
+                  'Mis pedidos',
                   overflow: TextOverflow.fade,
                   softWrap: false,
                   style: Theme.of(context).textTheme.display1,

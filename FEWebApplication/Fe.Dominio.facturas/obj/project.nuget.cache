@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "mNLtjptSS8CNLojPkGJBGanQVv/jSNSlynmwReqm5ZKWycAonegOky9cdVa0sLW/afwqPpwlb1U6lsb6GssUXQ==",
+  "dgSpecHash": "QmC0YkkLSoRp51bSe9jpHEOB37v8ILgdHMJoMh6x4pdVHBmS1d1nr3Ym+h0zTH8dEMk9L6m0dGdS39b9kSs9fw==",
   "success": true,
   "projectFilePath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Dominio.facturas\\Fe.Dominio.facturas.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vospi\\.nuget\\packages\\dapper\\2.0.90\\dapper.2.0.90.nupkg.sha512",
     "C:\\Users\\vospi\\.nuget\\packages\\dapper.contrib\\2.0.78\\dapper.contrib.2.0.78.nupkg.sha512",
+    "C:\\Users\\vospi\\.nuget\\packages\\dotliquid\\2.2.508\\dotliquid.2.2.508.nupkg.sha512",
     "C:\\Users\\vospi\\.nuget\\packages\\epayco.net\\1.0.13\\epayco.net.1.0.13.nupkg.sha512",
     "C:\\Users\\vospi\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\vospi\\.nuget\\packages\\identitymodel\\4.4.0\\identitymodel.4.4.0.nupkg.sha512",

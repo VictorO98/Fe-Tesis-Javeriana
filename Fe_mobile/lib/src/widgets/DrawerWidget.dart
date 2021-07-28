@@ -38,11 +38,11 @@ class DrawerWidget extends StatelessWidget {
               Navigator.of(context).pushNamed('/Tabs', arguments: 2);
             },
             leading: Icon(
-              UiIcons.home,
+              Icons.home,
               color: Theme.of(context).focusColor.withOpacity(1),
             ),
             title: Text(
-              "Home",
+              "Inicio",
               style: Theme.of(context).textTheme.subhead,
             ),
           ),
@@ -51,11 +51,11 @@ class DrawerWidget extends StatelessWidget {
               Navigator.of(context).pushNamed('/Tabs', arguments: 0);
             },
             leading: Icon(
-              UiIcons.bell,
+              Icons.notifications_active_outlined,
               color: Theme.of(context).focusColor.withOpacity(1),
             ),
             title: Text(
-              "Notifications",
+              "Notificaciones",
               style: Theme.of(context).textTheme.subhead,
             ),
           ),
@@ -64,11 +64,11 @@ class DrawerWidget extends StatelessWidget {
               Navigator.of(context).pushNamed('/Orders', arguments: 0);
             },
             leading: Icon(
-              UiIcons.inbox,
+              Icons.inbox,
               color: Theme.of(context).focusColor.withOpacity(1),
             ),
             title: Text(
-              "My Orders",
+              "Mis pedidos",
               style: Theme.of(context).textTheme.subhead,
             ),
             trailing: Chip(
@@ -87,18 +87,18 @@ class DrawerWidget extends StatelessWidget {
               Navigator.of(context).pushNamed('/Tabs', arguments: 4);
             },
             leading: Icon(
-              UiIcons.heart,
+              Icons.favorite_border_outlined,
               color: Theme.of(context).focusColor.withOpacity(1),
             ),
             title: Text(
-              "Wish List",
+              "Favoritos",
               style: Theme.of(context).textTheme.subhead,
             ),
           ),
           ListTile(
             dense: true,
             title: Text(
-              "Products",
+              "Publicaciones",
               style: Theme.of(context).textTheme.body1,
             ),
             trailing: Icon(
@@ -111,11 +111,11 @@ class DrawerWidget extends StatelessWidget {
               Navigator.of(context).pushNamed('/Categories');
             },
             leading: Icon(
-              UiIcons.folder_1,
+              Icons.folder_open_outlined,
               color: Theme.of(context).focusColor.withOpacity(1),
             ),
             title: Text(
-              "Categories",
+              "Categorías",
               style: Theme.of(context).textTheme.subhead,
             ),
           ),
@@ -124,18 +124,18 @@ class DrawerWidget extends StatelessWidget {
               Navigator.of(context).pushNamed('/Brands');
             },
             leading: Icon(
-              UiIcons.folder_1,
+              Icons.folder_open_outlined,
               color: Theme.of(context).focusColor.withOpacity(1),
             ),
             title: Text(
-              "Brands",
+              "Mis Producos",
               style: Theme.of(context).textTheme.subhead,
             ),
           ),
           ListTile(
             dense: true,
             title: Text(
-              "Application Preferences",
+              "Preferencias del usuario",
               style: Theme.of(context).textTheme.body1,
             ),
             trailing: Icon(
@@ -148,11 +148,11 @@ class DrawerWidget extends StatelessWidget {
               Navigator.of(context).pushNamed('/Help');
             },
             leading: Icon(
-              UiIcons.information,
+              Icons.question_answer,
               color: Theme.of(context).focusColor.withOpacity(1),
             ),
             title: Text(
-              "Help & Support",
+              "Preguntas frecuentes",
               style: Theme.of(context).textTheme.subhead,
             ),
           ),
@@ -161,24 +161,11 @@ class DrawerWidget extends StatelessWidget {
               Navigator.of(context).pushNamed('/Tabs', arguments: 1);
             },
             leading: Icon(
-              UiIcons.settings_1,
+              Icons.settings,
               color: Theme.of(context).focusColor.withOpacity(1),
             ),
             title: Text(
-              "Settings",
-              style: Theme.of(context).textTheme.subhead,
-            ),
-          ),
-          ListTile(
-            onTap: () {
-              Navigator.of(context).pushNamed('/Languages');
-            },
-            leading: Icon(
-              UiIcons.planet_earth,
-              color: Theme.of(context).focusColor.withOpacity(1),
-            ),
-            title: Text(
-              "Languages",
+              "Configuración",
               style: Theme.of(context).textTheme.subhead,
             ),
           ),
@@ -187,11 +174,11 @@ class DrawerWidget extends StatelessWidget {
               Navigator.of(context).pushNamed('/Login');
             },
             leading: Icon(
-              UiIcons.upload,
+              Icons.upload,
               color: Theme.of(context).focusColor.withOpacity(1),
             ),
             title: Text(
-              "Log out",
+              "Cerrar Sesión",
               style: Theme.of(context).textTheme.subhead,
             ),
           ),

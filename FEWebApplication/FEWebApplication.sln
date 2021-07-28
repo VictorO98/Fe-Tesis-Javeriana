@@ -45,6 +45,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fe.Core.Global", "Fe.Core.G
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fe.Core.Seguridad", "Fe.Core.Seguridad\Fe.Core.Seguridad.csproj", "{E0634EB9-E006-4EC0-A4A4-307CBCA792D0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "integracion", "integracion", "{AC7B44BC-BED9-4D3D-967B-9FF8489E15D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fe.Servidor.Integracion", "Fe.Servidor.Integracion\Fe.Servidor.Integracion.csproj", "{74EF4A32-190F-4F4E-A96A-661987C65318}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +95,10 @@ Global
 		{E0634EB9-E006-4EC0-A4A4-307CBCA792D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0634EB9-E006-4EC0-A4A4-307CBCA792D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0634EB9-E006-4EC0-A4A4-307CBCA792D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74EF4A32-190F-4F4E-A96A-661987C65318}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74EF4A32-190F-4F4E-A96A-661987C65318}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74EF4A32-190F-4F4E-A96A-661987C65318}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74EF4A32-190F-4F4E-A96A-661987C65318}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -113,6 +121,7 @@ Global
 		{649D0819-C90C-4A74-92C4-1CCF0D8B3D11} = {E7D2F4A2-92FB-4916-8305-EFAC0002057D}
 		{382B7666-8FC2-4FB8-9A82-065562FD2D7E} = {B714016E-19D4-44E2-9030-BC67A2224AEA}
 		{E0634EB9-E006-4EC0-A4A4-307CBCA792D0} = {EE7BEB40-57F8-498A-B78A-776353139723}
+		{74EF4A32-190F-4F4E-A96A-661987C65318} = {AC7B44BC-BED9-4D3D-967B-9FF8489E15D4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {18D08042-ECF2-4852-B616-BF915381DB0C}

@@ -1,9 +1,12 @@
 import 'package:Fe_mobile/config/ui_icons.dart';
 import 'package:Fe_mobile/src/core/models/info_usuario_model.dart';
 import 'package:Fe_mobile/src/core/pages/usuario/bloc/info_perfil/info_usuario_bloc.dart';
+import 'package:Fe_mobile/src/core/util/alert_util.dart';
+import 'package:Fe_mobile/src/core/util/conf_api.dart';
 import 'package:Fe_mobile/src/core/util/preferencias_util.dart';
 import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:Fe_mobile/src/dominio/providers/contenido_provider.dart';
+import 'package:Fe_mobile/src/models/route_argument.dart';
 import 'package:Fe_mobile/src/models/user.dart';
 import 'package:Fe_mobile/src/widgets/ProfileSettingsDialog.dart';
 import 'package:Fe_mobile/src/widgets/SearchBarWidget.dart';
@@ -18,25 +21,62 @@ class PerfilUsuarioPage extends StatefulWidget {
 class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
   final _prefs = new PreferenciasUtil();
 
+  List<ProductoServicioModel> _productos = [];
+  List<ProductoServicioModel> _servicios = [];
+
   InfoUsuarioBloc? _infoUsuarioBloc;
+  ContenidoProvider _contenidoProvider = new ContenidoProvider();
 
   bool _cargandoUsuario = false;
+  bool _cargandoProductos = false;
 
   User _user = new User.init().getCurrentUser();
+
+  String? idDemografia;
 
   @override
   void initState() {
     super.initState();
     _infoUsuarioBloc = BlocProvider.of<InfoUsuarioBloc>(context);
-    _cargarUsuario();
+    _cargarInfoUsuario();
+    _cargarProductos();
   }
 
-  void _cargarUsuario() async {
+  _cargarProductos() async {
+    var lista = await _contenidoProvider.getPublicacionesPorIdDemografia(
+        _infoUsuarioBloc!.state.infoUsuarioModel!.id.toString());
+    List<ProductoServicioModel> listaProductos = [];
+    List<ProductoServicioModel> listaServicios = [];
+
+    var idUsuario = _infoUsuarioBloc!.state.infoUsuarioModel!.id.toString();
+
+    for (var i = 0; i < lista.length; i++) {
+      lista[i].urlimagenproductoservicio =
+          "${ConfServer.SERVER}dominio/COContenido/GetImagenProdcuto?idPublicacion=${lista[i].id}&idUsuario=$idUsuario";
+    }
+
+    for (int i = 0; i < lista.length; i++) {
+      if (lista[i].tipoPublicacion == "Producto") {
+        listaProductos.add(lista[i]);
+      } else {
+        listaServicios.add(lista[i]);
+      }
+    }
+    setState(() {
+      _productos = listaProductos;
+      _servicios = listaServicios;
+      _cargandoProductos = true;
+    });
+  }
+
+  void _cargarInfoUsuario() async {
     setState(() {
       _cargandoUsuario = true;
     });
+
     if (_infoUsuarioBloc!.state.infoUsuarioModel != null) {
       _infoUsuarioBloc!.add(OnSetearInfoUsuario(new InfoUsuarioModel(
+          id: await _prefs.getPrefStr("id"),
           documento: await _prefs.getPrefStr("documento"),
           tipoDocumento: await _prefs.getPrefStr("tipoDocumento"),
           email: await _prefs.getPrefStr("email"),
@@ -48,6 +88,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
           direccion: await _prefs.getPrefStr("direccion"),
           estado: await _prefs.getPrefStr("estado"),
           poblacion: await _prefs.getPrefStr("poblacion"))));
+
       setState(() {
         _cargandoUsuario = false;
       });
@@ -117,75 +158,42 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
 
   Widget _tabPrincipal(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20),
-      decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor,
-        borderRadius: BorderRadius.circular(6),
-        boxShadow: [
-          BoxShadow(
-              color: Theme.of(context).hintColor.withOpacity(0.15),
-              offset: Offset(0, 3),
-              blurRadius: 10)
-        ],
-      ),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: FlatButton(
-              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-              onPressed: () {
-                Navigator.of(context).pushNamed('/Tabs', arguments: 4);
-              },
-              child: Column(
+        margin: EdgeInsets.symmetric(horizontal: 20),
+        decoration: BoxDecoration(
+          color: Theme.of(context).primaryColor,
+          borderRadius: BorderRadius.circular(6),
+          boxShadow: [
+            BoxShadow(
+                color: Theme.of(context).hintColor.withOpacity(0.15),
+                offset: Offset(0, 3),
+                blurRadius: 10)
+          ],
+        ),
+        child: _infoUsuarioBloc!.state.infoUsuarioModel!.rol == "Usuario"
+            ? Row(
                 children: <Widget>[
-                  Icon(Icons.favorite_border_outlined,
-                      color: Theme.of(context).hintColor),
-                  Text(
-                    'Favoritos',
-                    style: Theme.of(context).textTheme.body1,
-                  )
+                  Expanded(
+                    child: FlatButton(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                        onPressed: () {
+                          AlertUtil.success(context,
+                              '¡Ya iniciaste tu camino como emprendedor! \n Ahora anexa tus documentos');
+                        },
+                        child: Column(
+                          children: <Widget>[
+                            Icon(Icons.group,
+                                color: Theme.of(context).hintColor),
+                            Text(
+                              '¿Quieres ser emprendedor? Haz click aquí',
+                              style: Theme.of(context).textTheme.bodyText2,
+                            )
+                          ],
+                        )),
+                  ),
                 ],
-              ),
-            ),
-          ),
-          Expanded(
-            child: FlatButton(
-              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-              onPressed: () {
-                Navigator.of(context).pushNamed('/Tabs', arguments: 0);
-              },
-              child: Column(
-                children: <Widget>[
-                  Icon(Icons.notifications_active_outlined,
-                      color: Theme.of(context).hintColor),
-                  Text(
-                    'Notificaciones',
-                    style: Theme.of(context).textTheme.body1,
-                  )
-                ],
-              ),
-            ),
-          ),
-          Expanded(
-            child: FlatButton(
-              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-              onPressed: () {
-                Navigator.of(context).pushNamed('/Tabs', arguments: 3);
-              },
-              child: Column(
-                children: <Widget>[
-                  Icon(Icons.chat_outlined, color: Theme.of(context).hintColor),
-                  Text(
-                    'Mensajes',
-                    style: Theme.of(context).textTheme.body1,
-                  )
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+              )
+            : SizedBox());
   }
 
   Widget _userOrders(BuildContext context) {
@@ -341,7 +349,9 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
           ),
           ListTile(
             onTap: () {
-              Navigator.of(context).pushNamed('/Orders');
+              Navigator.of(context).pushNamed('/MisPub',
+                  arguments: new RouteArgument(
+                      argumentsList: ['Productos', _productos]));
             },
             dense: true,
             title: Text(
@@ -354,14 +364,16 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
               shape: StadiumBorder(
                   side: BorderSide(color: Theme.of(context).focusColor)),
               label: Text(
-                '1',
+                _productos.length.toString(),
                 style: TextStyle(color: Theme.of(context).focusColor),
               ),
             ),
           ),
           ListTile(
             onTap: () {
-              Navigator.of(context).pushNamed('/Orders');
+              Navigator.of(context).pushNamed('/MisPub',
+                  arguments: new RouteArgument(
+                      argumentsList: ['Servicios', _servicios]));
             },
             dense: true,
             title: Text(
@@ -374,7 +386,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
               shape: StadiumBorder(
                   side: BorderSide(color: Theme.of(context).focusColor)),
               label: Text(
-                '5',
+                _servicios.length.toString(),
                 style: TextStyle(color: Theme.of(context).focusColor),
               ),
             ),

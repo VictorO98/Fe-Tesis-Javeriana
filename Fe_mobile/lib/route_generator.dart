@@ -1,4 +1,6 @@
 import 'package:Fe_mobile/src/dominio/pages/Contenido/crear_servicio_producto_page.dart';
+import 'package:Fe_mobile/src/dominio/pages/contenido/busqueda_productos_page.dart';
+import 'package:Fe_mobile/src/dominio/pages/contenido/publicaciones_usuario_page.dart';
 import 'package:Fe_mobile/src/dominio/pages/trueques/ofertar_trueque_page.dart';
 import 'package:Fe_mobile/src/models/route_argument.dart';
 import 'package:Fe_mobile/src/screens/brand.dart';
@@ -44,6 +46,10 @@ class RouteGenerator {
 //        return MaterialPageRoute(builder: (_) => MobileVerification());
 //      case '/MobileVerification2':
 //        return MaterialPageRoute(builder: (_) => MobileVerification2());
+      case '/MisPub':
+        return MaterialPageRoute(
+            builder: (_) => PublicacionesUsuarioPage(
+                routeArgument: args as RouteArgument?));
       case '/Tabs':
         return MaterialPageRoute(
             builder: (_) => TabsWidget(
@@ -60,6 +66,10 @@ class RouteGenerator {
         return MaterialPageRoute(
             builder: (_) =>
                 ProductoDetallePage(routeArgument: args as RouteArgument?));
+      case '/Busqueda':
+        return MaterialPageRoute(
+            builder: (_) =>
+                BusquedaProductosPage(routeArgument: args as RouteArgument?));
 //      case '/Food':
 //        return MaterialPageRoute(
 //            builder: (_) => FoodWidget(

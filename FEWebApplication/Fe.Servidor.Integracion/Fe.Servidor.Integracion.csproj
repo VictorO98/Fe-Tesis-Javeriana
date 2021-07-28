@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DotLiquid" Version="2.2.508" />
+    <PackageReference Include="MailKit" Version="2.13.0" />
+    <PackageReference Include="MimeKit" Version="2.14.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Fe.Servidor.Middleware\Fe.Servidor.Middleware.csproj" />
+  </ItemGroup>
+
+</Project>

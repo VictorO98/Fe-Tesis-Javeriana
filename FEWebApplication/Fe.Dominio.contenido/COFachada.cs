@@ -143,7 +143,7 @@ namespace Fe.Dominio.contenido
             return respuestaDatos;
         }
 
-        public RespuestaDatos SubirFotosPublicacion(IFormFileCollection files)
+        public async Task<RespuestaDatos> SubirFotosPublicacionAsync(IFormFileCollection files)
         {
             RespuestaDatos respuestaDatos;
             try

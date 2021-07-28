@@ -360,6 +360,10 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                     .HasColumnName("id")
                     .UseIdentityAlwaysColumn();
 
+                entity.Property(e => e.Categoria)
+                    .HasMaxLength(5)
+                    .HasColumnName("categoria");
+
                 entity.Property(e => e.Pregunta).HasColumnName("pregunta");
 
                 entity.Property(e => e.Respuesta).HasColumnName("respuesta");
@@ -506,10 +510,12 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                 entity.Property(e => e.Creacion).HasColumnName("creacion");
 
                 entity.Property(e => e.Detalle)
+                    .IsRequired()
                     .HasMaxLength(100)
                     .HasColumnName("detalle");
 
                 entity.Property(e => e.Estado)
+                    .IsRequired()
                     .HasMaxLength(5)
                     .HasColumnName("estado");
 

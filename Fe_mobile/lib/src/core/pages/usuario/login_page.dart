@@ -289,6 +289,7 @@ class _LoginPageState extends State<LoginPage> {
             JWTUtil.addPreferenciasUsuario(claims).then((value) async {
               final infoUsuarioBloc = BlocProvider.of<InfoUsuarioBloc>(context);
               infoUsuarioBloc.add(OnSetearInfoUsuario(new InfoUsuarioModel(
+                  id: await _preferenciasUtil.getPrefStr("id"),
                   documento: await _preferenciasUtil.getPrefStr("documento"),
                   tipoDocumento:
                       await _preferenciasUtil.getPrefStr("tipoDocumento"),

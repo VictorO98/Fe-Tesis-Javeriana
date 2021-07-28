@@ -104,23 +104,23 @@ class _OrderListItemWidgetState extends State<OrderListItemWidget> {
                               Row(
                                 children: <Widget>[
                                   Icon(
-                                    UiIcons.calendar,
+                                    Icons.date_range,
                                     color: Theme.of(context).focusColor,
                                     size: 20,
                                   ),
                                   SizedBox(width: 10),
-                                  // Text(
-                                  //   widget.order.getDateTime(),
-                                  //   style: Theme.of(context).textTheme.body1,
-                                  //   overflow: TextOverflow.fade,
-                                  //   softWrap: false,
-                                  // ),
+                                  Text(
+                                    '20-Jul-2021 3:14am',
+                                    style: Theme.of(context).textTheme.body1,
+                                    overflow: TextOverflow.fade,
+                                    softWrap: false,
+                                  ),
                                 ],
                               ),
                               Row(
                                 children: <Widget>[
                                   Icon(
-                                    UiIcons.line_chart,
+                                    Icons.line_style,
                                     color: Theme.of(context).focusColor,
                                     size: 20,
                                   ),

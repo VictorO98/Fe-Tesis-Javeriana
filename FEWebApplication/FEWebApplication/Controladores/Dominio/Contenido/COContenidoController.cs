@@ -96,7 +96,7 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         }
 
         [Route("SubirFotosPublicacion")]
-        public RespuestaDatos SubirFotosPublicacion(IFormCollection collection)
+        public async Task<RespuestaDatos> SubirFotosPublicacion(IFormCollection collection)
         {
             try
             {
@@ -106,7 +106,7 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
                 if (formData == null)
                     throw new COExcepcion("El formulario de la petición enviada se encuentra vacío. ");
 
-                return _coFachada.SubirFotosPublicacion(files);
+                return await _coFachada.SubirFotosPublicacionAsync(files);
             }
             catch (Exception e)
             {
