@@ -132,12 +132,11 @@ namespace FEWebApplication
             services.AddScoped<RepoPyR>();
             services.AddScoped<RepoTrueque>();
             services.AddScoped<RepoTruequeDetalle>();
-
+            services.AddScoped<RepoNotificacion>();
 
             services.AddScoped<RepoDemografiaReportada>();
             services.AddScoped<RepoRazonSocial>();
             services.AddScoped<RepoFavorito>();
-
             services.AddScoped<RepoProdSerXVendidosPed>();
             services.AddScoped<RepoPedidosPed>();
 
