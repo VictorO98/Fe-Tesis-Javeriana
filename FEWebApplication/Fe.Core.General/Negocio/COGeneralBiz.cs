@@ -17,8 +17,9 @@ namespace Fe.Core.General.Negocio
         RepoFaqCor _repoFaqCor;
         RepoDemografiaReportada _repoDemografiaReportada;
         RepoRazonSocial _repoRazonSocial;
+        RepoNotificacion _repoNotificacion;
 
-        public COGeneralBiz(RepoDemografia repoDemografia, RepoDocumento repoDocumento, RepoPoblacion repoPoblacion, RepoFaqCor repoFaqCor, RepoDemografiaReportada repoDemografiaReportada, RepoRazonSocial repoRazonSocial)
+        public COGeneralBiz(RepoDemografia repoDemografia, RepoDocumento repoDocumento, RepoPoblacion repoPoblacion, RepoFaqCor repoFaqCor, RepoDemografiaReportada repoDemografiaReportada, RepoRazonSocial repoRazonSocial, RepoNotificacion repoNotificacion)
         {
             _repoDemografia = repoDemografia;
             _repoDocumento = repoDocumento;
@@ -26,6 +27,7 @@ namespace Fe.Core.General.Negocio
             _repoFaqCor = repoFaqCor;
             _repoDemografiaReportada = repoDemografiaReportada;
             _repoRazonSocial = repoRazonSocial;
+            _repoNotificacion = repoNotificacion;
         }
         internal DemografiaCor GetDemografiaPorId(int idDemografia)
         {
@@ -228,6 +230,53 @@ namespace Fe.Core.General.Negocio
             try
             {
                 respuestaDatos = await _repoRazonSocial.RemoverRazonSocial(idRazonSocial);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
+
+        internal List<NotificacionesCor> GetNotificaciones()
+        {
+            return _repoNotificacion.GetNotificaciones();
+        }
+
+        internal List<NotificacionesCor> GetNotificacionesPorIdDemografia(int idDemografia)
+        {
+            return _repoNotificacion.GetNotificacionesPorIdDemografia(idDemografia);
+        }
+
+        internal NotificacionesCor GetNotificacionPorIdNotificacion(int idNotificacion)
+        {
+            return _repoNotificacion.GetNotificacionPorIdNotificacion(idNotificacion);
+        }
+
+        internal async Task<RespuestaDatos> GuardarNotificacion(NotificacionesCor notificacion, DemografiaCor demografia)
+        {
+            RespuestaDatos respuestaDatos;
+            if (demografia != null)
+            {
+                try
+                {
+                    respuestaDatos = await _repoNotificacion.GuardarNotificacion(notificacion);
+                }
+                catch (COExcepcion e)
+                {
+                    throw e;
+                }
+            }
+            else { throw new COExcepcion("El usuario ingresado no existe."); }
+            return respuestaDatos;
+        }
+
+        internal async Task<RespuestaDatos> RemoverNotificacion(int idNotificacion)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _repoNotificacion.RemoverNotificacion(idNotificacion);
             }
             catch (COExcepcion e)
             {
