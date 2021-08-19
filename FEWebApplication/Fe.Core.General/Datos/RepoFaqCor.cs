@@ -16,15 +16,22 @@ namespace Fe.Core.General.Datos
         {
             using FeContext context = new FeContext();
             RespuestaDatos respuestaDatos;
-            try
+            if (faq.Categoria == COCategoriaFAQ.PRODUCTOS || faq.Categoria == COCategoriaFAQ.COMPRAS || faq.Categoria == COCategoriaFAQ.SERVICIOS || faq.Categoria == COCategoriaFAQ.DEVOLUCIONES)
             {
-                context.Add(faq);
-                context.SaveChanges();
-                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "FAQ creada exitosamente." };
+                try
+                {
+                    context.Add(faq);
+                    context.SaveChanges();
+                    respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "FAQ creada exitosamente." };
+                }
+                catch (Exception e)
+                {
+                    throw new COExcepcion("Ocurrió un problema al intentar agregar la FAQ.");
+                }
             }
-            catch (Exception e)
+            else
             {
-                throw new COExcepcion("Ocurrió un problema al intentar agregar la FAQ.");
+                throw new COExcepcion("La categoría de la FAQ no existe");
             }
             return respuestaDatos;
         }
@@ -48,17 +55,25 @@ namespace Fe.Core.General.Datos
             FaqCor f = GetFaqCorPorId(faq.Id);
             if (f != null)
             {
-                try
+                if (faq.Categoria == COCategoriaFAQ.PRODUCTOS || faq.Categoria == COCategoriaFAQ.COMPRAS || faq.Categoria == COCategoriaFAQ.SERVICIOS || faq.Categoria == COCategoriaFAQ.DEVOLUCIONES)
                 {
-                    context.Attach(f);
-                    f.Pregunta = faq.Pregunta;
-                    f.Respuesta = faq.Respuesta;
-                    context.SaveChanges();
-                    respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "FAQ modificada exitosamente." };
+                    try
+                    {
+                        context.Attach(f);
+                        f.Pregunta = faq.Pregunta;
+                        f.Respuesta = faq.Respuesta;
+                        f.Categoria = faq.Categoria;
+                        context.SaveChanges();
+                        respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "FAQ modificada exitosamente." };
+                    }
+                    catch (Exception e)
+                    {
+                        throw new COExcepcion("Ocurrió un problema al intentar modificar la FAQ.");
+                    }
                 }
-                catch (Exception e)
+                else
                 {
-                    throw new COExcepcion("Ocurrió un problema al intentar modificar la FAQ.");
+                    throw new COExcepcion("La categoría de la FAQ no existe");
                 }
             }
             else

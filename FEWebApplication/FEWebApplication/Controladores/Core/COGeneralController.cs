@@ -342,5 +342,82 @@ namespace FEWebApplication.Controladores.Core
             }
             return respuestaDatos;
         }
+
+        /// <summary>
+        /// Obtiene todas las notificaciones de la base de datos
+        /// </summary>
+        /// <returns>Lista con todas las notificaciones de la base de datos</returns>
+        [Route("GetNotificaciones")]
+        [HttpGet]
+        public List<NotificacionesCor> GetNotificaciones()
+        {
+            return _cOGeneralFachada.GetNotificaciones();
+        }
+
+        /// <summary>
+        /// Obtiene todas las notificaciones asociadas a un usuario de la base de datos
+        /// </summary>
+        /// <returns>Lista con todas las notificaciones asociadas a un usuario de la base de datos</returns>
+        /// <param name="idDemografia">Id de la demografía que se desea modificar</param>
+        [Route("GetNotificacionesPorIdDemografia")]
+        [HttpGet]
+        public List<NotificacionesCor> GetNotificacionesPorIdDemografia(int idDemografia)
+        {
+            return _cOGeneralFachada.GetNotificacionesPorIdDemografia(idDemografia);
+        }
+
+        /// <summary>
+        /// Obtiene una notificación asociada a un id de la base de datos
+        /// </summary>
+        /// <returns>Notificación asociada a un id de la base de datos</returns>
+        /// <param name="idNotificacion">Id de la notificación que se desea modificar</param>
+        [Route("GetNotificacionesPorIdNotificacion")]
+        [HttpGet]
+        public NotificacionesCor GetNotificacionPorIdNotificacion(int idNotificacion)
+        {
+            return _cOGeneralFachada.GetNotificacionPorIdNotificacion(idNotificacion);
+        }
+
+        /// <summary>
+        /// Almacena la notificación en la base de datos
+        /// </summary>
+        /// <returns>Respuesta de datos verificando que se realizó la inserción de la notificación en la base de datos</returns>
+        /// <param name="notificacion">Notificación que se desea almacenar</param>
+        [Route("GuardarNotificacion")]
+        [HttpPost]
+        public async Task<RespuestaDatos> GuardarNotificacion([FromBody] NotificacionesCor notificacion)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _cOGeneralFachada.GuardarNotificacion(notificacion);
+            }
+            catch (COExcepcion e)
+            {
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
+            }
+            return respuestaDatos;
+        }
+
+        /// <summary>
+        /// Elimina la notificación de la base de datos
+        /// </summary>
+        /// <returns>Respuesta de datos verificando que se realizó la elimicación de la notificación de la base de datos</returns>
+        /// <param name="idNotificacion">Notificación que se desea eliminar</param>
+        [Route("RemoverNotificacion")]
+        [HttpDelete]
+        public async Task<RespuestaDatos> RemoverNotificacion(int idNotificacion)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _cOGeneralFachada.RemoverNotificacion(idNotificacion);
+            }
+            catch (COExcepcion e)
+            {
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
+            }
+            return respuestaDatos;
+        }
     }
 }
