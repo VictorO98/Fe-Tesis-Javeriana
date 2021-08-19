@@ -11,6 +11,8 @@ using Fe.Servidor.Middleware.Contratos.Dominio.Contenido;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 using System;
+using System.Security.Claims;
+using System.Linq;
 
 namespace FEWebApplication.Controladores.Dominio.Contenido
 {
@@ -78,15 +80,33 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         /// Almacena la publicación en la BD.
         /// </summary>
         /// <returns>Respuesta de datos verificando que se realizó la inserción de la publicación.</returns>
-        /// <param name="productosServicios">Publicación que se desea almacenar en la base de datos.</param>
         [Route("GuardarPublicacion")]
         [HttpPost]
-        public async Task<RespuestaDatos> GuardarPublicacion([FromBody] ProductosServiciosPc productosServicios)
+        public async Task<RespuestaDatos> GuardarPublicacion(IFormCollection collection)
         {
             RespuestaDatos respuestaDatos;
             try
             {
-                respuestaDatos = await _coFachada.GuardarPublicacion(productosServicios);
+                var formData = Request.Form;
+                var files = Request.Form.Files;
+                Claim claimId = User.Claims.Where(c => c.Type == "id").FirstOrDefault();
+                formData = Request.Form;
+                if (formData == null)
+                    throw new COExcepcion("El formulario de la petición enviada se encuentra vacío. ");
+
+                ProductosServiciosPc productosServicios = new ProductosServiciosPc
+                {
+                    Idcategoria = int.Parse(Request.Form["Idcategoria"]),
+                    Idtipopublicacion = int.Parse(Request.Form["Idtipopublicacion"]),
+                    Idusuario = int.Parse(Request.Form["Idusuario"]),
+                    Descripcion = Request.Form["Descripcion"].ToString(),
+                    Cantidadtotal = int.Parse(Request.Form["Cantidad"]),
+                    Preciounitario = int.Parse(Request.Form["Precio"]),
+                    Descuento = decimal.Parse(Request.Form["Descuento"]),
+                    Habilitatrueque = int.Parse(Request.Form["Trueque"]),
+                    Nombre = Request.Form["Nombre"].ToString()
+                };
+                respuestaDatos =  await _coFachada.GuardarPublicacion(productosServicios, files);
             }
             catch (COExcepcion e)
             {
@@ -95,24 +115,6 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
             return respuestaDatos;
         }
 
-        [Route("SubirFotosPublicacion")]
-        public async Task<RespuestaDatos> SubirFotosPublicacion(IFormCollection collection)
-        {
-            try
-            {
-                var formData = Request.Form;
-                var files = Request.Form.Files;
-                formData = Request.Form;
-                if (formData == null)
-                    throw new COExcepcion("El formulario de la petición enviada se encuentra vacío. ");
-
-                return await _coFachada.SubirFotosPublicacionAsync(files);
-            }
-            catch (Exception e)
-            {
-                throw new COExcepcion("Error al subir el documento. " + e.Message);
-            }
-        }
 
         /// <summary>
         /// Busca las imagens de los productos por su ID.
@@ -121,9 +123,9 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         /// <param name="idPublicacion">El id de la publicación para buscar.</param>
         [Route("GetImagenProdcuto")]
         [HttpGet]
-        public IActionResult GetImagenProdcuto(int idPublicacion, int idUsuario)
+        public async Task<IActionResult> GetImagenProdcuto(int idPublicacion)
         {
-            string pathImage = _coFachada.GetImagenProdcuto(idPublicacion, idUsuario);
+            string pathImage = await _coFachada.GetImagenProdcuto(idPublicacion);
 
             var ext = Path.GetExtension(pathImage).ToLowerInvariant();
             string mimeTypeExt = "";
@@ -342,9 +344,9 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         /// <param name="idPublicacion">El id de la publicación a desplegar.</param>
         [Route("DesplegarPublicacion")]
         [HttpGet]
-        public ContratoPc DesplegarPublicacion(int idPublicacion)
+        public async Task<ContratoPc> DesplegarPublicacion(int idPublicacion)
         {
-            return _coFachada.DesplegarPublicacion(idPublicacion);
+            return await _coFachada.DesplegarPublicacion(idPublicacion);
         }
 
         /// <summary>
@@ -357,15 +359,14 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         /// <param name="precioMayor">El límite superior del precio de las publicaciones a filtrar.</param>
         /// <param name="calificacionMenor">El límite inferior de la calificación de las publicaciones a filtrar.</param>
         /// <param name="calificacionMayor">El límite superior de la calificación de las publicaciones a filtrar.</param>
-        /// 
         [Route("FiltrarPublicacion")]
         [HttpGet]
-        public List<ContratoPc> FiltrarPublicacion(int idCategoria = -1, int idTipoPublicacion = -1, 
+        public async Task<List<ContratoPc>> FiltrarPublicacion(int idCategoria = -1, int idTipoPublicacion = -1, int idUsuario = -1,
             decimal precioMenor = -1, decimal precioMayor = -1, decimal calificacionMenor = -1, decimal calificacionMayor = -1)
         {
             try
             {
-                return _coFachada.FiltrarPublicacion(idCategoria, idTipoPublicacion, precioMenor, precioMayor,
+                return await _coFachada.FiltrarPublicacion(idCategoria, idTipoPublicacion, idUsuario, precioMenor, precioMayor,
                     calificacionMenor, calificacionMayor);
             }
             catch(COExcepcion e)
@@ -427,11 +428,11 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         /// <param name="idDemografia">El id del usuario para buscar sus publicaciones favoritas.</param>
         [Route("GetFavoritosPorIdDemografia")]
         [HttpGet]
-        public List<ContratoPc> GetFavoritosPorIdDemografia(int idDemografia)
+        public async Task<List<ContratoPc>> GetFavoritosPorIdDemografia(int idDemografia)
         {
             try
             {
-                return _coFachada.GetFavoritosPorIdDemografia(idDemografia);
+                return await _coFachada.GetFavoritosPorIdDemografia(idDemografia);
             }
             catch (COExcepcion e)
             {
@@ -467,11 +468,11 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         /// <param name="idDemografia">El id del usuario para obtener sus publicaciones.</param>
         [Route("GetPublicacionesPorIdUsuario")]
         [HttpGet]
-        public List<ContratoPc> GetPublicacionesPorIdUsuario(int idDemografia)
+        public async Task<List<ContratoPc>> GetPublicacionesPorIdUsuario(int idDemografia)
         {
             try
             {
-                return _coFachada.GetPublicacionesPorIdUsuario(idDemografia);
+                return await _coFachada.GetPublicacionesPorIdUsuario(idDemografia);
             }
             catch (COExcepcion e)
             {
@@ -485,9 +486,9 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         /// <returns>Una lista de publicaciones con sus reseñas, preguntas y respuestas, categoría y tipo de publicación.</returns>
         [Route("GetPublicacionesPorDescuento")]
         [HttpGet]
-        public List<ContratoPc> GetPublicacionesPorDescuento()
+        public async Task<List<ContratoPc>> GetPublicacionesPorDescuento(int idUsuario)
         {
-            return _coFachada.GetPublicacionesPorDescuento();
+            return await _coFachada.GetPublicacionesPorDescuento(idUsuario);
         }
 
         /// <summary>
@@ -497,9 +498,9 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         /// <param name="nombre">El nombre de las publicaciones a filtrar.</param>
         [Route("BuscarPublicacion")]
         [HttpGet]
-        public List<ContratoPc> BuscarPublicacion(string nombre)
+        public async Task<List<ContratoPc>> BuscarPublicacion(string nombre)
         {
-            return _coFachada.BuscarPublicacion(nombre);
+            return await _coFachada.BuscarPublicacion(nombre);
         }
 
         // TODO: Decodificacion de JWT para validar el usuario mediante el claim del ID
@@ -510,11 +511,11 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         /// <param name="idDemografia">ID del usuario que se desea obtener sus pubicaciones con truque habilitado</param>
         [Route("GetPublicacionesHabilitadasTrueque")]
         [HttpGet]
-        public List<ContratoPc> GetPublicacionesHabilitadasTrueque(int idDemografia)
+        public async Task<List<ContratoPc>>  GetPublicacionesHabilitadasTrueque(int idDemografia)
         {
             try
             {
-                return _coFachada.GetPublicacionesHabilitadasTrueque(idDemografia);
+                return await _coFachada.GetPublicacionesHabilitadasTrueque(idDemografia);
             }
             catch (COExcepcion e)
             {

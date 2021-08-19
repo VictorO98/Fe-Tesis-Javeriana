@@ -21,9 +21,11 @@ class ContenidoProvider {
     return listado;
   }
 
-  Future<List<ProductoServicioModel>> getProductosDescuento() async {
+  Future<List<ProductoServicioModel>> getProductosDescuento(
+      String idUsuario) async {
     String? data = await ServicioUtil.get(
-        "dominio/COContenido/GetPublicacionesPorDescuento");
+        "dominio/COContenido/GetPublicacionesPorDescuento",
+        params: {"idUsuario": idUsuario});
     if (data == null) return [];
     final List<dynamic> decodedData = json.decode(data);
     final List<ProductoServicioModel> listado =
@@ -68,12 +70,12 @@ class ContenidoProvider {
   }
 
   Future<RespuestaDatosModel?> guardarPublicacion(
-      CrearPublicacionModel publicacion, BuildContext context) async {
-    String? data = await ServicioUtil.post(
-        "dominio/COContenido/GuardarPublicacion", json.encode(publicacion),
-        isMostratAlertError: true, contextErr: context);
+      Map<String, dynamic> param, BuildContext context) async {
+    dynamic data = await ServicioUtil.file(
+        "dominio/COContenido/GuardarPublicacion", param,
+        isMostrarAlertError: true, contextErr: context);
     if (data == null) return null;
-    final dynamic decodedData = json.decode(data);
-    return RespuestaDatosModel.fromJson(decodedData);
+    RespuestaDatosModel respuesta = RespuestaDatosModel.fromJson(data);
+    return respuesta;
   }
 }

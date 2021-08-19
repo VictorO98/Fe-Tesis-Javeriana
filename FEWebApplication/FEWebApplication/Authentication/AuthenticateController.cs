@@ -28,12 +28,13 @@ namespace FEWebApplication.Authentication
         private readonly WorkflowMensaje _workflowMensaje;
 
         public AuthenticateController(COSeguridadBiz seguridadBiz, IConfiguration configuration
-            , UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+            , UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, WorkflowMensaje workflowMensaje)
         {
             _seguridadBiz = seguridadBiz;
             _configuration = configuration;
             _userManager = userManager;
             _roleManager = roleManager;
+            _workflowMensaje = workflowMensaje;
         }
 
         /// <summary>
@@ -110,13 +111,11 @@ namespace FEWebApplication.Authentication
             {
                 var urlApp = _configuration["App:Url"];
                 //Generar token de confirmación
-                /*var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                var linkConfirmation = urlApp + Url.Action("ConfirmarCuenta", "Authenticate", new
-                {
-                    userId = user.Email,
-                    code
-                });
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var linkConfirmation = urlApp + $@"/ConfirmarCuenta/{user.Email}/{code}";
+
                 Console.WriteLine($@"A1 - {linkConfirmation}");
+
 
                 //Envia mensaje de registro
                 await _workflowMensaje.EnviarMensajeRegistro(new DemografiaDatos
@@ -125,7 +124,7 @@ namespace FEWebApplication.Authentication
                     Apellidos = model.Apellidos,
                     Email = model.Email
                 }, linkConfirmation);
-            */
+
                 return new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = $@"Hemos enviado a su correo electrónico un enlace de confirmación, por favor revise su bandeja de entrada y siga las instrucciones para activar su cuenta en {_configuration["App:Nombre"]}." };
             
             }

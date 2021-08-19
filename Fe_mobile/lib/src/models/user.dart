@@ -26,7 +26,7 @@ class User {
         'manuel@gmail.com',
         'Male',
         DateTime(1993, 12, 31),
-        'img/user2.jpg',
+        'img/user3.jpg',
         '4600 Isaacs Creek Road Golden, IL 62339',
         UserState.available);
   }

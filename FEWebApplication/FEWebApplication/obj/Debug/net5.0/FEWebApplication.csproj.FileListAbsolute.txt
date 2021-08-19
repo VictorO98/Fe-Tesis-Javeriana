@@ -12,6 +12,7 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\De
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\FEWebApplication.Views.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Dapper.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Dapper.Contrib.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\DotLiquid.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\epayco.net.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Humanizer.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\IdentityModel.dll
@@ -56,6 +57,7 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\De
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\it\DotLiquid.resources.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Fe.Core.General.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Fe.Core.Global.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Fe.Core.Seguridad.dll
@@ -64,6 +66,7 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\De
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Fe.Dominio.facturas.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Fe.Dominio.pedidos.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Fe.Dominio.trueques.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Fe.Servidor.Integracion.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Fe.Servidor.Middleware.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Fe.Core.General.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Fe.Core.Global.pdb
@@ -73,6 +76,7 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\De
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Fe.Dominio.facturas.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Fe.Dominio.pedidos.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Fe.Dominio.trueques.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Fe.Servidor.Integracion.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Fe.Servidor.Middleware.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Debug\net5.0\FEWebApplication.csproj.AssemblyReference.cache
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Debug\net5.0\FEWebApplication.GeneratedMSBuildEditorConfig.editorconfig

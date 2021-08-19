@@ -31,13 +31,13 @@ class ReviewsList {
           'Excelente producto me ha ayudado a verme más bonita',
           4.7),
       new Review(
-          new User.basic('Arreglos de joyas a domicilio', 'img/user2.jpg',
+          new User.basic('Arreglos de joyas a domicilio', 'img/user3.jpg',
               UserState.available),
           'Fue un excelente regalo para mi esposa',
           4.5),
       new Review(
           new User.basic(
-              'Eduardo Ezequiel', 'img/user2.jpg', UserState.available),
+              'Eduardo Ezequiel', 'img/user3.jpg', UserState.available),
           'Muy buena calidad',
           4.9),
       new Review(
@@ -47,7 +47,7 @@ class ReviewsList {
           5.0),
       new Review(
           new User.basic(
-              'Laura C. Benavidez', 'img/user2.jpg', UserState.available),
+              'Laura C. Benavidez', 'img/user3.jpg', UserState.available),
           'Muy buenos pero se pierde el brillo después de un tiempo',
           4.1)
     ];

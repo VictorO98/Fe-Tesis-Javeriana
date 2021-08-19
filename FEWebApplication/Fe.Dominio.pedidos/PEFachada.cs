@@ -83,12 +83,12 @@ namespace Fe.Dominio.pedidos
         public async Task<RespuestaDatos> GuardarProductoPedido(ProdSerXVendidosPed productoPedido)
         {
             RespuestaDatos respuestaDatos;
-            ProductosServiciosPc producto = _cOContenidoFachada.GetPublicacionPorIdPublicacion(productoPedido.Idproductoservico);
+            ProductosServiciosPc producto = await _cOContenidoFachada.GetPublicacionPorIdPublicacion(productoPedido.Idproductoservico);
             System.Diagnostics.Debug.WriteLine("Este es el ID:");
             System.Diagnostics.Debug.WriteLine(productoPedido.Idproductoservico);
             if (producto != null)
             {
-                if (ValidarPrecioProductoPedido(productoPedido))
+                if (await ValidarPrecioProductoPedido(productoPedido))
                 {
                     TipoPublicacionPc tipoProductoPedido = _cOContenidoFachada.GetTipoPublicacionPorID(producto.Idtipopublicacion);
                     if (tipoProductoPedido != null)
@@ -109,7 +109,7 @@ namespace Fe.Dominio.pedidos
                         }
                         else
                         {
-                            if (ValidarCantidadProductoPedido(productoPedido))
+                            if (await ValidarCantidadProductoPedido(productoPedido))
                             {
                                 try
                                 {
@@ -170,9 +170,9 @@ namespace Fe.Dominio.pedidos
             return respuestaDatos;
         }
 
-        public Boolean ValidarCantidadProductoPedido(ProdSerXVendidosPed productoPedido)
+        public async Task<Boolean> ValidarCantidadProductoPedido(ProdSerXVendidosPed productoPedido)
         {
-            ProductosServiciosPc producto = _cOContenidoFachada.GetPublicacionPorIdPublicacion(productoPedido.Idproductoservico);
+            ProductosServiciosPc producto = await _cOContenidoFachada.GetPublicacionPorIdPublicacion(productoPedido.Idproductoservico);
             bool validacion = false;
             if (producto != null)
             {
@@ -185,11 +185,11 @@ namespace Fe.Dominio.pedidos
             return validacion;
         }
 
-        public Boolean ValidarPrecioProductoPedido(ProdSerXVendidosPed productoPedido)
+        public async Task<Boolean> ValidarPrecioProductoPedido(ProdSerXVendidosPed productoPedido)
         {
             ProductosServiciosPc producto = new ProductosServiciosPc();
             //System.Diagnostics.Debug.WriteLine(productoPedido.Idproductoservico);
-            producto = _cOContenidoFachada.GetPublicacionPorIdPublicacion(productoPedido.Idproductoservico);
+            producto = await _cOContenidoFachada.GetPublicacionPorIdPublicacion(productoPedido.Idproductoservico);
             //System.Diagnostics.Debug.WriteLine(producto);
             bool validacion = false;
             if (producto != null)
@@ -214,10 +214,10 @@ namespace Fe.Dominio.pedidos
             return validacion;
         }
 
-        public ContratoDetallesPedido DetalleProductoPedido(ProdSerXVendidosPed productoPedido)
+        public async Task<ContratoDetallesPedido> DetalleProductoPedido(ProdSerXVendidosPed productoPedido)
         {
             ContratoDetallesPedido detalleProductoPedido = new ContratoDetallesPedido();
-            ProductosServiciosPc producto = _cOContenidoFachada.GetPublicacionPorIdPublicacion(productoPedido.Idproductoservico);
+            ProductosServiciosPc producto = await _cOContenidoFachada.GetPublicacionPorIdPublicacion(productoPedido.Idproductoservico);
             if (productoPedido != null)
             {
                 if (producto != null)
@@ -232,7 +232,7 @@ namespace Fe.Dominio.pedidos
             return detalleProductoPedido;
         }
 
-        public List<ContratoDetallesPedido> ListarDetallesPedido(PedidosPed pedido)
+        public async Task< List<ContratoDetallesPedido>> ListarDetallesPedido(PedidosPed pedido)
         {
             List<ContratoDetallesPedido> detallesPedido = new List<ContratoDetallesPedido>();
             if (pedido != null)
@@ -240,26 +240,26 @@ namespace Fe.Dominio.pedidos
                 List<ProdSerXVendidosPed> productos = _pEPedidoBiz.GetProductosPedidosPorIdPedido(pedido.Id);
                 for (int i = 0; i < productos.Count; i++)
                 {
-                    detallesPedido.Add(DetalleProductoPedido(productos[i]));
+                    detallesPedido.Add(await DetalleProductoPedido(productos[i]));
                 }
             }
             else { throw new COExcepcion("El pedido ingresado no existe."); }
             return detallesPedido;
         }
 
-        public ContratoPedidos CabeceraPedido(PedidosPed pedido)
+        public async  Task<ContratoPedidos> CabeceraPedido(PedidosPed pedido)
         {
             ContratoPedidos cabeceraPedido = new ContratoPedidos();
             if (pedido != null)
             {
                 cabeceraPedido.Id = pedido.Idusuario;
-                cabeceraPedido.Productos = ListarDetallesPedido(pedido);
+                cabeceraPedido.Productos = await ListarDetallesPedido(pedido);
             }
             else { throw new COExcepcion("El pedido ingresado no existe."); }
             return cabeceraPedido;
         }
 
-        public List<ContratoPedidos> ListarTodosLosPedidosPorUsuario(int idUsuario)
+        public async Task<List<ContratoPedidos>> ListarTodosLosPedidosPorUsuario(int idUsuario)
         {
             List<ContratoPedidos> pedidos = new List<ContratoPedidos>();
             if(idUsuario != -1)
@@ -267,7 +267,7 @@ namespace Fe.Dominio.pedidos
                 List<PedidosPed> ps = _pEPedidoBiz.GetPedidosPorIdUsuario(idUsuario);
                 for (int i = 0; i < ps.Count; i++)
                 {
-                    pedidos.Add(CabeceraPedido(ps[i]));
+                    pedidos.Add(await CabeceraPedido(ps[i]));
                 }
             }
             else { throw new COExcepcion("El usuario ingresado no existe."); }

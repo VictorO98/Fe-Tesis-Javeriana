@@ -35,6 +35,7 @@
         "dependencies": {
           "Dapper": "2.0.90",
           "Dapper.Contrib": "2.0.78",
+          "DotLiquid": "2.2.508",
           "Fe.Core.General": "1.0.0",
           "Fe.Core.Global": "1.0.0",
           "Fe.Core.Seguridad": "1.0.0",
@@ -43,6 +44,7 @@
           "Fe.Dominio.facturas": "1.0.0",
           "Fe.Dominio.pedidos": "1.0.0",
           "Fe.Dominio.trueques": "1.0.0",
+          "Fe.Servidor.Integracion": "1.0.0",
           "Fe.Servidor.Middleware": "1.0.0",
           "IdentityServer4": "4.1.2",
           "IdentityServer4.Storage": "4.1.2",
@@ -369,6 +371,22 @@
           "lib/net5.0/Dapper.Contrib.dll": {}
         }
       },
+      "DotLiquid/2.2.508": {
+        "runtime": {
+          "lib/netstandard2.0/DotLiquid.dll": {
+            "assemblyVersion": "2.2.508.0",
+            "fileVersion": "2.2.508.0"
+          }
+        },
+        "resources": {
+          "lib/netstandard2.0/it/DotLiquid.resources.dll": {
+            "locale": "it"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/DotLiquid.dll": {}
+        }
+      },
       "ePayco.Net/1.0.13": {
         "dependencies": {
           "Newtonsoft.Json": "12.0.3",
@@ -434,7 +452,7 @@
       },
       "MailKit/2.13.0": {
         "dependencies": {
-          "MimeKit": "2.13.0"
+          "MimeKit": "2.14.0"
         },
         "runtime": {
           "lib/net50/MailKit.dll": {
@@ -834,7 +852,7 @@
           "lib/net40/Microsoft.Web.Infrastructure.dll": {}
         }
       },
-      "MimeKit/2.13.0": {
+      "MimeKit/2.14.0": {
         "dependencies": {
           "Portable.BouncyCastle": "1.8.10",
           "System.Buffers": "4.5.1",
@@ -844,8 +862,8 @@
         },
         "runtime": {
           "lib/net50/MimeKit.dll": {
-            "assemblyVersion": "2.13.0.0",
-            "fileVersion": "2.13.0.0"
+            "assemblyVersion": "2.14.0.0",
+            "fileVersion": "2.14.0.0"
           }
         },
         "compile": {
@@ -1062,6 +1080,7 @@
         "dependencies": {
           "Dapper": "2.0.90",
           "Dapper.Contrib": "2.0.78",
+          "DotLiquid": "2.2.508",
           "Fe.Core.Global": "1.0.0",
           "Fe.Servidor.Middleware": "1.0.0",
           "IdentityServer4": "4.1.2",
@@ -1088,6 +1107,7 @@
         "dependencies": {
           "Dapper": "2.0.90",
           "Dapper.Contrib": "2.0.78",
+          "DotLiquid": "2.2.508",
           "Fe.Servidor.Middleware": "1.0.0",
           "IdentityServer4": "4.1.2",
           "IdentityServer4.Storage": "4.1.2",
@@ -1113,6 +1133,7 @@
         "dependencies": {
           "Dapper": "2.0.90",
           "Dapper.Contrib": "2.0.78",
+          "DotLiquid": "2.2.508",
           "Fe.Core.General": "1.0.0",
           "Fe.Core.Global": "1.0.0",
           "Fe.Servidor.Middleware": "1.0.0",
@@ -1137,6 +1158,7 @@
         "dependencies": {
           "Dapper": "2.0.90",
           "Dapper.Contrib": "2.0.78",
+          "DotLiquid": "2.2.508",
           "Fe.Core.General": "1.0.0",
           "Fe.Core.Global": "1.0.0",
           "Fe.Servidor.Middleware": "1.0.0",
@@ -1164,6 +1186,7 @@
         "dependencies": {
           "Dapper": "2.0.90",
           "Dapper.Contrib": "2.0.78",
+          "DotLiquid": "2.2.508",
           "IdentityServer4": "4.1.2",
           "IdentityServer4.Storage": "4.1.2",
           "MailKit": "2.13.0",
@@ -1188,6 +1211,7 @@
         "dependencies": {
           "Dapper": "2.0.90",
           "Dapper.Contrib": "2.0.78",
+          "DotLiquid": "2.2.508",
           "IdentityServer4": "4.1.2",
           "IdentityServer4.Storage": "4.1.2",
           "MailKit": "2.13.0",
@@ -1212,6 +1236,7 @@
         "dependencies": {
           "Dapper": "2.0.90",
           "Dapper.Contrib": "2.0.78",
+          "DotLiquid": "2.2.508",
           "Fe.Core.General": "1.0.0",
           "Fe.Dominio.contenido": "1.0.0",
           "Fe.Servidor.Middleware": "1.0.0",
@@ -1239,6 +1264,7 @@
         "dependencies": {
           "Dapper": "2.0.90",
           "Dapper.Contrib": "2.0.78",
+          "DotLiquid": "2.2.508",
           "Fe.Core.General": "1.0.0",
           "Fe.Dominio.contenido": "1.0.0",
           "Fe.Servidor.Middleware": "1.0.0",
@@ -1262,10 +1288,26 @@
           "Fe.Dominio.trueques.dll": {}
         }
       },
+      "Fe.Servidor.Integracion/1.0.0": {
+        "dependencies": {
+          "DotLiquid": "2.2.508",
+          "Fe.Core.General": "1.0.0",
+          "Fe.Servidor.Middleware": "1.0.0",
+          "MailKit": "2.13.0",
+          "MimeKit": "2.14.0"
+        },
+        "runtime": {
+          "Fe.Servidor.Integracion.dll": {}
+        },
+        "compile": {
+          "Fe.Servidor.Integracion.dll": {}
+        }
+      },
       "Fe.Servidor.Middleware/1.0.0": {
         "dependencies": {
           "Dapper": "2.0.90",
           "Dapper.Contrib": "2.0.78",
+          "DotLiquid": "2.2.508",
           "IdentityServer4": "4.1.2",
           "IdentityServer4.Storage": "4.1.2",
           "MailKit": "2.13.0",
@@ -2970,6 +3012,13 @@
       "path": "dapper.contrib/2.0.78",
       "hashPath": "dapper.contrib.2.0.78.nupkg.sha512"
     },
+    "DotLiquid/2.2.508": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VLpfY1HwcR7AIE3YnSnk9nBELfJDuZioqSwuE9L7ij3N1ifsgYDvEfFnTDNL/VmdIxr1WMmNo01Gy2bBW9CSDg==",
+      "path": "dotliquid/2.2.508",
+      "hashPath": "dotliquid.2.2.508.nupkg.sha512"
+    },
     "ePayco.Net/1.0.13": {
       "type": "package",
       "serviceable": true,
@@ -3292,12 +3341,12 @@
       "path": "microsoft.web.infrastructure/1.0.0",
       "hashPath": "microsoft.web.infrastructure.1.0.0.nupkg.sha512"
     },
-    "MimeKit/2.13.0": {
+    "MimeKit/2.14.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-wkHUQzy/sAtWCifZfNDq24DB/xshYoc+QeynSCJPSNeeA51DzZWjVaRslyix/9OEGhdSsUtvisL66dpGp0THjw==",
-      "path": "mimekit/2.13.0",
-      "hashPath": "mimekit.2.13.0.nupkg.sha512"
+      "sha512": "sha512-Z8ONAYytB/P8O7tpqMShcfL/2b+cF8Uq6UHqhcE9jiFMZsXocwu4Tg1r3Dpa2/uESJsdXtc+gvFj08PBAJ9YOg==",
+      "path": "mimekit/2.14.0",
+      "hashPath": "mimekit.2.14.0.nupkg.sha512"
     },
     "NETCore.MailKit/2.0.3": {
       "type": "package",
@@ -3496,6 +3545,11 @@
       "sha512": ""
     },
     "Fe.Dominio.trueques/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Fe.Servidor.Integracion/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

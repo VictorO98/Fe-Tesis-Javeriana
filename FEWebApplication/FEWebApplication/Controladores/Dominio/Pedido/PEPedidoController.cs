@@ -215,9 +215,9 @@ namespace FEWebApplication.Controladores.Dominio.Pedido
         /// <param name="productoPedido">Producto de un pedido que se desea obtener su detalle</param>
         [Route("DetalleProductoPedido")]
         [HttpGet]
-        public ContratoDetallesPedido DetalleProductoPedido(ProdSerXVendidosPed productoPedido)
+        public async Task<ContratoDetallesPedido> DetalleProductoPedido(ProdSerXVendidosPed productoPedido)
         {
-            return _peFachada.DetalleProductoPedido(productoPedido);
+            return await _peFachada.DetalleProductoPedido(productoPedido);
         }
 
         /// <summary>
@@ -227,11 +227,11 @@ namespace FEWebApplication.Controladores.Dominio.Pedido
         /// <param name="pedido">Pedido del cual se desea obtener el detalle de todos sus productos</param>
         [Route("ListarDetallesPedido")]
         [HttpGet]
-        public List<ContratoDetallesPedido> ListarDetallesPedido(PedidosPed pedido)
+        public async Task<List<ContratoDetallesPedido>> ListarDetallesPedido(PedidosPed pedido)
         {
             try
             {
-                return _peFachada.ListarDetallesPedido(pedido);
+                return await _peFachada.ListarDetallesPedido(pedido);
             }
             catch (COExcepcion e)
             {
@@ -247,11 +247,11 @@ namespace FEWebApplication.Controladores.Dominio.Pedido
         /// <param name="pedido">Pedido del que se desea obtener su contrato</param>
         [Route("CabeceraPedido")]
         [HttpGet]
-        public ContratoPedidos Cabecera([FromBody] PedidosPed pedido)
+        public async Task<ContratoPedidos> Cabecera([FromBody] PedidosPed pedido)
         {
             try
             {
-                return _peFachada.CabeceraPedido(pedido);
+                return await _peFachada.CabeceraPedido(pedido);
             }
             catch (COExcepcion e)
             {
@@ -266,11 +266,11 @@ namespace FEWebApplication.Controladores.Dominio.Pedido
         /// <param name="idUsuario">ID usuario del que se desean obtner todos sus pedidos</param>
         [Route("ListarTodosLosPedidosPorUsuario")]
         [HttpGet]
-        public List<ContratoPedidos> ListarTodosLosPedidosPorUsuario(int idUsuario)
+        public async Task<List<ContratoPedidos>> ListarTodosLosPedidosPorUsuario(int idUsuario)
         {
             try
             {
-                return _peFachada.ListarTodosLosPedidosPorUsuario(idUsuario);
+                return await _peFachada.ListarTodosLosPedidosPorUsuario(idUsuario);
             }
             catch (COExcepcion e)
             {

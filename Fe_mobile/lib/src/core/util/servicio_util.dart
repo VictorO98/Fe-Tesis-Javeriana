@@ -6,6 +6,7 @@ import 'package:Fe_mobile/src/core/util/jwt_util.dart';
 import 'package:Fe_mobile/src/core/util/preferencias_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 import 'conf_api.dart';
 
 class ServicioUtil {
@@ -52,6 +53,26 @@ class ServicioUtil {
     }
   }
 
+  static dynamic file(String api, Map<String, dynamic> data,
+      {bool isMostrarAlertError = false, BuildContext? contextErr}) async {
+    var dio = new Dio();
+    try {
+      FormData formData = new FormData.fromMap(data);
+      final response = await dio.post(ConfServer.SERVER + api,
+          data: formData,
+          options: Options(
+            headers: await formarHeader(isSendAccept: false),
+          ));
+      if (response.statusCode == 200) return response.data;
+
+      controlarError(contextErr!, null, isMostrarAlertError);
+    } catch (e) {
+      AlertUtil.error(contextErr!, 'Error al subir los archivos. ');
+    } finally {
+      dio.close();
+    }
+  }
+
   static Future<Map<String, String>> formarHeader(
       {bool isSendAccept = true}) async {
     final prefs = new PreferenciasUtil();
@@ -59,7 +80,7 @@ class ServicioUtil {
     Map<String, String> headers = {};
     headers["Accept"] = "application/json";
     if (!isSendAccept) {
-      // headers["Content-Type"] = "multipart/form-data";
+      headers["Content-Type"] = "multipart/form-data";
     } else {
       headers["Content-Type"] = "application/json";
     }

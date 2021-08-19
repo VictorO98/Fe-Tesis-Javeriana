@@ -16,36 +16,36 @@ namespace Fe.Dominio.contenido.Datos
 {
     public class RepoProducto
     {
-        internal async Task<RespuestaDatos> GuardarPublicacion(ProductosServiciosPc productoSservicio)
+        internal async Task<int> GuardarPublicacion(ProductosServiciosPc productoSservicio)
         {
+            int idPublicacion = 0;
             using FeContext context = new FeContext();
-            RespuestaDatos respuestaDatos;
             try
             {
                 productoSservicio.Creacion = DateTime.Now;
                 productoSservicio.Calificacionpromedio = 0.0m;
                 context.Add(productoSservicio);
                 context.SaveChanges();
-                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "Publicación creada exitosamente." };
+                idPublicacion = productoSservicio.Id;
             }
             catch (Exception e)
             {
                 throw new COExcepcion("Ocurrió un problema al intentar realizar la publicación: " + e.Message);
             }
-            return respuestaDatos;
+            return idPublicacion;
         }
 
-        internal ProductosServiciosPc GetPublicacionPorIdPublicacion(int idPublicacion)
+        internal async Task<ProductosServiciosPc> GetPublicacionPorIdPublicacion(int idPublicacion)
         {
             using FeContext context = new FeContext();
-            return context.ProductosServiciosPcs.SingleOrDefault(p => p.Id == idPublicacion);
+            return context.ProductosServiciosPcs.FirstOrDefault(p => p.Id == idPublicacion);
         }
 
         internal async Task<RespuestaDatos> RemoverPublicacion(int idPublicacion)
         {
             using FeContext context = new FeContext();
             RespuestaDatos respuestaDatos;
-            ProductosServiciosPc publicacion = GetPublicacionPorIdPublicacion(idPublicacion);
+            ProductosServiciosPc publicacion = await GetPublicacionPorIdPublicacion(idPublicacion);
             if (publicacion != null)
             {
                 try
@@ -68,11 +68,28 @@ namespace Fe.Dominio.contenido.Datos
             return respuestaDatos;
         }
 
+        internal async Task<RespuestaDatos> GuardarLinkImagen(ProductosServiciosPc productoSservicio)
+        {
+            using FeContext context = new FeContext();
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                context.Update(productoSservicio);
+                context.SaveChanges();
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "Publicación modificada exitosamente." };
+            }
+            catch (Exception e)
+            {
+                throw new COExcepcion("Ocurrió un problema al intentar modificar la publicación.");
+            }
+            return respuestaDatos;
+        }
+
         internal async Task<RespuestaDatos> ModificarPublicacion(ProductosServiciosPc productoSservicio)
         {
             using FeContext context = new FeContext();
             RespuestaDatos respuestaDatos;
-            ProductosServiciosPc publicacion = GetPublicacionPorIdPublicacion(productoSservicio.Id);
+            ProductosServiciosPc publicacion = await GetPublicacionPorIdPublicacion(productoSservicio.Id);
             if(publicacion != null)
             {
                 try
@@ -107,7 +124,7 @@ namespace Fe.Dominio.contenido.Datos
         {
             using FeContext context = new FeContext();
             RespuestaDatos respuestaDatos;
-            ProductosServiciosPc publicacion = GetPublicacionPorIdPublicacion(idPublicacion);
+            ProductosServiciosPc publicacion = await GetPublicacionPorIdPublicacion (idPublicacion);
             if (publicacion != null)
             {
                 try
@@ -131,7 +148,7 @@ namespace Fe.Dominio.contenido.Datos
         }
 
         internal List<ProductosServiciosPc> FiltrarPublicaciones(int idCategoria, int idTipoPublicacion,
-            decimal precioMenor, decimal precioMayor, decimal calificacionMenor, decimal calificacionMayor)
+            decimal precioMenor, decimal precioMayor, decimal calificacionMenor, decimal calificacionMayor, DemografiaCor usuario)
         {
             var dynamicParameters = new DynamicParameters();
             StringBuilder condiciones = new StringBuilder();
@@ -210,10 +227,10 @@ namespace Fe.Dominio.contenido.Datos
             return context.ProductosServiciosPcs.Where(p => p.Idusuario == idDemografia).ToList();
         }
 
-        internal List<ProductosServiciosPc> GetPublicacionesPorDescuento()
+        internal List<ProductosServiciosPc> GetPublicacionesPorDescuento(int idUsuario)
         {
             using FeContext context = new FeContext();
-            return context.ProductosServiciosPcs.Where(p => p.Descuento > 0).ToList();
+            return context.ProductosServiciosPcs.Where(p => p.Descuento > 0 && p.Idusuario != idUsuario).ToList();
         }
 
         internal string RemoverAcentos(string s)

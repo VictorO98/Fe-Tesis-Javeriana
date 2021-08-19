@@ -111,6 +111,7 @@ class _ProductoDetallePageState extends State<ProductoDetallePage>
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
+                    // TODO: AÑADIR AL CARRO
                     Expanded(
                       child: Text(
                         'Añadir al carrito',
@@ -177,7 +178,7 @@ class _ProductoDetallePageState extends State<ProductoDetallePage>
                     Navigator.of(context).pushNamed('/Tabs', arguments: 1);
                   },
                   child: CircleAvatar(
-                    backgroundImage: AssetImage('img/user2.jpg'),
+                    backgroundImage: AssetImage('img/user3.jpg'),
                   ),
                 )),
           ],

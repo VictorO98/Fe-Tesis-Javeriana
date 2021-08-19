@@ -6,8 +6,9 @@ namespace Fe.Core.Global.Constantes
 {
     public class COEstadoPedido
     {
-        public const string GENERADO = "GEN";
+        public const string PENDIENTE = "PEN";
+        public const string EMPAQUETADO = "EMP";
+        public const string ENVIADO = "ENV";
         public const string CANCELADO = "CAN";
-        public const string RECHAZADO = "REC";
     }
 }

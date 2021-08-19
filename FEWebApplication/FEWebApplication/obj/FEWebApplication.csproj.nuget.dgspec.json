@@ -59,6 +59,10 @@
               "target": "Package",
               "version": "[2.2.508, )"
             },
+            "Hangfire.AspNetCore": {
+              "target": "Package",
+              "version": "[1.7.24, )"
+            },
             "IdentityServer4": {
               "target": "Package",
               "version": "[4.1.2, )"
@@ -78,6 +82,14 @@
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.8, )"
+            },
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.SpaServices": {
+              "target": "Package",
+              "version": "[3.1.18, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -191,6 +203,10 @@
               "target": "Package",
               "version": "[2.2.508, )"
             },
+            "Hangfire.AspNetCore": {
+              "target": "Package",
+              "version": "[1.7.24, )"
+            },
             "IdentityServer4": {
               "target": "Package",
               "version": "[4.1.2, )"
@@ -210,6 +226,14 @@
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.8, )"
+            },
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.SpaServices": {
+              "target": "Package",
+              "version": "[3.1.18, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -329,6 +353,10 @@
               "target": "Package",
               "version": "[2.2.508, )"
             },
+            "Hangfire.AspNetCore": {
+              "target": "Package",
+              "version": "[1.7.24, )"
+            },
             "IdentityServer4": {
               "target": "Package",
               "version": "[4.1.2, )"
@@ -348,6 +376,14 @@
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.8, )"
+            },
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.SpaServices": {
+              "target": "Package",
+              "version": "[3.1.18, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -449,6 +485,10 @@
               "target": "Package",
               "version": "[2.2.508, )"
             },
+            "Hangfire.AspNetCore": {
+              "target": "Package",
+              "version": "[1.7.24, )"
+            },
             "IdentityServer4": {
               "target": "Package",
               "version": "[4.1.2, )"
@@ -468,6 +508,14 @@
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.8, )"
+            },
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.SpaServices": {
+              "target": "Package",
+              "version": "[3.1.18, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -577,6 +625,10 @@
               "target": "Package",
               "version": "[2.2.508, )"
             },
+            "Hangfire.AspNetCore": {
+              "target": "Package",
+              "version": "[1.7.24, )"
+            },
             "IdentityServer4": {
               "target": "Package",
               "version": "[4.1.2, )"
@@ -596,6 +648,14 @@
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.8, )"
+            },
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.SpaServices": {
+              "target": "Package",
+              "version": "[3.1.18, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -705,6 +765,10 @@
               "target": "Package",
               "version": "[2.2.508, )"
             },
+            "Hangfire.AspNetCore": {
+              "target": "Package",
+              "version": "[1.7.24, )"
+            },
             "IdentityServer4": {
               "target": "Package",
               "version": "[4.1.2, )"
@@ -724,6 +788,14 @@
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.8, )"
+            },
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.SpaServices": {
+              "target": "Package",
+              "version": "[3.1.18, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -843,6 +915,10 @@
               "target": "Package",
               "version": "[2.2.508, )"
             },
+            "Hangfire.AspNetCore": {
+              "target": "Package",
+              "version": "[1.7.24, )"
+            },
             "IdentityServer4": {
               "target": "Package",
               "version": "[4.1.2, )"
@@ -862,6 +938,14 @@
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.8, )"
+            },
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.SpaServices": {
+              "target": "Package",
+              "version": "[3.1.18, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -981,6 +1065,10 @@
               "target": "Package",
               "version": "[2.2.508, )"
             },
+            "Hangfire.AspNetCore": {
+              "target": "Package",
+              "version": "[1.7.24, )"
+            },
             "IdentityServer4": {
               "target": "Package",
               "version": "[4.1.2, )"
@@ -1000,6 +1088,14 @@
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.8, )"
+            },
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.SpaServices": {
+              "target": "Package",
+              "version": "[3.1.18, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -1085,6 +1181,9 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
+              "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Core.General\\Fe.Core.General.csproj": {
+                "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Core.General\\Fe.Core.General.csproj"
+              },
               "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj": {
                 "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Servidor.Middleware\\Fe.Servidor.Middleware.csproj"
               }
@@ -1105,9 +1204,21 @@
               "target": "Package",
               "version": "[2.2.508, )"
             },
+            "Hangfire.AspNetCore": {
+              "target": "Package",
+              "version": "[1.7.24, )"
+            },
             "MailKit": {
               "target": "Package",
               "version": "[2.13.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.SpaServices": {
+              "target": "Package",
+              "version": "[3.1.18, )"
             },
             "MimeKit": {
               "target": "Package",
@@ -1181,6 +1292,10 @@
               "target": "Package",
               "version": "[2.2.508, )"
             },
+            "Hangfire.AspNetCore": {
+              "target": "Package",
+              "version": "[1.7.24, )"
+            },
             "IdentityServer4": {
               "target": "Package",
               "version": "[4.1.2, )"
@@ -1200,6 +1315,14 @@
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.8, )"
+            },
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.SpaServices": {
+              "target": "Package",
+              "version": "[3.1.18, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -1340,6 +1463,10 @@
               "target": "Package",
               "version": "[2.2.508, )"
             },
+            "Hangfire.AspNetCore": {
+              "target": "Package",
+              "version": "[1.7.24, )"
+            },
             "IdentityServer4": {
               "target": "Package",
               "version": "[4.1.2, )"
@@ -1359,6 +1486,18 @@
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.8, )"
+            },
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.SpaServices": {
+              "target": "Package",
+              "version": "[3.1.18, )"
+            },
+            "Microsoft.AspNetCore.SpaServices.Extensions": {
+              "target": "Package",
+              "version": "[5.0.9, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",

@@ -49,6 +49,7 @@ dependencies:
   dropdown_search: ^0.6.3
   image_gallery_saver: ^1.6.9
   card_swiper: ^1.0.2
+  dio: ^4.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

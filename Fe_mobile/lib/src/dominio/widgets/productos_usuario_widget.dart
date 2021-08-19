@@ -1,5 +1,6 @@
 import 'package:Fe_mobile/config/ui_icons.dart';
 import 'package:Fe_mobile/src/core/util/currency_util.dart';
+import 'package:Fe_mobile/src/core/util/publicaciones_util.dart';
 import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:Fe_mobile/src/models/order.dart';
 import 'package:Fe_mobile/src/models/route_argument.dart';
@@ -56,6 +57,7 @@ class _ProductoUsuarioListItemWidgetState
         splashColor: Theme.of(context).accentColor,
         focusColor: Theme.of(context).accentColor,
         highlightColor: Theme.of(context).primaryColor,
+        // TODO : ARREGLAR EL DETALLE DEL PRODUCTO PARA MODIFICARLO
         onTap: () {
           Navigator.of(context).pushNamed('/Product',
               arguments: new RouteArgument(
@@ -156,18 +158,20 @@ class _ProductoUsuarioListItemWidgetState
                             "${CurrencyUtil.convertFormatMoney('COP', widget.product!.preciounitario!.round())}",
                             style: Theme.of(context).textTheme.display1),
                         SizedBox(height: 6),
-                        Chip(
-                          padding: EdgeInsets.symmetric(horizontal: 5),
-                          backgroundColor: Colors.transparent,
-                          shape: StadiumBorder(
-                              side: BorderSide(
-                                  color: Theme.of(context).focusColor)),
-                          label: Text(
-                            '${widget.product!.cantidadtotal}',
-                            style:
-                                TextStyle(color: Theme.of(context).focusColor),
-                          ),
-                        ),
+                        widget.product!.tipoPublicacion == "Producto"
+                            ? Chip(
+                                padding: EdgeInsets.symmetric(horizontal: 5),
+                                backgroundColor: Colors.transparent,
+                                shape: StadiumBorder(
+                                    side: BorderSide(
+                                        color: Theme.of(context).focusColor)),
+                                label: Text(
+                                  '${widget.product!.cantidadtotal}',
+                                  style: TextStyle(
+                                      color: Theme.of(context).focusColor),
+                                ),
+                              )
+                            : SizedBox(),
                       ],
                     ),
                   ],

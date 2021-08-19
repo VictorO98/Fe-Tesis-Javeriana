@@ -54,7 +54,7 @@ class _PublicacionesUsuarioPageState extends State<PublicacionesUsuarioPage> {
               elevation: 0,
               title: Text(
                 'Publicaciones',
-                style: Theme.of(context).textTheme.display1,
+                style: Theme.of(context).textTheme.headline4,
               ),
 
               actions: <Widget>[
@@ -71,7 +71,7 @@ class _PublicacionesUsuarioPageState extends State<PublicacionesUsuarioPage> {
                         Navigator.of(context).pushNamed('/Tabs', arguments: 1);
                       },
                       child: CircleAvatar(
-                        backgroundImage: AssetImage('img/user2.jpg'),
+                        backgroundImage: AssetImage('img/user3.jpg'),
                       ),
                     )),
               ],
