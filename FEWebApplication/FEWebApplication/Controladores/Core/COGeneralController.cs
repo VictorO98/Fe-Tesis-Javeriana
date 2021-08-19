@@ -6,6 +6,7 @@ using Fe.Core.Global.Errores;
 using Fe.Servidor.Middleware.Contratos.Core;
 using Fe.Servidor.Middleware.Modelo.Entidades;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -101,6 +102,14 @@ namespace FEWebApplication.Controladores.Core
             }
             catch (COExcepcion e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
             }
             return respuestaDatos;
@@ -145,6 +154,14 @@ namespace FEWebApplication.Controladores.Core
             }
             catch (COExcepcion e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
             }
             return respuestaDatos;
@@ -166,6 +183,14 @@ namespace FEWebApplication.Controladores.Core
             }
             catch (COExcepcion e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
             }
             return respuestaDatos;
@@ -187,6 +212,14 @@ namespace FEWebApplication.Controladores.Core
             }
             catch (COExcepcion e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
             }
             return respuestaDatos;
@@ -231,6 +264,14 @@ namespace FEWebApplication.Controladores.Core
             }
             catch (COExcepcion e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
             }
             return respuestaDatos;
@@ -252,6 +293,14 @@ namespace FEWebApplication.Controladores.Core
             }
             catch (COExcepcion e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
             }
             return respuestaDatos;
@@ -273,6 +322,14 @@ namespace FEWebApplication.Controladores.Core
             }
             catch (COExcepcion e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
             }
             return respuestaDatos;
@@ -317,6 +374,14 @@ namespace FEWebApplication.Controladores.Core
             }
             catch (COExcepcion e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
             }
             return respuestaDatos;
@@ -338,6 +403,14 @@ namespace FEWebApplication.Controladores.Core
             }
             catch (COExcepcion e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
             }
             return respuestaDatos;

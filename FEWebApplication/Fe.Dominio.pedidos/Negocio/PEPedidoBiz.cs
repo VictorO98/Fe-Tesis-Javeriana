@@ -7,6 +7,8 @@ using Fe.Servidor.Middleware.Contratos.Core;
 using System;
 using Fe.Servidor.Middleware.Contratos.Dominio.Contenido;
 using Fe.Dominio.pedidos.Datos;
+using Fe.Core.General.Datos;
+using Fe.Core.Global.Constantes;
 
 namespace Fe.Dominio.pedidos
 {
@@ -32,6 +34,14 @@ namespace Fe.Dominio.pedidos
                 }
                 catch (COExcepcion e)
                 {
+                    RepoErrorLog.AddErrorLog(new ErrorLog
+                    {
+                        Mensaje = e.Message,
+                        Traza = e.StackTrace,
+                        Usuario = demografiaCor.Email,
+                        Creacion = DateTime.Now,
+                        Tipoerror = COErrorLog.ENVIO_CORREO
+                    });
                     throw e;
                 }
             }
@@ -58,6 +68,14 @@ namespace Fe.Dominio.pedidos
             }
             catch (COExcepcion e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 throw e;
             }
             return respuestaDatos;
@@ -72,6 +90,14 @@ namespace Fe.Dominio.pedidos
             }
             catch (COExcepcion e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 throw e;
             }
             return respuestaDatos;
@@ -88,6 +114,14 @@ namespace Fe.Dominio.pedidos
                 }
                 catch (COExcepcion e)
                 {
+                    RepoErrorLog.AddErrorLog(new ErrorLog
+                    {
+                        Mensaje = e.Message,
+                        Traza = e.StackTrace,
+                        Usuario = "no_aplica",
+                        Creacion = DateTime.Now,
+                        Tipoerror = COErrorLog.ENVIO_CORREO
+                    });
                     throw e;
                 }
             }
@@ -114,6 +148,14 @@ namespace Fe.Dominio.pedidos
             }
             catch (COExcepcion e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 throw e;
             }
             return respuestaDatos;
@@ -128,6 +170,14 @@ namespace Fe.Dominio.pedidos
             }
             catch (COExcepcion e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 throw e;
             }
             return respuestaDatos;

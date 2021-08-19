@@ -11,6 +11,7 @@ using Fe.Servidor.Middleware.Contratos.Dominio.Contenido;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 using System;
+using Fe.Core.General.Datos;
 
 namespace FEWebApplication.Controladores.Dominio.Contenido
 {
@@ -518,6 +519,14 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
             }
             catch (COExcepcion e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 throw e;
             }
         }

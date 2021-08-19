@@ -9,6 +9,8 @@ using Fe.Servidor.Middleware.Contratos.Core;
 using System.Threading.Tasks;
 using Fe.Servidor.Middleware.Contratos.Dominio.Pedidos;
 using Fe.Dominio.pedidos;
+using Fe.Core.General.Datos;
+using System;
 
 namespace FEWebApplication.Controladores.Dominio.Pedido
 {
@@ -46,6 +48,14 @@ namespace FEWebApplication.Controladores.Dominio.Pedido
             }
             catch (COExcepcion e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
             }
             return respuestaDatos;
@@ -92,6 +102,14 @@ namespace FEWebApplication.Controladores.Dominio.Pedido
             }
             catch (COExcepcion e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
             }
             return respuestaDatos;
@@ -114,6 +132,14 @@ namespace FEWebApplication.Controladores.Dominio.Pedido
             }
             catch (COExcepcion e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
             }
             return respuestaDatos;
@@ -123,7 +149,7 @@ namespace FEWebApplication.Controladores.Dominio.Pedido
         /// Almacena el producto de un pedido en la base de datos (ProdSerXVendidosPed)
         /// </summary>
         /// <returns>Respuesta de datos verificando que se realizó la inserción del producto de un pedido</returns>
-        /// <param name="pedido">Producto de un pedido que se desea almacenar en la base de datos</param>
+        /// <param name="productoPedido">Producto de un pedido que se desea almacenar en la base de datos</param>
         [Route("GuardarProductoPedido")]
         [HttpPost]
         public async Task<RespuestaDatos> GuardarProductoPedido([FromBody] ProdSerXVendidosPed productoPedido)
@@ -135,6 +161,14 @@ namespace FEWebApplication.Controladores.Dominio.Pedido
             }
             catch (COExcepcion e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
             }
             return respuestaDatos;
@@ -144,7 +178,7 @@ namespace FEWebApplication.Controladores.Dominio.Pedido
         /// Obtiene el producto de un pedido asociado al ID (ProdSerXVendidosPed)
         /// </summary>
         /// <returns>Producto de un pedido asociado al ID</returns>
-        /// <param name="pedido">Id del producto de un pedido deseado</param>
+        /// <param name="idProductoPedido">Id del producto de un pedido deseado</param>
         [Route("GetProductoPedidoPorId")]
         [HttpGet]
         public ProdSerXVendidosPed GetPrductoPedidoPorId(int idProductoPedido)
@@ -181,6 +215,14 @@ namespace FEWebApplication.Controladores.Dominio.Pedido
             }
             catch (COExcepcion e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
             }
             return respuestaDatos;
@@ -203,6 +245,14 @@ namespace FEWebApplication.Controladores.Dominio.Pedido
             }
             catch (COExcepcion e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
             }
             return respuestaDatos;
@@ -235,6 +285,14 @@ namespace FEWebApplication.Controladores.Dominio.Pedido
             }
             catch (COExcepcion e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 throw e;
             }
         }
@@ -255,6 +313,14 @@ namespace FEWebApplication.Controladores.Dominio.Pedido
             }
             catch (COExcepcion e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 throw e;
             }
         }
@@ -274,6 +340,14 @@ namespace FEWebApplication.Controladores.Dominio.Pedido
             }
             catch (COExcepcion e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 throw e;
             }
         }

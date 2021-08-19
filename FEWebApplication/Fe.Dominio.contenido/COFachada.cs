@@ -10,6 +10,7 @@ using Fe.Core.Global.Constantes;
 using Fe.Core.General;
 using Fe.Servidor.Middleware.Contratos.Dominio.Contenido;
 using Microsoft.AspNetCore.Http;
+using Fe.Core.General.Datos;
 
 namespace Fe.Dominio.contenido
 {
@@ -272,6 +273,14 @@ namespace Fe.Dominio.contenido
             }
             catch (COExcepcion e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 throw e;
             }
         }
@@ -285,6 +294,14 @@ namespace Fe.Dominio.contenido
             }
             catch (COExcepcion e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 throw e;
             }
         }
@@ -298,6 +315,14 @@ namespace Fe.Dominio.contenido
             }
             catch (COExcepcion e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 throw e;
             }
         }
@@ -320,6 +345,14 @@ namespace Fe.Dominio.contenido
             }
             catch (COExcepcion e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 throw e;
             }
         }
