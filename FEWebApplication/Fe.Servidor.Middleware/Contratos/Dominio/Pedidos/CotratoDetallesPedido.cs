@@ -10,6 +10,7 @@ namespace Fe.Servidor.Middleware.Contratos.Dominio.Pedidos
         public int Id { get; set; }
         public int? Precio { get; set; }
         public int? Cantidad { get; set; }
+        public DateTime? Fecha { get; set; }
 
         public virtual PedidosPed IdpedidoNavigation { get; set; }
         public virtual ProductosServiciosPc IdproductoservicoNavigation { get; set; }

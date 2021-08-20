@@ -262,26 +262,26 @@ namespace FEWebApplication.Controladores.Dominio.Pedido
         /// Obtiene el detalle del producto de un pedido (ProdSerXVendidosPed)
         /// </summary>
         /// <returns>Contrato de detalles del producto de un pedido</returns>
-        /// <param name="productoPedido">Producto de un pedido que se desea obtener su detalle</param>
+        /// <param name="idProductoPedido">Producto de un pedido que se desea obtener su detalle</param>
         [Route("DetalleProductoPedido")]
         [HttpGet]
-        public ContratoDetallesPedido DetalleProductoPedido(ProdSerXVendidosPed productoPedido)
+        public ContratoDetallesPedido DetalleProductoPedido(int idProductoPedido)
         {
-            return _peFachada.DetalleProductoPedido(productoPedido);
+            return _peFachada.DetalleProductoPedido(idProductoPedido);
         }
 
         /// <summary>
         /// Obtiene la lista de detalles de los productos de un pedido (ProdSerXVendidosPed)
         /// </summary>
         /// <returns>Lista de contratos de detalles de los productos de un pedido</returns>
-        /// <param name="pedido">Pedido del cual se desea obtener el detalle de todos sus productos</param>
+        /// <param name="idPedido">IDPedido del cual se desea obtener el detalle de todos sus productos</param>
         [Route("ListarDetallesPedido")]
         [HttpGet]
-        public List<ContratoDetallesPedido> ListarDetallesPedido(PedidosPed pedido)
+        public List<ContratoDetallesPedido> ListarDetallesPedido(int idPedido)
         {
             try
             {
-                return _peFachada.ListarDetallesPedido(pedido);
+                return _peFachada.ListarDetallesPedido(idPedido);
             }
             catch (COExcepcion e)
             {
@@ -302,14 +302,14 @@ namespace FEWebApplication.Controladores.Dominio.Pedido
         /// Obtiene el contrato de un pedido (ProdSerXVendidosPed)
         /// </summary>
         /// <returns>Contrato de un pedido con sus productos</returns>
-        /// <param name="pedido">Pedido del que se desea obtener su contrato</param>
+        /// <param name="idPedido">Pedido del que se desea obtener su contrato</param>
         [Route("CabeceraPedido")]
         [HttpGet]
-        public ContratoPedidos Cabecera([FromBody] PedidosPed pedido)
+        public ContratoPedidos CabeceraPedido(int idPedido)
         {
             try
             {
-                return _peFachada.CabeceraPedido(pedido);
+                return _peFachada.CabeceraPedido(idPedido);
             }
             catch (COExcepcion e)
             {

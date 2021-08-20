@@ -255,17 +255,20 @@ namespace Fe.Dominio.pedidos
             return validacion;
         }
 
-        public ContratoDetallesPedido DetalleProductoPedido(ProdSerXVendidosPed productoPedido)
+        public ContratoDetallesPedido DetalleProductoPedido(int idProductoPedido)
         {
             ContratoDetallesPedido detalleProductoPedido = new ContratoDetallesPedido();
-            ProductosServiciosPc producto = _cOContenidoFachada.GetPublicacionPorIdPublicacion(productoPedido.Idproductoservico);
+            ProdSerXVendidosPed productoPedido = _pEPedidoBiz.GetProductoPedidoPorId(idProductoPedido);
+            System.Diagnostics.Debug.WriteLine(productoPedido);
             if (productoPedido != null)
             {
+                ProductosServiciosPc producto = _cOContenidoFachada.GetPublicacionPorIdPublicacion(productoPedido.Idproductoservico);
                 if (producto != null)
                 {
                     detalleProductoPedido.Id = producto.Id;
                     detalleProductoPedido.Precio = producto.Preciounitario;
                     detalleProductoPedido.Cantidad = productoPedido.Cantidadespedida;
+                    detalleProductoPedido.Fecha = productoPedido.Creacion;
                 }
                 else { throw new COExcepcion("El producto no existe."); }
             }
@@ -273,28 +276,32 @@ namespace Fe.Dominio.pedidos
             return detalleProductoPedido;
         }
 
-        public List<ContratoDetallesPedido> ListarDetallesPedido(PedidosPed pedido)
+        public List<ContratoDetallesPedido> ListarDetallesPedido(int idPedido)
         {
             List<ContratoDetallesPedido> detallesPedido = new List<ContratoDetallesPedido>();
+            PedidosPed pedido = _pEPedidoBiz.GetPedidoPorId(idPedido);
             if (pedido != null)
             {
                 List<ProdSerXVendidosPed> productos = _pEPedidoBiz.GetProductosPedidosPorIdPedido(pedido.Id);
                 for (int i = 0; i < productos.Count; i++)
                 {
-                    detallesPedido.Add(DetalleProductoPedido(productos[i]));
+                    detallesPedido.Add(DetalleProductoPedido(productos[i].Id));
                 }
             }
             else { throw new COExcepcion("El pedido ingresado no existe."); }
             return detallesPedido;
         }
 
-        public ContratoPedidos CabeceraPedido(PedidosPed pedido)
+        public ContratoPedidos CabeceraPedido(int idPedido)
         {
             ContratoPedidos cabeceraPedido = new ContratoPedidos();
+            PedidosPed pedido = _pEPedidoBiz.GetPedidoPorId(idPedido);
             if (pedido != null)
             {
                 cabeceraPedido.Id = pedido.Idusuario;
-                cabeceraPedido.Productos = ListarDetallesPedido(pedido);
+                cabeceraPedido.Estado = pedido.Estado;
+                cabeceraPedido.Fechapedido = pedido.Fechapedido;
+                cabeceraPedido.Productos = ListarDetallesPedido(pedido.Id);
             }
             else { throw new COExcepcion("El pedido ingresado no existe."); }
             return cabeceraPedido;
@@ -303,12 +310,13 @@ namespace Fe.Dominio.pedidos
         public List<ContratoPedidos> ListarTodosLosPedidosPorUsuario(int idUsuario)
         {
             List<ContratoPedidos> pedidos = new List<ContratoPedidos>();
-            if(idUsuario != -1)
+            DemografiaCor usuario = _cOGeneralFachada.GetDemografiaPorId(idUsuario);
+            if(usuario != null)
             {
-                List<PedidosPed> ps = _pEPedidoBiz.GetPedidosPorIdUsuario(idUsuario);
+                List<PedidosPed> ps = _pEPedidoBiz.GetPedidosPorIdUsuario(usuario.Id);
                 for (int i = 0; i < ps.Count; i++)
                 {
-                    pedidos.Add(CabeceraPedido(ps[i]));
+                    pedidos.Add(CabeceraPedido(ps[i].Id));
                 }
             }
             else { throw new COExcepcion("El usuario ingresado no existe."); }
