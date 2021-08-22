@@ -2,10 +2,10 @@ part of 'info_carrito_bloc.dart';
 
 @immutable
 class InfoCarritoState {
-  final CarritoComprasModel? carrito;
+  final List<ProductoServicioModel?> carrito;
 
-  InfoCarritoState({this.carrito});
+  InfoCarritoState({required this.carrito});
 
-  InfoCarritoState copyWith({CarritoComprasModel? carrito}) =>
-      new InfoCarritoState(carrito: carrito ?? this.carrito);
+  InfoCarritoState copyWith({required List<ProductoServicioModel> carrito}) =>
+      new InfoCarritoState(carrito: carrito);
 }

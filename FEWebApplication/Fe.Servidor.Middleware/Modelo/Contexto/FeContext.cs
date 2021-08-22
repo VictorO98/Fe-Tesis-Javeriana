@@ -336,11 +336,18 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                     .HasColumnName("id")
                     .UseIdentityAlwaysColumn();
 
+                entity.Property(e => e.Estado)
+                    .IsRequired()
+                    .HasMaxLength(5)
+                    .HasColumnName("estado");
+
                 entity.Property(e => e.Fechaentrega).HasColumnName("fechaentrega");
 
                 entity.Property(e => e.Fechafactura).HasColumnName("fechafactura");
 
                 entity.Property(e => e.Idpedido).HasColumnName("idpedido");
+
+                entity.Property(e => e.Idvendedor).HasColumnName("idvendedor");
 
                 entity.Property(e => e.Valortotalfactura).HasColumnName("valortotalfactura");
 
@@ -801,9 +808,7 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
 
                 entity.Property(e => e.Tiempogarantia).HasColumnName("tiempogarantia");
 
-                entity.Property(e => e.Urlimagenproductoservicio)
-                    .IsRequired()
-                    .HasColumnName("urlimagenproductoservicio");
+                entity.Property(e => e.Urlimagenproductoservicio).HasColumnName("urlimagenproductoservicio");
 
                 entity.Property(e => e.Ventas).HasColumnName("ventas");
 
@@ -924,6 +929,10 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .UseIdentityAlwaysColumn();
+
+                entity.Property(e => e.Codigo)
+                    .HasMaxLength(3)
+                    .HasColumnName("codigo");
 
                 entity.Property(e => e.Creacion).HasColumnName("creacion");
 

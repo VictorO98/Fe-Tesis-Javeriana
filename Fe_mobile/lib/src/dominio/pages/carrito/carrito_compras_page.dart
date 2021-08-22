@@ -1,5 +1,7 @@
-import 'package:Fe_mobile/config/ui_icons.dart';
-import 'package:Fe_mobile/src/models/product.dart';
+import 'package:Fe_mobile/src/core/util/comisiones_util.dart';
+import 'package:Fe_mobile/src/core/util/currency_util.dart';
+import 'package:Fe_mobile/src/dominio/models/carrito_compras_model.dart';
+import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:Fe_mobile/src/widgets/CartItemWidget.dart';
 import 'package:flutter/material.dart';
 
@@ -9,11 +11,47 @@ class CartWidget extends StatefulWidget {
 }
 
 class _CartWidgetState extends State<CartWidget> {
-  late ProductsList _productsList;
+  List<ProductoServicioModel?> _productsList = [];
+  CarritoComprasModel _carrito = new CarritoComprasModel();
+
+  int _totalCancelar = 0;
+  int _comision = 0;
+  int _checkout = 0;
+
   @override
   void initState() {
-    _productsList = new ProductsList();
     super.initState();
+    _initialConfiguration();
+  }
+
+  void _initialConfiguration() {
+    var lista = _carrito.returnCarrito();
+
+    setState(() {
+      _productsList = lista;
+    });
+
+    var total = 0;
+    for (int i = 0; i < _productsList.length; i++) {
+      if (_productsList[i]!.descuento! > 0.0) {
+        total += _productsList[i]!.preciounitario! -
+            ((_productsList[i]!.descuento! / 100) *
+                    _productsList[i]!.preciounitario!)
+                .toInt();
+      } else {
+        total += _productsList[i]!.preciounitario!;
+      }
+    }
+
+    var comision = total * ComisionesUtil.COMISION_BUYA;
+    setState(() {
+      _totalCancelar = total;
+      _comision = comision.toInt();
+      _checkout = _totalCancelar + _comision;
+    });
+    // setState(() {
+    //   _cargandoUsuario = false;
+    // });
   }
 
   @override
@@ -88,13 +126,13 @@ class _CartWidgetState extends State<CartWidget> {
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     primary: false,
-                    itemCount: _productsList.cartList!.length,
+                    itemCount: _productsList.length,
                     separatorBuilder: (context, index) {
                       return SizedBox(height: 15);
                     },
                     itemBuilder: (context, index) {
                       return CartItemWidget(
-                          product: _productsList.cartList!.elementAt(index),
+                          product: _productsList.elementAt(index),
                           heroTag: 'cart');
                     },
                   ),
@@ -132,7 +170,8 @@ class _CartWidgetState extends State<CartWidget> {
                             style: Theme.of(context).textTheme.body2,
                           ),
                         ),
-                        Text('\$130.230',
+                        Text(
+                            "${CurrencyUtil.convertFormatMoney('COP', _totalCancelar)}",
                             style: Theme.of(context).textTheme.subhead),
                       ],
                     ),
@@ -145,7 +184,8 @@ class _CartWidgetState extends State<CartWidget> {
                             style: Theme.of(context).textTheme.body2,
                           ),
                         ),
-                        Text('\$2.604',
+                        Text(
+                            "${CurrencyUtil.convertFormatMoney('COP', _comision)}",
                             style: Theme.of(context).textTheme.subhead),
                       ],
                     ),
@@ -174,7 +214,7 @@ class _CartWidgetState extends State<CartWidget> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: Text(
-                            '\$132.834',
+                            "${CurrencyUtil.convertFormatMoney('COP', _checkout)}",
                             style: Theme.of(context).textTheme.display1!.merge(
                                 TextStyle(
                                     color: Theme.of(context).primaryColor)),

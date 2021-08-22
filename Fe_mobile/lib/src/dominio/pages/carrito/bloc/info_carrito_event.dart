@@ -4,7 +4,7 @@ part of 'info_carrito_bloc.dart';
 abstract class InfoCarritoEvent {}
 
 class OnSetearInfoCarrito extends InfoCarritoEvent {
-  final CarritoComprasModel carrito;
+  final List<ProductoServicioModel> carrito;
 
   OnSetearInfoCarrito(this.carrito);
 }

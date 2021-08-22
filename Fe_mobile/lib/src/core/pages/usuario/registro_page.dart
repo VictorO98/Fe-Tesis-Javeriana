@@ -305,7 +305,7 @@ class _RegistroPageState extends State<RegistroPage> {
 
         if (foto != null) {
           File? croppedFile = await ImageCropper.cropImage(
-              sourcePath: foto?.path ?? '',
+              sourcePath: foto.path,
               aspectRatioPresets: [
                 CropAspectRatioPreset.square,
                 CropAspectRatioPreset.ratio3x2,
@@ -356,7 +356,7 @@ class _RegistroPageState extends State<RegistroPage> {
 
         if (foto != null) {
           File? croppedFile = await ImageCropper.cropImage(
-              sourcePath: foto?.path ?? '',
+              sourcePath: foto.path,
               aspectRatioPresets: [
                 CropAspectRatioPreset.square,
                 CropAspectRatioPreset.ratio3x2,

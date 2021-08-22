@@ -19,6 +19,8 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
         public DateTime? Fechaentrega { get; set; }
         public int? Valortotalfactura { get; set; }
         public int? Valortotalfacturaiva { get; set; }
+        public int Idvendedor { get; set; }
+        public string Estado { get; set; }
 
         public virtual PedidosPed IdpedidoNavigation { get; set; }
         public virtual ICollection<DevolucionesDev> DevolucionesDevs { get; set; }

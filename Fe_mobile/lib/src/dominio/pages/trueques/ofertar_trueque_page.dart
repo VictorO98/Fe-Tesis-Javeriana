@@ -90,21 +90,21 @@ class _OfertarTruequePageState extends State<OfertarTruequePage>
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold)),
                   ),
-                  ListView.separated(
-                    padding: EdgeInsets.symmetric(vertical: 15),
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    primary: false,
-                    itemCount: _productsList.cartList!.length,
-                    separatorBuilder: (context, index) {
-                      return SizedBox(height: 15);
-                    },
-                    itemBuilder: (context, index) {
-                      return CartItemWidget(
-                          product: _productsList.cartList!.elementAt(index),
-                          heroTag: 'cart');
-                    },
-                  ),
+                  // ListView.separated(
+                  //   padding: EdgeInsets.symmetric(vertical: 15),
+                  //   scrollDirection: Axis.vertical,
+                  //   shrinkWrap: true,
+                  //   primary: false,
+                  //   itemCount: _productsList.cartList!.length,
+                  //   separatorBuilder: (context, index) {
+                  //     return SizedBox(height: 15);
+                  //   },
+                  //   itemBuilder: (context, index) {
+                  //     return CartItemWidget(
+                  //         product: _productsList.cartList!.elementAt(index),
+                  //         heroTag: 'cart');
+                  //   },
+                  // ),
                 ],
               ),
             ),

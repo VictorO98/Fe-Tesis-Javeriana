@@ -1,10 +1,8 @@
-import 'package:Fe_mobile/config/ui_icons.dart';
 import 'package:Fe_mobile/src/core/util/preferencias_util.dart';
 import 'package:Fe_mobile/src/dominio/models/carrito_compras_model.dart';
 import 'package:Fe_mobile/src/dominio/models/guardar_favorito_model.dart';
 import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:Fe_mobile/src/dominio/providers/contenido_provider.dart';
-import 'package:Fe_mobile/src/models/product.dart';
 import 'package:Fe_mobile/src/models/route_argument.dart';
 import 'package:Fe_mobile/src/widgets/DrawerWidget.dart';
 import 'package:Fe_mobile/src/widgets/ProductDetailsTabWidget.dart';

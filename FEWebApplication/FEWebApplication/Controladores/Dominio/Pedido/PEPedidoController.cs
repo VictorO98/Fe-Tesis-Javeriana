@@ -265,9 +265,9 @@ namespace FEWebApplication.Controladores.Dominio.Pedido
         /// <param name="idProductoPedido">Producto de un pedido que se desea obtener su detalle</param>
         [Route("DetalleProductoPedido")]
         [HttpGet]
-        public ContratoDetallesPedido DetalleProductoPedido(int idProductoPedido)
+        public async Task<ContratoDetallesPedido> DetalleProductoPedido(int idProductoPedido)
         {
-            return _peFachada.DetalleProductoPedido(idProductoPedido);
+            return await _peFachada.DetalleProductoPedido(idProductoPedido);
         }
 
         /// <summary>
@@ -277,11 +277,11 @@ namespace FEWebApplication.Controladores.Dominio.Pedido
         /// <param name="idPedido">IDPedido del cual se desea obtener el detalle de todos sus productos</param>
         [Route("ListarDetallesPedido")]
         [HttpGet]
-        public List<ContratoDetallesPedido> ListarDetallesPedido(int idPedido)
+        public async Task<List<ContratoDetallesPedido>> ListarDetallesPedido(int idPedido)
         {
             try
             {
-                return _peFachada.ListarDetallesPedido(idPedido);
+                return await  _peFachada.ListarDetallesPedido(idPedido);
             }
             catch (COExcepcion e)
             {
@@ -305,11 +305,11 @@ namespace FEWebApplication.Controladores.Dominio.Pedido
         /// <param name="idPedido">Pedido del que se desea obtener su contrato</param>
         [Route("CabeceraPedido")]
         [HttpGet]
-        public ContratoPedidos CabeceraPedido(int idPedido)
+        public async Task<ContratoPedidos> CabeceraPedido(int idPedido)
         {
             try
             {
-                return _peFachada.CabeceraPedido(idPedido);
+                return await _peFachada.CabeceraPedido(idPedido);
             }
             catch (COExcepcion e)
             {

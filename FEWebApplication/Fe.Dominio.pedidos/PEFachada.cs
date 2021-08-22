@@ -256,7 +256,7 @@ namespace Fe.Dominio.pedidos
         }
 
 
-        public ContratoDetallesPedido DetalleProductoPedido(int idProductoPedido)
+        public async Task<ContratoDetallesPedido> DetalleProductoPedido(int idProductoPedido)
         {
             ContratoDetallesPedido detalleProductoPedido = new ContratoDetallesPedido();
             ProdSerXVendidosPed productoPedido = _pEPedidoBiz.GetProductoPedidoPorId(idProductoPedido);
@@ -264,7 +264,7 @@ namespace Fe.Dominio.pedidos
 
             if (productoPedido != null)
             {
-                ProductosServiciosPc producto = _cOContenidoFachada.GetPublicacionPorIdPublicacion(productoPedido.Idproductoservico);
+                ProductosServiciosPc producto = await _cOContenidoFachada.GetPublicacionPorIdPublicacion(productoPedido.Idproductoservico);
                 if (producto != null)
                 {
                     detalleProductoPedido.Id = producto.Id;
@@ -279,7 +279,7 @@ namespace Fe.Dominio.pedidos
         }
 
 
-        public List<ContratoDetallesPedido> ListarDetallesPedido(int idPedido)
+        public async Task<List<ContratoDetallesPedido>> ListarDetallesPedido(int idPedido)
 
         {
             List<ContratoDetallesPedido> detallesPedido = new List<ContratoDetallesPedido>();
@@ -289,7 +289,7 @@ namespace Fe.Dominio.pedidos
                 List<ProdSerXVendidosPed> productos = _pEPedidoBiz.GetProductosPedidosPorIdPedido(pedido.Id);
                 for (int i = 0; i < productos.Count; i++)
                 {
-                    detallesPedido.Add(DetalleProductoPedido(productos[i].Id));
+                    detallesPedido.Add(await DetalleProductoPedido(productos[i].Id));
 
                 }
             }
@@ -298,7 +298,7 @@ namespace Fe.Dominio.pedidos
         }
 
 
-        public ContratoPedidos CabeceraPedido(int idPedido)
+        public async Task<ContratoPedidos> CabeceraPedido(int idPedido)
 
         {
             ContratoPedidos cabeceraPedido = new ContratoPedidos();
@@ -309,7 +309,7 @@ namespace Fe.Dominio.pedidos
 
                 cabeceraPedido.Estado = pedido.Estado;
                 cabeceraPedido.Fechapedido = pedido.Fechapedido;
-                cabeceraPedido.Productos = ListarDetallesPedido(pedido.Id);
+                cabeceraPedido.Productos = await ListarDetallesPedido(pedido.Id);
 
             }
             else { throw new COExcepcion("El pedido ingresado no existe."); }
@@ -326,7 +326,7 @@ namespace Fe.Dominio.pedidos
                 for (int i = 0; i < ps.Count; i++)
                 {
 
-                    pedidos.Add(CabeceraPedido(ps[i].Id));
+                    pedidos.Add(await CabeceraPedido (ps[i].Id));
 
                 }
             }

@@ -15,6 +15,7 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
         public int Id { get; set; }
         public string Nombre { get; set; }
         public DateTime? Creacion { get; set; }
+        public string Codigo { get; set; }
 
         public virtual ICollection<DemografiaCor> DemografiaCors { get; set; }
     }

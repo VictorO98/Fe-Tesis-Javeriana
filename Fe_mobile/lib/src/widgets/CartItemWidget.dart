@@ -1,10 +1,12 @@
+import 'package:Fe_mobile/src/core/util/currency_util.dart';
+import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:Fe_mobile/src/models/product.dart';
 import 'package:Fe_mobile/src/models/route_argument.dart';
 import 'package:flutter/material.dart';
 
 class CartItemWidget extends StatefulWidget {
   String? heroTag;
-  Product? product;
+  ProductoServicioModel? product;
   int quantity;
 
   CartItemWidget({Key? key, this.product, this.heroTag, this.quantity = 0})
@@ -42,15 +44,17 @@ class _CartItemWidgetState extends State<CartItemWidget> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Hero(
-              tag: widget.heroTag! + widget.product!.id,
+              tag: widget.heroTag! + widget.product!.id.toString(),
               child: Container(
                 height: 90,
                 width: 90,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                  borderRadius: BorderRadius.circular(6),
                   image: DecorationImage(
-                      image: AssetImage(widget.product!.image),
-                      fit: BoxFit.cover),
+                    image: NetworkImage(
+                        widget.product!.urlimagenproductoservicio.toString()),
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ),
             ),
@@ -64,13 +68,15 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          widget.product!.name,
+                          widget.product!.nombre!,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: Theme.of(context).textTheme.subhead,
                         ),
                         Text(
-                          widget.product!.getPrice(),
+                          widget.product!.descuento == 0.0
+                              ? "${CurrencyUtil.convertFormatMoney('COP', widget.product!.preciounitario!)}"
+                              : "${CurrencyUtil.convertFormatMoney('COP', widget.product!.preciounitario! - ((widget.product!.descuento! / 100) * widget.product!.preciounitario!).toInt())}",
                           style: Theme.of(context).textTheme.display1,
                         ),
                       ],
