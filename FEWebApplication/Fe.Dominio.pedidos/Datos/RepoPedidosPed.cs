@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Fe.Core.General.Datos;
 using Fe.Core.Global.Constantes;
 using Fe.Core.Global.Errores;
 using Fe.Servidor.Middleware.Contratos.Core;
@@ -23,10 +24,19 @@ namespace Fe.Dominio.pedidos.Datos
             {
                 context.Add(pedido);
                 context.SaveChanges();
-                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "Pedido creado exitosamente." };
+                int idPedido = pedido.Id;
+                respuestaDatos = new RespuestaDatos { Codigo = idPedido, Mensaje = "Pedido creado exitosamente." };
             }
             catch (Exception e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 throw new COExcepcion("Ocurrió un problema al intentar realizar el pedido");
             }
             return respuestaDatos;
@@ -60,6 +70,14 @@ namespace Fe.Dominio.pedidos.Datos
                 }
                 catch (Exception e)
                 {
+                    RepoErrorLog.AddErrorLog(new ErrorLog
+                    {
+                        Mensaje = e.Message,
+                        Traza = e.StackTrace,
+                        Usuario = "no_aplica",
+                        Creacion = DateTime.Now,
+                        Tipoerror = COErrorLog.ENVIO_CORREO
+                    });
                     throw new COExcepcion("Ocurrió un problema al intentar eliminar el pedido");
                 }
             }
@@ -88,6 +106,14 @@ namespace Fe.Dominio.pedidos.Datos
                 }
                 catch (Exception e)
                 {
+                    RepoErrorLog.AddErrorLog(new ErrorLog
+                    {
+                        Mensaje = e.Message,
+                        Traza = e.StackTrace,
+                        Usuario = "no_aplica",
+                        Creacion = DateTime.Now,
+                        Tipoerror = COErrorLog.ENVIO_CORREO
+                    });
                     throw new COExcepcion("Ocurrió un problema al intentar modificar el pedido.");
                 }
             }

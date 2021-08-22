@@ -25,6 +25,14 @@ namespace Fe.Core.General.Datos
             }
             catch (Exception e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 throw new COExcepcion("Ocurrió un problema al intentar agregar la Demografía reportada.");
             }
          
@@ -59,6 +67,14 @@ namespace Fe.Core.General.Datos
                 }
                 catch (Exception e)
                 {
+                    RepoErrorLog.AddErrorLog(new ErrorLog
+                    {
+                        Mensaje = e.Message,
+                        Traza = e.StackTrace,
+                        Usuario = "no_aplica",
+                        Creacion = DateTime.Now,
+                        Tipoerror = COErrorLog.ENVIO_CORREO
+                    });
                     throw new COExcepcion("Ocurrió un problema al intentar modificar la demografía reportada.");
                 }
             }
@@ -83,6 +99,14 @@ namespace Fe.Core.General.Datos
             }
             catch (Exception e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 Console.WriteLine(e.StackTrace);
                 Console.WriteLine(e.InnerException);
                 throw new COExcepcion("Ocurrió un problema al intentar eliminar la demografía reportada");

@@ -8,6 +8,8 @@ namespace Fe.Servidor.Middleware.Contratos.Dominio.Pedidos
     public class ContratoPedidos
     {
         public int Id { get; set; }
+        public string Estado { get; set; }
+        public DateTime? Fechapedido { get; set; }
         public virtual List<ContratoDetallesPedido> Productos { get; set; }
 
         public virtual DemografiaCor IdusuarioNavigation { get; set; }
