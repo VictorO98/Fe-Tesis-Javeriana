@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
+using Fe.Core.General.Datos;
+using System.Linq;
 
 namespace Fe.Dominio.contenido
 {
@@ -65,7 +67,7 @@ namespace Fe.Dominio.contenido
             return respuestaDatos;
         }
 
-        internal async Task<RespuestaDatos> GuardarPublicacion(ProductosServiciosPc productosServicios, DemografiaCor demografiaCor)
+        internal async Task<RespuestaDatos> GuardarPublicacion(ProductosServiciosPc productosServicios, DemografiaCor demografiaCor, IFormFileCollection files)
         {
             RespuestaDatos respuestaDatos;
             if (demografiaCor != null)
@@ -82,7 +84,59 @@ namespace Fe.Dominio.contenido
                                 // TODO : queda pendiente definir bien estas fechas
                                 productosServicios.Tiempoentrega = DateTime.Today.AddDays(10); // Tiempo de entrega aproximado a 10 días
                                 productosServicios.Tiempogarantia = productosServicios.Tiempoentrega.AddDays(15); // TIempo de garantía aproximado de 15 días
-                                respuestaDatos = await _repoProducto.GuardarPublicacion(productosServicios);
+                                productosServicios.Modificacion = DateTime.Now;
+                                productosServicios.Id = await _repoProducto.GuardarPublicacion(productosServicios);
+
+                                string directorio = _configuration["ImageProductos:DirectorioImagenes"];
+                                directorio = directorio + "/" + "Productos";
+
+                                if (string.IsNullOrEmpty(directorio))
+                                {
+                                    RepoErrorLog.AddErrorLog(new ErrorLog
+                                    {
+                                        Mensaje = "No se encuentra definida la ruta para las imagenes de evidencia. ",
+                                        Traza = null,
+                                        Usuario = demografiaCor.Email,
+                                        Creacion = DateTime.Now,
+                                        Tipoerror = COErrorLog.RUTA_NO_ENCONTRADA
+                                    });
+                                    throw new COExcepcion("Problema con las rutas. Por favor contacte a servicio al cliente. ");
+                                }
+
+                                var folderName = Path.Combine(directorio);
+                                if (files.Count == 0)
+                                    throw new COExcepcion("No hay documento a subir. ");
+
+                                if (files.Count > 1)
+                                    throw new COExcepcion("Solo se puede subir un máximo de 1 documento. ");
+
+                                string[] permittedExtensions = { ".jpg", ".jpeg", ".png" };
+                                List<string> listadoDeRutaFotos = new List<string>();
+                                var folderDocument = directorio;
+
+                                foreach (var file in files)
+                                {
+                                    var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
+                                    if (string.IsNullOrEmpty(ext) || !permittedExtensions.Contains(ext))
+                                        throw new COExcepcion("Solo se aceptan imágenes JPG y PNG. ");
+
+                                    var fileName = $@"imagen-producto-{productosServicios.Id}{ext}";
+                                    productosServicios.Urlimagenproductoservicio = fileName;
+                                    var fullPath = Path.Combine(folderName, fileName);
+                                    using var stream = new FileStream(fullPath, FileMode.Create);
+                                    file.CopyTo(stream);
+                                    listadoDeRutaFotos.Add(fullPath);
+                                }
+                                if (listadoDeRutaFotos.Count == 0)
+                                    throw new COExcepcion("No se almacenó ninguna imagen.");
+
+                                await _repoProducto.GuardarLinkImagen(productosServicios);
+
+                                return new RespuestaDatos
+                                {
+                                    Codigo = COCodigoRespuesta.OK,
+                                    Mensaje = "Se guardo correctamente la publicación."
+                                };
                             }
                             catch (COExcepcion e)
                             {
@@ -99,9 +153,9 @@ namespace Fe.Dominio.contenido
             return respuestaDatos;
         }
 
-        internal ProductosServiciosPc GetPublicacionPorIdPublicacion(int idPublicacion)
+        internal async Task<ProductosServiciosPc> GetPublicacionPorIdPublicacion(int idPublicacion)
         {
-            return _repoProducto.GetPublicacionPorIdPublicacion(idPublicacion);
+            return await _repoProducto.GetPublicacionPorIdPublicacion(idPublicacion);
         }
 
         internal async Task<RespuestaDatos> RemoverPublicacion(int idPublicacion)
@@ -116,11 +170,6 @@ namespace Fe.Dominio.contenido
                 throw e;
             }
             return respuestaDatos;
-        }
-
-        internal Task<RespuestaDatos> SubirFotosPublicacion(IFormFileCollection files)
-        {
-            throw new NotImplementedException();
         }
 
         internal async Task<RespuestaDatos> ModificarPublicacion(ProductosServiciosPc productosServicios)
@@ -170,22 +219,19 @@ namespace Fe.Dominio.contenido
             return _repoResena.GetResenaPorIdResena(idResena);
         }
 
-        internal string GetImagenProdcuto(DemografiaCor demografiaCor, ProductosServiciosPc publicacion)
+        internal string GetImagenProdcuto(ProductosServiciosPc publicacion)
         {
             try
             {
-                if (demografiaCor == null)
-                    throw new COExcepcion("El usuario no existe. ");
-
                 if (publicacion == null)
                     throw new COExcepcion("La publicación no existe. ");
 
                 string fileName = publicacion.Urlimagenproductoservicio;
 
-                if (!fileName.Contains($@"imagen-producto-{demografiaCor.Id}-{publicacion.Id}"))
+                if (!fileName.Contains($@"imagen-producto-{publicacion.Id}"))
                     throw new COExcepcion("No tiene acceso a esta imagen. ");
 
-                string directorio = _configuration["ImageProductos:DirectorioImagenes"] + "/" + demografiaCor.Email + "/Productos";
+                string directorio = _configuration["ImageProductos:DirectorioImagenes"] + "/Productos";
 
                 return Path.Combine(directorio, Path.GetFileName(fileName));
 
@@ -206,7 +252,7 @@ namespace Fe.Dominio.contenido
             RespuestaDatos respuestaDatos;
             try
             {
-                ProductosServiciosPc publicacion = _repoProducto.GetPublicacionPorIdPublicacion(resena.Idpublicacion);
+                ProductosServiciosPc publicacion = await _repoProducto.GetPublicacionPorIdPublicacion(resena.Idpublicacion);
                 if (publicacion != null)
                 {
                     respuestaDatos = await _repoResena.GuardarResena(resena);
@@ -235,7 +281,7 @@ namespace Fe.Dominio.contenido
         internal async Task<RespuestaDatos> GuardarPreguntasyRespuestas(PreguntasRespuestasPc pyr)
         {
             RespuestaDatos respuestaDatos;
-            ProductosServiciosPc publicacion = _repoProducto.GetPublicacionPorIdPublicacion(pyr.Idproductoservicio);
+            ProductosServiciosPc publicacion = await _repoProducto.GetPublicacionPorIdPublicacion(pyr.Idproductoservicio);
             if (publicacion != null)
             {
                 try
@@ -275,9 +321,9 @@ namespace Fe.Dominio.contenido
             return _repoPyR.GetPreguntasyRespuestasPorIdPublicacion(idPublicacion);
         }
 
-        internal ContratoPc DesplegarPublicacion(int idPublicacion)
+        internal async Task<ContratoPc> DesplegarPublicacion(int idPublicacion)
         {
-            ProductosServiciosPc publicacion = _repoProducto.GetPublicacionPorIdPublicacion(idPublicacion);
+            ProductosServiciosPc publicacion = await _repoProducto.GetPublicacionPorIdPublicacion(idPublicacion);
             ContratoPc contrato = new ContratoPc();
             if (publicacion != null)
             {
@@ -304,7 +350,7 @@ namespace Fe.Dominio.contenido
             return contrato;
         }
 
-        internal List<ContratoPc> FiltrarPublicacion(int idCategoria, int idTipoPublicacion,
+        internal async Task<List<ContratoPc>> FiltrarPublicacion(int idCategoria, int idTipoPublicacion, DemografiaCor usuario, 
             decimal precioMenor, decimal precioMayor, decimal calificacionMenor, decimal calificacionMayor)
         {
             List<ContratoPc> publicaciones = new List<ContratoPc>();
@@ -316,6 +362,10 @@ namespace Fe.Dominio.contenido
             {
                 throw new COExcepcion("El tipo de publicación ingresado no existe.");
             }
+            if (usuario == null)
+            {
+                throw new COExcepcion("El usuario no existe.");
+            }
             if (precioMenor <= precioMayor)
             {
                 if(calificacionMenor <= calificacionMayor)
@@ -324,10 +374,10 @@ namespace Fe.Dominio.contenido
                     {
 
                         List<ProductosServiciosPc> listaPublicaciones = _repoProducto.FiltrarPublicaciones(idCategoria, 
-                            idTipoPublicacion, precioMenor, precioMayor, calificacionMenor, calificacionMayor);
+                            idTipoPublicacion, precioMenor, precioMayor, calificacionMenor, calificacionMayor, usuario);
                         for(int i = 0; i < listaPublicaciones.Count; i++)
                         {
-                            publicaciones.Add(DesplegarPublicacion(listaPublicaciones[i].Id));
+                            publicaciones.Add(await DesplegarPublicacion(listaPublicaciones[i].Id));
                         }
                     }
                     catch(Exception e)
@@ -379,7 +429,7 @@ namespace Fe.Dominio.contenido
             return respuestaDatos;
         }
 
-        internal List<ContratoPc> GetFavoritosPorIdDemografia(DemografiaCor demografia)
+        internal async Task<List<ContratoPc>> GetFavoritosPorIdDemografia(DemografiaCor demografia)
         {
             List<ContratoPc> publicaciones = new List<ContratoPc>();
             if(demografia != null)
@@ -387,7 +437,7 @@ namespace Fe.Dominio.contenido
                 List<ProductosFavoritosDemografiaPc> favoritos = _repoFavorito.GetFavoritosPorIdDemografia(demografia.Id);
                 for(int i = 0; i < favoritos.Count; i++)
                 {
-                    publicaciones.Add(DesplegarPublicacion(favoritos[i].Idproductoservicio));
+                    publicaciones.Add(await DesplegarPublicacion(favoritos[i].Idproductoservicio));
                 }
             }
             else { throw new COExcepcion("El usuario ingresado no existe."); }
@@ -408,7 +458,7 @@ namespace Fe.Dominio.contenido
             return validarPublicacion;
         }
 
-        internal List<ContratoPc> GetPublicacionesPorIdUsuario(DemografiaCor demografia)
+        internal async Task<List<ContratoPc>> GetPublicacionesPorIdUsuario(DemografiaCor demografia)
         {
             List<ContratoPc> publicaciones = new List<ContratoPc>();
             if (demografia != null)
@@ -418,7 +468,7 @@ namespace Fe.Dominio.contenido
                     List<ProductosServiciosPc> publicacion = _repoProducto.GetPublicacionesPorIdUsuario(demografia.Id);
                     for (int i = 0; i < publicacion.Count; i++)
                     {
-                        publicaciones.Add(DesplegarPublicacion(publicacion[i].Id));
+                        publicaciones.Add(await DesplegarPublicacion(publicacion[i].Id));
                     }
                 } else { throw new COExcepcion("El usuario ingresado no es un emprendedor."); }
             }
@@ -426,29 +476,32 @@ namespace Fe.Dominio.contenido
             return publicaciones;
         }
 
-        internal List<ContratoPc> GetPublicacionesPorDescuento()
+        internal async Task<List<ContratoPc>> GetPublicacionesPorDescuento(int idUsuario, DemografiaCor demografiaCor)
         {
+            if (demografiaCor == null)
+                throw new COExcepcion("El usuario no existe.");
+
             List<ContratoPc> publicaciones = new List<ContratoPc>();
-            List<ProductosServiciosPc> publicacion = _repoProducto.GetPublicacionesPorDescuento();
+            List<ProductosServiciosPc> publicacion = _repoProducto.GetPublicacionesPorDescuento(idUsuario);
             for (int i = 0; i < publicacion.Count; i++)
             {
-                publicaciones.Add(DesplegarPublicacion(publicacion[i].Id));
+                publicaciones.Add(await DesplegarPublicacion(publicacion[i].Id));
             }
             return publicaciones;
         }
 
-        internal List<ContratoPc> BuscarPublicacion(string nombre)
+        internal async Task<List<ContratoPc>> BuscarPublicacion(string nombre)
         {
             List<ContratoPc> publicaciones = new List<ContratoPc>();
             List<ProductosServiciosPc> publicacion = _repoProducto.BuscarPublicacion(nombre);
             for (int i = 0; i < publicacion.Count; i++)
             {
-                publicaciones.Add(DesplegarPublicacion(publicacion[i].Id));
+                publicaciones.Add(await DesplegarPublicacion(publicacion[i].Id));
             }
             return publicaciones;
         }
 
-        internal List<ContratoPc> GetPublicacionesHabilitadasTrueque(DemografiaCor demografia)
+        internal async Task<List<ContratoPc>> GetPublicacionesHabilitadasTrueque(DemografiaCor demografia)
         {
             List<ContratoPc> publicaciones = new List<ContratoPc>();
             if (demografia != null)
@@ -458,7 +511,7 @@ namespace Fe.Dominio.contenido
                     List<ProductosServiciosPc> publicacion = _repoProducto.GetPublicacionesHabilitadasTrueque(demografia.Id);
                     for (int i = 0; i < publicacion.Count; i++)
                     {
-                        publicaciones.Add(DesplegarPublicacion(publicacion[i].Id));
+                        publicaciones.Add(await DesplegarPublicacion(publicacion[i].Id));
                     }
                 }
                 else { throw new COExcepcion("El usuario ingresado no es un emprendedor."); }

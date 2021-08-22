@@ -48,8 +48,8 @@ namespace Fe.Dominio.trueques
                 if(trueque.Estado == COEstadosTrueque.ACEPTADO)
                 {
                     ProdSerTruequeTrue detalle = _tRTruequeBiz.GetDetallePorIdTrueque(trueque.Id);
-                    ProductosServiciosPc publicacionVendedor = _cOFachada.GetPublicacionPorIdPublicacion(detalle.Idproductoserviciovendedor);
-                    ProductosServiciosPc publicacionComprador = _cOFachada.GetPublicacionPorIdPublicacion(detalle.Idproductoserviciocomprador);
+                    ProductosServiciosPc publicacionVendedor = await _cOFachada.GetPublicacionPorIdPublicacion(detalle.Idproductoserviciovendedor);
+                    ProductosServiciosPc publicacionComprador =  await _cOFachada.GetPublicacionPorIdPublicacion(detalle.Idproductoserviciocomprador);
                     publicacionComprador.Cantidadtotal = (int)(publicacionComprador.Cantidadtotal - detalle.Cantidadcomprador);
                     publicacionVendedor.Cantidadtotal = (int)(publicacionVendedor.Cantidadtotal - detalle.Cantidadvendedor);
                     RespuestaDatos modificarVendedor = await _cOFachada.ModificarPublicacion(publicacionVendedor);
@@ -68,8 +68,8 @@ namespace Fe.Dominio.trueques
             RespuestaDatos respuestaDatos;
             try
             {
-                ProductosServiciosPc publicacionComprador = _cOFachada.GetPublicacionPorIdPublicacion(detalle.Idproductoserviciocomprador);
-                ProductosServiciosPc publicacionVendedor = _cOFachada.GetPublicacionPorIdPublicacion(detalle.Idproductoserviciovendedor);
+                ProductosServiciosPc publicacionComprador = await _cOFachada.GetPublicacionPorIdPublicacion(detalle.Idproductoserviciocomprador);
+                ProductosServiciosPc publicacionVendedor = await _cOFachada.GetPublicacionPorIdPublicacion(detalle.Idproductoserviciovendedor);
                 DemografiaCor demografiaComprador = _cOGeneralFachada.GetDemografiaPorId(publicacionComprador.Idusuario);
                 DemografiaCor demografiaVendedor = _cOGeneralFachada.GetDemografiaPorId(publicacionVendedor.Idusuario);
                 TruequesPedidoTrue trueque = new TruequesPedidoTrue

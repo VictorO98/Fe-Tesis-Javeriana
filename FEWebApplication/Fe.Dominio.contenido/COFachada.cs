@@ -54,13 +54,13 @@ namespace Fe.Dominio.contenido
             return _cOContenidoBiz.GetTipoPublicacionPorID(idPublicacion);
         }
 
-        public async Task<RespuestaDatos> GuardarPublicacion(ProductosServiciosPc productosServicios)
+        public async Task<RespuestaDatos> GuardarPublicacion(ProductosServiciosPc productosServicios, IFormFileCollection files)
         {
             RespuestaDatos respuestaDatos;
             try
             {
                 DemografiaCor demografiaCor = _cOGeneralFachada.GetDemografiaPorId(productosServicios.Idusuario);
-                respuestaDatos = respuestaDatos = await _cOContenidoBiz.GuardarPublicacion(productosServicios, demografiaCor);
+                respuestaDatos = respuestaDatos = await _cOContenidoBiz.GuardarPublicacion(productosServicios, demografiaCor, files);
             }
             catch(COExcepcion e)
             {
@@ -69,9 +69,9 @@ namespace Fe.Dominio.contenido
             return respuestaDatos;
         }
 
-        public ProductosServiciosPc GetPublicacionPorIdPublicacion(int idPublicacion)
+        public async Task<ProductosServiciosPc> GetPublicacionPorIdPublicacion(int idPublicacion)
         {
-            return _cOContenidoBiz.GetPublicacionPorIdPublicacion(idPublicacion);
+            return await _cOContenidoBiz.GetPublicacionPorIdPublicacion(idPublicacion);
         }
         
         public async Task<RespuestaDatos> RemoverPublicacion(int idPublicacion)
@@ -144,20 +144,6 @@ namespace Fe.Dominio.contenido
             return respuestaDatos;
         }
 
-        public async Task<RespuestaDatos> SubirFotosPublicacionAsync(IFormFileCollection files)
-        {
-            RespuestaDatos respuestaDatos;
-            try
-            {
-                respuestaDatos = respuestaDatos = await _cOContenidoBiz.SubirFotosPublicacion(files);
-            }
-            catch (COExcepcion e)
-            {
-                throw e;
-            }
-            return respuestaDatos;
-        }
-
         public ResenasPc GetResenaPorIdResena(int idResena)
         {
             return _cOContenidoBiz.GetResenaPorIdResena(idResena);
@@ -168,13 +154,12 @@ namespace Fe.Dominio.contenido
             return _cOContenidoBiz.GetResenasPorIdPublicacion(idPublicacion);
         }
 
-        public string GetImagenProdcuto(int idPublicacion, int idUsuario)
+        public async Task<string> GetImagenProdcuto(int idPublicacion)
         {
             try
             {
-                DemografiaCor demografiaCor = _cOGeneralFachada.GetDemografiaPorId(idUsuario);
-                ProductosServiciosPc publicacion = _cOContenidoBiz.GetPublicacionPorIdPublicacion(idPublicacion);
-                return _cOContenidoBiz.GetImagenProdcuto(demografiaCor, publicacion);
+                ProductosServiciosPc publicacion = await _cOContenidoBiz.GetPublicacionPorIdPublicacion(idPublicacion);
+                return _cOContenidoBiz.GetImagenProdcuto(publicacion);
             }
             catch (COExcepcion e)
             {
@@ -215,17 +200,18 @@ namespace Fe.Dominio.contenido
             return _cOContenidoBiz.GetPreguntasyRespuestasPorIdPublicacion(idPublicacion);
         }
 
-        public ContratoPc DesplegarPublicacion(int idPublicacion)
+        public async Task<ContratoPc> DesplegarPublicacion(int idPublicacion)
         {
-            return _cOContenidoBiz.DesplegarPublicacion(idPublicacion);
+            return await _cOContenidoBiz.DesplegarPublicacion(idPublicacion);
         }
 
-        public List<ContratoPc> FiltrarPublicacion(int idCategoria, int idTipoPublicacion,
+        public async Task<List<ContratoPc>> FiltrarPublicacion(int idCategoria, int idTipoPublicacion, int idUsuario,
             decimal precioMenor, decimal precioMayor, decimal calificacionMenor, decimal calificacionMayor)
         {
             try
             {
-                return _cOContenidoBiz.FiltrarPublicacion(idCategoria, idTipoPublicacion, precioMenor, precioMayor,
+                DemografiaCor demografiaCor = _cOGeneralFachada.GetDemografiaPorId(idUsuario);
+                return await _cOContenidoBiz.FiltrarPublicacion(idCategoria, idTipoPublicacion, demografiaCor, precioMenor, precioMayor,
                 calificacionMenor, calificacionMayor);
             }
             catch(COExcepcion e)
@@ -240,7 +226,7 @@ namespace Fe.Dominio.contenido
             try
             {
                 DemografiaCor demografiaCor = _cOGeneralFachada.GetDemografiaPorId(favorito.Iddemografia);
-                ProductosServiciosPc publicacion = _cOContenidoBiz.GetPublicacionPorIdPublicacion(favorito.Idproductoservicio);
+                ProductosServiciosPc publicacion = await _cOContenidoBiz.GetPublicacionPorIdPublicacion(favorito.Idproductoservicio);
                 respuestaDatos = respuestaDatos = await _cOContenidoBiz.GuardarFavorito(favorito, demografiaCor, publicacion);
             }
             catch (COExcepcion e)
@@ -264,12 +250,12 @@ namespace Fe.Dominio.contenido
             return respuestaDatos;
         }
 
-        public List<ContratoPc> GetFavoritosPorIdDemografia(int idDemografia)
+        public async Task<List<ContratoPc>> GetFavoritosPorIdDemografia(int idDemografia)
         {
             try
             {
                 DemografiaCor demografiaCor = _cOGeneralFachada.GetDemografiaPorId(idDemografia);
-                return _cOContenidoBiz.GetFavoritosPorIdDemografia(demografiaCor);
+                return await _cOContenidoBiz.GetFavoritosPorIdDemografia(demografiaCor);
             }
             catch (COExcepcion e)
             {
@@ -306,12 +292,12 @@ namespace Fe.Dominio.contenido
             }
         }
 
-        public List<ContratoPc> GetPublicacionesPorIdUsuario(int idDemografia)
+        public async Task<List<ContratoPc>> GetPublicacionesPorIdUsuario(int idDemografia)
         {
             try
             {
                 DemografiaCor demografiaCor = _cOGeneralFachada.GetDemografiaPorId(idDemografia);
-                return _cOContenidoBiz.GetPublicacionesPorIdUsuario(demografiaCor);
+                return await _cOContenidoBiz.GetPublicacionesPorIdUsuario(demografiaCor);
             }
             catch (COExcepcion e)
             {
@@ -327,21 +313,29 @@ namespace Fe.Dominio.contenido
             }
         }
 
-        public List<ContratoPc> GetPublicacionesPorDescuento()
+        public async Task<List<ContratoPc>> GetPublicacionesPorDescuento(int idUsuario)
         {
-            return _cOContenidoBiz.GetPublicacionesPorDescuento();
+            try
+            {
+                DemografiaCor demografiaCor = _cOGeneralFachada.GetDemografiaPorId(idUsuario);
+                return await _cOContenidoBiz.GetPublicacionesPorDescuento(idUsuario, demografiaCor);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
         }
 
-        public List<ContratoPc> BuscarPublicacion(string nombre)
+        public async Task<List<ContratoPc>> BuscarPublicacion(string nombre)
         {
-            return _cOContenidoBiz.BuscarPublicacion(nombre);
+            return  await _cOContenidoBiz.BuscarPublicacion(nombre);
         }
-        public List<ContratoPc> GetPublicacionesHabilitadasTrueque(int idDemografia)
+        public async Task<List<ContratoPc>> GetPublicacionesHabilitadasTrueque(int idDemografia)
         {
             try
             {
                 DemografiaCor demografiaCor = _cOGeneralFachada.GetDemografiaPorId(idDemografia);
-                return _cOContenidoBiz.GetPublicacionesHabilitadasTrueque(demografiaCor);
+                return await _cOContenidoBiz.GetPublicacionesHabilitadasTrueque(demografiaCor);
             }
             catch (COExcepcion e)
             {

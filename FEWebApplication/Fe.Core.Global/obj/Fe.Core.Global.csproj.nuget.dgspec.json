@@ -56,6 +56,10 @@
               "target": "Package",
               "version": "[2.2.508, )"
             },
+            "Hangfire.AspNetCore": {
+              "target": "Package",
+              "version": "[1.7.24, )"
+            },
             "IdentityServer4": {
               "target": "Package",
               "version": "[4.1.2, )"
@@ -75,6 +79,14 @@
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.8, )"
+            },
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.SpaServices": {
+              "target": "Package",
+              "version": "[3.1.18, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -184,6 +196,10 @@
               "target": "Package",
               "version": "[2.2.508, )"
             },
+            "Hangfire.AspNetCore": {
+              "target": "Package",
+              "version": "[1.7.24, )"
+            },
             "IdentityServer4": {
               "target": "Package",
               "version": "[4.1.2, )"
@@ -203,6 +219,14 @@
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.8, )"
+            },
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.SpaServices": {
+              "target": "Package",
+              "version": "[3.1.18, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",

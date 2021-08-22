@@ -291,5 +291,49 @@ namespace Fe.Core.General
             }
             return respuestaDatos;
         }
+
+        public List<NotificacionesCor> GetNotificaciones()
+        {
+            return _cOGeneralBiz.GetNotificaciones();
+        }
+        
+        public List<NotificacionesCor> GetNotificacionesPorIdDemografia(int idDemografia)
+        {
+            return _cOGeneralBiz.GetNotificacionesPorIdDemografia(idDemografia);
+        }
+
+        public NotificacionesCor GetNotificacionPorIdNotificacion(int idNotificacion)
+        {
+            return _cOGeneralBiz.GetNotificacionPorIdNotificacion(idNotificacion);
+        }
+
+        public async Task<RespuestaDatos> GuardarNotificacion(NotificacionesCor notificacion)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                DemografiaCor demografiaCor = GetDemografiaPorId(notificacion.Idusuario);
+                respuestaDatos = respuestaDatos = await _cOGeneralBiz.GuardarNotificacion(notificacion, demografiaCor);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
+
+        public async Task<RespuestaDatos> RemoverNotificacion(int idNotificacion)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _cOGeneralBiz.RemoverNotificacion(idNotificacion);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
     }
 }

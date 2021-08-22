@@ -43,7 +43,7 @@ class _CartWidgetState extends State<CartWidget> {
                   Navigator.of(context).pushNamed('/Tabs', arguments: 1);
                 },
                 child: CircleAvatar(
-                  backgroundImage: AssetImage('img/user2.jpg'),
+                  backgroundImage: AssetImage('img/user3.jpg'),
                 ),
               )),
         ],

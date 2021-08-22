@@ -40,7 +40,10 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
     _infoUsuarioBloc = BlocProvider.of<InfoUsuarioBloc>(context);
     _cargarInfoUsuario();
     _cargarProductos();
+    _cargarPedidos();
   }
+
+  _cargarPedidos() async {}
 
   _cargarProductos() async {
     var lista = await _contenidoProvider.getPublicacionesPorIdDemografia(
@@ -62,11 +65,12 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
         listaServicios.add(lista[i]);
       }
     }
-    setState(() {
-      _productos = listaProductos;
-      _servicios = listaServicios;
-      _cargandoProductos = true;
-    });
+    if (mounted)
+      setState(() {
+        _productos = listaProductos;
+        _servicios = listaServicios;
+        _cargandoProductos = true;
+      });
   }
 
   void _cargarInfoUsuario() async {
@@ -144,6 +148,9 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
           ),
           _tabPrincipal(context),
           _userOrders(context),
+          _infoUsuarioBloc!.state.infoUsuarioModel!.rol == "Emprendedor"
+              ? _infoFacturacionEmprendedor(context)
+              : SizedBox(),
           _infoUsuarioBloc!.state.infoUsuarioModel!.rol == "Emprendedor"
               ? _infoProductosEmprendedores(context)
               : _infoUsuarios(context),
@@ -304,6 +311,109 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
               style: Theme.of(context).textTheme.body1,
             ),
           )
+        ],
+      ),
+    );
+  }
+
+  Widget _infoFacturacionEmprendedor(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      decoration: BoxDecoration(
+        color: Theme.of(context).primaryColor,
+        borderRadius: BorderRadius.circular(6),
+        boxShadow: [
+          BoxShadow(
+              color: Theme.of(context).hintColor.withOpacity(0.15),
+              offset: Offset(0, 3),
+              blurRadius: 10)
+        ],
+      ),
+      child: ListView(
+        shrinkWrap: true,
+        primary: false,
+        children: <Widget>[
+          ListTile(
+            leading: Icon(Icons.money_outlined),
+            title: Text(
+              'Mis ventas',
+              style: Theme.of(context).textTheme.body2,
+            ),
+            trailing: ButtonTheme(
+              padding: EdgeInsets.all(0),
+              minWidth: 50.0,
+              height: 25.0,
+              child: FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/Orders');
+                },
+                child: Text(
+                  "Ver todo",
+                  style: Theme.of(context).textTheme.body1,
+                ),
+              ),
+            ),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.of(context).pushNamed('/Orders');
+            },
+            dense: true,
+            title: Text(
+              'Facturadas',
+              style: Theme.of(context).textTheme.body1,
+            ),
+            trailing: Chip(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              backgroundColor: Colors.transparent,
+              shape: StadiumBorder(
+                  side: BorderSide(color: Theme.of(context).focusColor)),
+              label: Text(
+                '1',
+                style: TextStyle(color: Theme.of(context).focusColor),
+              ),
+            ),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.of(context).pushNamed('/Orders');
+            },
+            dense: true,
+            title: Text(
+              'Enviadas',
+              style: Theme.of(context).textTheme.body1,
+            ),
+            trailing: Chip(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              backgroundColor: Colors.transparent,
+              shape: StadiumBorder(
+                  side: BorderSide(color: Theme.of(context).focusColor)),
+              label: Text(
+                '5',
+                style: TextStyle(color: Theme.of(context).focusColor),
+              ),
+            ),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.of(context).pushNamed('/Orders');
+            },
+            dense: true,
+            title: Text(
+              'Entregadas',
+              style: Theme.of(context).textTheme.body1,
+            ),
+            trailing: Chip(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              backgroundColor: Colors.transparent,
+              shape: StadiumBorder(
+                  side: BorderSide(color: Theme.of(context).focusColor)),
+              label: Text(
+                '3',
+                style: TextStyle(color: Theme.of(context).focusColor),
+              ),
+            ),
+          ),
         ],
       ),
     );

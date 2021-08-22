@@ -332,11 +332,11 @@ namespace FEWebApplication.Controladores.Dominio.Pedido
         /// <param name="idUsuario">ID usuario del que se desean obtner todos sus pedidos</param>
         [Route("ListarTodosLosPedidosPorUsuario")]
         [HttpGet]
-        public List<ContratoPedidos> ListarTodosLosPedidosPorUsuario(int idUsuario)
+        public async Task<List<ContratoPedidos>> ListarTodosLosPedidosPorUsuario(int idUsuario)
         {
             try
             {
-                return _peFachada.ListarTodosLosPedidosPorUsuario(idUsuario);
+                return await _peFachada.ListarTodosLosPedidosPorUsuario(idUsuario);
             }
             catch (COExcepcion e)
             {

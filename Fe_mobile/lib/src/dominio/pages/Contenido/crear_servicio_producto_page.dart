@@ -10,10 +10,14 @@ import 'package:Fe_mobile/src/dominio/models/categoria_model.dart';
 import 'package:Fe_mobile/src/dominio/models/crear_publicacion_model.dart';
 import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:Fe_mobile/src/dominio/providers/contenido_provider.dart';
+import 'package:Fe_mobile/src/widgets/DrawerWidget.dart';
+import 'package:Fe_mobile/src/widgets/SearchBarWidget.dart';
 import 'package:Fe_mobile/src/widgets/ShoppingCartButtonWidget.dart';
 import 'package:Fe_mobile/src/widgets/check_box_form_field_widget.dart';
 import 'package:Fe_mobile/src/widgets/ver_imagen_widget.dart';
 import 'package:card_swiper/card_swiper.dart';
+import 'package:path/path.dart' as path;
+import 'package:dio/dio.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -37,8 +41,6 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
   int? _currentStep;
 
   TextEditingController dateCtl = TextEditingController();
-
-  List<File> listadoFotoProductos = [];
   List<CategoriaModel> _listCategoriaModel = [];
   List<StepManejadorModel> controlSteps = <StepManejadorModel>[];
   List<String> _tipoPublicacion = ["Producto", "Servicio"];
@@ -61,6 +63,8 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
 
   ButtonStyle? _styleButtonSiguiente;
 
+  File? documentoASubir;
+
   MediaQueryData? queryData;
   SwiperController? _scrollController;
 
@@ -72,6 +76,7 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
   bool checkboxValue = false;
   bool isShowImages = false;
   bool _isModifica = false;
+  bool isHayImagenSubida = false;
   late bool _isProducto;
 
   // TODO cambiar este dato para subir varias
@@ -121,36 +126,54 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.blue[100],
-        body: Stack(
-          children: <Widget>[
-            Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                margin: EdgeInsets.only(top: 80, bottom: 20),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Theme.of(context).primaryColor,
-                  boxShadow: [
-                    BoxShadow(
-                        color: Theme.of(context).hintColor.withOpacity(0.2),
-                        offset: Offset(0, 10),
-                        blurRadius: 20)
-                  ],
-                ),
-                child: WillPopScope(
-                    onWillPop: _onWillPop,
-                    child: Scaffold(
-                        key: _scaffoldKey,
-                        body: GestureDetector(
-                            behavior: HitTestBehavior.opaque,
-                            onPanDown: (_) {
-                              FocusScope.of(context).requestFocus(FocusNode());
-                            },
-                            child: _crearProducto(context)))))
-          ],
-        ));
+    return WillPopScope(
+        onWillPop: _onWillPop,
+        child: Scaffold(
+            key: _scaffoldKey,
+            drawer: DrawerWidget(),
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              // leading: new IconButton(
+              //   icon: new Icon(UiIcons.return_icon,
+              //       color: Theme.of(context).hintColor),
+              //   onPressed: () => Navigator.of(context).pop(),
+              // ),
+              leading: new IconButton(
+                icon: new Icon(Icons.sort, color: Theme.of(context).hintColor),
+                onPressed: () => _scaffoldKey.currentState!.openDrawer(),
+              ),
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              title: Text(
+                'Vender',
+                style: Theme.of(context).textTheme.headline4,
+              ),
+
+              actions: <Widget>[
+                new ShoppingCartButtonWidget(
+                    iconColor: Theme.of(context).hintColor,
+                    labelColor: Theme.of(context).accentColor),
+                Container(
+                    width: 30,
+                    height: 30,
+                    margin: EdgeInsets.only(top: 12.5, bottom: 12.5, right: 20),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(300),
+                      onTap: () {
+                        Navigator.of(context).pushNamed('/Tabs', arguments: 1);
+                      },
+                      child: CircleAvatar(
+                        backgroundImage: AssetImage('img/user3.jpg'),
+                      ),
+                    )),
+              ],
+            ),
+            body: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onPanDown: (_) {
+                  FocusScope.of(context).requestFocus(FocusNode());
+                },
+                child: _crearProducto(context))));
   }
 
   Future<bool> _onWillPop() async {
@@ -173,75 +196,6 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
           ),
         )) ??
         false);
-  }
-
-  Widget _createProductService(BuildContext context) {
-    queryData = MediaQuery.of(context);
-    var widthScreen = queryData!.size.width;
-    var heightScreen = queryData!.size.height;
-
-    return Container(
-        alignment: Alignment.center,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 45,
-            ),
-            Text("¿Qué quieres publicar?",
-                style: Theme.of(context).textTheme.headline3),
-            SizedBox(
-              height: 45,
-            ),
-            ClipOval(
-              child: Material(
-                color: Colors.blue[100], // Button color
-                child: InkWell(
-                  splashColor: Colors.limeAccent, // Splash color
-                  onTap: () {
-                    setState(() {});
-                    Timer(Duration(seconds: 1), () {
-                      setState(() {
-                        _isLoading = true;
-                      });
-                    });
-                  },
-                  child: SizedBox(
-                      width: heightScreen / 5.3,
-                      height: heightScreen / 5.3,
-                      child: Icon(Icons.watch,
-                          color: Colors.lightBlue, size: heightScreen / 12)),
-                ),
-              ),
-            ),
-            SizedBox(height: 10),
-            Text("Producto", style: Theme.of(context).textTheme.headline4),
-            SizedBox(height: 35),
-            ClipOval(
-              child: Material(
-                color: Colors.white, // Button color
-                child: InkWell(
-                  splashColor: Colors.limeAccent, // Splash color
-                  onTap: () {
-                    setState(() {});
-                    Timer(Duration(seconds: 1), () {
-                      setState(() {
-                        _isLoading = true;
-                      });
-                    });
-                  },
-                  child: SizedBox(
-                      width: heightScreen / 5.3,
-                      height: heightScreen / 5.3,
-                      child: Icon(Icons.dry_cleaning,
-                          color: Colors.lightBlue, size: heightScreen / 12)),
-                ),
-              ),
-            ),
-            SizedBox(height: 10),
-            Text("Servicio", style: Theme.of(context).textTheme.headline4)
-          ],
-        ));
   }
 
   _crearBotonSeleccionarGaleria(BuildContext context) {
@@ -274,7 +228,7 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
   }
 
   void _gestionFoto(BuildContext context, ImageSource typeOption) async {
-    if (listadoFotoProductos.length < LIMITE_IMAGENES) {
+    if (documentoASubir == null) {
       setState(() {
         isShowImages = false;
       });
@@ -282,7 +236,7 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
 
       if (foto != null) {
         File? croppedFile = await ImageCropper.cropImage(
-            sourcePath: foto?.path ?? '',
+            sourcePath: foto.path,
             aspectRatioPresets: [
               CropAspectRatioPreset.square,
               CropAspectRatioPreset.ratio3x2,
@@ -305,7 +259,7 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
 
         if (croppedFile != null) {
           setState(() {
-            listadoFotoProductos.add(croppedFile);
+            documentoASubir = croppedFile;
           });
           Timer(Duration(seconds: 2), () {
             setState(() {
@@ -313,7 +267,7 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
             });
           });
         } else {
-          if (listadoFotoProductos.length != 0)
+          if (documentoASubir != null)
             setState(() {
               isShowImages = true;
             });
@@ -325,68 +279,58 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
     }
   }
 
-  Widget _crearViewerImagenes(BuildContext context) {
-    return SizedBox(
+  Widget _crearViewerImagenes(BuildContext context) => SizedBox(
       child: isShowImages
-          ? new Swiper(
-              scrollDirection: Axis.horizontal,
-              pagination: new SwiperPagination(),
-              controller: _scrollController,
-              itemCount: listadoFotoProductos.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Stack(
-                    fit: StackFit.expand,
-                    alignment: Alignment.center,
-                    children: [
-                      // Image(
-                      //   fit: BoxFit.cover,
-                      //   image: AssetImage(listadoFotoEvidencia[index].path),
-                      // ),
-                      Image.file(listadoFotoProductos[index]),
-                      Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            ElevatedButton(
-                                style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            Colors.transparent)),
-                                onPressed: () {
-                                  _visualizarImagen(index);
-                                },
-                                child: Icon(Icons.more_horiz_sharp,
-                                    color: Colors.white))
-                          ])
-                    ]);
-              })
+          ? Stack(fit: StackFit.expand, alignment: Alignment.center, children: [
+              !isHayImagenSubida ? Image.file(documentoASubir!) : SizedBox(),
+              // Image(
+              //   fit: BoxFit.cover,
+              //   image: !isHayImagenSubida
+              //       ? AssetImage(documentoASubir.path)
+              //       : _getImagenEvidencia(),
+              // ),
+              Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+                !isHayImagenSubida
+                    ? ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                Colors.transparent)),
+                        onPressed: () {
+                          _visualizarImagen();
+                        },
+                        child:
+                            Icon(Icons.more_horiz_sharp, color: Colors.white))
+                    : SizedBox(height: 0)
+              ])
+            ])
           : SizedBox(height: 0.0),
-      height: listadoFotoProductos.length > 0 ? 300.0 : 20,
-    );
-  }
+      height: documentoASubir != null && !isHayImagenSubida
+          ? MediaQuery.of(context).size.height / 2.7
+          : isHayImagenSubida
+              ? MediaQuery.of(context).size.height / 1.5
+              : MediaQuery.of(context).size.height / 41);
 
-  _visualizarImagen(int index) {
+  _visualizarImagen() {
     try {
-      if (listadoFotoProductos.length > 0) {
-        File file = listadoFotoProductos[index];
+      if (documentoASubir != null) {
+        File file = documentoASubir!;
         Navigator.push(
             context,
             new MaterialPageRoute(
                 builder: (BuildContext context) => new VerImagenWidget(
-                    pathImage: file.path,
-                    indexImage: index,
-                    callback: callback)));
+                    pathImage: file.path, indexImage: 0, callback: callback)));
       }
     } catch (e) {}
   }
 
   callback(bool isDelete, int index) {
     if (isDelete) {
-      Navigator.of(context).pop();
+      //Navigator.pop();
       setState(() {
         isShowImages = false;
       });
       setState(() {
-        listadoFotoProductos.removeAt(index);
+        documentoASubir = null;
       });
       Timer(Duration(seconds: 2), () {
         setState(() {
@@ -448,13 +392,13 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
 
   Step _getFormFieldDatosBasicos() {
     return Step(
-      title: const Text(
+      title: Text(
         'Tipo de publicación',
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        style: Theme.of(context).textTheme.headline4,
       ),
       subtitle: Text(
         '¿ Que deseas vender ?',
-        style: TextStyle(fontSize: 15),
+        style: Theme.of(context).textTheme.headline6,
       ),
       isActive: true,
       state: controlSteps
@@ -501,13 +445,13 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
 
   Step _getFormFieldDatosTiempos() {
     return Step(
-        title: const Text(
+        title: Text(
           'Datos basicos',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          style: Theme.of(context).textTheme.headline4,
         ),
         subtitle: Text(
           'Diligencie los datos',
-          style: TextStyle(fontSize: 15),
+          style: Theme.of(context).textTheme.headline6,
         ),
         isActive: true,
         state: controlSteps
@@ -618,13 +562,13 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
 
   Step _getFormFieldPrecios() {
     return Step(
-        title: const Text(
+        title: Text(
           'Precio',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          style: Theme.of(context).textTheme.headline4,
         ),
         subtitle: Text(
           'Diligencie los datos',
-          style: TextStyle(fontSize: 15),
+          style: Theme.of(context).textTheme.headline6,
         ),
         isActive: true,
         state: controlSteps
@@ -704,13 +648,13 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
 
   Step _getFormFieldImagen() {
     return Step(
-        title: const Text(
+        title: Text(
           'Imagenes',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          style: Theme.of(context).textTheme.headline4,
         ),
         subtitle: Text(
           'Adjunte las images de su producto',
-          style: TextStyle(fontSize: 15),
+          style: Theme.of(context).textTheme.headline6,
         ),
         isActive: true,
         state: controlSteps
@@ -790,7 +734,7 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
         if (_formImagen.currentState!.validate()) {
           setState(() {
             stepManejador.stepEstado = StepState.complete;
-            if (listadoFotoProductos.length != 0) {
+            if (documentoASubir != null) {
               _registrarProducto(context);
             } else {
               AlertUtil.error(context, '¡No has anexado imagenes!');
@@ -854,29 +798,48 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
       _formPrecio.currentState!.save();
       _formImagen.currentState!.save();
 
+      if (documentoASubir == null) {
+        AlertUtil.error(context, "Por favor cargue una imagen. ");
+        //setState(() {
+        //   isEntregandoEvidencia = false;
+        // });
+        return;
+      }
+
+      List<MultipartFile> listadoFotoProductos = [];
+      listadoFotoProductos.add(await MultipartFile.fromFile(
+          documentoASubir!.path,
+          filename: path.basename(documentoASubir!.path)));
+
       var idUsuario = await _prefs.getPrefStr("id");
       _crearPublicacionModel.idusuario = int.parse(idUsuario!);
       _crearPublicacionModel.tiempoentrega = DateTime.now();
       _crearPublicacionModel.tiempogarantia = DateTime.now();
       _crearPublicacionModel.urlimagenproductoservicio = "";
 
-      _crearPublicacionModel.idtipopublicacion == 2
-          ? _crearPublicacionModel.cantidadtotal = 0
-          : null;
+      if (_crearPublicacionModel.idtipopublicacion == 2)
+        _crearPublicacionModel.cantidadtotal = 0;
 
-      // Map<String, dynamic> data = {
-      //   "Idcategoria": _crearPublicacionModel.idusuario,
-      //   "Idtipopublicacion": _documento!.idVehiculoTransportista,
-      //   "Idusuario": _documento!.tipoDocumento,
-      //   "Nombre": listadoDeImagenesMP
-      // };
+      if (_crearPublicacionModel.habilitatrueque == null)
+        _crearPublicacionModel.habilitatrueque = 0;
+
+      Map<String, dynamic> data = {
+        "Idcategoria": _crearPublicacionModel.idcategoria,
+        "Idtipopublicacion": _crearPublicacionModel.idtipopublicacion,
+        "Idusuario": _crearPublicacionModel.idusuario,
+        "Descripcion": _crearPublicacionModel.descripcion,
+        "Cantidad": _crearPublicacionModel.cantidadtotal,
+        "Precio": _crearPublicacionModel.preciounitario,
+        "Descuento": _crearPublicacionModel.descuento,
+        "Trueque": _crearPublicacionModel.habilitatrueque,
+        "Nombre": _crearPublicacionModel.nombre,
+        "files": listadoFotoProductos
+      };
 
       setState(() {
         _isLoading = true;
       });
-      _contenidoProvider
-          .guardarPublicacion(_crearPublicacionModel, context)
-          .then((value) {
+      _contenidoProvider.guardarPublicacion(data, context).then((value) {
         RespuestaDatosModel? respuesta = value;
         if (respuesta?.codigo == 10) {
           final funcionNavegar = () {

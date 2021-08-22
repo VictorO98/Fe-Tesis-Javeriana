@@ -33,6 +33,10 @@ using Microsoft.OpenApi.Models;
 using System.IO;
 using System;
 using Fe.Core.Global.Errores;
+using Fe.Servidor.Integracion.Mensajes.DotLiquid;
+using Fe.Servidor.Integracion.Email;
+using NETCore.MailKit.Extensions;
+using NETCore.MailKit.Infrastructure.Internal;
 
 namespace FEWebApplication
 {
@@ -68,6 +72,7 @@ namespace FEWebApplication
             });
 
             //Configurar Email
+            services.AddMailKit(config => config.UseMailKit(Configuration.GetSection("Email").Get<MailKitOptions>()));
 
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationUserDbContext>()
@@ -132,14 +137,18 @@ namespace FEWebApplication
             services.AddScoped<RepoPyR>();
             services.AddScoped<RepoTrueque>();
             services.AddScoped<RepoTruequeDetalle>();
-
+            services.AddScoped<RepoNotificacion>();
 
             services.AddScoped<RepoDemografiaReportada>();
             services.AddScoped<RepoRazonSocial>();
             services.AddScoped<RepoFavorito>();
-
             services.AddScoped<RepoProdSerXVendidosPed>();
             services.AddScoped<RepoPedidosPed>();
+
+            services.AddScoped<RepoTemplateMensaje>();
+
+            services.AddScoped<WorkflowMensaje>();
+            services.AddScoped<EmailSender>();
 
 
             services.AddRazorPages();
@@ -186,6 +195,20 @@ namespace FEWebApplication
             {
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
+            });
+
+            app.UseSpa(spa =>
+            {
+                if (env.IsDevelopment())
+                    spa.Options.SourcePath = "ClientApp/";
+                else
+                    spa.Options.SourcePath = "dist";
+
+                /*if (env.IsDevelopment())
+                {
+                    spa.UseVueCli(npmScript: "serve");
+                }*/
+
             });
         }
     }

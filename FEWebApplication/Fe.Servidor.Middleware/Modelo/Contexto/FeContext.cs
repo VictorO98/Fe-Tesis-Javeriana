@@ -48,6 +48,7 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
         public virtual DbSet<RazonSocialCor> RazonSocialCors { get; set; }
         public virtual DbSet<ResenasPc> ResenasPcs { get; set; }
         public virtual DbSet<RolCor> RolCors { get; set; }
+        public virtual DbSet<TemplateMensajeCor> TemplateMensajeCors { get; set; }
         public virtual DbSet<TipoDocumentoCor> TipoDocumentoCors { get; set; }
         public virtual DbSet<TipoPublicacionPc> TipoPublicacionPcs { get; set; }
         public virtual DbSet<TruequesPedidoTrue> TruequesPedidoTrues { get; set; }
@@ -893,6 +894,27 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                 entity.Property(e => e.Nombre)
                     .HasMaxLength(30)
                     .HasColumnName("nombre");
+            });
+
+            modelBuilder.Entity<TemplateMensajeCor>(entity =>
+            {
+                entity.HasKey(e => e.Codigo)
+                    .HasName("template_mensaje_cor_pkey");
+
+                entity.ToTable("template_mensaje_cor");
+
+                entity.Property(e => e.Codigo)
+                    .HasMaxLength(50)
+                    .HasColumnName("codigo");
+
+                entity.Property(e => e.Contenido)
+                    .IsRequired()
+                    .HasColumnName("contenido");
+
+                entity.Property(e => e.Subject)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .HasColumnName("subject");
             });
 
             modelBuilder.Entity<TipoDocumentoCor>(entity =>

@@ -169,14 +169,13 @@
             <returns>Respuesta de datos verificando que se realizó la inserción de la categoría.</returns>
             <param name="categoria">Categoría que se desea almacernar en la base de datos.</param>
         </member>
-        <member name="M:FEWebApplication.Controladores.Dominio.Contenido.COContenidoController.GuardarPublicacion(Fe.Servidor.Middleware.Modelo.Entidades.ProductosServiciosPc)">
+        <member name="M:FEWebApplication.Controladores.Dominio.Contenido.COContenidoController.GuardarPublicacion(Microsoft.AspNetCore.Http.IFormCollection)">
             <summary>
             Almacena la publicación en la BD.
             </summary>
             <returns>Respuesta de datos verificando que se realizó la inserción de la publicación.</returns>
-            <param name="productosServicios">Publicación que se desea almacenar en la base de datos.</param>
         </member>
-        <member name="M:FEWebApplication.Controladores.Dominio.Contenido.COContenidoController.GetImagenProdcuto(System.Int32,System.Int32)">
+        <member name="M:FEWebApplication.Controladores.Dominio.Contenido.COContenidoController.GetImagenProdcuto(System.Int32)">
             <summary>
             Busca las imagens de los productos por su ID.
             </summary>
@@ -265,7 +264,7 @@
             <returns>La publicación con sus reseñas, preguntas y respuestas, categoría y tipo de publicación.</returns>
             <param name="idPublicacion">El id de la publicación a desplegar.</param>
         </member>
-        <member name="M:FEWebApplication.Controladores.Dominio.Contenido.COContenidoController.FiltrarPublicacion(System.Int32,System.Int32,System.Decimal,System.Decimal,System.Decimal,System.Decimal)">
+        <member name="M:FEWebApplication.Controladores.Dominio.Contenido.COContenidoController.FiltrarPublicacion(System.Int32,System.Int32,System.Int32,System.Decimal,System.Decimal,System.Decimal,System.Decimal)">
             <summary>
             Filtra todas las publicaciones que correspondan a los parámetros dados y los entrega.
             </summary>
@@ -276,7 +275,6 @@
             <param name="precioMayor">El límite superior del precio de las publicaciones a filtrar.</param>
             <param name="calificacionMenor">El límite inferior de la calificación de las publicaciones a filtrar.</param>
             <param name="calificacionMayor">El límite superior de la calificación de las publicaciones a filtrar.</param>
-            
         </member>
         <member name="M:FEWebApplication.Controladores.Dominio.Contenido.COContenidoController.GuardarFavorito(Fe.Servidor.Middleware.Modelo.Entidades.ProductosFavoritosDemografiaPc)">
             <summary>
@@ -314,7 +312,7 @@
             <returns>Una lista de publicaciones con sus reseñas, preguntas y respuestas, categoría y tipo de publicación.</returns>
             <param name="idDemografia">El id del usuario para obtener sus publicaciones.</param>
         </member>
-        <member name="M:FEWebApplication.Controladores.Dominio.Contenido.COContenidoController.GetPublicacionesPorDescuento">
+        <member name="M:FEWebApplication.Controladores.Dominio.Contenido.COContenidoController.GetPublicacionesPorDescuento(System.Int32)">
             <summary>
             Obtiene todas las publicaciones que contengan descuentos.
             </summary>
@@ -326,6 +324,13 @@
             </summary>
             <returns>Una lista de publicaciones con sus reseñas, preguntas y respuestas, categoría y tipo de publicación.</returns>
             <param name="nombre">El nombre de las publicaciones a filtrar.</param>
+        </member>
+        <member name="M:FEWebApplication.Controladores.Dominio.Contenido.COContenidoController.GetPublicacionesHabilitadasTrueque(System.Int32)">
+            <summary>
+            Retorna una lista con las publicaciones que tienen el truque habilitado
+            </summary>
+            <returns>Lista de publicaciones con trueque habilitado</returns>
+            <param name="idDemografia">ID del usuario que se desea obtener sus pubicaciones con truque habilitado</param>
         </member>
         <member name="T:FEWebApplication.Controladores.Dominio.Pedido.PEPedidoController">
             <summary>
