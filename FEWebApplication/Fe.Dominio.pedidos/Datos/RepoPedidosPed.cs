@@ -24,7 +24,8 @@ namespace Fe.Dominio.pedidos.Datos
             {
                 context.Add(pedido);
                 context.SaveChanges();
-                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "Pedido creado exitosamente." };
+                int idPedido = pedido.Id;
+                respuestaDatos = new RespuestaDatos { Codigo = idPedido, Mensaje = "Pedido creado exitosamente." };
             }
             catch (Exception e)
             {
