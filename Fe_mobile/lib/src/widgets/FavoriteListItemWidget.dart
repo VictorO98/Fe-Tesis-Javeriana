@@ -1,4 +1,5 @@
 import 'package:Fe_mobile/config/ui_icons.dart';
+import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:Fe_mobile/src/models/product.dart';
 import 'package:Fe_mobile/src/models/route_argument.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,7 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class FavoriteListItemWidget extends StatefulWidget {
   String? heroTag;
-  Product? product;
+  ProductoServicioModel? product;
   VoidCallback? onDismissed;
 
   FavoriteListItemWidget(
@@ -44,7 +45,7 @@ class _FavoriteListItemWidgetState extends State<FavoriteListItemWidget> {
         // Then show a snackbar.
         Scaffold.of(context).showSnackBar(SnackBar(
             content: Text(
-                "The ${widget.product!.name} product is removed from wish list")));
+                "The ${widget.product!.nombre} product is removed from wish list")));
       },
       child: InkWell(
         splashColor: Theme.of(context).accentColor,
@@ -71,15 +72,17 @@ class _FavoriteListItemWidgetState extends State<FavoriteListItemWidget> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Hero(
-                tag: widget.heroTag! + widget.product!.id,
+                tag: widget.heroTag! + widget.product!.id.toString(),
                 child: Container(
                   height: 60,
                   width: 60,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(5)),
                     image: DecorationImage(
-                        image: AssetImage(widget.product!.image),
-                        fit: BoxFit.cover),
+                      image: NetworkImage(
+                          widget.product!.urlimagenproductoservicio.toString()),
+                      fit: BoxFit.fill,
+                    ),
                   ),
                 ),
               ),
@@ -93,7 +96,7 @@ class _FavoriteListItemWidgetState extends State<FavoriteListItemWidget> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            widget.product!.name,
+                            widget.product!.nombre!,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
                             style: Theme.of(context).textTheme.subhead,
@@ -102,7 +105,9 @@ class _FavoriteListItemWidgetState extends State<FavoriteListItemWidget> {
                             children: <Widget>[
                               // The title of the product
                               Text(
-                                '${widget.product!.sales} Sales',
+                                // TODO: AComodar esta vaina de las ventas
+                                // '${widget.product!.v} Ventas',
+                                '95 ventas',
                                 style: Theme.of(context).textTheme.body1,
                                 overflow: TextOverflow.fade,
                                 softWrap: false,
@@ -114,7 +119,7 @@ class _FavoriteListItemWidgetState extends State<FavoriteListItemWidget> {
                                 size: 18,
                               ),
                               Text(
-                                widget.product!.rate.toString(),
+                                widget.product!.calificacionpromedio.toString(),
                                 style: Theme.of(context).textTheme.body2,
                               )
                             ],
@@ -124,7 +129,7 @@ class _FavoriteListItemWidgetState extends State<FavoriteListItemWidget> {
                       ),
                     ),
                     SizedBox(width: 8),
-                    Text(widget.product!.getPrice(),
+                    Text(widget.product!.preciounitario.toString(),
                         style: Theme.of(context).textTheme.display1),
                   ],
                 ),

@@ -5,11 +5,16 @@
       <h5>
         <b> CONFIRMAR CUENTA </b>
       </h5>
-      <b>Bienvenido a {{title}}, haga click en el siguiente botón para confirmar la cuenta. </b>
+      <b
+        >Bienvenido a {{ title }}, haga click en el siguiente botón para
+        confirmar la cuenta.
+      </b>
       <p>Email: {{ obj.email }}</p>
       <br />
       <loading v-model:active="isLoading" :can-cancel="true" />
-        <button @click="onSubmit" class="submit-btn" type="submit">CONFIRMAR CUENTA</button>
+      <button @click="onSubmit" class="submit-btn" type="submit">
+        CONFIRMAR CUENTA
+      </button>
     </div>
   </div>
 </template>
@@ -22,7 +27,7 @@ import { useRoute } from "vue-router";
 import * as Services from "../util/services";
 
 export default {
-  name: "ConfirmarCuenta",  
+  name: "ConfirmarCuenta",
 
   components: {
     Loading,
@@ -36,31 +41,32 @@ export default {
 
     function onSubmit(values) {
       form = Object.assign(values, {
-        code: route.params.token.join("/"), 
+        code: route.params.token.join("/"),
         email: obj.email,
       });
       isLoading.value = true;
-      
-      Services.post("/api/Authenticate/ConfirmarCuenta", form).then(data=>{
-        if(data?.data.codigo==10)
-          alert(data.data.mensaje);
-        
-      }).catch(err=>{
-        if(err.response.data?.codigo==20){
-          alert("ERROR: " +err.response.data.mensaje);
-        }else{
-          alert("OCURRIÓ UN ERROR")
-        }
-      }).finally(()=>{
-         isLoading.value = false;
-      });
+
+      Services.post("/api/Authenticate/ConfirmarCuenta", form)
+        .then((data) => {
+          if (data?.data.codigo == 10) alert(data.data.mensaje);
+        })
+        .catch((err) => {
+          if (err.response.data?.codigo == 20) {
+            alert("ERROR: " + err.response.data.mensaje);
+          } else {
+            alert("OCURRIÓ UN ERROR");
+          }
+        })
+        .finally(() => {
+          isLoading.value = false;
+        });
     }
 
     return {
       onSubmit,
       obj,
       isLoading,
-      title
+      title,
     };
   },
 };
@@ -72,7 +78,7 @@ export default {
 }
 
 :root {
-  --primary-color: #0071fe;
+  --primary-color: #0091a7;
   --error-color: #f23648;
   --error-bg-color: #fddfe2;
   --success-color: #21a67a;
@@ -110,8 +116,10 @@ form {
   font-size: 18px;
   padding: 10px 15px;
   display: block;
-  width: 100%;
-  border-radius: 7px;
+  width: 30%;
+  position: absolute;
+  border-radius: 20px;
+  left: 36%;
   margin-top: 40px;
   transition: transform 0.3s ease-in-out;
   cursor: pointer;

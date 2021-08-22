@@ -75,30 +75,30 @@ class _ProductsByCategoryWidgetState extends State<ProductsByCategoryWidget> {
             ),
           ),
         ),
-        Offstage(
-          offstage: this.layout != 'list',
-          child: ListView.separated(
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            primary: false,
-            itemCount: widget.subCategory!.products.length,
-            separatorBuilder: (context, index) {
-              return SizedBox(height: 10);
-            },
-            itemBuilder: (context, index) {
-              // TODO replace with products list item
-              return FavoriteListItemWidget(
-                heroTag: 'products_by_category_list',
-                product: widget.subCategory!.products.elementAt(index),
-                onDismissed: () {
-                  setState(() {
-                    widget.subCategory!.products.removeAt(index);
-                  });
-                },
-              );
-            },
-          ),
-        ),
+        // Offstage(
+        //   offstage: this.layout != 'list',
+        //   child: ListView.separated(
+        //     scrollDirection: Axis.vertical,
+        //     shrinkWrap: true,
+        //     primary: false,
+        //     itemCount: widget.subCategory!.products.length,
+        //     separatorBuilder: (context, index) {
+        //       return SizedBox(height: 10);
+        //     },
+        //     itemBuilder: (context, index) {
+        //       // TODO replace with products list item
+        //       return FavoriteListItemWidget(
+        //         heroTag: 'products_by_category_list',
+        //         product: widget.subCategory!.products.elementAt(index),
+        //         onDismissed: () {
+        //           setState(() {
+        //             widget.subCategory!.products.removeAt(index);
+        //           });
+        //         },
+        //       );
+        //     },
+        //   ),
+        // ),
 //         Offstage(
 //           offstage: this.layout != 'grid',
 //           child: Container(

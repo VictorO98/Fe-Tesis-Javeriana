@@ -5,7 +5,7 @@ import 'package:Fe_mobile/src/dominio/pages/trueques/ofertar_trueque_page.dart';
 import 'package:Fe_mobile/src/models/route_argument.dart';
 import 'package:Fe_mobile/src/screens/brand.dart';
 import 'package:Fe_mobile/src/screens/brands.dart';
-import 'package:Fe_mobile/src/screens/cart.dart';
+import 'package:Fe_mobile/src/dominio/pages/carrito/carrito_compras_page.dart';
 import 'package:Fe_mobile/src/screens/categories.dart';
 import 'package:Fe_mobile/src/screens/category.dart';
 import 'package:Fe_mobile/src/screens/checkout.dart';

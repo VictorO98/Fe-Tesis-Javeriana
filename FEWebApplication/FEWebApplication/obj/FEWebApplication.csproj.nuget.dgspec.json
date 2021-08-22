@@ -57,7 +57,7 @@
             },
             "DotLiquid": {
               "target": "Package",
-              "version": "[2.2.508, )"
+              "version": "[2.2.541, )"
             },
             "Hangfire.AspNetCore": {
               "target": "Package",
@@ -73,7 +73,7 @@
             },
             "MailKit": {
               "target": "Package",
-              "version": "[2.13.0, )"
+              "version": "[2.15.0, )"
             },
             "Microsoft.AspNet.Mvc": {
               "target": "Package",
@@ -81,7 +81,7 @@
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.AspNetCore.Mvc": {
               "target": "Package",
@@ -93,23 +93,23 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.NETCore.App": {
               "target": "Package",
@@ -201,7 +201,7 @@
             },
             "DotLiquid": {
               "target": "Package",
-              "version": "[2.2.508, )"
+              "version": "[2.2.541, )"
             },
             "Hangfire.AspNetCore": {
               "target": "Package",
@@ -217,7 +217,7 @@
             },
             "MailKit": {
               "target": "Package",
-              "version": "[2.13.0, )"
+              "version": "[2.15.0, )"
             },
             "Microsoft.AspNet.Mvc": {
               "target": "Package",
@@ -225,7 +225,7 @@
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.AspNetCore.Mvc": {
               "target": "Package",
@@ -237,23 +237,23 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.NETCore.App": {
               "target": "Package",
@@ -351,7 +351,7 @@
             },
             "DotLiquid": {
               "target": "Package",
-              "version": "[2.2.508, )"
+              "version": "[2.2.541, )"
             },
             "Hangfire.AspNetCore": {
               "target": "Package",
@@ -367,7 +367,7 @@
             },
             "MailKit": {
               "target": "Package",
-              "version": "[2.13.0, )"
+              "version": "[2.15.0, )"
             },
             "Microsoft.AspNet.Mvc": {
               "target": "Package",
@@ -375,7 +375,7 @@
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.AspNetCore.Mvc": {
               "target": "Package",
@@ -387,17 +387,17 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "NETCore.MailKit": {
               "target": "Package",
@@ -483,7 +483,7 @@
             },
             "DotLiquid": {
               "target": "Package",
-              "version": "[2.2.508, )"
+              "version": "[2.2.541, )"
             },
             "Hangfire.AspNetCore": {
               "target": "Package",
@@ -499,7 +499,7 @@
             },
             "MailKit": {
               "target": "Package",
-              "version": "[2.13.0, )"
+              "version": "[2.15.0, )"
             },
             "Microsoft.AspNet.Mvc": {
               "target": "Package",
@@ -507,7 +507,7 @@
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.AspNetCore.Mvc": {
               "target": "Package",
@@ -519,23 +519,23 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.NETCore.App": {
               "target": "Package",
@@ -623,7 +623,7 @@
             },
             "DotLiquid": {
               "target": "Package",
-              "version": "[2.2.508, )"
+              "version": "[2.2.541, )"
             },
             "Hangfire.AspNetCore": {
               "target": "Package",
@@ -639,7 +639,7 @@
             },
             "MailKit": {
               "target": "Package",
-              "version": "[2.13.0, )"
+              "version": "[2.15.0, )"
             },
             "Microsoft.AspNet.Mvc": {
               "target": "Package",
@@ -647,7 +647,7 @@
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.AspNetCore.Mvc": {
               "target": "Package",
@@ -659,23 +659,23 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.NETCore.App": {
               "target": "Package",
@@ -763,7 +763,7 @@
             },
             "DotLiquid": {
               "target": "Package",
-              "version": "[2.2.508, )"
+              "version": "[2.2.541, )"
             },
             "Hangfire.AspNetCore": {
               "target": "Package",
@@ -779,7 +779,7 @@
             },
             "MailKit": {
               "target": "Package",
-              "version": "[2.13.0, )"
+              "version": "[2.15.0, )"
             },
             "Microsoft.AspNet.Mvc": {
               "target": "Package",
@@ -787,7 +787,7 @@
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.AspNetCore.Mvc": {
               "target": "Package",
@@ -799,23 +799,23 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.NETCore.App": {
               "target": "Package",
@@ -913,7 +913,7 @@
             },
             "DotLiquid": {
               "target": "Package",
-              "version": "[2.2.508, )"
+              "version": "[2.2.541, )"
             },
             "Hangfire.AspNetCore": {
               "target": "Package",
@@ -929,7 +929,7 @@
             },
             "MailKit": {
               "target": "Package",
-              "version": "[2.13.0, )"
+              "version": "[2.15.0, )"
             },
             "Microsoft.AspNet.Mvc": {
               "target": "Package",
@@ -937,7 +937,7 @@
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.AspNetCore.Mvc": {
               "target": "Package",
@@ -949,23 +949,23 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.NETCore.App": {
               "target": "Package",
@@ -1063,7 +1063,7 @@
             },
             "DotLiquid": {
               "target": "Package",
-              "version": "[2.2.508, )"
+              "version": "[2.2.541, )"
             },
             "Hangfire.AspNetCore": {
               "target": "Package",
@@ -1079,7 +1079,7 @@
             },
             "MailKit": {
               "target": "Package",
-              "version": "[2.13.0, )"
+              "version": "[2.15.0, )"
             },
             "Microsoft.AspNet.Mvc": {
               "target": "Package",
@@ -1087,7 +1087,7 @@
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.AspNetCore.Mvc": {
               "target": "Package",
@@ -1099,23 +1099,23 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.NETCore.App": {
               "target": "Package",
@@ -1202,7 +1202,7 @@
           "dependencies": {
             "DotLiquid": {
               "target": "Package",
-              "version": "[2.2.508, )"
+              "version": "[2.2.541, )"
             },
             "Hangfire.AspNetCore": {
               "target": "Package",
@@ -1210,7 +1210,7 @@
             },
             "MailKit": {
               "target": "Package",
-              "version": "[2.13.0, )"
+              "version": "[2.15.0, )"
             },
             "Microsoft.AspNetCore.Mvc": {
               "target": "Package",
@@ -1222,7 +1222,7 @@
             },
             "MimeKit": {
               "target": "Package",
-              "version": "[2.14.0, )"
+              "version": "[2.15.0, )"
             }
           },
           "imports": [
@@ -1290,7 +1290,7 @@
             },
             "DotLiquid": {
               "target": "Package",
-              "version": "[2.2.508, )"
+              "version": "[2.2.541, )"
             },
             "Hangfire.AspNetCore": {
               "target": "Package",
@@ -1306,7 +1306,7 @@
             },
             "MailKit": {
               "target": "Package",
-              "version": "[2.13.0, )"
+              "version": "[2.15.0, )"
             },
             "Microsoft.AspNet.Mvc": {
               "target": "Package",
@@ -1314,7 +1314,7 @@
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.AspNetCore.Mvc": {
               "target": "Package",
@@ -1326,23 +1326,23 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.NETCore.App": {
               "target": "Package",
@@ -1461,7 +1461,7 @@
             },
             "DotLiquid": {
               "target": "Package",
-              "version": "[2.2.508, )"
+              "version": "[2.2.541, )"
             },
             "Hangfire.AspNetCore": {
               "target": "Package",
@@ -1477,7 +1477,7 @@
             },
             "MailKit": {
               "target": "Package",
-              "version": "[2.13.0, )"
+              "version": "[2.15.0, )"
             },
             "Microsoft.AspNet.Mvc": {
               "target": "Package",
@@ -1485,7 +1485,7 @@
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.AspNetCore.Mvc": {
               "target": "Package",
@@ -1501,23 +1501,23 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.NETCore.App": {
               "target": "Package",
@@ -1537,7 +1537,11 @@
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.1.4, )"
+              "version": "[6.1.5, )"
+            },
+            "VueCliMiddleware": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             },
             "ePayco.Net": {
               "target": "Package",

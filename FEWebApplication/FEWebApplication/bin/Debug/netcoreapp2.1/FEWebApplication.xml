@@ -143,6 +143,40 @@
             <returns>Respuesta de datos verificando que se realizó la elimicación de la razón social de la base de datos</returns>
             <param name="idRazonSocial">Razón social que se desea eliminar</param>
         </member>
+        <member name="M:FEWebApplication.Controladores.Core.COGeneralController.GetNotificaciones">
+            <summary>
+            Obtiene todas las notificaciones de la base de datos
+            </summary>
+            <returns>Lista con todas las notificaciones de la base de datos</returns>
+        </member>
+        <member name="M:FEWebApplication.Controladores.Core.COGeneralController.GetNotificacionesPorIdDemografia(System.Int32)">
+            <summary>
+            Obtiene todas las notificaciones asociadas a un usuario de la base de datos
+            </summary>
+            <returns>Lista con todas las notificaciones asociadas a un usuario de la base de datos</returns>
+            <param name="idDemografia">Id de la demografía que se desea modificar</param>
+        </member>
+        <member name="M:FEWebApplication.Controladores.Core.COGeneralController.GetNotificacionPorIdNotificacion(System.Int32)">
+            <summary>
+            Obtiene una notificación asociada a un id de la base de datos
+            </summary>
+            <returns>Notificación asociada a un id de la base de datos</returns>
+            <param name="idNotificacion">Id de la notificación que se desea modificar</param>
+        </member>
+        <member name="M:FEWebApplication.Controladores.Core.COGeneralController.GuardarNotificacion(Fe.Servidor.Middleware.Modelo.Entidades.NotificacionesCor)">
+            <summary>
+            Almacena la notificación en la base de datos
+            </summary>
+            <returns>Respuesta de datos verificando que se realizó la inserción de la notificación en la base de datos</returns>
+            <param name="notificacion">Notificación que se desea almacenar</param>
+        </member>
+        <member name="M:FEWebApplication.Controladores.Core.COGeneralController.RemoverNotificacion(System.Int32)">
+            <summary>
+            Elimina la notificación de la base de datos
+            </summary>
+            <returns>Respuesta de datos verificando que se realizó la elimicación de la notificación de la base de datos</returns>
+            <param name="idNotificacion">Notificación que se desea eliminar</param>
+        </member>
         <member name="T:FEWebApplication.Controladores.Dominio.Contenido.COContenidoController">
             <summary>
             Servicios para guardar, modificar, borrar o leer publicaciones

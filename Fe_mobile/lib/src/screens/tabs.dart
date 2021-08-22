@@ -1,7 +1,7 @@
 import 'package:Fe_mobile/config/ui_icons.dart';
 import 'package:Fe_mobile/src/core/pages/usuario/perfil_usuario_page.dart';
 import 'package:Fe_mobile/src/screens/chat.dart';
-import 'package:Fe_mobile/src/screens/favorites.dart';
+import 'package:Fe_mobile/src/dominio/pages/contenido/favoritos_usuario_page.dart';
 import 'package:Fe_mobile/src/dominio/pages/Contenido/contenido_home_page.dart';
 import 'package:Fe_mobile/src/screens/messages.dart';
 import 'package:Fe_mobile/src/screens/notifications.dart';
@@ -66,7 +66,7 @@ class _TabsWidgetState extends State<TabsWidget> {
           break;
         case 4:
           widget.currentTitle = 'Favorites';
-          widget.currentPage = FavoritesWidget();
+          widget.currentPage = FavoritosUsuarioPage();
           break;
         case 5:
           widget.selectedTab = 3;

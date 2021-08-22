@@ -1,6 +1,9 @@
 import 'package:Fe_mobile/config/ui_icons.dart';
 import 'package:Fe_mobile/src/core/util/preferencias_util.dart';
+import 'package:Fe_mobile/src/dominio/models/carrito_compras_model.dart';
+import 'package:Fe_mobile/src/dominio/models/guardar_favorito_model.dart';
 import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
+import 'package:Fe_mobile/src/dominio/providers/contenido_provider.dart';
 import 'package:Fe_mobile/src/models/product.dart';
 import 'package:Fe_mobile/src/models/route_argument.dart';
 import 'package:Fe_mobile/src/widgets/DrawerWidget.dart';
@@ -28,11 +31,21 @@ class _ProductoDetallePageState extends State<ProductoDetallePage>
     with SingleTickerProviderStateMixin {
   TabController? _tabController;
 
+  ContenidoProvider _contenidoProvider = new ContenidoProvider();
+
+  GuardarPublicacionFavoritaModel guardarPublicacionFavorita =
+      new GuardarPublicacionFavoritaModel();
+
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final _prefs = new PreferenciasUtil();
+  final _carrito = CarritoComprasModel();
 
   int _tabIndex = 0;
+  int _cantidadSeleccionada = 1;
+  String? idUsuario;
   String? idRoleUsuario;
+
+  bool _guardadoFavorito = false;
 
   @override
   void initState() {
@@ -44,9 +57,11 @@ class _ProductoDetallePageState extends State<ProductoDetallePage>
   }
 
   _initialConfiguration() async {
+    var idU = await _prefs.getPrefStr("id");
     var id = await _prefs.getPrefStr("roles");
     setState(() {
       idRoleUsuario = id!;
+      idUsuario = idU!;
     });
   }
 
@@ -84,23 +99,34 @@ class _ProductoDetallePageState extends State<ProductoDetallePage>
             Expanded(
               child: FlatButton(
                   onPressed: () {
-                    setState(() {
-//                      this.cartCount += this.quantity;
-                    });
+                    // TODO: Falta quitar la repetidera de agregar multiples favoritos
+                    guardarPublicacionFavorita.iddemografia =
+                        int.parse(idUsuario!);
+                    guardarPublicacionFavorita.idproductoservicio =
+                        widget._product!.id!;
+                    if (!_guardadoFavorito)
+                      _guardarPublicacionFavorita(context);
                   },
                   padding: EdgeInsets.symmetric(vertical: 14),
                   color: Theme.of(context).accentColor,
                   shape: StadiumBorder(),
-                  child: Icon(
-                    Icons.favorite_border_outlined,
-                    color: Theme.of(context).primaryColor,
-                  )),
+                  child: !_guardadoFavorito
+                      ? Icon(
+                          Icons.favorite_border_outlined,
+                          color: Theme.of(context).primaryColor,
+                        )
+                      : Icon(
+                          Icons.favorite,
+                          color: Theme.of(context).primaryColor,
+                        )),
             ),
             SizedBox(width: 10),
             FlatButton(
               onPressed: () {
                 setState(() {
-//                    this.cartCount += this.quantity;
+                  _carrito.addElementCarrito(
+                      widget._product!, _cantidadSeleccionada);
+                  _carrito.printCarrito();
                 });
               },
               color: Theme.of(context).accentColor,
@@ -123,6 +149,8 @@ class _ProductoDetallePageState extends State<ProductoDetallePage>
                       onPressed: () {
                         setState(() {
 //                          this.quantity = this.decrementQuantity(this.quantity);
+                          if (_cantidadSeleccionada - 1 != 0)
+                            _cantidadSeleccionada -= 1;
                         });
                       },
                       iconSize: 30,
@@ -131,13 +159,14 @@ class _ProductoDetallePageState extends State<ProductoDetallePage>
                       icon: Icon(Icons.remove_circle_outline),
                       color: Theme.of(context).primaryColor,
                     ),
-                    Text('2',
+                    Text(_cantidadSeleccionada.toString(),
                         style: Theme.of(context).textTheme.subhead!.merge(
                             TextStyle(color: Theme.of(context).primaryColor))),
                     IconButton(
                       onPressed: () {
                         setState(() {
 //                          this.quantity = this.incrementQuantity(this.quantity);
+                          _cantidadSeleccionada += 1;
                         });
                       },
                       iconSize: 30,
@@ -335,5 +364,15 @@ class _ProductoDetallePageState extends State<ProductoDetallePage>
         )
       ]),
     );
+  }
+
+  void _guardarPublicacionFavorita(BuildContext context) async {
+    await _contenidoProvider
+        .guardarPublicacionFavorita(guardarPublicacionFavorita, context)
+        .then((value) {
+      setState(() {
+        _guardadoFavorito = true;
+      });
+    }).whenComplete(() => null);
   }
 }

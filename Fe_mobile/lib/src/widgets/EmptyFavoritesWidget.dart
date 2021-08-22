@@ -32,7 +32,7 @@ class EmptyFavoritesWidget extends StatelessWidget {
                           Theme.of(context).focusColor.withOpacity(0.1),
                         ])),
                 child: Icon(
-                  UiIcons.heart,
+                  Icons.favorite_border_outlined,
                   color: Theme.of(context).primaryColor,
                   size: 70,
                 ),
@@ -67,7 +67,7 @@ class EmptyFavoritesWidget extends StatelessWidget {
           Opacity(
             opacity: 0.4,
             child: Text(
-              'D\'ont have any item in the wish list',
+              'No tienes productos favoritos al momento',
               textAlign: TextAlign.center,
               style: Theme.of(context)
                   .textTheme
@@ -84,7 +84,7 @@ class EmptyFavoritesWidget extends StatelessWidget {
             color: Theme.of(context).focusColor.withOpacity(0.15),
             shape: StadiumBorder(),
             child: Text(
-              'Start Exploring',
+              'Empieza a explorar',
 //                        textAlign: TextAlign.ce,
               style: Theme.of(context).textTheme.title,
             ),

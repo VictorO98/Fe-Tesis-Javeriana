@@ -37,6 +37,7 @@ using Fe.Servidor.Integracion.Mensajes.DotLiquid;
 using Fe.Servidor.Integracion.Email;
 using NETCore.MailKit.Extensions;
 using NETCore.MailKit.Infrastructure.Internal;
+using VueCliMiddleware;
 
 namespace FEWebApplication
 {
@@ -204,10 +205,10 @@ namespace FEWebApplication
                 else
                     spa.Options.SourcePath = "dist";
 
-                /*if (env.IsDevelopment())
+                if (env.IsDevelopment())
                 {
                     spa.UseVueCli(npmScript: "serve");
-                }*/
+                }
 
             });
         }

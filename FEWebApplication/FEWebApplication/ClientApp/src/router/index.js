@@ -20,17 +20,25 @@ const routes = [
         path: "/FetchData",
         name: "FetchData",
         component: FetchData,
-    
+
     },
     {
         path: "/ResetearPassword/:email/:token*",
         name: "ResetearPassword",
         component: ResetearPassword,
+
+        // path: "/ResetearPassword",
+        // name: "ResetearPassword",
+        // component: ResetearPassword,
     },
     {
         path: "/ConfirmarCuenta/:email/:token*",
         name: "ConfirmarCuenta",
         component: ConfirmarCuenta,
+
+        // path: "/ConfirmarCuenta",
+        // name: "ConfirmarCuenta",
+        // component: ConfirmarCuenta,
     }
 ];
 
