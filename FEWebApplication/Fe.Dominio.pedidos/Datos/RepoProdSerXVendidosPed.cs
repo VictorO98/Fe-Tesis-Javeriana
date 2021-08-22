@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Fe.Core.General.Datos;
 using Fe.Core.Global.Constantes;
 using Fe.Core.Global.Errores;
 using Fe.Servidor.Middleware.Contratos.Core;
@@ -30,6 +31,14 @@ namespace Fe.Dominio.contenido.Datos
             }
             catch (Exception e)
             {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = "no_aplica",
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.ENVIO_CORREO
+                });
                 throw new COExcepcion("Ocurrió un problema al intentar realizar la creación del detalle de producto de pedido");
             }
             return respuestaDatos;
@@ -63,6 +72,14 @@ namespace Fe.Dominio.contenido.Datos
                 }
                 catch (Exception e)
                 {
+                    RepoErrorLog.AddErrorLog(new ErrorLog
+                    {
+                        Mensaje = e.Message,
+                        Traza = e.StackTrace,
+                        Usuario = "no_aplica",
+                        Creacion = DateTime.Now,
+                        Tipoerror = COErrorLog.ENVIO_CORREO
+                    });
                     throw new COExcepcion("Ocurrió un problema al intentar eliminar el producto pedido");
                 }
             }
@@ -92,6 +109,14 @@ namespace Fe.Dominio.contenido.Datos
                 }
                 catch (Exception e)
                 {
+                    RepoErrorLog.AddErrorLog(new ErrorLog
+                    {
+                        Mensaje = e.Message,
+                        Traza = e.StackTrace,
+                        Usuario = "no_aplica",
+                        Creacion = DateTime.Now,
+                        Tipoerror = COErrorLog.ENVIO_CORREO
+                    });
                     throw new COExcepcion("Ocurrió un problema al intentar modificar el producto pedido.");
                 }
             }
