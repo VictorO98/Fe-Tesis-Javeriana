@@ -321,10 +321,10 @@ namespace Fe.Dominio.contenido
             return _repoPyR.GetPreguntasyRespuestasPorIdPublicacion(idPublicacion);
         }
 
-        internal async Task<ContratoPc> DesplegarPublicacion(int idPublicacion)
+        internal async Task<ContratoPublicacionPc> DesplegarPublicacion(int idPublicacion)
         {
             ProductosServiciosPc publicacion = await _repoProducto.GetPublicacionPorIdPublicacion(idPublicacion);
-            ContratoPc contrato = new ContratoPc();
+            ContratoPublicacionPc contrato = new ContratoPublicacionPc();
             if (publicacion != null)
             {
                 contrato.Id = publicacion.Id;
@@ -350,10 +350,10 @@ namespace Fe.Dominio.contenido
             return contrato;
         }
 
-        internal async Task<List<ContratoPc>> FiltrarPublicacion(int idCategoria, int idTipoPublicacion, DemografiaCor usuario, 
+        internal async Task<List<ContratoPublicacionPc>> FiltrarPublicacion(int idCategoria, int idTipoPublicacion, DemografiaCor usuario, 
             decimal precioMenor, decimal precioMayor, decimal calificacionMenor, decimal calificacionMayor)
         {
-            List<ContratoPc> publicaciones = new List<ContratoPc>();
+            List<ContratoPublicacionPc> publicaciones = new List<ContratoPublicacionPc>();
             if (idCategoria != -1 && GetCategoriaPorIdCategoria(idCategoria) == null)
             {
                 throw new COExcepcion("La categoría ingresada no existe.");
@@ -429,9 +429,9 @@ namespace Fe.Dominio.contenido
             return respuestaDatos;
         }
 
-        internal async Task<List<ContratoPc>> GetFavoritosPorIdDemografia(DemografiaCor demografia)
+        internal async Task<List<ContratoPublicacionPc>> GetFavoritosPorIdDemografia(DemografiaCor demografia)
         {
-            List<ContratoPc> publicaciones = new List<ContratoPc>();
+            List<ContratoPublicacionPc> publicaciones = new List<ContratoPublicacionPc>();
             if(demografia != null)
             {
                 List<ProductosFavoritosDemografiaPc> favoritos = _repoFavorito.GetFavoritosPorIdDemografia(demografia.Id);
@@ -458,9 +458,9 @@ namespace Fe.Dominio.contenido
             return validarPublicacion;
         }
 
-        internal async Task<List<ContratoPc>> GetPublicacionesPorIdUsuario(DemografiaCor demografia)
+        internal async Task<List<ContratoPublicacionPc>> GetPublicacionesPorIdUsuario(DemografiaCor demografia)
         {
-            List<ContratoPc> publicaciones = new List<ContratoPc>();
+            List<ContratoPublicacionPc> publicaciones = new List<ContratoPublicacionPc>();
             if (demografia != null)
             {
                 if(demografia.Rolcorid == 2)
@@ -476,12 +476,12 @@ namespace Fe.Dominio.contenido
             return publicaciones;
         }
 
-        internal async Task<List<ContratoPc>> GetPublicacionesPorDescuento(int idUsuario, DemografiaCor demografiaCor)
+        internal async Task<List<ContratoPublicacionPc>> GetPublicacionesPorDescuento(int idUsuario, DemografiaCor demografiaCor)
         {
             if (demografiaCor == null)
                 throw new COExcepcion("El usuario no existe.");
 
-            List<ContratoPc> publicaciones = new List<ContratoPc>();
+            List<ContratoPublicacionPc> publicaciones = new List<ContratoPublicacionPc>();
             List<ProductosServiciosPc> publicacion = _repoProducto.GetPublicacionesPorDescuento(idUsuario);
             for (int i = 0; i < publicacion.Count; i++)
             {
@@ -490,9 +490,9 @@ namespace Fe.Dominio.contenido
             return publicaciones;
         }
 
-        internal async Task<List<ContratoPc>> BuscarPublicacion(string nombre)
+        internal async Task<List<ContratoPublicacionPc>> BuscarPublicacion(string nombre)
         {
-            List<ContratoPc> publicaciones = new List<ContratoPc>();
+            List<ContratoPublicacionPc> publicaciones = new List<ContratoPublicacionPc>();
             List<ProductosServiciosPc> publicacion = _repoProducto.BuscarPublicacion(nombre);
             for (int i = 0; i < publicacion.Count; i++)
             {
@@ -501,9 +501,9 @@ namespace Fe.Dominio.contenido
             return publicaciones;
         }
 
-        internal async Task<List<ContratoPc>> GetPublicacionesHabilitadasTrueque(DemografiaCor demografia)
+        internal async Task<List<ContratoPublicacionPc>> GetPublicacionesHabilitadasTrueque(DemografiaCor demografia)
         {
-            List<ContratoPc> publicaciones = new List<ContratoPc>();
+            List<ContratoPublicacionPc> publicaciones = new List<ContratoPublicacionPc>();
             if (demografia != null)
             {
                 if (demografia.Rolcorid == 2)

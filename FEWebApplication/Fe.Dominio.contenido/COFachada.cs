@@ -200,12 +200,12 @@ namespace Fe.Dominio.contenido
             return _cOContenidoBiz.GetPreguntasyRespuestasPorIdPublicacion(idPublicacion);
         }
 
-        public async Task<ContratoPc> DesplegarPublicacion(int idPublicacion)
+        public async Task<ContratoPublicacionPc> DesplegarPublicacion(int idPublicacion)
         {
             return await _cOContenidoBiz.DesplegarPublicacion(idPublicacion);
         }
 
-        public async Task<List<ContratoPc>> FiltrarPublicacion(int idCategoria, int idTipoPublicacion, int idUsuario,
+        public async Task<List<ContratoPublicacionPc>> FiltrarPublicacion(int idCategoria, int idTipoPublicacion, int idUsuario,
             decimal precioMenor, decimal precioMayor, decimal calificacionMenor, decimal calificacionMayor)
         {
             try
@@ -250,7 +250,7 @@ namespace Fe.Dominio.contenido
             return respuestaDatos;
         }
 
-        public async Task<List<ContratoPc>> GetFavoritosPorIdDemografia(int idDemografia)
+        public async Task<List<ContratoPublicacionPc>> GetFavoritosPorIdDemografia(int idDemografia)
         {
             try
             {
@@ -292,7 +292,7 @@ namespace Fe.Dominio.contenido
             }
         }
 
-        public async Task<List<ContratoPc>> GetPublicacionesPorIdUsuario(int idDemografia)
+        public async Task<List<ContratoPublicacionPc>> GetPublicacionesPorIdUsuario(int idDemografia)
         {
             try
             {
@@ -313,7 +313,7 @@ namespace Fe.Dominio.contenido
             }
         }
 
-        public async Task<List<ContratoPc>> GetPublicacionesPorDescuento(int idUsuario)
+        public async Task<List<ContratoPublicacionPc>> GetPublicacionesPorDescuento(int idUsuario)
         {
             try
             {
@@ -326,11 +326,11 @@ namespace Fe.Dominio.contenido
             }
         }
 
-        public async Task<List<ContratoPc>> BuscarPublicacion(string nombre)
+        public async Task<List<ContratoPublicacionPc>> BuscarPublicacion(string nombre)
         {
             return  await _cOContenidoBiz.BuscarPublicacion(nombre);
         }
-        public async Task<List<ContratoPc>> GetPublicacionesHabilitadasTrueque(int idDemografia)
+        public async Task<List<ContratoPublicacionPc>> GetPublicacionesHabilitadasTrueque(int idDemografia)
         {
             try
             {
