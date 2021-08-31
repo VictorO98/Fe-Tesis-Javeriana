@@ -12,6 +12,7 @@
           "Dapper": "2.0.90",
           "Dapper.Contrib": "2.0.78",
           "DotLiquid": "2.2.541",
+          "Fe.Dominio.pedidos": "1.0.0",
           "Google.Apis.Gmail.v1": "1.54.0.2356",
           "Hangfire.AspNetCore": "1.7.24",
           "IdentityServer4": "4.1.2",
@@ -2006,6 +2007,150 @@
           "System.Xml.XDocument": "4.3.0",
           "System.Xml.XPath": "4.3.0"
         }
+      },
+      "Fe.Core.General/1.0.0": {
+        "dependencies": {
+          "Blazored.Toast": "3.1.2",
+          "Dapper": "2.0.90",
+          "Dapper.Contrib": "2.0.78",
+          "DotLiquid": "2.2.541",
+          "Fe.Core.Global": "1.0.0",
+          "Fe.Servidor.Middleware": "1.0.0",
+          "Google.Apis.Gmail.v1": "1.54.0.2356",
+          "Hangfire.AspNetCore": "1.7.24",
+          "IdentityServer4": "4.1.2",
+          "IdentityServer4.Storage": "4.1.2",
+          "MailKit": "2.15.0",
+          "Microsoft.AspNet.Mvc": "5.2.7",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.9",
+          "Microsoft.AspNetCore.Mvc": "2.2.0",
+          "Microsoft.AspNetCore.SpaServices": "3.1.18",
+          "Microsoft.EntityFrameworkCore": "5.0.9",
+          "Microsoft.EntityFrameworkCore.Relational": "5.0.9",
+          "Microsoft.NETCore.App": "2.2.8",
+          "NETCore.MailKit": "2.0.3",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.7",
+          "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.1.0",
+          "ePayco.Net": "1.0.13"
+        },
+        "runtime": {
+          "Fe.Core.General.dll": {}
+        }
+      },
+      "Fe.Core.Global/1.0.0": {
+        "dependencies": {
+          "Blazored.Toast": "3.1.2",
+          "Dapper": "2.0.90",
+          "Dapper.Contrib": "2.0.78",
+          "DotLiquid": "2.2.541",
+          "Fe.Servidor.Middleware": "1.0.0",
+          "Google.Apis.Gmail.v1": "1.54.0.2356",
+          "Hangfire.AspNetCore": "1.7.24",
+          "IdentityServer4": "4.1.2",
+          "IdentityServer4.Storage": "4.1.2",
+          "MailKit": "2.15.0",
+          "Microsoft.AspNet.Mvc": "5.2.7",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.9",
+          "Microsoft.AspNetCore.Mvc": "2.2.0",
+          "Microsoft.AspNetCore.SpaServices": "3.1.18",
+          "Microsoft.EntityFrameworkCore": "5.0.9",
+          "Microsoft.EntityFrameworkCore.Relational": "5.0.9",
+          "Microsoft.NETCore.App": "2.2.8",
+          "NETCore.MailKit": "2.0.3",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.7",
+          "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.1.0",
+          "ePayco.Net": "1.0.13"
+        },
+        "runtime": {
+          "Fe.Core.Global.dll": {}
+        }
+      },
+      "Fe.Dominio.contenido/1.0.0": {
+        "dependencies": {
+          "Blazored.Toast": "3.1.2",
+          "Dapper": "2.0.90",
+          "Dapper.Contrib": "2.0.78",
+          "DotLiquid": "2.2.541",
+          "Fe.Core.General": "1.0.0",
+          "Fe.Core.Global": "1.0.0",
+          "Fe.Servidor.Middleware": "1.0.0",
+          "Google.Apis.Gmail.v1": "1.54.0.2356",
+          "Hangfire.AspNetCore": "1.7.24",
+          "IdentityServer4": "4.1.2",
+          "IdentityServer4.Storage": "4.1.2",
+          "MailKit": "2.15.0",
+          "Microsoft.AspNet.Mvc": "5.2.7",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.9",
+          "Microsoft.AspNetCore.Mvc": "2.2.0",
+          "Microsoft.AspNetCore.SpaServices": "3.1.18",
+          "Microsoft.EntityFrameworkCore": "5.0.9",
+          "Microsoft.EntityFrameworkCore.Relational": "5.0.9",
+          "Microsoft.NETCore.App": "2.2.8",
+          "NETCore.MailKit": "2.0.3",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.7",
+          "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.1.0",
+          "ePayco.Net": "1.0.13"
+        },
+        "runtime": {
+          "Fe.Dominio.contenido.dll": {}
+        }
+      },
+      "Fe.Dominio.pedidos/1.0.0": {
+        "dependencies": {
+          "Blazored.Toast": "3.1.2",
+          "Dapper": "2.0.90",
+          "Dapper.Contrib": "2.0.78",
+          "DotLiquid": "2.2.541",
+          "Fe.Core.General": "1.0.0",
+          "Fe.Dominio.contenido": "1.0.0",
+          "Fe.Servidor.Middleware": "1.0.0",
+          "Google.Apis.Gmail.v1": "1.54.0.2356",
+          "Hangfire.AspNetCore": "1.7.24",
+          "IdentityServer4": "4.1.2",
+          "IdentityServer4.Storage": "4.1.2",
+          "MailKit": "2.15.0",
+          "Microsoft.AspNet.Mvc": "5.2.7",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.9",
+          "Microsoft.AspNetCore.Mvc": "2.2.0",
+          "Microsoft.AspNetCore.SpaServices": "3.1.18",
+          "Microsoft.EntityFrameworkCore": "5.0.9",
+          "Microsoft.EntityFrameworkCore.Relational": "5.0.9",
+          "Microsoft.NETCore.App": "2.2.8",
+          "NETCore.MailKit": "2.0.3",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.7",
+          "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.1.0",
+          "ePayco.Net": "1.0.13"
+        },
+        "runtime": {
+          "Fe.Dominio.pedidos.dll": {}
+        }
+      },
+      "Fe.Servidor.Middleware/1.0.0": {
+        "dependencies": {
+          "Blazored.Toast": "3.1.2",
+          "Dapper": "2.0.90",
+          "Dapper.Contrib": "2.0.78",
+          "DotLiquid": "2.2.541",
+          "Google.Apis.Gmail.v1": "1.54.0.2356",
+          "Hangfire.AspNetCore": "1.7.24",
+          "IdentityServer4": "4.1.2",
+          "IdentityServer4.Storage": "4.1.2",
+          "MailKit": "2.15.0",
+          "Microsoft.AspNet.Mvc": "5.2.7",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.9",
+          "Microsoft.AspNetCore.Mvc": "2.2.0",
+          "Microsoft.AspNetCore.SpaServices": "3.1.18",
+          "Microsoft.EntityFrameworkCore": "5.0.9",
+          "Microsoft.EntityFrameworkCore.Relational": "5.0.9",
+          "Microsoft.NETCore.App": "2.2.8",
+          "NETCore.MailKit": "2.0.3",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.7",
+          "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.1.0",
+          "ePayco.Net": "1.0.13"
+        },
+        "runtime": {
+          "Fe.Servidor.Middleware.dll": {}
+        }
       }
     }
   },
@@ -3533,6 +3678,31 @@
       "sha512": "sha512-jw9oHHEIVW53mHY9PgrQa98Xo2IZ0ZjrpdOTmtvk+Rvg4tq7dydmxdNqUvJ5YwjDqhn75mBXWttWjiKhWP53LQ==",
       "path": "system.xml.xpath.xdocument/4.3.0",
       "hashPath": "system.xml.xpath.xdocument.4.3.0.nupkg.sha512"
+    },
+    "Fe.Core.General/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Fe.Core.Global/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Fe.Dominio.contenido/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Fe.Dominio.pedidos/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Fe.Servidor.Middleware/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

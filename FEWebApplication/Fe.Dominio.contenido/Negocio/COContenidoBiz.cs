@@ -300,7 +300,7 @@ namespace Fe.Dominio.contenido
             return respuestaDatos;
         }
 
-        internal async Task<ContratoPc> GetProductoPorIdProducto(int idPublicacion)
+        internal async Task<ContratoPublicacionPc> GetProductoPorIdProducto(int idPublicacion)
         {
             return await DesplegarPublicacion(idPublicacion);
         }

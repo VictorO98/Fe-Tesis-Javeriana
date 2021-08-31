@@ -351,7 +351,7 @@ namespace Fe.Dominio.contenido
             }
         }
 
-        public async Task<ContratoPc> GetProductoPorIdProducto(int idPublicacion)
+        public async Task<ContratoPublicacionPc> GetProductoPorIdProducto(int idPublicacion)
         {
             return await _cOContenidoBiz.GetProductoPorIdProducto(idPublicacion);
         }

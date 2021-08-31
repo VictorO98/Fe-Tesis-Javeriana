@@ -493,7 +493,7 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
 
         [Route("GetProductoPorIdProducto")]
         [HttpGet]
-        public async Task<ContratoPc> GetProductoPorIdProducto(int idPublicacion)
+        public async Task<ContratoPublicacionPc> GetProductoPorIdProducto(int idPublicacion)
         {
             try
             {

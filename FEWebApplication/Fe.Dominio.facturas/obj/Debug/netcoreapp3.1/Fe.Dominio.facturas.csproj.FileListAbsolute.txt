@@ -23,3 +23,14 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\obj
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\obj\Debug\netcoreapp3.1\Fe.Dominio.facturas.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\obj\Debug\netcoreapp3.1\Fe.Dominio.facturas.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\obj\Debug\netcoreapp3.1\Fe.Dominio.facturas.genruntimeconfig.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\bin\Debug\netcoreapp3.1\Fe.Core.General.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\bin\Debug\netcoreapp3.1\Fe.Core.Global.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\bin\Debug\netcoreapp3.1\Fe.Dominio.contenido.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\bin\Debug\netcoreapp3.1\Fe.Dominio.pedidos.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\bin\Debug\netcoreapp3.1\Fe.Servidor.Middleware.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\bin\Debug\netcoreapp3.1\Fe.Dominio.pedidos.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\bin\Debug\netcoreapp3.1\Fe.Core.General.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\bin\Debug\netcoreapp3.1\Fe.Core.Global.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\bin\Debug\netcoreapp3.1\Fe.Dominio.contenido.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\bin\Debug\netcoreapp3.1\Fe.Servidor.Middleware.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\obj\Debug\netcoreapp3.1\Fe.Dominio.facturas.csproj.CopyComplete

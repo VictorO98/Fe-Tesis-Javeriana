@@ -3524,6 +3524,7 @@
           "Dapper": "2.0.90",
           "Dapper.Contrib": "2.0.78",
           "DotLiquid": "2.2.541",
+          "Fe.Dominio.pedidos": "1.0.0",
           "Google.Apis.Gmail.v1": "1.54.0.2356",
           "Hangfire.AspNetCore": "1.7.24",
           "IdentityServer4": "4.1.2",

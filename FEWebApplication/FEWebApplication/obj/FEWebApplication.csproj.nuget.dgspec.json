@@ -786,7 +786,11 @@
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Dominio.pedidos\\Fe.Dominio.pedidos.csproj": {
+                "projectPath": "D:\\Documentos\\Repositorios\\Comunidad-Fe\\FEWebApplication\\Fe.Dominio.pedidos\\Fe.Dominio.pedidos.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

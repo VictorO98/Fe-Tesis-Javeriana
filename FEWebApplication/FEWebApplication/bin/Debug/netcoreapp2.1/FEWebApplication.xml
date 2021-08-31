@@ -366,6 +366,26 @@
             <returns>Lista de publicaciones con trueque habilitado</returns>
             <param name="idDemografia">ID del usuario que se desea obtener sus pubicaciones con truque habilitado</param>
         </member>
+        <member name="T:FEWebApplication.Controladores.Dominio.Factura.FAFacturaController">
+            <summary>
+            Servicios para realizar transacciones y CRUD de Factura
+            y su respectivo detalle
+            </summary>
+        </member>
+        <member name="M:FEWebApplication.Controladores.Dominio.Factura.FAFacturaController.PagoConTC(Fe.Servidor.Middleware.Contratos.Dominio.Factura.ContratoTC)">
+            <summary>
+            Se realiza un pago con tarjeta de crédito y se almacena la factura una vez que ha sido aprobada.
+            </summary>
+            <returns>Respuesta de datos indicando la factura.</returns>
+            <param name="contratoTC">Información necesaria para realizar la transacción con tarjeta de crédito.</param>
+        </member>
+        <member name="M:FEWebApplication.Controladores.Dominio.Factura.FAFacturaController.PagoPSE(Fe.Servidor.Middleware.Contratos.Dominio.Factura.ContratoPSE)">
+            <summary>
+            Se realiza un pago mediante PSE y se almacena la factura una vez que ha sido aprobada.
+            </summary>
+            <returns>Respuesta de datos indicando la factura.</returns>
+            <param name="contratoPSE">Información necesaria para realizar la transacción mediante PSE.</param>
+        </member>
         <member name="T:FEWebApplication.Controladores.Dominio.Pedido.PEPedidoController">
             <summary>
             Servicios para guardar, modificar o borrar pedidos (PedidosPed)
