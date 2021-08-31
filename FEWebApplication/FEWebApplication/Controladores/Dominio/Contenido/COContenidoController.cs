@@ -14,6 +14,7 @@ using System;
 using Fe.Core.General.Datos;
 using System.Security.Claims;
 using System.Linq;
+using Fe.Core.General.Datos;
 
 
 namespace FEWebApplication.Controladores.Dominio.Contenido
@@ -72,6 +73,14 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
             }
             catch (COExcepcion e) 
             {
+                //RepoErrorLog.AddErrorLog(new ErrorLog
+                //{
+                //    Mensaje = e.Message,
+                //    Traza = e.StackTrace,
+                //    Usuario = "",
+                //    Creacion = DateTime.Now
+                    
+                //});
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
             }
             return respuestaDatos;
@@ -346,7 +355,7 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         /// <param name="idPublicacion">El id de la publicación a desplegar.</param>
         [Route("DesplegarPublicacion")]
         [HttpGet]
-        public async Task<ContratoPc> DesplegarPublicacion(int idPublicacion)
+        public async Task<ContratoPublicacionPc> DesplegarPublicacion(int idPublicacion)
         {
             return await _coFachada.DesplegarPublicacion(idPublicacion);
         }
@@ -363,7 +372,7 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         /// <param name="calificacionMayor">El límite superior de la calificación de las publicaciones a filtrar.</param>
         [Route("FiltrarPublicacion")]
         [HttpGet]
-        public async Task<List<ContratoPc>> FiltrarPublicacion(int idCategoria = -1, int idTipoPublicacion = -1, int idUsuario = -1,
+        public async Task<List<ContratoPublicacionPc>> FiltrarPublicacion(int idCategoria = -1, int idTipoPublicacion = -1, int idUsuario = -1,
             decimal precioMenor = -1, decimal precioMayor = -1, decimal calificacionMenor = -1, decimal calificacionMayor = -1)
         {
             try
@@ -430,7 +439,7 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         /// <param name="idDemografia">El id del usuario para buscar sus publicaciones favoritas.</param>
         [Route("GetFavoritosPorIdDemografia")]
         [HttpGet]
-        public async Task<List<ContratoPc>> GetFavoritosPorIdDemografia(int idDemografia)
+        public async Task<List<ContratoPublicacionPc>> GetFavoritosPorIdDemografia(int idDemografia)
         {
             try
             {
@@ -470,7 +479,7 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         /// <param name="idDemografia">El id del usuario para obtener sus publicaciones.</param>
         [Route("GetPublicacionesPorIdUsuario")]
         [HttpGet]
-        public async Task<List<ContratoPc>> GetPublicacionesPorIdUsuario(int idDemografia)
+        public async Task<List<ContratoPublicacionPc>> GetPublicacionesPorIdUsuario(int idDemografia)
         {
             try
             {
@@ -502,7 +511,7 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         /// <returns>Una lista de publicaciones con sus reseñas, preguntas y respuestas, categoría y tipo de publicación.</returns>
         [Route("GetPublicacionesPorDescuento")]
         [HttpGet]
-        public async Task<List<ContratoPc>> GetPublicacionesPorDescuento(int idUsuario)
+        public async Task<List<ContratoPublicacionPc>> GetPublicacionesPorDescuento(int idUsuario)
         {
             return await _coFachada.GetPublicacionesPorDescuento(idUsuario);
         }
@@ -514,7 +523,7 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         /// <param name="nombre">El nombre de las publicaciones a filtrar.</param>
         [Route("BuscarPublicacion")]
         [HttpGet]
-        public async Task<List<ContratoPc>> BuscarPublicacion(string nombre)
+        public async Task<List<ContratoPublicacionPc>> BuscarPublicacion(string nombre)
         {
             return await _coFachada.BuscarPublicacion(nombre);
         }
@@ -527,7 +536,7 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         /// <param name="idDemografia">ID del usuario que se desea obtener sus pubicaciones con truque habilitado</param>
         [Route("GetPublicacionesHabilitadasTrueque")]
         [HttpGet]
-        public async Task<List<ContratoPc>>  GetPublicacionesHabilitadasTrueque(int idDemografia)
+        public async Task<List<ContratoPublicacionPc>>  GetPublicacionesHabilitadasTrueque(int idDemografia)
         {
             try
             {

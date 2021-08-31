@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Fe.Servidor.Middleware.Contratos.Dominio.Contenido
 {
-    public class ContratoPc
+    public class ContratoPublicacionPc
     {
         public int Id { get; set; }
         public string Descripcion { get; set; }
