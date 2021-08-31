@@ -359,26 +359,6 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
               },
               dense: true,
               title: Text(
-                'Empaquetado',
-                style: Theme.of(context).textTheme.body1,
-              ),
-              trailing: Chip(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                backgroundColor: Colors.transparent,
-                shape: StadiumBorder(
-                    side: BorderSide(color: Theme.of(context).focusColor)),
-                label: Text(
-                  '1',
-                  //_pedidoEmpaquetado.toString(),
-                  style: TextStyle(color: Theme.of(context).focusColor),
-                ),
-              )),
-          ListTile(
-              onTap: () {
-                Navigator.of(context).pushNamed('/Orders');
-              },
-              dense: true,
-              title: Text(
                 'Enviado',
                 style: Theme.of(context).textTheme.body1,
               ),
@@ -390,6 +370,26 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
                 label: Text(
                   '1',
                   // _pedidoEnviado.toString(),
+                  style: TextStyle(color: Theme.of(context).focusColor),
+                ),
+              )),
+          ListTile(
+              onTap: () {
+                Navigator.of(context).pushNamed('/Orders');
+              },
+              dense: true,
+              title: Text(
+                'Entregado',
+                style: Theme.of(context).textTheme.body1,
+              ),
+              trailing: Chip(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                backgroundColor: Colors.transparent,
+                shape: StadiumBorder(
+                    side: BorderSide(color: Theme.of(context).focusColor)),
+                label: Text(
+                  '1',
+                  //_pedidoEmpaquetado.toString(),
                   style: TextStyle(color: Theme.of(context).focusColor),
                 ),
               )),

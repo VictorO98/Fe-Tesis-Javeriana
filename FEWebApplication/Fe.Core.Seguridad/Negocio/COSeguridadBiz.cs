@@ -42,7 +42,7 @@ namespace Fe.Core.Seguridad.Negocio
             _repoDocumentosEmprendedor = repoDocumentosEmprendedor;
         }
 
-        internal async Task<RespuestaDatos> SubirDocumentosEmprendedor(DemografiaCor demografiaCor, IFormFileCollection files)
+        internal async Task<RespuestaDatos> SubirDocumentosEmprendedor(DemografiaCor demografiaCor, string RazonsSocial, IFormFileCollection files)
         {
             if (demografiaCor != null)
             {
@@ -50,6 +50,7 @@ namespace Fe.Core.Seguridad.Negocio
                 {
                     DocumentosDemografiaCor documentosDemografiaCor = new DocumentosDemografiaCor();
                     documentosDemografiaCor.Iddemografia = demografiaCor.Id;
+                    documentosDemografiaCor.Razonsocial = RazonsSocial;
                     string directorio = _configuration["ImageDocumentos:DirectorioDocumentos"];
                     directorio = directorio + "/" + "Documentos";
 

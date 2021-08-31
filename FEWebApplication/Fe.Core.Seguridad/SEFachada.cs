@@ -22,10 +22,10 @@ namespace Fe.Core.Seguridad
             _cOSeguridadBiz = cOSeguridadBiz;
         }
 
-        public async Task<RespuestaDatos> SubirDocumentosEmprendedor(string correoUsuario, IFormFileCollection files)
+        public async Task<RespuestaDatos> SubirDocumentosEmprendedor(string correoUsuario, string razonSoccial, IFormFileCollection files)
         {
             DemografiaCor demografiaCor = _cOGeneralFachada.GetDemografiaPorEmail(correoUsuario);
-            return await _cOSeguridadBiz.SubirDocumentosEmprendedor(demografiaCor, files);
+            return await _cOSeguridadBiz.SubirDocumentosEmprendedor(demografiaCor, razonSoccial, files);
 
         }
     }

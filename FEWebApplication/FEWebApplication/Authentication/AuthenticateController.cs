@@ -123,8 +123,9 @@ namespace FEWebApplication.Authentication
                     throw new COExcepcion("El formulario de la petición enviada se encuentra vacío. ");
 
                 var correoUsuario = Request.Form["Correo"].ToString();
+                var razonSocial = Request.Form["RazonSocial"].ToString();
 
-                respuestaDatos = await _sEFachada.SubirDocumentosEmprendedor(correoUsuario, files);
+                respuestaDatos = await _sEFachada.SubirDocumentosEmprendedor(correoUsuario, razonSocial, files);
             }
             catch (COExcepcion e)
             {
