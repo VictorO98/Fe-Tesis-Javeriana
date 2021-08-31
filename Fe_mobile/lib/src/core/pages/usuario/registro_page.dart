@@ -17,6 +17,7 @@ import 'package:Fe_mobile/src/core/util/estilo_util.dart';
 import 'package:Fe_mobile/src/widgets/ver_imagen_widget.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:country_code_picker/country_code_picker.dart';
+import 'package:dio/dio.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
@@ -70,6 +71,8 @@ class _RegistroPageState extends State<RegistroPage> {
 
   late String labelSiguiente;
   late String labelRegresar;
+
+  String? razonSocial;
 
   ButtonStyle? _styleButtonSiguiente;
 
@@ -270,7 +273,9 @@ class _RegistroPageState extends State<RegistroPage> {
         child: ElevatedButton.icon(
             icon: Icon(Icons.image, color: Colors.white),
             label: Text("SELECCIONAR FOTOS DE GALERÍA",
-                style: TextStyle(color: Colors.white)),
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: MediaQuery.of(context).size.width / 30)),
             style: ButtonStyle(
                 backgroundColor:
                     MaterialStateProperty.all<Color>(EstiloUtil.COLOR_PRIMARY)),
@@ -284,7 +289,10 @@ class _RegistroPageState extends State<RegistroPage> {
         width: MediaQuery.of(context).size.width,
         child: ElevatedButton.icon(
             icon: Icon(Icons.camera_alt, color: Colors.white),
-            label: Text("TOMAR FOTO", style: TextStyle(color: Colors.white)),
+            label: Text("TOMAR FOTO",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: MediaQuery.of(context).size.width / 30)),
             style: ButtonStyle(
                 backgroundColor:
                     MaterialStateProperty.all<Color>(EstiloUtil.COLOR_PRIMARY)),
@@ -881,7 +889,7 @@ class _RegistroPageState extends State<RegistroPage> {
                       TextFormField(
                         onSaved: (String? value) {
                           setState(() {
-                            //registroModel.direccion = value;
+                            razonSocial = value;
                           });
                         },
                         decoration: EstiloUtil.crearInputDecorationFormCustom(
@@ -1174,20 +1182,35 @@ class _RegistroPageState extends State<RegistroPage> {
       setState(() {
         isLoadingRegistro = true;
       });
-      _usuarioProvider.registrarUsuario(registroModel, context).then((value) {
-        RespuestaDatosModel? respuesta = value;
-        if (respuesta?.codigo == 10) {
-          final funcionNavegar = () {
-            WidgetsBinding.instance!.addPostFrameCallback((_) {
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                  "login", (Route<dynamic> route) => false,
-                  arguments: new ValidaRegistroContract(isRegistro: true));
-            });
-          };
-          AlertUtil.success(context, respuesta!.mensaje!,
-              respuesta: funcionNavegar, title: '¡Registro exitoso!');
-        }
-      }).whenComplete(() => setState(() => isLoadingRegistro = false));
+
+      setState(() => isLoadingRegistro = false);
+
+      List<File> _documentosEmprendedor = [];
+
+      for (int i = 0; i < listadoDocumentoCamaraComercio.length; i++) {
+        _documentosEmprendedor.add(listadoDocumentoCamaraComercio[i]);
+      }
+
+      for (int i = 0; i < listadoFotoCedula.length; i++) {
+        _documentosEmprendedor.add(listadoFotoCedula[i]);
+      }
+
+      print(_documentosEmprendedor);
+      print(razonSocial);
+      // _usuarioProvider.registrarUsuario(registroModel, context).then((value) {
+      //   RespuestaDatosModel? respuesta = value;
+      //   if (respuesta?.codigo == 10) {
+      //     final funcionNavegar = () {
+      //       WidgetsBinding.instance!.addPostFrameCallback((_) {
+      //         Navigator.of(context).pushNamedAndRemoveUntil(
+      //             "/Login", (Route<dynamic> route) => false,
+      //             arguments: new ValidaRegistroContract(isRegistro: true));
+      //       });
+      //     };
+      //     AlertUtil.success(context, respuesta!.mensaje!,
+      //         respuesta: funcionNavegar, title: '¡Registro exitoso!');
+      //   }
+      // }).whenComplete(() => setState(() => isLoadingRegistro = false));
     }
   }
 }

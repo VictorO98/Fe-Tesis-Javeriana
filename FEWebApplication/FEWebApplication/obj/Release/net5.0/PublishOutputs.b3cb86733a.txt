@@ -48,6 +48,11 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Re
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\PubTmp\Out\Dapper.Contrib.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\PubTmp\Out\DotLiquid.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\PubTmp\Out\epayco.net.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\PubTmp\Out\Google.Apis.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\PubTmp\Out\Google.Apis.Auth.PlatformServices.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\PubTmp\Out\Google.Apis.Auth.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\PubTmp\Out\Google.Apis.Core.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\PubTmp\Out\Google.Apis.Gmail.v1.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\PubTmp\Out\Hangfire.AspNetCore.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\PubTmp\Out\Hangfire.Core.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\PubTmp\Out\IdentityModel.dll

@@ -20,6 +20,16 @@ class UsuarioProvider {
     return RespuestaDatosModel.fromJson(decodedData);
   }
 
+  Future<RespuestaDatosModel?> subirDocumentosEmprendedor(
+      Map<String, dynamic> param, BuildContext context) async {
+    dynamic data = await ServicioUtil.file(
+        "api/Authenticate/SubirDocumentosEmprendedor", param,
+        isMostrarAlertError: true, contextErr: context);
+    if (data == null) return null;
+    RespuestaDatosModel respuesta = RespuestaDatosModel.fromJson(data);
+    return respuesta;
+  }
+
   Future<RespuestaLoginModel?> iniciarSesion(
       LoginModel loginModel, BuildContext context) async {
     String? data = await ServicioUtil.post(

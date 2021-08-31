@@ -1,6 +1,7 @@
 ﻿using Fe.Core.General.Datos;
 using Fe.Core.Global.Constantes;
 using Fe.Core.Global.Errores;
+using Fe.Core.Seguridad.Datos;
 using Fe.Servidor.Middleware.Contratos.Core;
 using Fe.Servidor.Middleware.Contratos.Core.Seguridad;
 using Fe.Servidor.Middleware.Modelo.Entidades;
@@ -11,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -24,11 +26,12 @@ namespace Fe.Core.Seguridad.Negocio
         private readonly RepoDemografia _repoDemografia;
         private readonly RepoDocumento _repoDocumento;
         private readonly RepoRoles _repoRoles;
+        private readonly RepoDocumentosEmprendedor _repoDocumentosEmprendedor;
         private readonly RepoPoblacion _repoPoblacion;
         private readonly IConfiguration _configuration;
 
         public COSeguridadBiz(UserManager<IdentityUser> userManager, RepoDemografia repoDemografia, RepoDocumento repoDocumento,
-                            RepoRoles repoRoles, IConfiguration configuration, RepoPoblacion repoPoblacion) 
+                            RepoRoles repoRoles, IConfiguration configuration, RepoPoblacion repoPoblacion, RepoDocumentosEmprendedor repoDocumentosEmprendedor) 
         {
             _userManager = userManager;
             _repoDemografia = repoDemografia;
@@ -36,13 +39,75 @@ namespace Fe.Core.Seguridad.Negocio
             _configuration = configuration;
             _repoRoles = repoRoles;
             _repoPoblacion = repoPoblacion;
+            _repoDocumentosEmprendedor = repoDocumentosEmprendedor;
         }
 
-        internal Task<RespuestaDatos> SubirDocumentosEmprendedor(DemografiaCor demografiaCor, IFormFileCollection files)
+        internal async Task<RespuestaDatos> SubirDocumentosEmprendedor(DemografiaCor demografiaCor, IFormFileCollection files)
         {
             if (demografiaCor != null)
             {
-                return null;
+                try
+                {
+                    DocumentosDemografiaCor documentosDemografiaCor = new DocumentosDemografiaCor();
+                    documentosDemografiaCor.Iddemografia = demografiaCor.Id;
+                    string directorio = _configuration["ImageDocumentos:DirectorioDocumentos"];
+                    directorio = directorio + "/" + "Documentos";
+
+                    if (string.IsNullOrEmpty(directorio))
+                    {
+                        RepoErrorLog.AddErrorLog(new ErrorLog
+                        {
+                            Mensaje = "No se encuentra definida la ruta para las imagenes de evidencia. ",
+                            Traza = null,
+                            Usuario = demografiaCor.Email,
+                            Creacion = DateTime.Now,
+                            Tipoerror = COErrorLog.RUTA_NO_ENCONTRADA
+                        });
+                        throw new COExcepcion("Problema con las rutas. Por favor contacte a servicio al cliente. ");
+
+                        var folderName = Path.Combine(directorio);
+                        if (files.Count == 0)
+                            throw new COExcepcion("No hay documento a subir. ");
+
+                        if (files.Count > 1)
+                            throw new COExcepcion("Solo se puede subir un máximo de 1 documento. ");
+
+                        string[] permittedExtensions = { ".jpg", ".jpeg", ".png" };
+                        List<string> listadoDeRutaFotos = new List<string>();
+                        var folderDocument = directorio;
+                        var indexDocumentos = 1;
+
+                        foreach (var file in files)
+                        {
+
+                            var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
+                            if (string.IsNullOrEmpty(ext) || !permittedExtensions.Contains(ext))
+                                throw new COExcepcion("Solo se aceptan imágenes JPG y PNG. ");
+
+                            var fileName = $@"imagen-documento-{demografiaCor.Id}-{indexDocumentos}{ext}";
+                            documentosDemografiaCor.Urlimagen = fileName;
+                            var fullPath = Path.Combine(folderName, fileName);
+                            using var stream = new FileStream(fullPath, FileMode.Create);
+                            file.CopyTo(stream);
+                            listadoDeRutaFotos.Add(fullPath);
+                            indexDocumentos += 1;
+                            await _repoDocumentosEmprendedor.SubirDocumentosEmprendedor(documentosDemografiaCor);
+                        }
+                        if (listadoDeRutaFotos.Count == 0)
+                            throw new COExcepcion("No se almacenó ninguna imagen.");
+                        
+                    }
+                    return new RespuestaDatos
+                    {
+                        Codigo = COCodigoRespuesta.OK,
+                        Mensaje = "Se guardo correctamente la publicación."
+                    };
+
+                }
+                catch (COExcepcion e)
+                {
+                    throw e;
+                }
             }
             else { throw new COExcepcion("El usuario ingresado no existe."); }
         }

@@ -46,7 +46,6 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
         public virtual DbSet<ProdSerXVendidosPed> ProdSerXVendidosPeds { get; set; }
         public virtual DbSet<ProductosFavoritosDemografiaPc> ProductosFavoritosDemografiaPcs { get; set; }
         public virtual DbSet<ProductosServiciosPc> ProductosServiciosPcs { get; set; }
-        public virtual DbSet<RazonSocialCor> RazonSocialCors { get; set; }
         public virtual DbSet<ResenasPc> ResenasPcs { get; set; }
         public virtual DbSet<RolCor> RolCors { get; set; }
         public virtual DbSet<TemplateMensajeCor> TemplateMensajeCors { get; set; }
@@ -148,6 +147,8 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                     .IsRequired()
                     .HasMaxLength(5)
                     .HasColumnName("estado");
+
+                entity.Property(e => e.Idepayco).HasColumnName("idepayco");
 
                 entity.Property(e => e.Idpoblacion).HasColumnName("idpoblacion");
 
@@ -292,7 +293,14 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                     .UseIdentityAlwaysColumn()
                     .HasIdentityOptions(null, null, null, 999999L, null, null);
 
+                entity.Property(e => e.Creacion).HasColumnName("creacion");
+
                 entity.Property(e => e.Iddemografia).HasColumnName("iddemografia");
+
+                entity.Property(e => e.Razonsocial)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("razonsocial");
 
                 entity.Property(e => e.Urlimagen)
                     .IsRequired()
@@ -367,8 +375,6 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                 entity.Property(e => e.Fechafactura).HasColumnName("fechafactura");
 
                 entity.Property(e => e.Idpedido).HasColumnName("idpedido");
-
-                entity.Property(e => e.Idvendedor).HasColumnName("idvendedor");
 
                 entity.Property(e => e.Valortotalfactura).HasColumnName("valortotalfactura");
 
@@ -703,6 +709,8 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
 
                 entity.Property(e => e.Idproductoservicio).HasColumnName("idproductoservicio");
 
+                entity.Property(e => e.Idvendedor).HasColumnName("idvendedor");
+
                 entity.Property(e => e.Preciofacturado).HasColumnName("preciofacturado");
 
                 entity.HasOne(d => d.IdfacturaNavigation)
@@ -850,34 +858,6 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                     .HasForeignKey(d => d.Idusuario)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_idUsuario");
-            });
-
-            modelBuilder.Entity<RazonSocialCor>(entity =>
-            {
-                entity.ToTable("razon_social_cor");
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .UseIdentityAlwaysColumn();
-
-                entity.Property(e => e.Creacion).HasColumnName("creacion");
-
-                entity.Property(e => e.DocumentoCamaraComercio).HasColumnName("documento_camara_comercio");
-
-                entity.Property(e => e.DocumentoCedula).HasColumnName("documento_cedula");
-
-                entity.Property(e => e.Estado)
-                    .IsRequired()
-                    .HasMaxLength(5)
-                    .HasColumnName("estado");
-
-                entity.Property(e => e.Nit).HasColumnName("NIT");
-
-                entity.Property(e => e.Nombre)
-                    .HasMaxLength(30)
-                    .HasColumnName("nombre");
-
-                entity.Property(e => e.Telefono).HasColumnName("telefono");
             });
 
             modelBuilder.Entity<ResenasPc>(entity =>

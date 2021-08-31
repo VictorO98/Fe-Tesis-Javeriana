@@ -39,6 +39,7 @@ using NETCore.MailKit.Extensions;
 using NETCore.MailKit.Infrastructure.Internal;
 using VueCliMiddleware;
 using Fe.Core.Seguridad;
+using Fe.Core.Seguridad.Datos;
 
 namespace FEWebApplication
 {
@@ -143,6 +144,7 @@ namespace FEWebApplication
             services.AddScoped<RepoNotificacion>();
 
             services.AddScoped<RepoDemografiaReportada>();
+            services.AddScoped<RepoDocumentosEmprendedor>();
             services.AddScoped<RepoRazonSocial>();
             services.AddScoped<RepoFavorito>();
             services.AddScoped<RepoProdSerXVendidosPed>();

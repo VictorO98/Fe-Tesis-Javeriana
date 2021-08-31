@@ -104,6 +104,10 @@ namespace FEWebApplication.Authentication
             return await _seguridadBiz.Login(model);
         }
 
+        /// <summary>
+        /// Método para subir documentos de los emprendedores
+        /// </summary>
+        /// <returns>Respuesta datos. </returns>
         [HttpPost]
         [Route("SubirDocumentosEmprendedor")]
         public async Task<RespuestaDatos> SubirDocumentosEmprendedor(IFormCollection collection)

@@ -18,6 +18,11 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\De
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Dapper.Contrib.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\DotLiquid.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\epayco.net.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Google.Apis.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Google.Apis.Auth.PlatformServices.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Google.Apis.Auth.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Google.Apis.Core.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Google.Apis.Gmail.v1.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Hangfire.AspNetCore.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Hangfire.Core.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Humanizer.dll
@@ -136,8 +141,3 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\De
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Debug\net5.0\ref\FEWebApplication.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Debug\net5.0\FEWebApplication.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Debug\net5.0\FEWebApplication.genruntimeconfig.cache
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Google.Apis.dll
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Google.Apis.Auth.PlatformServices.dll
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Google.Apis.Auth.dll
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Google.Apis.Core.dll
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Debug\net5.0\Google.Apis.Gmail.v1.dll

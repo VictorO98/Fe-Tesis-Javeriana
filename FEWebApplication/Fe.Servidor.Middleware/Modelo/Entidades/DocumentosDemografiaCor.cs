@@ -10,6 +10,8 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
         public int Id { get; set; }
         public string Urlimagen { get; set; }
         public int Iddemografia { get; set; }
+        public DateTime Creacion { get; set; }
+        public string Razonsocial { get; set; }
 
         public virtual DemografiaCor IddemografiaNavigation { get; set; }
     }
