@@ -149,8 +149,6 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                     .HasMaxLength(5)
                     .HasColumnName("estado");
 
-                entity.Property(e => e.Idepayco).HasColumnName("idepayco");
-
                 entity.Property(e => e.Idpoblacion).HasColumnName("idpoblacion");
 
                 entity.Property(e => e.Modificacion).HasColumnName("modificacion");

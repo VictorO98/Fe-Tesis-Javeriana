@@ -34,7 +34,6 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
         public int Idpoblacion { get; set; }
         public string Email { get; set; }
         public string Codigotelefonopais { get; set; }
-        public int? Idepayco { get; set; }
 
         public virtual PoblacionCor IdpoblacionNavigation { get; set; }
         public virtual RolCor Rolcor { get; set; }
