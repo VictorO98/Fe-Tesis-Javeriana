@@ -10,6 +10,7 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Seguridad\bin\R
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Seguridad\bin\Release\netcoreapp3.1\Fe.Core.Global.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Seguridad\bin\Release\netcoreapp3.1\Fe.Servidor.Middleware.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Seguridad\obj\Release\netcoreapp3.1\Fe.Core.Seguridad.csproj.AssemblyReference.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Seguridad\obj\Release\netcoreapp3.1\Fe.Core.Seguridad.GeneratedMSBuildEditorConfig.editorconfig
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Seguridad\obj\Release\netcoreapp3.1\Fe.Core.Seguridad.AssemblyInfoInputs.cache
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Seguridad\obj\Release\netcoreapp3.1\Fe.Core.Seguridad.AssemblyInfo.cs
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Seguridad\obj\Release\netcoreapp3.1\Fe.Core.Seguridad.csproj.CoreCompileInputs.cache

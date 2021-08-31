@@ -5,6 +5,7 @@ import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:Fe_mobile/src/models/product.dart';
 import 'package:Fe_mobile/src/models/product_color.dart';
 import 'package:Fe_mobile/src/models/product_size.dart';
+import 'package:Fe_mobile/src/models/route_argument.dart';
 import 'package:Fe_mobile/src/widgets/FlashSalesCarouselWidget.dart';
 import 'package:flutter/material.dart';
 
@@ -122,7 +123,9 @@ class ProductHomeTabWidgetState extends State<ProductHomeTabWidget> {
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.of(context).pushNamed('/Trueque');
+                    Navigator.of(context).pushNamed('/Trueque',
+                        arguments: new RouteArgument(
+                            argumentsList: [1, widget.product!]));
                   },
                   child: Container(
                     decoration: BoxDecoration(

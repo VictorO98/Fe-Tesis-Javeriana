@@ -63,6 +63,12 @@ namespace Fe.Dominio.trueques.Datos
             return context.TruequesPedidoTrues.Where(t => t.Idcomprador == idComprador).ToList();
         }
 
+        internal ICollection<ProdSerTruequeTrue> GetDetalleTruequePorIdTrueque(int id)
+        {
+            using FeContext context = new FeContext();
+            return context.ProdSerTruequeTrues.Where(t => t.Id == id).ToList();
+        }
+
         internal async Task<RespuestaDatos> ModificarTrueque(TruequesPedidoTrue nuevoTrueque, string estado)
         {
             using FeContext context = new FeContext();

@@ -350,5 +350,10 @@ namespace Fe.Dominio.contenido
                 throw e;
             }
         }
+
+        public async Task<ContratoPc> GetProductoPorIdProducto(int idPublicacion)
+        {
+            return await _cOContenidoBiz.GetProductoPorIdProducto(idPublicacion);
+        }
     }
 }

@@ -59,10 +59,10 @@ class _ProductoUsuarioListItemWidgetState
         highlightColor: Theme.of(context).primaryColor,
         // TODO : ARREGLAR EL DETALLE DEL PRODUCTO PARA MODIFICARLO
         onTap: () {
-          Navigator.of(context).pushNamed('/Product',
-              arguments: new RouteArgument(
-                  argumentsList: [this.widget.heroTag],
-                  id: this.widget.product!.id));
+          // Navigator.of(context).pushNamed('/Product',
+          //     arguments: new RouteArgument(
+          //         argumentsList: [this.widget.heroTag],
+          //         id: this.widget.product!.id));
         },
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
@@ -144,6 +144,24 @@ class _ProductoUsuarioListItemWidgetState
                                   ),
                                 ],
                               ),
+                              Row(
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.format_list_numbered_rtl_outlined,
+                                    color: Theme.of(context).focusColor,
+                                    size: 20,
+                                  ),
+                                  SizedBox(width: 10),
+                                  Text(
+                                    'Unidades disponibles: ' +
+                                        widget.product!.cantidadtotal
+                                            .toString(), // TODO  cambiar por el número del modelo
+                                    style: Theme.of(context).textTheme.body1,
+                                    overflow: TextOverflow.fade,
+                                    softWrap: false,
+                                  ),
+                                ],
+                              ),
                             ],
 //                            crossAxisAlignment: CrossAxisAlignment.center,
                           ),
@@ -159,14 +177,21 @@ class _ProductoUsuarioListItemWidgetState
                             style: Theme.of(context).textTheme.display1),
                         SizedBox(height: 6),
                         widget.product!.tipoPublicacion == "Producto"
-                            ? Chip(
+                            ? ActionChip(
+                                avatar: Icon(Icons.edit),
+                                onPressed: () {
+                                  Navigator.of(context).pushNamed(
+                                      '/EditarPublicacion',
+                                      arguments: new RouteArgument(
+                                          argumentsList: [widget.product]));
+                                },
                                 padding: EdgeInsets.symmetric(horizontal: 5),
                                 backgroundColor: Colors.transparent,
                                 shape: StadiumBorder(
                                     side: BorderSide(
                                         color: Theme.of(context).focusColor)),
                                 label: Text(
-                                  '${widget.product!.cantidadtotal}',
+                                  'Editar',
                                   style: TextStyle(
                                       color: Theme.of(context).focusColor),
                                 ),

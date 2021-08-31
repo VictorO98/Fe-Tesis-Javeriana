@@ -105,12 +105,22 @@ namespace Fe.Dominio.trueques.Negocio
 
         internal List<TruequesPedidoTrue> GetTruequesPorIdVendedor(int idVendedor)
         {
-            return _repoTrueque.GetTruequesPorIdVendedor(idVendedor);
+            var cabeceraTrueque = _repoTrueque.GetTruequesPorIdVendedor(idVendedor);
+            for (int i = 0; i < cabeceraTrueque.Count; i++)
+            {
+                cabeceraTrueque[i].ProdSerTruequeTrues = _repoTrueque.GetDetalleTruequePorIdTrueque(cabeceraTrueque[i].Id);
+            }
+            return cabeceraTrueque;
         }
 
         internal List<TruequesPedidoTrue> GetTruequesPorIdComprador(int idComprador)
         {
-            return _repoTrueque.GetTruequesPorIdComprador(idComprador);
+            var cabeceraTrueque = _repoTrueque.GetTruequesPorIdComprador(idComprador);
+            for (int i = 0; i < cabeceraTrueque.Count; i++)
+            {
+                cabeceraTrueque[i].ProdSerTruequeTrues = _repoTrueque.GetDetalleTruequePorIdTrueque(cabeceraTrueque[i].Id);
+            }
+            return cabeceraTrueque;
         }
 
         internal ProdSerTruequeTrue GetDetallePorIdTrueque(int idTrueque)

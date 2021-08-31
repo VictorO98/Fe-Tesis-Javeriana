@@ -1,4 +1,6 @@
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Integracion\bin\Debug\net5.0\Fe.Servidor.Integracion.deps.json
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Integracion\bin\Debug\net5.0\Fe.Servidor.Integracion.runtimeconfig.json
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Integracion\bin\Debug\net5.0\Fe.Servidor.Integracion.runtimeconfig.dev.json
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Integracion\bin\Debug\net5.0\Fe.Servidor.Integracion.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Integracion\bin\Debug\net5.0\ref\Fe.Servidor.Integracion.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Integracion\bin\Debug\net5.0\Fe.Servidor.Integracion.pdb
@@ -17,3 +19,4 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Integracion
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Integracion\obj\Debug\net5.0\Fe.Servidor.Integracion.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Integracion\obj\Debug\net5.0\ref\Fe.Servidor.Integracion.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Integracion\obj\Debug\net5.0\Fe.Servidor.Integracion.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Integracion\obj\Debug\net5.0\Fe.Servidor.Integracion.genruntimeconfig.cache

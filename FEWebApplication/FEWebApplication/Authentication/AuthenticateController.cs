@@ -1,15 +1,21 @@
-﻿using Fe.Core.General.Datos;
+﻿using Fe.Core.General;
+using Fe.Core.General.Datos;
 using Fe.Core.Global.Constantes;
+using Fe.Core.Global.Errores;
+using Fe.Core.Seguridad;
 using Fe.Core.Seguridad.Negocio;
 using Fe.Servidor.Integracion.Mensajes.DotLiquid;
 using Fe.Servidor.Middleware.Contratos.Core;
 using Fe.Servidor.Middleware.Contratos.Core.Seguridad;
 using Fe.Servidor.Middleware.Modelo.Entidades;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace FEWebApplication.Authentication
@@ -22,15 +28,17 @@ namespace FEWebApplication.Authentication
     public class AuthenticateController : ControllerBase
     {
         private readonly COSeguridadBiz _seguridadBiz;
+        private readonly SEFachada _sEFachada;
         private readonly IConfiguration _configuration;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly WorkflowMensaje _workflowMensaje;
 
-        public AuthenticateController(COSeguridadBiz seguridadBiz, IConfiguration configuration
+        public AuthenticateController(COSeguridadBiz seguridadBiz, IConfiguration configuration, SEFachada sEFachada
             , UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, WorkflowMensaje workflowMensaje)
         {
             _seguridadBiz = seguridadBiz;
+            _sEFachada = sEFachada;
             _configuration = configuration;
             _userManager = userManager;
             _roleManager = roleManager;
@@ -94,6 +102,31 @@ namespace FEWebApplication.Authentication
         public async Task<RespuestaLogin> Login([FromBody] LoginDatos model)
         {
             return await _seguridadBiz.Login(model);
+        }
+
+        [HttpPost]
+        [Route("SubirDocumentosEmprendedor")]
+        public async Task<RespuestaDatos> SubirDocumentosEmprendedor(IFormCollection collection)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                var formData = Request.Form;
+                var files = Request.Form.Files;
+                Claim claimId = User.Claims.Where(c => c.Type == "id").FirstOrDefault();
+                formData = Request.Form;
+                if (formData == null)
+                    throw new COExcepcion("El formulario de la petición enviada se encuentra vacío. ");
+
+                var correoUsuario = Request.Form["Correo"].ToString();
+
+                respuestaDatos = await _sEFachada.SubirDocumentosEmprendedor(correoUsuario, files);
+            }
+            catch (COExcepcion e)
+            {
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
+            }
+            return respuestaDatos;
         }
 
         /// <summary>

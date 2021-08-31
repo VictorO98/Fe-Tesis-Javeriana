@@ -22,6 +22,17 @@ class ContenidoProvider {
     return listado;
   }
 
+  Future<ProductoServicioModel?> getPublicacionesPorIdPublicacion(
+      String idPublicacion) async {
+    String? data = await ServicioUtil.get(
+        "dominio/COContenido/GetProductoPorIdProducto",
+        params: {"idPublicacion": idPublicacion},
+        isMostrarAlertError: true);
+    if (data == null) return null;
+    final dynamic decodedData = json.decode(data);
+    return ProductoServicioModel.fromJson(decodedData);
+  }
+
   Future<List<ProductoServicioModel>> getPublicacionesFavoritas(
       String idDemografia) async {
     String? data = await ServicioUtil.get(

@@ -4,6 +4,7 @@ using Fe.Core.Global.Constantes;
 using Fe.Core.Global.Errores;
 using Fe.Servidor.Middleware.Contratos.Core;
 using Fe.Servidor.Middleware.Modelo.Entidades;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

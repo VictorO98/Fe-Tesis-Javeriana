@@ -34,6 +34,7 @@ class ProductoServicioModel {
     this.prodSerTruequeTrueIdproductoserviciovendedorNavigations,
     this.prodSerXVendidosPeds,
     this.resenas,
+    this.cantidadOfertarTrueque,
   });
 
   int? id;
@@ -55,6 +56,7 @@ class ProductoServicioModel {
   dynamic prodSerTruequeTrueIdproductoserviciovendedorNavigations;
   dynamic prodSerXVendidosPeds;
   List<ResenaModel>? resenas;
+  int? cantidadOfertarTrueque;
 
   factory ProductoServicioModel.fromJson(Map<String, dynamic> json) =>
       ProductoServicioModel(

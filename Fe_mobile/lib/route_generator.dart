@@ -1,6 +1,9 @@
 import 'package:Fe_mobile/src/dominio/pages/Contenido/crear_servicio_producto_page.dart';
 import 'package:Fe_mobile/src/dominio/pages/contenido/busqueda_productos_page.dart';
+import 'package:Fe_mobile/src/dominio/pages/contenido/editar_publicacion_page.dart';
 import 'package:Fe_mobile/src/dominio/pages/contenido/publicaciones_usuario_page.dart';
+import 'package:Fe_mobile/src/dominio/pages/trueques/lista_solicitud_trueques_page.dart';
+import 'package:Fe_mobile/src/dominio/pages/trueques/listado_trueques_usuario_page.dart';
 import 'package:Fe_mobile/src/dominio/pages/trueques/ofertar_trueque_page.dart';
 import 'package:Fe_mobile/src/models/route_argument.dart';
 import 'package:Fe_mobile/src/screens/brand.dart';
@@ -38,14 +41,28 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => OrdersWidget());
       case '/Create':
         return MaterialPageRoute(builder: (_) => CrearServicioProductoPage());
-      case '/Trueque':
-        return MaterialPageRoute(builder: (_) => OfertarTruequePage());
       case '/Brands':
         return MaterialPageRoute(builder: (_) => BrandsWidget());
 //      case '/MobileVerification':
 //        return MaterialPageRoute(builder: (_) => MobileVerification());
 //      case '/MobileVerification2':
 //        return MaterialPageRoute(builder: (_) => MobileVerification2());
+      case '/SolicitudTrueques':
+        return MaterialPageRoute(
+            builder: (_) => ListadoSolicitudTruequesWidget(
+                routeArgument: args as RouteArgument?));
+      case '/TruquesUsuario':
+        return MaterialPageRoute(
+            builder: (_) => ListadoTruequesUsuarioWidget(
+                routeArgument: args as RouteArgument?));
+      case '/EditarPublicacion':
+        return MaterialPageRoute(
+            builder: (_) =>
+                EditarPublicacionPage(routeArgument: args as RouteArgument?));
+      case '/Trueque':
+        return MaterialPageRoute(
+            builder: (_) =>
+                OfertarTruequePage(routeArgument: args as RouteArgument?));
       case '/MisPub':
         return MaterialPageRoute(
             builder: (_) => PublicacionesUsuarioPage(
@@ -75,10 +92,10 @@ class RouteGenerator {
 //            builder: (_) => FoodWidget(
 //              routeArgument: args as RouteArgument,
 //            ));
-      case '/Cart':
-        return MaterialPageRoute(builder: (_) => CartWidget());
       case '/Checkout':
         return MaterialPageRoute(builder: (_) => CheckoutWidget());
+      case '/Cart':
+        return MaterialPageRoute(builder: (_) => CartWidget());
       case '/CheckoutDone':
         return MaterialPageRoute(builder: (_) => CheckoutDoneWidget());
       case '/Help':

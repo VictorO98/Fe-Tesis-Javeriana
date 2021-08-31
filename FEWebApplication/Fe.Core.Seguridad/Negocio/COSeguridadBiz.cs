@@ -1,8 +1,10 @@
 ﻿using Fe.Core.General.Datos;
 using Fe.Core.Global.Constantes;
 using Fe.Core.Global.Errores;
+using Fe.Servidor.Middleware.Contratos.Core;
 using Fe.Servidor.Middleware.Contratos.Core.Seguridad;
 using Fe.Servidor.Middleware.Modelo.Entidades;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -34,6 +36,15 @@ namespace Fe.Core.Seguridad.Negocio
             _configuration = configuration;
             _repoRoles = repoRoles;
             _repoPoblacion = repoPoblacion;
+        }
+
+        internal Task<RespuestaDatos> SubirDocumentosEmprendedor(DemografiaCor demografiaCor, IFormFileCollection files)
+        {
+            if (demografiaCor != null)
+            {
+                return null;
+            }
+            else { throw new COExcepcion("El usuario ingresado no existe."); }
         }
 
         public async Task<RespuestaLogin> RefreshToken(string token)

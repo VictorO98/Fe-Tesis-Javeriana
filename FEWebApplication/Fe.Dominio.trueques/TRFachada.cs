@@ -81,7 +81,7 @@ namespace Fe.Dominio.trueques
                 trueque = GetTruequePorIdCompradorIdVendedor(demografiaComprador.Id, demografiaVendedor.Id);
                 detalle.Idtruequepedido = trueque.Id;
                 RespuestaDatos respuestaDetalle = await _tRTruequeBiz.GuardarTruequeDetalle(detalle, publicacionVendedor, publicacionComprador);
-                respuestaDatos.Mensaje = respuestaDatos.Mensaje + " " + respuestaDetalle.Mensaje;
+                respuestaDatos.Mensaje = respuestaDatos.Mensaje;
             }
             catch (COExcepcion e)
             {

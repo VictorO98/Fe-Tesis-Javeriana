@@ -198,6 +198,7 @@ class _CartWidgetState extends State<CartWidget> {
                           width: MediaQuery.of(context).size.width - 40,
                           child: FlatButton(
                             onPressed: () {
+                              _carrito.setTotalCheckOut(_checkout);
                               Navigator.of(context).pushNamed('/Checkout');
                             },
                             padding: EdgeInsets.symmetric(vertical: 14),

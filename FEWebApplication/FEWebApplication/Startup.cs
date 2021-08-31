@@ -38,6 +38,7 @@ using Fe.Servidor.Integracion.Email;
 using NETCore.MailKit.Extensions;
 using NETCore.MailKit.Infrastructure.Internal;
 using VueCliMiddleware;
+using Fe.Core.Seguridad;
 
 namespace FEWebApplication
 {
@@ -120,6 +121,7 @@ namespace FEWebApplication
             services.AddScoped<TRTruequeBiz>();
 
             services.AddScoped<COFachada>();
+            services.AddScoped<SEFachada>();
             services.AddScoped<COGeneralFachada>();
             services.AddScoped<DEFachada>();
             services.AddScoped<FAFachada>();
@@ -154,6 +156,11 @@ namespace FEWebApplication
 
             services.AddRazorPages();
             services.AddControllers();
+
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/dist";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -198,6 +205,7 @@ namespace FEWebApplication
                 endpoints.MapControllers();
             });
 
+            app.UseSpaStaticFiles();
             app.UseSpa(spa =>
             {
                 if (env.IsDevelopment())

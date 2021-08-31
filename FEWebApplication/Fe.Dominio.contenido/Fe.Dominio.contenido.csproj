@@ -5,10 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Blazored.Toast" Version="3.1.2" />
     <PackageReference Include="Dapper" Version="2.0.90" />
     <PackageReference Include="Dapper.Contrib" Version="2.0.78" />
     <PackageReference Include="DotLiquid" Version="2.2.541" />
     <PackageReference Include="ePayco.Net" Version="1.0.13" />
+    <PackageReference Include="Google.Apis.Gmail.v1" Version="1.54.0.2356" />
     <PackageReference Include="Hangfire.AspNetCore" Version="1.7.24" />
     <PackageReference Include="IdentityServer4" Version="4.1.2" />
     <PackageReference Include="IdentityServer4.Storage" Version="4.1.2" />

@@ -21,7 +21,7 @@ class FavoritosUsuarioPage extends StatefulWidget {
 
 class _FavoritosUsuarioPageState extends State<FavoritosUsuarioPage> {
   final _prefs = new PreferenciasUtil();
-  String layout = 'grid';
+  String layout = 'list';
 
   List<ProductoServicioModel>? _productsList;
 
@@ -83,119 +83,123 @@ class _FavoritosUsuarioPageState extends State<FavoritosUsuarioPage> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       padding: EdgeInsets.symmetric(vertical: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: SearchBarWidget(),
-          ),
-          SizedBox(height: 10),
-          Offstage(
-            offstage: _productsList!.isEmpty,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 20, right: 10),
-              child: ListTile(
-                contentPadding: EdgeInsets.symmetric(vertical: 0),
-                leading: Icon(
-                  Icons.favorite_border_outlined,
-                  color: Theme.of(context).hintColor,
+      child: _cargandoProductosFavoritos
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: SearchBarWidget(),
                 ),
-                title: Text(
-                  'Lista de deseos',
-                  overflow: TextOverflow.fade,
-                  softWrap: false,
-                  style: Theme.of(context).textTheme.display1,
-                ),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          this.layout = 'list';
-                        });
-                      },
-                      icon: Icon(
-                        Icons.format_list_bulleted,
-                        color: this.layout == 'list'
-                            ? Theme.of(context).accentColor
-                            : Theme.of(context).focusColor,
+                SizedBox(height: 10),
+                Offstage(
+                  offstage: _productsList!.isEmpty,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20, right: 10),
+                    child: ListTile(
+                      contentPadding: EdgeInsets.symmetric(vertical: 0),
+                      leading: Icon(
+                        Icons.favorite_border_outlined,
+                        color: Theme.of(context).hintColor,
+                      ),
+                      title: Text(
+                        'Lista de deseos',
+                        overflow: TextOverflow.fade,
+                        softWrap: false,
+                        style: Theme.of(context).textTheme.display1,
+                      ),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                this.layout = 'list';
+                              });
+                            },
+                            icon: Icon(
+                              Icons.format_list_bulleted,
+                              color: this.layout == 'list'
+                                  ? Theme.of(context).accentColor
+                                  : Theme.of(context).focusColor,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                this.layout = 'grid';
+                              });
+                            },
+                            icon: Icon(
+                              Icons.apps,
+                              color: this.layout == 'grid'
+                                  ? Theme.of(context).accentColor
+                                  : Theme.of(context).focusColor,
+                            ),
+                          )
+                        ],
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          this.layout = 'grid';
-                        });
-                      },
-                      icon: Icon(
-                        Icons.apps,
-                        color: this.layout == 'grid'
-                            ? Theme.of(context).accentColor
-                            : Theme.of(context).focusColor,
-                      ),
-                    )
-                  ],
+                  ),
                 ),
-              ),
-            ),
-          ),
-          Offstage(
-            offstage: this.layout != 'list' || _productsList!.isEmpty,
-            child: ListView.separated(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              primary: false,
-              itemCount: _productsList!.length,
-              separatorBuilder: (context, index) {
-                return SizedBox(height: 10);
-              },
-              itemBuilder: (context, index) {
-                return FavoriteListItemWidget(
-                  heroTag: 'favorites_list',
-                  product: _productsList!.elementAt(index),
-                  onDismissed: () {
-                    setState(() {
-                      _productsList!.removeAt(index);
-                    });
-                  },
-                );
-              },
-            ),
-          ),
-          Offstage(
-            offstage: this.layout != 'grid' || _productsList!.isEmpty,
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: new StaggeredGridView.countBuilder(
-                primary: false,
-                shrinkWrap: true,
-                crossAxisCount: 4,
-                itemCount: _productsList!.length,
-                itemBuilder: (BuildContext context, int index) {
-                  ProductoServicioModel product =
-                      _productsList!.elementAt(index);
-                  return ProductGridItemWidget(
-                    product: product,
-                    heroTag: 'favorites_grid',
-                  );
-                },
-//                  staggeredTileBuilder: (int index) => new StaggeredTile.fit(index % 2 == 0 ? 1 : 2),
-                staggeredTileBuilder: (int index) => new StaggeredTile.fit(2),
-                mainAxisSpacing: 15.0,
-                crossAxisSpacing: 15.0,
-              ),
-            ),
-          ),
-          Offstage(
-            offstage: _productsList!.isNotEmpty,
-            child: EmptyFavoritesWidget(),
-          )
-        ],
-      ),
+                Offstage(
+                  offstage: this.layout != 'list' || _productsList!.isEmpty,
+                  child: ListView.separated(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    primary: false,
+                    itemCount: _productsList!.length,
+                    separatorBuilder: (context, index) {
+                      return SizedBox(height: 10);
+                    },
+                    itemBuilder: (context, index) {
+                      return FavoriteListItemWidget(
+                        heroTag: 'favorites_list',
+                        product: _productsList!.elementAt(index),
+                        onDismissed: () {
+                          setState(() {
+                            _productsList!.removeAt(index);
+                          });
+                        },
+                      );
+                    },
+                  ),
+                ),
+//                 Offstage(
+//                   offstage: this.layout != 'grid' || _productsList!.isEmpty,
+//                   child: Container(
+//                     padding: EdgeInsets.symmetric(horizontal: 20),
+//                     child: new StaggeredGridView.countBuilder(
+//                       primary: false,
+//                       shrinkWrap: true,
+//                       crossAxisCount: 4,
+//                       itemCount: _productsList!.length,
+//                       itemBuilder: (BuildContext context, int index) {
+//                         ProductoServicioModel product =
+//                             _productsList!.elementAt(index);
+//                         return ProductGridItemWidget(
+//                           product: product,
+//                           heroTag: 'favorites_grid',
+//                         );
+//                       },
+// //                  staggeredTileBuilder: (int index) => new StaggeredTile.fit(index % 2 == 0 ? 1 : 2),
+//                       staggeredTileBuilder: (int index) =>
+//                           new StaggeredTile.fit(2),
+//                       mainAxisSpacing: 15.0,
+//                       crossAxisSpacing: 15.0,
+//                     ),
+//                   ),
+//                 ),
+                Offstage(
+                  offstage: _productsList!.isNotEmpty,
+                  child: EmptyFavoritesWidget(),
+                )
+              ],
+            )
+          : Container(
+              alignment: Alignment.center, child: CircularProgressIndicator()),
     );
   }
 }

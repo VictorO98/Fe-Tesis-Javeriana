@@ -3,9 +3,15 @@ import 'package:Fe_mobile/src/core/models/info_usuario_model.dart';
 import 'package:Fe_mobile/src/core/pages/usuario/bloc/info_perfil/info_usuario_bloc.dart';
 import 'package:Fe_mobile/src/core/util/alert_util.dart';
 import 'package:Fe_mobile/src/core/util/conf_api.dart';
+import 'package:Fe_mobile/src/core/util/estados_pedido_util.dart';
+import 'package:Fe_mobile/src/core/util/estados_trueque_util.dart';
 import 'package:Fe_mobile/src/core/util/preferencias_util.dart';
+import 'package:Fe_mobile/src/dominio/models/info_pedidos_model.dart';
+import 'package:Fe_mobile/src/dominio/models/info_trueques_model.dart';
 import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:Fe_mobile/src/dominio/providers/contenido_provider.dart';
+import 'package:Fe_mobile/src/dominio/providers/pedidos_provider.dart';
+import 'package:Fe_mobile/src/dominio/providers/trueque_provider.dart';
 import 'package:Fe_mobile/src/models/route_argument.dart';
 import 'package:Fe_mobile/src/models/user.dart';
 import 'package:Fe_mobile/src/widgets/ProfileSettingsDialog.dart';
@@ -23,27 +29,105 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
 
   List<ProductoServicioModel> _productos = [];
   List<ProductoServicioModel> _servicios = [];
+  List<InfoTruequesModel> _infoTrueques = [];
+  List<InfoPedidosModel> _infoPedidos = [];
+  List<InfoTruequesModel> _infoTruequesSolicitados = [];
 
   InfoUsuarioBloc? _infoUsuarioBloc;
   ContenidoProvider _contenidoProvider = new ContenidoProvider();
+  TruequeProvider _truequeProvider = new TruequeProvider();
+  PedidoProvider _pedidoProvider = new PedidoProvider();
 
   bool _cargandoUsuario = false;
   bool _cargandoProductos = false;
+  bool _cargandoPedidos = false;
 
   User _user = new User.init().getCurrentUser();
 
   String? idDemografia;
+  int? _pedidoPendiente;
+  int? _pedidoEmpaquetado;
+  int? _pedidoEnviado;
+  int? _pedidoCancelado;
+  int? _truequeOfertado;
+  int? _truequeAceptado;
+  int? _truequeRechazdo;
 
   @override
   void initState() {
     super.initState();
     _infoUsuarioBloc = BlocProvider.of<InfoUsuarioBloc>(context);
     _cargarInfoUsuario();
-    _cargarProductos();
+    _infoUsuarioBloc!.state.infoUsuarioModel!.rol == "Emprendedor"
+        ? _cargarProductos()
+        : SizedBox();
     _cargarPedidos();
+    _infoUsuarioBloc!.state.infoUsuarioModel!.rol == "Emprendedor"
+        ? _cargarTrueques()
+        : SizedBox();
   }
 
-  _cargarPedidos() async {}
+  _cargarTrueques() async {
+    var lista = await _truequeProvider.getTruequesPorIdComprador(
+        _infoUsuarioBloc!.state.infoUsuarioModel!.id!);
+    var list = await _truequeProvider.getTruequesPorIdVendedor(
+        _infoUsuarioBloc!.state.infoUsuarioModel!.id!);
+    var ace = 0;
+    var ofe = 0;
+    var rec = 0;
+    for (var i = 0; i < lista.length; i++) {
+      if (EstadosTruequeUtil.ACEPTADO == lista[i].estado) {
+        ace += 1;
+      }
+      if (EstadosTruequeUtil.RECHAZADO == lista[i].estado) {
+        rec += 1;
+      }
+      if (EstadosTruequeUtil.OFERTADO == lista[i].estado) {
+        ofe += 1;
+      }
+    }
+
+    if (mounted)
+      setState(() {
+        _infoTrueques = lista;
+        _infoTruequesSolicitados = list;
+        _truequeOfertado = ofe;
+        _truequeAceptado = ace;
+        _truequeRechazdo = rec;
+      });
+  }
+
+  _cargarPedidos() async {
+    var lista = await _pedidoProvider
+        .getPedidosPorIdUsuario(_infoUsuarioBloc!.state.infoUsuarioModel!.id!);
+    var pen = 0;
+    var env = 0;
+    var emp = 0;
+    var can = 0;
+    for (var i = 0; i < lista.length; i++) {
+      if (EstadosPedidosUtil.PENDIENTE == lista[i].estado) {
+        pen += 1;
+      }
+      if (EstadosPedidosUtil.ENVIADO == lista[i].estado) {
+        env += 1;
+      }
+      if (EstadosPedidosUtil.EMPAQUETADO == lista[i].estado) {
+        emp += 1;
+      }
+      if (EstadosPedidosUtil.CANCELADO == lista[i].estado) {
+        can += 1;
+      }
+    }
+    if (mounted)
+      setState(() {
+        _infoPedidos = lista;
+        _pedidoPendiente = pen;
+        _pedidoEmpaquetado = emp;
+        _pedidoEnviado = env;
+        _pedidoCancelado = can;
+        _cargandoPedidos = true;
+      });
+  }
 
   _cargarProductos() async {
     var lista = await _contenidoProvider.getPublicacionesPorIdDemografia(
@@ -55,7 +139,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
 
     for (var i = 0; i < lista.length; i++) {
       lista[i].urlimagenproductoservicio =
-          "${ConfServer.SERVER}dominio/COContenido/GetImagenProdcuto?idPublicacion=${lista[i].id}&idUsuario=$idUsuario";
+          "${ConfServer.SERVER}dominio/COContenido/GetImagenProdcuto?idPublicacion=${lista[i].id}";
     }
 
     for (int i = 0; i < lista.length; i++) {
@@ -147,13 +231,19 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             ),
           ),
           _tabPrincipal(context),
-          _userOrders(context),
+          _infoUsuarioBloc!.state.infoUsuarioModel!.rol == "Emprendedor"
+              ? _infoProductosEmprendedores(context)
+              : _infoUsuarios(context),
+          _cargandoPedidos ? _userOrders(context) : CircularProgressIndicator(),
           _infoUsuarioBloc!.state.infoUsuarioModel!.rol == "Emprendedor"
               ? _infoFacturacionEmprendedor(context)
               : SizedBox(),
           _infoUsuarioBloc!.state.infoUsuarioModel!.rol == "Emprendedor"
-              ? _infoProductosEmprendedores(context)
-              : _infoUsuarios(context),
+              ? _userTrueques(context)
+              : SizedBox(),
+          _infoUsuarioBloc!.state.infoUsuarioModel!.rol == "Emprendedor"
+              ? _userTruequeSolicitados(context)
+              : SizedBox(),
           _cargandoUsuario
               ? Center(child: CircularProgressIndicator())
               : _userProfile(context),
@@ -256,8 +346,114 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
               shape: StadiumBorder(
                   side: BorderSide(color: Theme.of(context).focusColor)),
               label: Text(
+                // TODO CAMBIAR ESTA SHIT
                 '1',
+                //_pedidoPendiente.toString(),
                 style: TextStyle(color: Theme.of(context).focusColor),
+              ),
+            ),
+          ),
+          ListTile(
+              onTap: () {
+                Navigator.of(context).pushNamed('/Orders');
+              },
+              dense: true,
+              title: Text(
+                'Empaquetado',
+                style: Theme.of(context).textTheme.body1,
+              ),
+              trailing: Chip(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                backgroundColor: Colors.transparent,
+                shape: StadiumBorder(
+                    side: BorderSide(color: Theme.of(context).focusColor)),
+                label: Text(
+                  '1',
+                  //_pedidoEmpaquetado.toString(),
+                  style: TextStyle(color: Theme.of(context).focusColor),
+                ),
+              )),
+          ListTile(
+              onTap: () {
+                Navigator.of(context).pushNamed('/Orders');
+              },
+              dense: true,
+              title: Text(
+                'Enviado',
+                style: Theme.of(context).textTheme.body1,
+              ),
+              trailing: Chip(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                backgroundColor: Colors.transparent,
+                shape: StadiumBorder(
+                    side: BorderSide(color: Theme.of(context).focusColor)),
+                label: Text(
+                  '1',
+                  // _pedidoEnviado.toString(),
+                  style: TextStyle(color: Theme.of(context).focusColor),
+                ),
+              )),
+          ListTile(
+              onTap: () {
+                Navigator.of(context).pushNamed('/Orders');
+              },
+              dense: true,
+              title: Text(
+                'Devoluciones',
+                style: Theme.of(context).textTheme.body1,
+              ),
+              trailing: Chip(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                backgroundColor: Colors.transparent,
+                shape: StadiumBorder(
+                    side: BorderSide(color: Theme.of(context).focusColor)),
+                label: Text(
+                  _pedidoCancelado.toString(),
+                  style: TextStyle(color: Theme.of(context).focusColor),
+                ),
+              ))
+        ],
+      ),
+    );
+  }
+
+  Widget _userTruequeSolicitados(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      decoration: BoxDecoration(
+        color: Theme.of(context).primaryColor,
+        borderRadius: BorderRadius.circular(6),
+        boxShadow: [
+          BoxShadow(
+              color: Theme.of(context).hintColor.withOpacity(0.15),
+              offset: Offset(0, 3),
+              blurRadius: 10)
+        ],
+      ),
+      child: ListView(
+        shrinkWrap: true,
+        primary: false,
+        children: <Widget>[
+          ListTile(
+            leading: Icon(Icons.business),
+            title: Text(
+              'Intercambios solictados',
+              style: Theme.of(context).textTheme.body2,
+            ),
+            trailing: ButtonTheme(
+              padding: EdgeInsets.all(0),
+              minWidth: 50.0,
+              height: 25.0,
+              child: FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/SolicitudTrueques',
+                      arguments: new RouteArgument(
+                          argumentsList: [_infoTruequesSolicitados]));
+                },
+                child: Text(
+                  "Ver todo",
+                  style: Theme.of(context).textTheme.body1,
+                ),
               ),
             ),
           ),
@@ -267,7 +463,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             },
             dense: true,
             title: Text(
-              'Empaquetado',
+              'Solicitados',
               style: Theme.of(context).textTheme.body1,
             ),
             trailing: Chip(
@@ -276,8 +472,53 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
               shape: StadiumBorder(
                   side: BorderSide(color: Theme.of(context).focusColor)),
               label: Text(
-                '5',
+                _infoTruequesSolicitados.length.toString(),
                 style: TextStyle(color: Theme.of(context).focusColor),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _userTrueques(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      decoration: BoxDecoration(
+        color: Theme.of(context).primaryColor,
+        borderRadius: BorderRadius.circular(6),
+        boxShadow: [
+          BoxShadow(
+              color: Theme.of(context).hintColor.withOpacity(0.15),
+              offset: Offset(0, 3),
+              blurRadius: 10)
+        ],
+      ),
+      child: ListView(
+        shrinkWrap: true,
+        primary: false,
+        children: <Widget>[
+          ListTile(
+            leading: Icon(Icons.approval_outlined),
+            title: Text(
+              'Mis intercambios',
+              style: Theme.of(context).textTheme.body2,
+            ),
+            trailing: ButtonTheme(
+              padding: EdgeInsets.all(0),
+              minWidth: 50.0,
+              height: 25.0,
+              child: FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/TruquesUsuario',
+                      arguments:
+                          new RouteArgument(argumentsList: [_infoTrueques]));
+                },
+                child: Text(
+                  "Ver todo",
+                  style: Theme.of(context).textTheme.body1,
+                ),
               ),
             ),
           ),
@@ -287,7 +528,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             },
             dense: true,
             title: Text(
-              'Enviado',
+              'Ofertado',
               style: Theme.of(context).textTheme.body1,
             ),
             trailing: Chip(
@@ -296,7 +537,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
               shape: StadiumBorder(
                   side: BorderSide(color: Theme.of(context).focusColor)),
               label: Text(
-                '3',
+                _truequeOfertado.toString(),
                 style: TextStyle(color: Theme.of(context).focusColor),
               ),
             ),
@@ -307,10 +548,40 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             },
             dense: true,
             title: Text(
-              'Devoluciones',
+              'Aceptado',
               style: Theme.of(context).textTheme.body1,
             ),
-          )
+            trailing: Chip(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              backgroundColor: Colors.transparent,
+              shape: StadiumBorder(
+                  side: BorderSide(color: Theme.of(context).focusColor)),
+              label: Text(
+                _truequeAceptado.toString(),
+                style: TextStyle(color: Theme.of(context).focusColor),
+              ),
+            ),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.of(context).pushNamed('/Orders');
+            },
+            dense: true,
+            title: Text(
+              'Rechazado',
+              style: Theme.of(context).textTheme.body1,
+            ),
+            trailing: Chip(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              backgroundColor: Colors.transparent,
+              shape: StadiumBorder(
+                  side: BorderSide(color: Theme.of(context).focusColor)),
+              label: Text(
+                _truequeRechazdo.toString(),
+                style: TextStyle(color: Theme.of(context).focusColor),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -369,7 +640,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
               shape: StadiumBorder(
                   side: BorderSide(color: Theme.of(context).focusColor)),
               label: Text(
-                '1',
+                '0',
                 style: TextStyle(color: Theme.of(context).focusColor),
               ),
             ),
@@ -389,7 +660,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
               shape: StadiumBorder(
                   side: BorderSide(color: Theme.of(context).focusColor)),
               label: Text(
-                '5',
+                '0',
                 style: TextStyle(color: Theme.of(context).focusColor),
               ),
             ),
@@ -409,7 +680,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
               shape: StadiumBorder(
                   side: BorderSide(color: Theme.of(context).focusColor)),
               label: Text(
-                '3',
+                '0',
                 style: TextStyle(color: Theme.of(context).focusColor),
               ),
             ),

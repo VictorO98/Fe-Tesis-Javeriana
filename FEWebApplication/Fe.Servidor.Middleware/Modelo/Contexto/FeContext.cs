@@ -24,6 +24,7 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
         public virtual DbSet<DemografiaReportadaCor> DemografiaReportadaCors { get; set; }
         public virtual DbSet<DevolucionesDetalleDev> DevolucionesDetalleDevs { get; set; }
         public virtual DbSet<DevolucionesDev> DevolucionesDevs { get; set; }
+        public virtual DbSet<DocumentosDemografiaCor> DocumentosDemografiaCors { get; set; }
         public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
         public virtual DbSet<EstadoPoblacionCor> EstadoPoblacionCors { get; set; }
         public virtual DbSet<FacturasFac> FacturasFacs { get; set; }
@@ -282,6 +283,28 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                     .HasForeignKey(d => d.Idpedido)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("devoluciones_dev_pedidos_ped");
+            });
+
+            modelBuilder.Entity<DocumentosDemografiaCor>(entity =>
+            {
+                entity.ToTable("documentos_demografia_cor");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .UseIdentityAlwaysColumn()
+                    .HasIdentityOptions(null, null, null, 999999L, null, null);
+
+                entity.Property(e => e.Iddemografia).HasColumnName("iddemografia");
+
+                entity.Property(e => e.Urlimagen)
+                    .IsRequired()
+                    .HasColumnName("urlimagen");
+
+                entity.HasOne(d => d.IddemografiaNavigation)
+                    .WithMany(p => p.DocumentosDemografiaCors)
+                    .HasForeignKey(d => d.Iddemografia)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_iddemografia_demografia");
             });
 
             modelBuilder.Entity<ErrorLog>(entity =>

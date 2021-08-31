@@ -1,10 +1,11 @@
 import 'dart:ui';
 
 import 'package:Fe_mobile/config/ui_icons.dart';
+import 'package:Fe_mobile/src/dominio/models/carrito_compras_model.dart';
 import 'package:flutter/material.dart';
 
 class ShoppingCartButtonWidget extends StatelessWidget {
-  const ShoppingCartButtonWidget({
+  ShoppingCartButtonWidget({
     this.iconColor,
     this.labelColor,
     this.labelCount = 0,
@@ -13,10 +14,13 @@ class ShoppingCartButtonWidget extends StatelessWidget {
 
   final Color? iconColor;
   final Color? labelColor;
-  final int labelCount;
+  int labelCount;
+
+  CarritoComprasModel carritoComprasModel = new CarritoComprasModel();
 
   @override
   Widget build(BuildContext context) {
+    labelCount = carritoComprasModel.returSizeCarrito();
     return FlatButton(
       onPressed: () {
         Navigator.of(context).pushNamed('/Cart');

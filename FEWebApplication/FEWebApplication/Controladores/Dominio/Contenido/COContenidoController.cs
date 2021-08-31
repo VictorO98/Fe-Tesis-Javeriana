@@ -482,6 +482,20 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
             }
         }
 
+        [Route("GetProductoPorIdProducto")]
+        [HttpGet]
+        public async Task<ContratoPc> GetProductoPorIdProducto(int idPublicacion)
+        {
+            try
+            {
+                return await _coFachada.GetProductoPorIdProducto(idPublicacion);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+        }
+
         /// <summary>
         /// Obtiene todas las publicaciones que contengan descuentos.
         /// </summary>

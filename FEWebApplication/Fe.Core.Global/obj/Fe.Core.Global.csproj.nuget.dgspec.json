@@ -44,6 +44,10 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Blazored.Toast": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
             "Dapper": {
               "target": "Package",
               "version": "[2.0.90, )"
@@ -55,6 +59,10 @@
             "DotLiquid": {
               "target": "Package",
               "version": "[2.2.541, )"
+            },
+            "Google.Apis.Gmail.v1": {
+              "target": "Package",
+              "version": "[1.54.0.2356, )"
             },
             "Hangfire.AspNetCore": {
               "target": "Package",
@@ -184,6 +192,10 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Blazored.Toast": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
             "Dapper": {
               "target": "Package",
               "version": "[2.0.90, )"
@@ -195,6 +207,10 @@
             "DotLiquid": {
               "target": "Package",
               "version": "[2.2.541, )"
+            },
+            "Google.Apis.Gmail.v1": {
+              "target": "Package",
+              "version": "[1.54.0.2356, )"
             },
             "Hangfire.AspNetCore": {
               "target": "Package",

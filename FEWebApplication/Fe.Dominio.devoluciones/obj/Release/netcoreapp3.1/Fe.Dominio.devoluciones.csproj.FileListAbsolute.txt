@@ -3,10 +3,11 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.devoluciones
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.devoluciones\bin\Release\netcoreapp3.1\Fe.Dominio.devoluciones.runtimeconfig.dev.json
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.devoluciones\bin\Release\netcoreapp3.1\Fe.Dominio.devoluciones.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.devoluciones\bin\Release\netcoreapp3.1\Fe.Dominio.devoluciones.pdb
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.devoluciones\obj\Release\netcoreapp3.1\Fe.Dominio.devoluciones.csproj.AssemblyReference.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.devoluciones\obj\Release\netcoreapp3.1\Fe.Dominio.devoluciones.GeneratedMSBuildEditorConfig.editorconfig
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.devoluciones\obj\Release\netcoreapp3.1\Fe.Dominio.devoluciones.AssemblyInfoInputs.cache
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.devoluciones\obj\Release\netcoreapp3.1\Fe.Dominio.devoluciones.AssemblyInfo.cs
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.devoluciones\obj\Release\netcoreapp3.1\Fe.Dominio.devoluciones.csproj.CoreCompileInputs.cache
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.devoluciones\obj\Release\netcoreapp3.1\Fe.Dominio.devoluciones.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.devoluciones\obj\Release\netcoreapp3.1\Fe.Dominio.devoluciones.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.devoluciones\obj\Release\netcoreapp3.1\Fe.Dominio.devoluciones.genruntimeconfig.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.devoluciones\obj\Release\netcoreapp3.1\Fe.Dominio.devoluciones.csproj.AssemblyReference.cache

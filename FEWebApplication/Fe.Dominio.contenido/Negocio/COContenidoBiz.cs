@@ -69,7 +69,6 @@ namespace Fe.Dominio.contenido
 
         internal async Task<RespuestaDatos> GuardarPublicacion(ProductosServiciosPc productosServicios, DemografiaCor demografiaCor, IFormFileCollection files)
         {
-            RespuestaDatos respuestaDatos;
             if (demografiaCor != null)
             {
                 if (GetCategoriaPorIdCategoria(productosServicios.Idcategoria) != null)
@@ -85,7 +84,6 @@ namespace Fe.Dominio.contenido
                                 productosServicios.Tiempoentrega = DateTime.Today.AddDays(10); // Tiempo de entrega aproximado a 10 días
                                 productosServicios.Tiempogarantia = productosServicios.Tiempoentrega.AddDays(15); // TIempo de garantía aproximado de 15 días
                                 productosServicios.Modificacion = DateTime.Now;
-                                productosServicios.Id = await _repoProducto.GuardarPublicacion(productosServicios);
 
                                 string directorio = _configuration["ImageProductos:DirectorioImagenes"];
                                 directorio = directorio + "/" + "Productos";
@@ -130,6 +128,7 @@ namespace Fe.Dominio.contenido
                                 if (listadoDeRutaFotos.Count == 0)
                                     throw new COExcepcion("No se almacenó ninguna imagen.");
 
+                                productosServicios.Id = await _repoProducto.GuardarPublicacion(productosServicios);
                                 await _repoProducto.GuardarLinkImagen(productosServicios);
 
                                 return new RespuestaDatos
@@ -150,7 +149,6 @@ namespace Fe.Dominio.contenido
                 else { throw new COExcepcion("La categoría ingresada no existe."); }
             }
             else { throw new COExcepcion("El usuario ingresado no existe."); }
-            return respuestaDatos;
         }
 
         internal async Task<ProductosServiciosPc> GetPublicacionPorIdPublicacion(int idPublicacion)
@@ -300,6 +298,11 @@ namespace Fe.Dominio.contenido
                 throw new COExcepcion("La publicación ingresada no existe");
             }
             return respuestaDatos;
+        }
+
+        internal async Task<ContratoPc> GetProductoPorIdProducto(int idPublicacion)
+        {
+            return await DesplegarPublicacion(idPublicacion);
         }
 
         internal async Task<RespuestaDatos> ModificarPreguntasyRespuestas(PreguntasRespuestasPc pyr)

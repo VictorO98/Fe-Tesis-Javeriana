@@ -1,4 +1,5 @@
 import 'package:Fe_mobile/config/ui_icons.dart';
+import 'package:Fe_mobile/src/core/util/currency_util.dart';
 import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:Fe_mobile/src/models/product.dart';
 import 'package:Fe_mobile/src/models/route_argument.dart';
@@ -129,7 +130,8 @@ class _FavoriteListItemWidgetState extends State<FavoriteListItemWidget> {
                       ),
                     ),
                     SizedBox(width: 8),
-                    Text(widget.product!.preciounitario.toString(),
+                    Text(
+                        "${CurrencyUtil.convertFormatMoney('COP', widget.product!.preciounitario!)}",
                         style: Theme.of(context).textTheme.display1),
                   ],
                 ),

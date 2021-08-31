@@ -1,4 +1,6 @@
-import 'package:Fe_mobile/config/ui_icons.dart';
+import 'package:Fe_mobile/src/core/util/currency_util.dart';
+import 'package:Fe_mobile/src/dominio/models/carrito_compras_model.dart';
+import 'package:Fe_mobile/src/models/route_argument.dart';
 import 'package:Fe_mobile/src/widgets/CreditCardsWidget.dart';
 import 'package:Fe_mobile/src/widgets/ShoppingCartButtonWidget.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +11,8 @@ class CheckoutWidget extends StatefulWidget {
 }
 
 class _CheckoutWidgetState extends State<CheckoutWidget> {
+  CarritoComprasModel _carrito = new CarritoComprasModel();
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -16,14 +20,14 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         leading: new IconButton(
-          icon:
-              new Icon(UiIcons.return_icon, color: Theme.of(context).hintColor),
+          icon: new Icon(Icons.keyboard_return_outlined,
+              color: Theme.of(context).hintColor),
           onPressed: () => Navigator.of(context).pop(),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
-          'Checkout',
+          'Pago',
           style: Theme.of(context).textTheme.display1,
         ),
         actions: <Widget>[
@@ -56,17 +60,17 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
               child: ListTile(
                 contentPadding: EdgeInsets.symmetric(vertical: 0),
                 leading: Icon(
-                  UiIcons.credit_card,
+                  Icons.credit_card,
                   color: Theme.of(context).hintColor,
                 ),
                 title: Text(
-                  'Payment Mode',
+                  'Modo de pago',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.display1,
                 ),
                 subtitle: Text(
-                  'Select your prefered payment mode',
+                  'Selecciona tú método de pago preferido',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.caption,
@@ -77,7 +81,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
             CreditCardsWidget(),
             SizedBox(height: 40),
             Text(
-              'Or Checkout With',
+              'O cancela con',
               style: Theme.of(context).textTheme.caption,
             ),
             SizedBox(height: 40),
@@ -91,8 +95,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                 color: Theme.of(context).focusColor.withOpacity(0.2),
                 shape: StadiumBorder(),
                 child: Image.asset(
-                  'img/paypal.png',
-                  height: 28,
+                  'img/pse.png',
+                  height: 80,
                 ),
               ),
             ),
@@ -100,17 +104,14 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
             SizedBox(
               width: 320,
               child: FlatButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed('/CheckoutDone');
-                },
-                padding: EdgeInsets.symmetric(vertical: 12),
-                color: Theme.of(context).focusColor.withOpacity(0.2),
-                shape: StadiumBorder(),
-                child: Image.asset(
-                  'img/apple_pay.png',
-                  height: 28,
-                ),
-              ),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/CheckoutDone');
+                  },
+                  padding: EdgeInsets.symmetric(vertical: 12),
+                  color: Theme.of(context).focusColor.withOpacity(0.2),
+                  shape: StadiumBorder(),
+                  child: Text('Efectivo',
+                      style: Theme.of(context).textTheme.headline2)),
             ),
             SizedBox(height: 20),
             Stack(
@@ -130,7 +131,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                       width: double.infinity,
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Text(
-                        'Confirm Payment',
+                        'Confirmar Pago',
                         textAlign: TextAlign.start,
                         style: TextStyle(color: Theme.of(context).primaryColor),
                       ),
@@ -140,7 +141,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    '\$55.36',
+                    "${CurrencyUtil.convertFormatMoney('COP', _carrito.getTotalCheckOut())}",
                     style: Theme.of(context).textTheme.display1!.merge(
                         TextStyle(color: Theme.of(context).primaryColor)),
                   ),

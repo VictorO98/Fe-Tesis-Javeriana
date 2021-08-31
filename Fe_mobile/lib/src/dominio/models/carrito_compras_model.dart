@@ -2,10 +2,23 @@ import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 
 class CarritoComprasModel {
   static int _contadorCarrito = 0;
+  static int _totalCheckout = 0;
   static List<ProductoServicioModel> _carritoCompras = [];
 
   List<ProductoServicioModel> returnCarrito() {
     return _carritoCompras;
+  }
+
+  int returSizeCarrito() {
+    return _contadorCarrito;
+  }
+
+  int getTotalCheckOut() {
+    return _totalCheckout;
+  }
+
+  setTotalCheckOut(int value) {
+    _totalCheckout = value;
   }
 
   addElementCarrito(ProductoServicioModel publicacion, int cantidad) {

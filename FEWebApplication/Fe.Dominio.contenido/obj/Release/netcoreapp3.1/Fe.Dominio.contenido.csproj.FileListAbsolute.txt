@@ -10,6 +10,7 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.contenido\bi
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.contenido\bin\Release\netcoreapp3.1\Fe.Core.Global.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.contenido\bin\Release\netcoreapp3.1\Fe.Servidor.Middleware.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.contenido\obj\Release\netcoreapp3.1\Fe.Dominio.contenido.csproj.AssemblyReference.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.contenido\obj\Release\netcoreapp3.1\Fe.Dominio.contenido.GeneratedMSBuildEditorConfig.editorconfig
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.contenido\obj\Release\netcoreapp3.1\Fe.Dominio.contenido.AssemblyInfoInputs.cache
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.contenido\obj\Release\netcoreapp3.1\Fe.Dominio.contenido.AssemblyInfo.cs
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.contenido\obj\Release\netcoreapp3.1\Fe.Dominio.contenido.csproj.CoreCompileInputs.cache

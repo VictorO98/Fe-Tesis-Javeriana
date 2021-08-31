@@ -8,12 +8,9 @@ import 'package:Fe_mobile/src/core/util/estilo_util.dart';
 import 'package:Fe_mobile/src/core/util/preferencias_util.dart';
 import 'package:Fe_mobile/src/dominio/models/categoria_model.dart';
 import 'package:Fe_mobile/src/dominio/models/crear_publicacion_model.dart';
-import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:Fe_mobile/src/dominio/providers/contenido_provider.dart';
 import 'package:Fe_mobile/src/widgets/DrawerWidget.dart';
-import 'package:Fe_mobile/src/widgets/SearchBarWidget.dart';
 import 'package:Fe_mobile/src/widgets/ShoppingCartButtonWidget.dart';
-import 'package:Fe_mobile/src/widgets/check_box_form_field_widget.dart';
 import 'package:Fe_mobile/src/widgets/ver_imagen_widget.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:path/path.dart' as path;
@@ -69,7 +66,6 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
   SwiperController? _scrollController;
 
   CategoriaModel? _categoriaSeleccionada;
-  String? _publicacionSeleccionada;
   String? _tipoVenta;
 
   bool _isLoading = false;
@@ -80,7 +76,7 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
   late bool _isProducto;
 
   // TODO cambiar este dato para subir varias
-  static const int LIMITE_IMAGENES = 5;
+  static const int LIMITE_IMAGENES = 1;
 
   @override
   void initState() {

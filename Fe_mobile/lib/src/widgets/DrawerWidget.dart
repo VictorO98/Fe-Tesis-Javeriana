@@ -6,7 +6,6 @@ class DrawerWidget extends StatelessWidget {
   User _user = new User.init().getCurrentUser();
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Drawer(
       child: ListView(
         children: <Widget>[
@@ -71,16 +70,17 @@ class DrawerWidget extends StatelessWidget {
               "Mis pedidos",
               style: Theme.of(context).textTheme.subhead,
             ),
-            trailing: Chip(
-              padding: EdgeInsets.symmetric(horizontal: 5),
-              backgroundColor: Colors.transparent,
-              shape: StadiumBorder(
-                  side: BorderSide(color: Theme.of(context).focusColor)),
-              label: Text(
-                '8',
-                style: TextStyle(color: Theme.of(context).focusColor),
-              ),
-            ),
+            // TODO: Queda pendiente sacar el numerito
+            // trailing: Chip(
+            //   padding: EdgeInsets.symmetric(horizontal: 5),
+            //   backgroundColor: Colors.transparent,
+            //   shape: StadiumBorder(
+            //       side: BorderSide(color: Theme.of(context).focusColor)),
+            //   label: Text(
+            //     '8',
+            //     style: TextStyle(color: Theme.of(context).focusColor),
+            //   ),
+            // ),
           ),
           ListTile(
             onTap: () {
@@ -95,43 +95,44 @@ class DrawerWidget extends StatelessWidget {
               style: Theme.of(context).textTheme.subhead,
             ),
           ),
-          ListTile(
-            dense: true,
-            title: Text(
-              "Publicaciones",
-              style: Theme.of(context).textTheme.body1,
-            ),
-            trailing: Icon(
-              Icons.remove,
-              color: Theme.of(context).focusColor.withOpacity(0.3),
-            ),
-          ),
-          ListTile(
-            onTap: () {
-              Navigator.of(context).pushNamed('/Categories');
-            },
-            leading: Icon(
-              Icons.folder_open_outlined,
-              color: Theme.of(context).focusColor.withOpacity(1),
-            ),
-            title: Text(
-              "Categorías",
-              style: Theme.of(context).textTheme.subhead,
-            ),
-          ),
-          ListTile(
-            onTap: () {
-              Navigator.of(context).pushNamed('/Brands');
-            },
-            leading: Icon(
-              Icons.folder_open_outlined,
-              color: Theme.of(context).focusColor.withOpacity(1),
-            ),
-            title: Text(
-              "Mis Producos",
-              style: Theme.of(context).textTheme.subhead,
-            ),
-          ),
+          // TODO : Pendiente mas adelante mejorar
+          // ListTile(
+          //   dense: true,
+          //   title: Text(
+          //     "Publicaciones",
+          //     style: Theme.of(context).textTheme.body1,
+          //   ),
+          //   trailing: Icon(
+          //     Icons.remove,
+          //     color: Theme.of(context).focusColor.withOpacity(0.3),
+          //   ),
+          // ),
+          // ListTile(
+          //   onTap: () {
+          //     Navigator.of(context).pushNamed('/Categories');
+          //   },
+          //   leading: Icon(
+          //     Icons.folder_open_outlined,
+          //     color: Theme.of(context).focusColor.withOpacity(1),
+          //   ),
+          //   title: Text(
+          //     "Categorías",
+          //     style: Theme.of(context).textTheme.subhead,
+          //   ),
+          // ),
+          // ListTile(
+          //   onTap: () {
+          //     Navigator.of(context).pushNamed('/Brands');
+          //   },
+          //   leading: Icon(
+          //     Icons.folder_open_outlined,
+          //     color: Theme.of(context).focusColor.withOpacity(1),
+          //   ),
+          //   title: Text(
+          //     "Mis Productos",
+          //     style: Theme.of(context).textTheme.subhead,
+          //   ),
+          // ),
           ListTile(
             dense: true,
             title: Text(

@@ -54,7 +54,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
         context, _searchText);
     for (var i = 0; i < _listaFiltro!.length; i++) {
       _listaFiltro![i].urlimagenproductoservicio =
-          "${ConfServer.SERVER}dominio/COContenido/GetImagenProdcuto?idPublicacion=${_listaFiltro![i].id}&idUsuario=5";
+          "${ConfServer.SERVER}dominio/COContenido/GetImagenProdcuto?idPublicacion=${_listaFiltro![i].id}";
     }
     Navigator.of(context).pushNamed('/Busqueda',
         arguments: new RouteArgument(argumentsList: ['', _listaFiltro]));
