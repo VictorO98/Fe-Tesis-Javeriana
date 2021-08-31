@@ -9,5 +9,6 @@ namespace Fe.Servidor.Middleware.Contratos.Dominio.Factura
         public int IdDemografiaComprador { get; set; }
         public int IdPedido { get; set; }
         public String Banco { get; set; }
+        public int Bill { get; set; }
     }
 }

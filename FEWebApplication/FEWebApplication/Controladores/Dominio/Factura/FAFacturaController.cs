@@ -35,9 +35,9 @@ namespace FEWebApplication.Controladores.Dominio.Factura
         /// <param name="contratoTC">Información necesaria para realizar la transacción con tarjeta de crédito.</param>
         [Route("PagoConTC")]
         [HttpPost]
-        public Task<String> PagoConTC([FromBody] ContratoTC contratoTC)
+        public string PagoConTC([FromBody] ContratoTC contratoTC)
         {
-            Task<String> respuesta = null;
+            string respuesta = null;
             try
             {
                 respuesta = _fAFachada.PagoConTC(contratoTC);
@@ -58,9 +58,9 @@ namespace FEWebApplication.Controladores.Dominio.Factura
         /// <param name="contratoPSE">Información necesaria para realizar la transacción mediante PSE.</param>
         [Route("PagoPSE")]
         [HttpPost]
-        public Task<bool> PagoPSE([FromBody] ContratoPSE contratoPSE)
+        public string PagoPSE([FromBody] ContratoPSE contratoPSE)
         {
-            Task<bool> respuesta = null;
+            string respuesta = "";
             try
             {
                 respuesta = _fAFachada.PagoPSE(contratoPSE);

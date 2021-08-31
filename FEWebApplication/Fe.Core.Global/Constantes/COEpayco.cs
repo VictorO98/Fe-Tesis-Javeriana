@@ -7,7 +7,7 @@ namespace Fe.Core.Global.Constantes
     public class COEpayco
     {
         //TODO: 550731 epayco fundacion
-        public const string EPAYCO_IDBUYA = "539421";
+        public const string EPAYCO_IDBUYA = "550731";
         public static readonly Dictionary<String, String> CODIGO_BANCARIO = new Dictionary<String, String>()
         {
             { "BANCO AGRARIO", "1040" },
