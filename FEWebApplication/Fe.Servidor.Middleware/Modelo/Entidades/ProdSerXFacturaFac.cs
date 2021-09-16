@@ -12,8 +12,6 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
         public int? Cantidadfacturado { get; set; }
         public int? Idproductoservicio { get; set; }
         public int Idfactura { get; set; }
-        public int Idvendedor { get; set; }
-
         public virtual FacturasFac IdfacturaNavigation { get; set; }
     }
 }
