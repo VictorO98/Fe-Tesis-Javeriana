@@ -39,12 +39,12 @@ namespace FEWebApplication.Controladores.Dominio.Pedido
         /// <param name="pedido">Pedido que se desea almacenar en la base de datos</param>
         [Route("GuardarPedido")]
         [HttpPost]
-        public async Task<RespuestaDatos> GuardarPedido([FromBody] PedidosPed pedido)
+        public async Task<int> GuardarPedido([FromBody] PedidosPed pedido)
         {
-            RespuestaDatos respuestaDatos;
+            int idPedido;
             try
             {
-                respuestaDatos = await _peFachada.GuardarPedido(pedido);
+                idPedido = await _peFachada.GuardarPedido(pedido);
             }
             catch (COExcepcion e)
             {
@@ -56,9 +56,10 @@ namespace FEWebApplication.Controladores.Dominio.Pedido
                     Creacion = DateTime.Now,
                     Tipoerror = COErrorLog.ENVIO_CORREO
                 });
-                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
+                //respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
+                throw e;
             }
-            return respuestaDatos;
+            return idPedido;
         }
 
         /// <summary>
@@ -305,7 +306,7 @@ namespace FEWebApplication.Controladores.Dominio.Pedido
         /// <param name="idPedido">Pedido del que se desea obtener su contrato</param>
         [Route("CabeceraPedido")]
         [HttpGet]
-        public async Task<ContratoPedidos> CabeceraPedido(int idPedido)
+        public async Task<ContratoFacturas> CabeceraPedido(int idPedido)
         {
             try
             {
@@ -332,7 +333,7 @@ namespace FEWebApplication.Controladores.Dominio.Pedido
         /// <param name="idUsuario">ID usuario del que se desean obtner todos sus pedidos</param>
         [Route("ListarTodosLosPedidosPorUsuario")]
         [HttpGet]
-        public async Task<List<ContratoPedidos>> ListarTodosLosPedidosPorUsuario(int idUsuario)
+        public async Task<List<ContratoFacturas>> ListarTodosLosPedidosPorUsuario(int idUsuario)
         {
             try
             {

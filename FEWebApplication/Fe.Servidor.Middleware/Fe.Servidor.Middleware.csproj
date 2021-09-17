@@ -37,7 +37,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Contratos\Dominio\" />
     <Folder Include="Dapper\" />
   </ItemGroup>
 

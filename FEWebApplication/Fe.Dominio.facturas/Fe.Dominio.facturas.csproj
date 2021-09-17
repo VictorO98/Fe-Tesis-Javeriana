@@ -36,10 +36,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Datos\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Fe.Dominio.pedidos\Fe.Dominio.pedidos.csproj" />
   </ItemGroup>
 

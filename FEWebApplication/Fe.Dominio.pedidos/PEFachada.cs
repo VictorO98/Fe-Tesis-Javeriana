@@ -28,13 +28,13 @@ namespace Fe.Dominio.pedidos
             _cOContenidoFachada = cOFachada;
         }
 
-        public async Task<RespuestaDatos> GuardarPedido(PedidosPed pedido)
+        public async Task<int> GuardarPedido(PedidosPed pedido)
         {
-            RespuestaDatos respuestaDatos;
+            int idPedido;
             try
             {
                 DemografiaCor demografiaCor = _cOGeneralFachada.GetDemografiaPorId(pedido.Idusuario);
-                respuestaDatos = respuestaDatos = await _pEPedidoBiz.GuardarPedido(pedido, demografiaCor);
+                idPedido = idPedido = await _pEPedidoBiz.GuardarPedido(pedido, demografiaCor);
             }
             catch (COExcepcion e)
             {
@@ -48,7 +48,7 @@ namespace Fe.Dominio.pedidos
                 });
                 throw e;
             }
-            return respuestaDatos;
+            return idPedido;
         }
 
         public PedidosPed GetPedidoPorId(int idPedido)
@@ -298,10 +298,10 @@ namespace Fe.Dominio.pedidos
         }
 
 
-        public async Task<ContratoPedidos> CabeceraPedido(int idPedido)
+        public async Task<ContratoFacturas> CabeceraPedido(int idPedido)
 
         {
-            ContratoPedidos cabeceraPedido = new ContratoPedidos();
+            ContratoFacturas cabeceraPedido = new ContratoFacturas();
             PedidosPed pedido = _pEPedidoBiz.GetPedidoPorId(idPedido);
             if (pedido != null)
             {
@@ -316,9 +316,9 @@ namespace Fe.Dominio.pedidos
             return cabeceraPedido;
         }
 
-        public async Task<List<ContratoPedidos>> ListarTodosLosPedidosPorUsuario(int idUsuario)
+        public async Task<List<ContratoFacturas>> ListarTodosLosPedidosPorUsuario(int idUsuario)
         {
-            List<ContratoPedidos> pedidos = new List<ContratoPedidos>();
+            List<ContratoFacturas> pedidos = new List<ContratoFacturas>();
             DemografiaCor usuario = _cOGeneralFachada.GetDemografiaPorId(idUsuario);
             if(usuario != null)
             {
