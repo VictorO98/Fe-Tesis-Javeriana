@@ -1,4 +1,5 @@
-﻿using Fe.Core.General;
+﻿using EpaycoSdk.Models.Bank;
+using Fe.Core.General;
 using Fe.Core.General.Datos;
 using Fe.Core.Global.Constantes;
 using Fe.Core.Global.Errores;
@@ -37,13 +38,13 @@ namespace Fe.Dominio.facturas
             List<ProductosServiciosPc> productos = new List<ProductosServiciosPc>();
             for (int i = 0; i < listaPedido.Count; i++)
             {
-                ProductosServiciosPc producto = await _cOFachada.GetPublicacionPorIdPublicacion(listaPedido[i].Id);
+                ProductosServiciosPc producto = await _cOFachada.GetPublicacionPorIdPublicacion(listaPedido[i].Idproductoservico);
                 productos.Add(producto);
             }
             return await _fAFacturaBiz.PagoConTC(contratoTC, listaPedido, demografiaComprador, documentoComprador, productos);
         }
 
-        public async Task<string> PagoPSE(ContratoPSE contratoPSE)
+        public async Task<DataPse> PagoPSE(ContratoPSE contratoPSE)
         {
             List<ProdSerXVendidosPed> listaPedido = _pEFachada.GetProductosPedidosPorIdPedido(contratoPSE.IdPedido);
             DemografiaCor demografiaComprador = _cOGeneralFachada.GetDemografiaPorId(contratoPSE.IdDemografiaComprador);
@@ -51,10 +52,22 @@ namespace Fe.Dominio.facturas
             List<ProductosServiciosPc> productos = new List<ProductosServiciosPc>();
             for(int i = 0; i < listaPedido.Count; i++)
             {
-                ProductosServiciosPc producto = await _cOFachada.GetPublicacionPorIdPublicacion(listaPedido[i].Id);
+                ProductosServiciosPc producto = await _cOFachada.GetPublicacionPorIdPublicacion(listaPedido[i].Idproductoservico);
                 productos.Add(producto);
             }
             return await _fAFacturaBiz.PagoPSE(contratoPSE, listaPedido, demografiaComprador, documentoComprador, productos);
+        }
+
+        public async Task<string> FacturacionPSE(ContratoFacturaPSE contratoFacturaPSE)
+        {
+            List<ProdSerXVendidosPed> listaPedido = _pEFachada.GetProductosPedidosPorIdPedido(contratoFacturaPSE.IdPedido);
+            List<ProductosServiciosPc> productos = new List<ProductosServiciosPc>();
+            for (int i = 0; i < listaPedido.Count; i++)
+            {
+                ProductosServiciosPc producto = await _cOFachada.GetPublicacionPorIdPublicacion(listaPedido[i].Idproductoservico);
+                productos.Add(producto);
+            }
+            return await _fAFacturaBiz.FacturacionPSE(contratoFacturaPSE.TicketId, listaPedido, productos);
         }
 
         public async Task<List<FacturasFac>> PedidoAFacturas(List<ProdSerXVendidosPed> listaPedido)

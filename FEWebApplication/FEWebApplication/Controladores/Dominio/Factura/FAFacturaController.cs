@@ -60,9 +60,9 @@ namespace FEWebApplication.Controladores.Dominio.Factura
         /// <param name="contratoPSE">Información necesaria para realizar la transacción mediante PSE.</param>
         [Route("PagoPSE")]
         [HttpPost]
-        public async Task<string> PagoPSE([FromBody] ContratoPSE contratoPSE)
+        public async Task<DataPse> PagoPSE([FromBody] ContratoPSE contratoPSE)
         {
-            string respuesta = "";
+            DataPse respuesta = null;
             try
             {
                 respuesta = await _fAFachada.PagoPSE(contratoPSE);
@@ -75,12 +75,36 @@ namespace FEWebApplication.Controladores.Dominio.Factura
             }
             return respuesta;
         }
+
         /// <summary>
-        /// Retorna las facturas de un pedido (una factura por cada vendedor) (No las almacena en BD)
+        /// Se realiza una facturacion de una transacción hecha mediante PSE.
         /// </summary>
-        /// <returns>Lista de facturas del pedido</returns>
-        /// <param name="pedido">Pedido del cual se desean obtener sus facturas</param>
-        [Route("PedidoAFactura")]
+        /// <returns>Respuesta de datos indicando la factura.</returns>
+        /// <param name="contratoFacturaPSE">Información necesaria para realizar la facturación de PSE.</param>
+        [Route("FacturacionPSE")]
+        [HttpPost]
+        public async Task<string> FacturacionPSE([FromBody] ContratoFacturaPSE contratoFacturaPSE)
+        {
+            string respuesta = "";
+            try
+            {
+                respuesta = await _fAFachada.FacturacionPSE(contratoFacturaPSE);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.InnerException);
+                Console.WriteLine(e.StackTrace);
+            }
+            return respuesta;
+        }
+
+            /// <summary>
+            /// Retorna las facturas de un pedido (una factura por cada vendedor) (No las almacena en BD)
+            /// </summary>
+            /// <returns>Lista de facturas del pedido</returns>
+            /// <param name="pedido">Pedido del cual se desean obtener sus facturas</param>
+            [Route("PedidoAFactura")]
         [HttpGet]
         public async Task<List<FacturasFac>> PedidoAFacturas(List<ProdSerXVendidosPed> pedido)
         {

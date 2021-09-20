@@ -89,8 +89,9 @@ namespace Fe.Dominio.facturas
             );
 
             List<FacturasFac> facturasGuargadas = new List<FacturasFac>();
+            string respuesta;
             // TODO: Si el response.estado == Aceptado, realizar la facturación, si es false, realizar su debido proceso.
-            if (response.data.estado == "Aceptado")
+            if (response.data.estado == "Aceptada")
             {
                 List<FacturasFac> facturas = PedidoAFacturas(listaPedido, productos);
                 foreach (FacturasFac f in facturas)
@@ -103,11 +104,12 @@ namespace Fe.Dominio.facturas
                 {
                     _ = await _repoProdSerXFacturaFac.GuardarProductoFactura(pf);
                 }
-            }
-            return response.data.estado;
+                respuesta = "Transacción realizada correctamente";
+            } else { respuesta = "Transacción fallida. Intente nuevamente."; }
+            return respuesta;
         }
 
-        public async Task<string> PagoPSE(ContratoPSE contratoPSE,
+        public async Task<DataPse> PagoPSE(ContratoPSE contratoPSE,
             List<ProdSerXVendidosPed> listaPedido,
             DemografiaCor demografiaComprador,
             TipoDocumentoCor documentoComprador,
@@ -119,11 +121,11 @@ namespace Fe.Dominio.facturas
             {
                 total += p.Preciototal;
             }
-
+            String uuid = Guid.NewGuid().ToString();
             PseModel response = epayco.BankCreate(
               COEpayco.CODIGO_BANCARIO[contratoPSE.Banco],
-              contratoPSE.Bill.ToString(), // ID de factura
-              "Pedido numero" + contratoPSE.IdPedido.ToString(),
+              uuid, // ID de factura
+              "Pedido numero " + contratoPSE.IdPedido.ToString(),
               total.ToString(),
               "0",
               "0",
@@ -140,16 +142,24 @@ namespace Fe.Dominio.facturas
               "url_confirmation",
               "method_confirmation"
             );
-
-            // TODO: Si el response.success == True, realizar la facturación, si es false, realizar su debido proceso.
-            // TODO: response.data.urlbanco contiene un link que tiene que recibir el front end y entregar al cliente para
-            // TODO: finalizar la transacción en la página de PSE.
-            List<FacturasFac> facturasGuargadas = new List<FacturasFac>();
              
             if(response.success)
             {
+                return response.data;
+            }
+            return null;
+        }
+
+        internal async Task<string> FacturacionPSE(string ticketId,
+            List<ProdSerXVendidosPed> listaPedido,
+            List<ProductosServiciosPc> productos)
+        {
+            TransactionModel transaction = epayco.GetTransaction(ticketId);
+            if (transaction.data.estado == "Aceptada")
+            {
+                List<FacturasFac> facturasGuargadas = new List<FacturasFac>();
                 List<FacturasFac> facturas = PedidoAFacturas(listaPedido, productos);
-                foreach(FacturasFac f in facturas)
+                foreach (FacturasFac f in facturas)
                 {
                     _ = await _repoFacturasFac.GuardarFactura(f);
                     facturasGuargadas.Add(f);
@@ -159,9 +169,9 @@ namespace Fe.Dominio.facturas
                 {
                     _ = await _repoProdSerXFacturaFac.GuardarProductoFactura(pf);
                 }
-                return response.data.urlbanco;
+                return "La factura fue creada";
             }
-            return "";
+            return "La factura aún no ha sido creada";
         }
 
         internal async Task<List<RespuestaDatos>> Prueba(List<ProdSerXVendidosPed> pedido, List<ProductosServiciosPc> productos)
@@ -215,9 +225,10 @@ namespace Fe.Dominio.facturas
             if (listaPedido != null && productos != null)
             {
                 List<int> vendedores = new List<int>();
-
+                Console.WriteLine(productos);
                 for (int i = 0; i < listaPedido.Count; i++)
                 {
+                    Console.WriteLine(productos[i].Idusuario);
                     vendedores.Add(productos[i].Idusuario);
                 }
                 List<int> uniqueValues = new List<int>();
