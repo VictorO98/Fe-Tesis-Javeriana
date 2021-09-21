@@ -16,16 +16,14 @@ namespace Fe.Dominio.pedidos.Datos
 {
     public class RepoPedidosPed
     {
-        internal async Task<RespuestaDatos> GuardarPedido(PedidosPed pedido)
+        internal async Task<int> GuardarPedido(PedidosPed pedido)
         {
             using FeContext context = new FeContext();
-            RespuestaDatos respuestaDatos;
             try
             {
                 context.Add(pedido);
                 context.SaveChanges();
-                int idPedido = pedido.Id;
-                respuestaDatos = new RespuestaDatos { Codigo = idPedido, Mensaje = "Pedido creado exitosamente." };
+                return pedido.Id;
             }
             catch (Exception e)
             {
@@ -39,7 +37,6 @@ namespace Fe.Dominio.pedidos.Datos
                 });
                 throw new COExcepcion("Ocurrió un problema al intentar realizar el pedido");
             }
-            return respuestaDatos;
         }
 
         internal PedidosPed GetPedidoPorId(int idPedido)

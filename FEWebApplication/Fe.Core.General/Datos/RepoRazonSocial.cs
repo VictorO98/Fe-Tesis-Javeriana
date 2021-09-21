@@ -38,7 +38,5 @@ namespace Fe.Core.General.Datos
             }
             return respuestaDatos;
         }
-
-        
     }
 }

@@ -17,17 +17,15 @@ namespace Fe.Core.General.Negocio
         RepoPoblacion _repoPoblacion;
         RepoFaqCor _repoFaqCor;
         RepoDemografiaReportada _repoDemografiaReportada;
-        RepoRazonSocial _repoRazonSocial;
         RepoNotificacion _repoNotificacion;
 
-        public COGeneralBiz(RepoDemografia repoDemografia, RepoDocumento repoDocumento, RepoPoblacion repoPoblacion, RepoFaqCor repoFaqCor, RepoDemografiaReportada repoDemografiaReportada, RepoRazonSocial repoRazonSocial, RepoNotificacion repoNotificacion)
+        public COGeneralBiz(RepoDemografia repoDemografia, RepoDocumento repoDocumento, RepoPoblacion repoPoblacion, RepoFaqCor repoFaqCor, RepoDemografiaReportada repoDemografiaReportada, RepoNotificacion repoNotificacion)
         {
             _repoDemografia = repoDemografia;
             _repoDocumento = repoDocumento;
             _repoPoblacion = repoPoblacion;
             _repoFaqCor = repoFaqCor;
             _repoDemografiaReportada = repoDemografiaReportada;
-            _repoRazonSocial = repoRazonSocial;
             _repoNotificacion = repoNotificacion;
         }
         internal DemografiaCor GetDemografiaPorId(int idDemografia)
@@ -227,7 +225,6 @@ namespace Fe.Core.General.Negocio
             return respuestaDatos;
         }
 
-        
         internal List<NotificacionesCor> GetNotificaciones()
         {
             return _repoNotificacion.GetNotificaciones();

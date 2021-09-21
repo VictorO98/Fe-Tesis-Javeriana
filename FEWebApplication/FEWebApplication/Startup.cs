@@ -22,8 +22,8 @@ using FEWebApplication.Controladores.Dominio.Trueque;
 using Fe.Core.General;
 using Fe.Dominio.devoluciones.Negocio;
 using Fe.Dominio.devoluciones;
-using Fe.Dominio.facturas.Negocio;
 using Fe.Dominio.facturas;
+using Fe.Dominio.facturas.Datos;
 using Fe.Dominio.pedidos;
 using Fe.Dominio.pedidos.Datos;
 using Fe.Dominio.trueques.Negocio;
@@ -145,10 +145,11 @@ namespace FEWebApplication
 
             services.AddScoped<RepoDemografiaReportada>();
             services.AddScoped<RepoDocumentosEmprendedor>();
-            services.AddScoped<RepoRazonSocial>();
             services.AddScoped<RepoFavorito>();
             services.AddScoped<RepoProdSerXVendidosPed>();
             services.AddScoped<RepoPedidosPed>();
+            services.AddScoped<RepoFacturasFac>();
+            services.AddScoped<RepoProdSerXFacturaFac>();
 
             services.AddScoped<RepoTemplateMensaje>();
 

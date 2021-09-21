@@ -16,7 +16,7 @@
     "stylus": "^0.54.8",
     "stylus-loader": "^3.0.2",
     "vee-validate": "^4.3.5",
-    "vue": "^3.0.11",
+    "vue": "^3.2.10",
     "vue-axios": "^3.2.4",
     "vue-loader-v16": "npm:vue-loader@^16.0.0-alpha.3",
     "vue-loading-overlay": "^4.0.1",

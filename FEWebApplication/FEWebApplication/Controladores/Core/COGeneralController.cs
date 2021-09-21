@@ -306,8 +306,6 @@ namespace FEWebApplication.Controladores.Core
             return respuestaDatos;
         }
 
-       
-
         /// <summary>
         /// Obtiene todas las notificaciones de la base de datos
         /// </summary>

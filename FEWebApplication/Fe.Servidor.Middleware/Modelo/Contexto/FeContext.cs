@@ -380,9 +380,12 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
 
                 entity.Property(e => e.Valortotalfacturaiva).HasColumnName("valortotalfacturaiva");
 
+                entity.Property(e => e.Idvendedor).HasColumnName("idvendedor");
+
                 entity.HasOne(d => d.IdpedidoNavigation)
                     .WithMany(p => p.FacturasFacs)
                     .HasForeignKey(d => d.Idpedido)
+                    .HasForeignKey(d => d.Idvendedor)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("facturas_fac_pedidos_ped");
             });
@@ -708,8 +711,6 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                 entity.Property(e => e.Idfactura).HasColumnName("idfactura");
 
                 entity.Property(e => e.Idproductoservicio).HasColumnName("idproductoservicio");
-
-                entity.Property(e => e.Idvendedor).HasColumnName("idvendedor");
 
                 entity.Property(e => e.Preciofacturado).HasColumnName("preciofacturado");
 

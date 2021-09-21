@@ -23,14 +23,14 @@ namespace Fe.Dominio.pedidos
             _repoProdSerXVendidosPed = repoProdSerXVendidosPed;
         }
 
-        internal async Task<RespuestaDatos> GuardarPedido(PedidosPed pedido, DemografiaCor demografiaCor)
+        internal async Task<int> GuardarPedido(PedidosPed pedido, DemografiaCor demografiaCor)
         {
-            RespuestaDatos respuestaDatos;
+            int idPedido;
             if (demografiaCor != null)
             {
                 try
                 {
-                    respuestaDatos = await _repoPedidosPed.GuardarPedido(pedido);
+                    idPedido = await _repoPedidosPed.GuardarPedido(pedido);
                 }
                 catch (COExcepcion e)
                 {
@@ -46,7 +46,7 @@ namespace Fe.Dominio.pedidos
                 }
             }
             else { throw new COExcepcion("El usuario ingresado no existe."); }
-            return respuestaDatos;
+            return idPedido;
         }
 
         internal PedidosPed GetPedidoPorId(int idPedido)

@@ -20,6 +20,7 @@ namespace Fe.Servidor.Middleware.Modelo.Entidades
         public int? Valortotalfactura { get; set; }
         public int? Valortotalfacturaiva { get; set; }
         public string Estado { get; set; }
+        public int? Idvendedor { get; set; }
 
         public virtual PedidosPed IdpedidoNavigation { get; set; }
         public virtual ICollection<DevolucionesDev> DevolucionesDevs { get; set; }

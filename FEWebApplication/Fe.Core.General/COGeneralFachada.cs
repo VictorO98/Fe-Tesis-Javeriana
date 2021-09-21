@@ -217,7 +217,6 @@ namespace Fe.Core.General
             return respuestaDatos;
         }
 
-
         public List<NotificacionesCor> GetNotificaciones()
         {
             return _cOGeneralBiz.GetNotificaciones();
