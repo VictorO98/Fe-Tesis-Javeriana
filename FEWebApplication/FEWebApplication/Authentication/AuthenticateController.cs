@@ -119,6 +119,9 @@ namespace FEWebApplication.Authentication
                 var files = Request.Form.Files;
                 Claim claimId = User.Claims.Where(c => c.Type == "id").FirstOrDefault();
                 formData = Request.Form;
+                if (files.Count == 0)
+                    throw new COExcepcion("No se adjuntaron archivos. ");
+
                 if (formData == null)
                     throw new COExcepcion("El formulario de la petición enviada se encuentra vacío. ");
 

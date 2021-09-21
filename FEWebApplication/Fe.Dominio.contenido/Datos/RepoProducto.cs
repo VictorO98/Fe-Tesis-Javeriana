@@ -18,7 +18,7 @@ namespace Fe.Dominio.contenido.Datos
     {
         internal async Task<int> GuardarPublicacion(ProductosServiciosPc productoSservicio)
         {
-            int idPublicacion = 0;
+            
             using FeContext context = new FeContext();
             try
             {
@@ -27,13 +27,12 @@ namespace Fe.Dominio.contenido.Datos
                 productoSservicio.Ventas = 0;
                 context.Add(productoSservicio);
                 context.SaveChanges();
-                idPublicacion = productoSservicio.Id;
+                return productoSservicio.Id;
             }
             catch (Exception e)
             {
                 throw new COExcepcion("Ocurrió un problema al intentar realizar la publicación: " + e.Message);
-            }
-            return idPublicacion;
+            }        
         }
 
         internal async Task<ProductosServiciosPc> GetPublicacionPorIdPublicacion(int idPublicacion)

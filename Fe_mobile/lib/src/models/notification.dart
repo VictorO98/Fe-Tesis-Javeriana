@@ -12,15 +12,12 @@ class NotificationList {
 
   NotificationList() {
     this._notifications = [
-      new Notification('img/hola1.jpeg',
-          'Tu vela aromatica esta siendo empacada', '33min ago', false),
-      new Notification(
-          'img/hola2.jpeg',
-          'Tu estatua de colección ha sido enviada, esperala pronto',
-          '32min ago',
-          true),
-      new Notification('img/hola3.jpeg',
-          'Tú cojin para meditar esta pendiente de pago', '34min ago', true),
+      new Notification('img/home4.webp', 'Tus guantes esta siendo empacados',
+          '33min ago', false),
+      new Notification('img/home5.webp',
+          'Tu frediora ha sido enviada, esperala pronto', '32min ago', true),
+      new Notification('img/home6.webp', 'Tú matera esta pendiente de pago',
+          '34min ago', true),
     ];
   }
 

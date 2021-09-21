@@ -3,14 +3,6 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\bin
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\bin\Release\netcoreapp3.1\Fe.Dominio.facturas.runtimeconfig.dev.json
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\bin\Release\netcoreapp3.1\Fe.Dominio.facturas.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\bin\Release\netcoreapp3.1\Fe.Dominio.facturas.pdb
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\obj\Release\netcoreapp3.1\Fe.Dominio.facturas.GeneratedMSBuildEditorConfig.editorconfig
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\obj\Release\netcoreapp3.1\Fe.Dominio.facturas.AssemblyInfoInputs.cache
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\obj\Release\netcoreapp3.1\Fe.Dominio.facturas.AssemblyInfo.cs
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\obj\Release\netcoreapp3.1\Fe.Dominio.facturas.csproj.CoreCompileInputs.cache
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\obj\Release\netcoreapp3.1\Fe.Dominio.facturas.dll
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\obj\Release\netcoreapp3.1\Fe.Dominio.facturas.pdb
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\obj\Release\netcoreapp3.1\Fe.Dominio.facturas.genruntimeconfig.cache
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\obj\Release\netcoreapp3.1\Fe.Dominio.facturas.csproj.AssemblyReference.cache
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\bin\Release\netcoreapp3.1\Fe.Core.General.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\bin\Release\netcoreapp3.1\Fe.Core.Global.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\bin\Release\netcoreapp3.1\Fe.Dominio.contenido.dll
@@ -21,4 +13,12 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\bin
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\bin\Release\netcoreapp3.1\Fe.Core.Global.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\bin\Release\netcoreapp3.1\Fe.Dominio.contenido.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\bin\Release\netcoreapp3.1\Fe.Servidor.Middleware.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\obj\Release\netcoreapp3.1\Fe.Dominio.facturas.csproj.AssemblyReference.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\obj\Release\netcoreapp3.1\Fe.Dominio.facturas.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\obj\Release\netcoreapp3.1\Fe.Dominio.facturas.AssemblyInfoInputs.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\obj\Release\netcoreapp3.1\Fe.Dominio.facturas.AssemblyInfo.cs
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\obj\Release\netcoreapp3.1\Fe.Dominio.facturas.csproj.CoreCompileInputs.cache
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\obj\Release\netcoreapp3.1\Fe.Dominio.facturas.csproj.CopyComplete
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\obj\Release\netcoreapp3.1\Fe.Dominio.facturas.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\obj\Release\netcoreapp3.1\Fe.Dominio.facturas.pdb
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\obj\Release\netcoreapp3.1\Fe.Dominio.facturas.genruntimeconfig.cache

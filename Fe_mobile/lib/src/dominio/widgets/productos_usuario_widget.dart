@@ -153,7 +153,7 @@ class _ProductoUsuarioListItemWidgetState
                                   ),
                                   SizedBox(width: 10),
                                   Text(
-                                    'Unidades disponibles: ' +
+                                    'Unidades: ' +
                                         widget.product!.cantidadtotal
                                             .toString(), // TODO  cambiar por el número del modelo
                                     style: Theme.of(context).textTheme.body1,

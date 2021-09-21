@@ -177,21 +177,21 @@ class _ContenidoHomePageState extends State<ContenidoHomePage>
                 : Center(child: CircularProgressIndicator())
             : SizedBox(),
         // Heading (Recommended for you)
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-          child: ListTile(
-            dense: true,
-            contentPadding: EdgeInsets.symmetric(vertical: 0),
-            leading: Icon(
-              Icons.star_border_outlined,
-              color: Theme.of(context).hintColor,
-            ),
-            title: Text(
-              'Productos',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ),
-        ),
+        // Padding(
+        //   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+        //   child: ListTile(
+        //     dense: true,
+        //     contentPadding: EdgeInsets.symmetric(vertical: 0),
+        //     leading: Icon(
+        //       Icons.star_border_outlined,
+        //       color: Theme.of(context).hintColor,
+        //     ),
+        //     title: Text(
+        //       'Productos',
+        //       style: Theme.of(context).textTheme.headline4,
+        //     ),
+        //   ),
+        // ),
         // StickyHeader(
         //   header: CategoriesIconsCarouselWidget(
         //       heroTag: 'home_categories_1',

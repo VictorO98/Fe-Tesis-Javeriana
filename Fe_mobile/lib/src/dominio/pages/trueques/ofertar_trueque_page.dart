@@ -220,7 +220,7 @@ class _OfertarTruequePageState extends State<OfertarTruequePage>
                                       SizedBox(
                                         height: 5,
                                       ),
-                                      Text('Unidades disponibles: ' +
+                                      Text('Unidades: ' +
                                           _productoInteresado.cantidadtotal
                                               .toString()),
                                       SizedBox(

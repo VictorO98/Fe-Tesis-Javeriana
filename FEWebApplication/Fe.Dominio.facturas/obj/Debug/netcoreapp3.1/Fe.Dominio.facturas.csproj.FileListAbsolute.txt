@@ -1,15 +1,3 @@
-C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.facturas\bin\Debug\netcoreapp3.1\Fe.Dominio.facturas.deps.json
-C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.facturas\bin\Debug\netcoreapp3.1\Fe.Dominio.facturas.runtimeconfig.json
-C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.facturas\bin\Debug\netcoreapp3.1\Fe.Dominio.facturas.runtimeconfig.dev.json
-C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.facturas\bin\Debug\netcoreapp3.1\Fe.Dominio.facturas.dll
-C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.facturas\bin\Debug\netcoreapp3.1\Fe.Dominio.facturas.pdb
-C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.facturas\obj\Debug\netcoreapp3.1\Fe.Dominio.facturas.csprojAssemblyReference.cache
-C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.facturas\obj\Debug\netcoreapp3.1\Fe.Dominio.facturas.csproj.CoreCompileInputs.cache
-C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.facturas\obj\Debug\netcoreapp3.1\Fe.Dominio.facturas.AssemblyInfoInputs.cache
-C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.facturas\obj\Debug\netcoreapp3.1\Fe.Dominio.facturas.AssemblyInfo.cs
-C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.facturas\obj\Debug\netcoreapp3.1\Fe.Dominio.facturas.dll
-C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.facturas\obj\Debug\netcoreapp3.1\Fe.Dominio.facturas.pdb
-C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Dominio.facturas\obj\Debug\netcoreapp3.1\Fe.Dominio.facturas.genruntimeconfig.cache
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\bin\Debug\netcoreapp3.1\Fe.Dominio.facturas.deps.json
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\bin\Debug\netcoreapp3.1\Fe.Dominio.facturas.runtimeconfig.json
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Dominio.facturas\bin\Debug\netcoreapp3.1\Fe.Dominio.facturas.runtimeconfig.dev.json

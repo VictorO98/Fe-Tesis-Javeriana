@@ -1,15 +1,3 @@
-C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Core.Global\bin\Debug\netcoreapp3.1\Fe.Core.Global.deps.json
-C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Core.Global\bin\Debug\netcoreapp3.1\Fe.Core.Global.runtimeconfig.json
-C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Core.Global\bin\Debug\netcoreapp3.1\Fe.Core.Global.runtimeconfig.dev.json
-C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Core.Global\bin\Debug\netcoreapp3.1\Fe.Core.Global.dll
-C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Core.Global\bin\Debug\netcoreapp3.1\Fe.Core.Global.pdb
-C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Core.Global\obj\Debug\netcoreapp3.1\Fe.Core.Global.csprojAssemblyReference.cache
-C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Core.Global\obj\Debug\netcoreapp3.1\Fe.Core.Global.csproj.CoreCompileInputs.cache
-C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Core.Global\obj\Debug\netcoreapp3.1\Fe.Core.Global.AssemblyInfoInputs.cache
-C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Core.Global\obj\Debug\netcoreapp3.1\Fe.Core.Global.AssemblyInfo.cs
-C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Core.Global\obj\Debug\netcoreapp3.1\Fe.Core.Global.dll
-C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Core.Global\obj\Debug\netcoreapp3.1\Fe.Core.Global.pdb
-C:\Users\ASUS\Desktop\victor\FEWebApplication\Fe.Core.Global\obj\Debug\netcoreapp3.1\Fe.Core.Global.genruntimeconfig.cache
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Global\bin\Debug\netcoreapp3.1\Fe.Core.Global.deps.json
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Global\bin\Debug\netcoreapp3.1\Fe.Core.Global.runtimeconfig.json
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Core.Global\bin\Debug\netcoreapp3.1\Fe.Core.Global.runtimeconfig.dev.json

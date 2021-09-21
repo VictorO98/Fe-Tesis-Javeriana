@@ -212,6 +212,7 @@ class _LoginPageState extends State<LoginPage> {
                               },
                               child: Text(
                                 'Iniciar Sesión',
+                                textAlign: TextAlign.center,
                                 style: Theme.of(context).textTheme.title!.merge(
                                       TextStyle(
                                           color:

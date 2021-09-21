@@ -5,6 +5,7 @@ import 'package:Fe_mobile/src/core/util/alert_util.dart';
 import 'package:Fe_mobile/src/core/util/conf_api.dart';
 import 'package:Fe_mobile/src/core/util/estados_pedido_util.dart';
 import 'package:Fe_mobile/src/core/util/estados_trueque_util.dart';
+import 'package:Fe_mobile/src/core/util/estilo_util.dart';
 import 'package:Fe_mobile/src/core/util/preferencias_util.dart';
 import 'package:Fe_mobile/src/dominio/models/info_pedidos_model.dart';
 import 'package:Fe_mobile/src/dominio/models/info_trueques_model.dart';
@@ -201,7 +202,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
                   child: Column(
                     children: <Widget>[
                       Text(
-                        _infoUsuarioBloc!.state.infoUsuarioModel!.nombres
+                        _infoUsuarioBloc!.state.infoUsuarioModel!.nombreCompleto
                             .toString(),
                         textAlign: TextAlign.left,
                         style: Theme.of(context).textTheme.display2,
@@ -290,7 +291,87 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
                   ),
                 ],
               )
-            : SizedBox());
+            : Row(
+                children: <Widget>[
+                  Expanded(
+                    child: FlatButton(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                        onPressed: () {
+                          Navigator.of(context).pushNamed('/Orders');
+                        },
+                        child: Column(
+                          children: <Widget>[
+                            Icon(Icons.shopping_cart_outlined,
+                                color: Theme.of(context).hintColor),
+                            Text(
+                              'Mis pedidos',
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.bodyText2,
+                            )
+                          ],
+                        )),
+                  ),
+                  Expanded(
+                    child: FlatButton(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                        onPressed: () {
+                          Navigator.of(context).pushNamed('/Orders');
+                        },
+                        child: Column(
+                          children: <Widget>[
+                            Icon(Icons.attach_money_outlined,
+                                color: Theme.of(context).hintColor),
+                            Text(
+                              'Mis ventas',
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.bodyText2,
+                            )
+                          ],
+                        )),
+                  ),
+                  Expanded(
+                    child: FlatButton(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                        onPressed: () {
+                          Navigator.of(context).pushNamed('/SolicitudTrueques',
+                              arguments: new RouteArgument(
+                                  argumentsList: [_infoTruequesSolicitados]));
+                        },
+                        child: Column(
+                          children: <Widget>[
+                            Icon(Icons.autorenew_sharp,
+                                color: Theme.of(context).hintColor),
+                            Text(
+                              'Intercambios',
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.bodyText2,
+                            )
+                          ],
+                        )),
+                  ),
+                  Expanded(
+                    child: FlatButton(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                        onPressed: () {
+                          Navigator.of(context).pushNamed('/Create');
+                        },
+                        child: Column(
+                          children: <Widget>[
+                            Icon(Icons.add, color: Theme.of(context).hintColor),
+                            Text(
+                              'Crear venta',
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.bodyText2,
+                            )
+                          ],
+                        )),
+                  ),
+                ],
+              ));
   }
 
   Widget _userOrders(BuildContext context) {
@@ -718,13 +799,9 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
               minWidth: 50.0,
               height: 25.0,
               child: FlatButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed('/Create');
-                },
-                child: Text(
-                  "Vender",
-                  style: Theme.of(context).textTheme.body1,
-                ),
+                onPressed: () {},
+                child: Text("Vender",
+                    style: Theme.of(context).textTheme.bodyText2),
               ),
             ),
           ),

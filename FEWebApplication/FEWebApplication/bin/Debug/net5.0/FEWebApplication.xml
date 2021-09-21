@@ -26,6 +26,12 @@
             </summary>
             <returns>Retorna un JWT o un accesso denegado.</returns>
         </member>
+        <member name="M:FEWebApplication.Authentication.AuthenticateController.SubirDocumentosEmprendedor(Microsoft.AspNetCore.Http.IFormCollection)">
+            <summary>
+            Método para subir documentos de los emprendedores
+            </summary>
+            <returns>Respuesta datos. </returns>
+        </member>
         <member name="M:FEWebApplication.Authentication.AuthenticateController.Register(Fe.Servidor.Middleware.Contratos.Core.Seguridad.RegisterDatos)">
             <summary>
             Método para registrarse en la aplicación
@@ -108,40 +114,6 @@
             </summary>
             <returns>Respuesta de datos verificando que se realizó la eliminación de la demografía reportada en la base de datos</returns>
             <param name="idDemografiaReportada">Demografía reportada que se desea eliminar</param>
-        </member>
-        <member name="M:FEWebApplication.Controladores.Core.COGeneralController.GuardarRazonSocial(Fe.Servidor.Middleware.Modelo.Entidades.RazonSocialCor)">
-            <summary>
-            Almacena la razón social en la base de datos
-            </summary>
-            <returns>Respuesta de datos verificando que se realizó la inserción de la razón social en la base de datos</returns>
-            <param name="razonSocial">Razón social que se desea almacenar</param>
-        </member>
-        <member name="M:FEWebApplication.Controladores.Core.COGeneralController.GetRazonSocialPorId(System.Int32)">
-            <summary>
-            Obtiene la razón social asociada al ID
-            </summary>
-            <returns>Razón social asociada al ID</returns>
-            <param name="idRazonSocial">Id razón social que se desea obtener</param>
-        </member>
-        <member name="M:FEWebApplication.Controladores.Core.COGeneralController.GetTodasRazonSocial">
-            <summary>
-            Obtiene todas las razones sociales de la base de datos
-            </summary>
-            <returns>Lista con todas las razones sociales de la base de datos</returns>
-        </member>
-        <member name="M:FEWebApplication.Controladores.Core.COGeneralController.ModificarRazonSocial(Fe.Servidor.Middleware.Modelo.Entidades.RazonSocialCor)">
-            <summary>
-            Modifica la razón social en la base de datos
-            </summary>
-            <returns>Respuesta de datos verificando que se realizó la modificación de la razón social en la base de datos</returns>
-            <param name="razonSocial">Razón social que se desea modificar</param>
-        </member>
-        <member name="M:FEWebApplication.Controladores.Core.COGeneralController.RemoverRazonSocial(System.Int32)">
-            <summary>
-            Elimina la razón social de la base de datos
-            </summary>
-            <returns>Respuesta de datos verificando que se realizó la elimicación de la razón social de la base de datos</returns>
-            <param name="idRazonSocial">Razón social que se desea eliminar</param>
         </member>
         <member name="M:FEWebApplication.Controladores.Core.COGeneralController.GetNotificaciones">
             <summary>

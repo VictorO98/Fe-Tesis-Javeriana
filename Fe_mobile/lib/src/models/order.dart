@@ -52,18 +52,18 @@ class OrderList {
   OrderList() {
     this._list = [
       new Order(
-          new Product('Vela aromatica', 'img/hola1.jpeg', 80, 63.98, 200, 2554,
-              3.1, 10.5),
+          new Product(
+              'Guantes', 'img/home4.webp', 80, 63.98, 200, 2554, 3.1, 10.5),
           'RB4551532214564',
           OrderState.shipped),
       new Order(
-          new Product('Estatua de coleccion', 'img/hola2.jpeg', 10, 12.36, 153,
-              166, 4.2, 11.5),
+          new Product(
+              'Freidora', 'img/home5.webp', 10, 12.36, 153, 166, 4.2, 11.5),
           'CH4561454563156',
           OrderState.toBeShipped),
       new Order(
-          new Product('Cojin para meditar', 'img/hola3.jpeg', 80, 63.98, 200,
-              2554, 3.1, 10.5),
+          new Product(
+              'Materas', 'img/home6.webp', 80, 63.98, 200, 2554, 3.1, 10.5),
           'RB4551532214564',
           OrderState.unpaid),
     ];

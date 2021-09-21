@@ -4,8 +4,10 @@ import 'dart:io';
 import 'package:Fe_mobile/src/core/models/respuesta_datos_model.dart';
 import 'package:Fe_mobile/src/core/models/step_manejador_model.dart';
 import 'package:Fe_mobile/src/core/util/alert_util.dart';
+import 'package:Fe_mobile/src/core/util/currency_util.dart';
 import 'package:Fe_mobile/src/core/util/estilo_util.dart';
 import 'package:Fe_mobile/src/core/util/preferencias_util.dart';
+import 'package:Fe_mobile/src/core/util/remover_acentos_util.dart';
 import 'package:Fe_mobile/src/dominio/models/categoria_model.dart';
 import 'package:Fe_mobile/src/dominio/models/crear_publicacion_model.dart';
 import 'package:Fe_mobile/src/dominio/providers/contenido_provider.dart';
@@ -29,6 +31,7 @@ class CrearServicioProductoPage extends StatefulWidget {
 class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
   CrearPublicacionModel _crearPublicacionModel = new CrearPublicacionModel();
   ContenidoProvider _contenidoProvider = new ContenidoProvider();
+  RemoverAcentosUtil _removerAcentosUtil = new RemoverAcentosUtil();
 
   static const STEP_DATOS_BASICOS = "stepDatosBasicos";
   static const STEP_DATOS_TIEMPOS = "stepDatosTiempos";
@@ -85,6 +88,7 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
     _scrollController!.addListener(() {});
     _fontSizeRegrsar = 15;
     _fontSizeSiguiente = 15;
+    _crearPublicacionModel.descuento = 0;
 
     _styleButtonSiguiente = TextButton.styleFrom(
         // primary: Colors.black,
@@ -117,6 +121,7 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
     List<CategoriaModel> list = await _contenidoProvider.getAllCategorias();
     setState(() {
       _listCategoriaModel = list;
+      _listCategoriaModel.sort((a, b) => a.nombre!.compareTo(b.nombre!));
     });
   }
 
@@ -354,7 +359,7 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
           child: Stepper(
             controlsBuilder: (BuildContext context,
                 {VoidCallback? onStepContinue, VoidCallback? onStepCancel}) {
-              return !_isProducto
+              return !_isLoading
                   ? Row(
                       children: <Widget>[
                         TextButton(
@@ -466,7 +471,8 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
                         )),
                 onSaved: (String? value) {
                   setState(() {
-                    _crearPublicacionModel.nombre = value;
+                    _crearPublicacionModel.nombre =
+                        _removerAcentosUtil.removeDiacritics(value!);
                   });
                 },
                 onChanged: (String? value) {
@@ -601,7 +607,21 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
                     return null;
                   }),
               SizedBox(height: 10),
+              _crearPublicacionModel.preciounitario != null
+                  ? Text(
+                      "${CurrencyUtil.convertFormatMoney('COP', _crearPublicacionModel.preciounitario!)}")
+                  : Text("\$0"),
+              SizedBox(height: 10),
               TextFormField(
+                validator: (String? value) {
+                  if (_crearPublicacionModel.descuento != null ||
+                      _crearPublicacionModel.descuento != 0) {
+                    if (_crearPublicacionModel.descuento! >= 100) {
+                      return 'Solo se aceptan valores menores del %100';
+                    }
+                  }
+                  if (_crearPublicacionModel.descuento == null) {}
+                },
                 onSaved: (String? value) {
                   setState(() {
                     value == ""
@@ -624,6 +644,10 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
                       color: EstiloUtil.COLOR_PRIMARY,
                     )),
               ),
+              SizedBox(height: 8),
+              _crearPublicacionModel.descuento != null
+                  ? Text("%" + _crearPublicacionModel.descuento.toString())
+                  : Text("%0"),
               SizedBox(height: 8),
               CheckboxListTile(
                 value: checkboxValue,

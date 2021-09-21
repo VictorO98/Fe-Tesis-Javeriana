@@ -3,7 +3,6 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\bin\Release\netcoreapp3.1\Fe.Servidor.Middleware.runtimeconfig.dev.json
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\bin\Release\netcoreapp3.1\Fe.Servidor.Middleware.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\bin\Release\netcoreapp3.1\Fe.Servidor.Middleware.pdb
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\obj\Release\netcoreapp3.1\Fe.Servidor.Middleware.csproj.AssemblyReference.cache
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\obj\Release\netcoreapp3.1\Fe.Servidor.Middleware.GeneratedMSBuildEditorConfig.editorconfig
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\obj\Release\netcoreapp3.1\Fe.Servidor.Middleware.AssemblyInfoInputs.cache
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\obj\Release\netcoreapp3.1\Fe.Servidor.Middleware.AssemblyInfo.cs
@@ -11,3 +10,4 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\obj\Release\netcoreapp3.1\Fe.Servidor.Middleware.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\obj\Release\netcoreapp3.1\Fe.Servidor.Middleware.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\obj\Release\netcoreapp3.1\Fe.Servidor.Middleware.genruntimeconfig.cache
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\Fe.Servidor.Middleware\obj\Release\netcoreapp3.1\Fe.Servidor.Middleware.csproj.AssemblyReference.cache

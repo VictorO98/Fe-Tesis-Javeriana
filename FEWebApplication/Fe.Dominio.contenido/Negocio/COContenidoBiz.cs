@@ -79,11 +79,14 @@ namespace Fe.Dominio.contenido
                         {
                             try
                             {
+                                
+
                                 productosServicios.Estado = COEstados.VIGENTE;
                                 // TODO : queda pendiente definir bien estas fechas
                                 productosServicios.Tiempoentrega = DateTime.Today.AddDays(10); // Tiempo de entrega aproximado a 10 días
                                 productosServicios.Tiempogarantia = productosServicios.Tiempoentrega.AddDays(15); // TIempo de garantía aproximado de 15 días
                                 productosServicios.Modificacion = DateTime.Now;
+                                productosServicios.Id = await _repoProducto.GuardarPublicacion(productosServicios);
 
                                 string directorio = _configuration["ImageProductos:DirectorioImagenes"];
                                 directorio = directorio + "/" + "Productos";
@@ -111,7 +114,7 @@ namespace Fe.Dominio.contenido
                                 string[] permittedExtensions = { ".jpg", ".jpeg", ".png" };
                                 List<string> listadoDeRutaFotos = new List<string>();
                                 var folderDocument = directorio;
-
+                                
                                 foreach (var file in files)
                                 {
                                     var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
@@ -128,7 +131,6 @@ namespace Fe.Dominio.contenido
                                 if (listadoDeRutaFotos.Count == 0)
                                     throw new COExcepcion("No se almacenó ninguna imagen.");
 
-                                productosServicios.Id = await _repoProducto.GuardarPublicacion(productosServicios);
                                 await _repoProducto.GuardarLinkImagen(productosServicios);
 
                                 return new RespuestaDatos

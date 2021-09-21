@@ -51,6 +51,7 @@ namespace Fe.Core.Seguridad.Negocio
                     DocumentosDemografiaCor documentosDemografiaCor = new DocumentosDemografiaCor();
                     documentosDemografiaCor.Iddemografia = demografiaCor.Id;
                     documentosDemografiaCor.Razonsocial = RazonsSocial;
+                    documentosDemografiaCor.Creacion = DateTime.Now;
                     string directorio = _configuration["ImageDocumentos:DirectorioDocumentos"];
                     directorio = directorio + "/" + "Documentos";
 
@@ -65,13 +66,15 @@ namespace Fe.Core.Seguridad.Negocio
                             Tipoerror = COErrorLog.RUTA_NO_ENCONTRADA
                         });
                         throw new COExcepcion("Problema con las rutas. Por favor contacte a servicio al cliente. ");
+                    }
+
 
                         var folderName = Path.Combine(directorio);
                         if (files.Count == 0)
                             throw new COExcepcion("No hay documento a subir. ");
 
-                        if (files.Count > 1)
-                            throw new COExcepcion("Solo se puede subir un máximo de 1 documento. ");
+                        if (files.Count > 4)
+                            throw new COExcepcion("Solo se puede subir un máximo de 4 documento. ");
 
                         string[] permittedExtensions = { ".jpg", ".jpeg", ".png" };
                         List<string> listadoDeRutaFotos = new List<string>();
@@ -92,12 +95,13 @@ namespace Fe.Core.Seguridad.Negocio
                             file.CopyTo(stream);
                             listadoDeRutaFotos.Add(fullPath);
                             indexDocumentos += 1;
-                            await _repoDocumentosEmprendedor.SubirDocumentosEmprendedor(documentosDemografiaCor);
                         }
-                        if (listadoDeRutaFotos.Count == 0)
+
+                    if (listadoDeRutaFotos.Count == 0)
                             throw new COExcepcion("No se almacenó ninguna imagen.");
                         
-                    }
+                    await _repoDocumentosEmprendedor.SubirDocumentosEmprendedor(documentosDemografiaCor);
+
                     return new RespuestaDatos
                     {
                         Codigo = COCodigoRespuesta.OK,

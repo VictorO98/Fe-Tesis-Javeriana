@@ -7,6 +7,7 @@ import 'package:Fe_mobile/src/core/models/registro_model.dart';
 import 'package:Fe_mobile/src/core/models/respuesta_datos_model.dart';
 import 'package:Fe_mobile/src/core/contract/validar_registro_contract.dart';
 import 'package:Fe_mobile/src/core/models/rol_model.dart';
+import 'package:path/path.dart' as path;
 import 'package:Fe_mobile/src/core/models/step_manejador_model.dart';
 import 'package:Fe_mobile/src/core/models/tipo_documento_model.dart';
 import 'package:Fe_mobile/src/core/pages/usuario/terminos_y_condiciones_page.dart';
@@ -134,6 +135,7 @@ class _RegistroPageState extends State<RegistroPage> {
         await _generalProvider.getTipoDocumentos();
     setState(() {
       listadoTipoDocumento = listado;
+      listadoTipoDocumento.sort((a, b) => a.nombre!.compareTo(b.nombre!));
     });
   }
 
@@ -141,6 +143,7 @@ class _RegistroPageState extends State<RegistroPage> {
     List<DepartamentoModel> listado = await _generalProvider.getDepartamentos();
     setState(() {
       listDepartamento = listado;
+      listDepartamento.sort((a, b) => a.nombre!.compareTo(b.nombre!));
     });
   }
 
@@ -149,6 +152,7 @@ class _RegistroPageState extends State<RegistroPage> {
         await _generalProvider.getMunicipioPorIdEstado(idEstado);
     setState(() {
       listMunicipios = listado;
+      listMunicipios.sort((a, b) => a.nombre!.compareTo(b.nombre!));
     });
   }
 
@@ -797,9 +801,10 @@ class _RegistroPageState extends State<RegistroPage> {
                         borderSide: BorderSide(color: Colors.pinkAccent),
                       ),
                       icon: CountryCodePicker(
+                        textStyle: TextStyle(color: EstiloUtil.COLOR_2),
                         onChanged: (val) {
                           setState(() {
-                            // registroModel.codigoTelefonoPais = val.dialCode;
+                            registroModel.codigoTelefonoPais = val.dialCode;
                           });
                         },
                         // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
@@ -892,6 +897,8 @@ class _RegistroPageState extends State<RegistroPage> {
                             razonSocial = value;
                           });
                         },
+                        validator: (dynamic value) =>
+                            value == null ? 'Ingresa una razón social' : null,
                         decoration: EstiloUtil.crearInputDecorationFormCustom(
                             'Nombre razón social',
                             icon: Icon(
@@ -1183,34 +1190,44 @@ class _RegistroPageState extends State<RegistroPage> {
         isLoadingRegistro = true;
       });
 
-      setState(() => isLoadingRegistro = false);
+      _usuarioProvider
+          .registrarUsuario(registroModel, context)
+          .then((value) async {
+        RespuestaDatosModel? respuesta = value;
+        if (respuesta?.codigo == 10) {
+          if (registroModel.idTipoCliente == 2) {
+            List<MultipartFile> _documentosEmprendedor = [];
 
-      List<File> _documentosEmprendedor = [];
+            for (int i = 0; i < listadoDocumentoCamaraComercio.length; i++) {
+              String fullPath = listadoDocumentoCamaraComercio[i].path;
+              _documentosEmprendedor.add(await MultipartFile.fromFile(fullPath,
+                  filename: path.basename(fullPath)));
+            }
 
-      for (int i = 0; i < listadoDocumentoCamaraComercio.length; i++) {
-        _documentosEmprendedor.add(listadoDocumentoCamaraComercio[i]);
-      }
+            for (int i = 0; i < listadoFotoCedula.length; i++) {
+              String fullPath = listadoFotoCedula[i].path;
+              _documentosEmprendedor.add(await MultipartFile.fromFile(fullPath,
+                  filename: path.basename(fullPath)));
+            }
 
-      for (int i = 0; i < listadoFotoCedula.length; i++) {
-        _documentosEmprendedor.add(listadoFotoCedula[i]);
-      }
-
-      print(_documentosEmprendedor);
-      print(razonSocial);
-      // _usuarioProvider.registrarUsuario(registroModel, context).then((value) {
-      //   RespuestaDatosModel? respuesta = value;
-      //   if (respuesta?.codigo == 10) {
-      //     final funcionNavegar = () {
-      //       WidgetsBinding.instance!.addPostFrameCallback((_) {
-      //         Navigator.of(context).pushNamedAndRemoveUntil(
-      //             "/Login", (Route<dynamic> route) => false,
-      //             arguments: new ValidaRegistroContract(isRegistro: true));
-      //       });
-      //     };
-      //     AlertUtil.success(context, respuesta!.mensaje!,
-      //         respuesta: funcionNavegar, title: '¡Registro exitoso!');
-      //   }
-      // }).whenComplete(() => setState(() => isLoadingRegistro = false));
+            Map<String, dynamic> data = {
+              "Correo": registroModel.email,
+              "RazonSocial": razonSocial,
+              "files": _documentosEmprendedor
+            };
+            await _usuarioProvider.subirDocumentosEmprendedor(data, context);
+          }
+          final funcionNavegar = () {
+            WidgetsBinding.instance!.addPostFrameCallback((_) {
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  "/Login", (Route<dynamic> route) => false,
+                  arguments: new ValidaRegistroContract(isRegistro: true));
+            });
+          };
+          AlertUtil.success(context, respuesta!.mensaje!,
+              respuesta: funcionNavegar, title: '¡Registro exitoso!');
+        }
+      }).whenComplete(() => setState(() => isLoadingRegistro = false));
     }
   }
 }
