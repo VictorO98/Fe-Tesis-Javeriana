@@ -137,6 +137,34 @@ namespace FEWebApplication.Authentication
             return respuestaDatos;
         }
 
+        [HttpPost]
+        [Route("SubirImagenSocial")]
+        public async Task<RespuestaDatos> SubirImagenSocial(IFormCollection collection)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                var formData = Request.Form;
+                var files = Request.Form.Files;
+                Claim claimId = User.Claims.Where(c => c.Type == "id").FirstOrDefault();
+                formData = Request.Form;
+                if (files.Count == 0)
+                    throw new COExcepcion("No se adjuntaron archivos. ");
+
+                if (formData == null)
+                    throw new COExcepcion("El formulario de la petición enviada se encuentra vacío. ");
+
+                var correoUsuario = Request.Form["Correo"].ToString();
+
+                respuestaDatos = await _sEFachada.SubirImagenSocial(correoUsuario, files);
+            }
+            catch (COExcepcion e)
+            {
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
+            }
+            return respuestaDatos;
+        }
+
         /// <summary>
         /// Método para registrarse en la aplicación
         /// </summary>
@@ -187,6 +215,32 @@ namespace FEWebApplication.Authentication
                 {
                     return new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = $@"Se completo el registro!! Ocurrió un problema al enviar el correo de confirmación. Pongase en contacto con servicio al cliente" };
                 }
+            }
+        }
+
+        /// <summary>
+        /// Método para modificar la demografia
+        /// </summary>
+        [HttpPut]
+        [Route("ModificarDemografia")]
+        public async Task<RespuestaDatos> ModificarDemografia([FromBody] ModificarDemografia model)
+        {
+            // TODO: Cambiar en la tabla identity el número
+            try
+            {
+                return await _sEFachada.ModificarDemografia(model);
+            }
+            catch (Exception e)
+            {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = model.Correo,
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.MODIFICAR_USUARIO
+                });
+                return new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = $@" Ocurrió un problema al modificar el usuario" };
             }
         }
     }

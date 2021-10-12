@@ -44,8 +44,10 @@ class ReviewItemWidget extends StatelessWidget {
                               overflow: TextOverflow.fade,
                               softWrap: false,
                               maxLines: 2,
-                              style: Theme.of(context).textTheme.title!.merge(
-                                  TextStyle(
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline6!
+                                  .merge(TextStyle(
                                       color: Theme.of(context).hintColor)),
                             ),
                             SizedBox(
@@ -77,8 +79,10 @@ class ReviewItemWidget extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Text(review!.rate.toString(),
-                                style: Theme.of(context).textTheme.body2!.merge(
-                                    TextStyle(
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .merge(TextStyle(
                                         color:
                                             Theme.of(context).primaryColor))),
                             Icon(
@@ -101,7 +105,7 @@ class ReviewItemWidget extends StatelessWidget {
         ),
         Text(
           review!.review,
-          style: Theme.of(context).textTheme.body1,
+          style: Theme.of(context).textTheme.bodyText2,
           overflow: TextOverflow.ellipsis,
           softWrap: false,
           maxLines: 3,

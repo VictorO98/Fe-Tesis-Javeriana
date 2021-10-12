@@ -213,7 +213,10 @@ class _LoginPageState extends State<LoginPage> {
                               child: Text(
                                 'Iniciar Sesión',
                                 textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.title!.merge(
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline6!
+                                    .merge(
                                       TextStyle(
                                           color:
                                               Theme.of(context).primaryColor),
@@ -227,7 +230,7 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: () {},
                         child: Text(
                           '¿ Olvidaste tu contraseña ?',
-                          style: Theme.of(context).textTheme.body1,
+                          style: Theme.of(context).textTheme.bodyText2,
                         ),
                       ),
 

@@ -71,13 +71,13 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                           widget.product!.nombre!,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
-                          style: Theme.of(context).textTheme.subhead,
+                          style: Theme.of(context).textTheme.subtitle1,
                         ),
                         Text(
                           widget.product!.descuento == 0.0
                               ? "${CurrencyUtil.convertFormatMoney('COP', widget.product!.preciounitario!)}"
                               : "${CurrencyUtil.convertFormatMoney('COP', widget.product!.preciounitario! - ((widget.product!.descuento! / 100) * widget.product!.preciounitario!).toInt())}",
-                          style: Theme.of(context).textTheme.display1,
+                          style: Theme.of(context).textTheme.headline4,
                         ),
                       ],
                     ),
@@ -100,7 +100,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                         color: Theme.of(context).hintColor,
                       ),
                       Text(widget.quantity.toString(),
-                          style: Theme.of(context).textTheme.subhead),
+                          style: Theme.of(context).textTheme.subtitle1),
                       IconButton(
                         onPressed: () {
                           setState(() {

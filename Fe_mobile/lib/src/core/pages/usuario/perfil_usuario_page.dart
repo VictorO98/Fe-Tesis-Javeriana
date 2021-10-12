@@ -62,7 +62,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
     _infoUsuarioBloc!.state.infoUsuarioModel!.rol == "Emprendedor"
         ? _cargarProductos()
         : SizedBox();
-    _cargarPedidos();
+    //_cargarPedidos();
     _infoUsuarioBloc!.state.infoUsuarioModel!.rol == "Emprendedor"
         ? _cargarTrueques()
         : SizedBox();
@@ -205,7 +205,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
                         _infoUsuarioBloc!.state.infoUsuarioModel!.nombreCompleto
                             .toString(),
                         textAlign: TextAlign.left,
-                        style: Theme.of(context).textTheme.display2,
+                        style: Theme.of(context).textTheme.headline3,
                       ),
                       Text(
                         _infoUsuarioBloc!.state.infoUsuarioModel!.email
@@ -224,8 +224,14 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
                       onTap: () {
                         Navigator.of(context).pushNamed('/Tabs', arguments: 1);
                       },
-                      child: CircleAvatar(
-                        backgroundImage: AssetImage(_user.avatar!),
+                      child: GestureDetector(
+                        onTap: () {
+                          print('Undiste tu foto');
+                          Navigator.of(context).pushNamed('/FotoPerfil');
+                        },
+                        child: CircleAvatar(
+                          backgroundImage: AssetImage(_user.avatar!),
+                        ),
                       ),
                     )),
               ],
@@ -395,7 +401,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             leading: Icon(Icons.inbox_outlined),
             title: Text(
               'Mis pedidos',
-              style: Theme.of(context).textTheme.body2,
+              style: Theme.of(context).textTheme.bodyText1,
             ),
             trailing: ButtonTheme(
               padding: EdgeInsets.all(0),
@@ -407,7 +413,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
                 },
                 child: Text(
                   "Ver todo",
-                  style: Theme.of(context).textTheme.body1,
+                  style: Theme.of(context).textTheme.bodyText2,
                 ),
               ),
             ),
@@ -419,7 +425,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             dense: true,
             title: Text(
               'Pendiente',
-              style: Theme.of(context).textTheme.body1,
+              style: Theme.of(context).textTheme.bodyText2,
             ),
             trailing: Chip(
               padding: EdgeInsets.symmetric(horizontal: 10),
@@ -441,7 +447,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
               dense: true,
               title: Text(
                 'Enviado',
-                style: Theme.of(context).textTheme.body1,
+                style: Theme.of(context).textTheme.bodyText2,
               ),
               trailing: Chip(
                 padding: EdgeInsets.symmetric(horizontal: 10),
@@ -461,7 +467,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
               dense: true,
               title: Text(
                 'Entregado',
-                style: Theme.of(context).textTheme.body1,
+                style: Theme.of(context).textTheme.bodyText2,
               ),
               trailing: Chip(
                 padding: EdgeInsets.symmetric(horizontal: 10),
@@ -481,7 +487,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
               dense: true,
               title: Text(
                 'Devoluciones',
-                style: Theme.of(context).textTheme.body1,
+                style: Theme.of(context).textTheme.bodyText2,
               ),
               trailing: Chip(
                 padding: EdgeInsets.symmetric(horizontal: 10),
@@ -519,7 +525,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             leading: Icon(Icons.business),
             title: Text(
               'Intercambios solictados',
-              style: Theme.of(context).textTheme.body2,
+              style: Theme.of(context).textTheme.bodyText1,
             ),
             trailing: ButtonTheme(
               padding: EdgeInsets.all(0),
@@ -533,7 +539,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
                 },
                 child: Text(
                   "Ver todo",
-                  style: Theme.of(context).textTheme.body1,
+                  style: Theme.of(context).textTheme.bodyText2,
                 ),
               ),
             ),
@@ -545,7 +551,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             dense: true,
             title: Text(
               'Solicitados',
-              style: Theme.of(context).textTheme.body1,
+              style: Theme.of(context).textTheme.bodyText2,
             ),
             trailing: Chip(
               padding: EdgeInsets.symmetric(horizontal: 10),
@@ -584,7 +590,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             leading: Icon(Icons.approval_outlined),
             title: Text(
               'Mis intercambios',
-              style: Theme.of(context).textTheme.body2,
+              style: Theme.of(context).textTheme.bodyText1,
             ),
             trailing: ButtonTheme(
               padding: EdgeInsets.all(0),
@@ -598,7 +604,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
                 },
                 child: Text(
                   "Ver todo",
-                  style: Theme.of(context).textTheme.body1,
+                  style: Theme.of(context).textTheme.bodyText2,
                 ),
               ),
             ),
@@ -610,7 +616,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             dense: true,
             title: Text(
               'Ofertado',
-              style: Theme.of(context).textTheme.body1,
+              style: Theme.of(context).textTheme.bodyText2,
             ),
             trailing: Chip(
               padding: EdgeInsets.symmetric(horizontal: 10),
@@ -630,7 +636,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             dense: true,
             title: Text(
               'Aceptado',
-              style: Theme.of(context).textTheme.body1,
+              style: Theme.of(context).textTheme.bodyText2,
             ),
             trailing: Chip(
               padding: EdgeInsets.symmetric(horizontal: 10),
@@ -650,7 +656,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             dense: true,
             title: Text(
               'Rechazado',
-              style: Theme.of(context).textTheme.body1,
+              style: Theme.of(context).textTheme.bodyText2,
             ),
             trailing: Chip(
               padding: EdgeInsets.symmetric(horizontal: 10),
@@ -689,7 +695,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             leading: Icon(Icons.money_outlined),
             title: Text(
               'Mis ventas',
-              style: Theme.of(context).textTheme.body2,
+              style: Theme.of(context).textTheme.bodyText1,
             ),
             trailing: ButtonTheme(
               padding: EdgeInsets.all(0),
@@ -701,7 +707,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
                 },
                 child: Text(
                   "Ver todo",
-                  style: Theme.of(context).textTheme.body1,
+                  style: Theme.of(context).textTheme.bodyText2,
                 ),
               ),
             ),
@@ -713,7 +719,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             dense: true,
             title: Text(
               'Facturadas',
-              style: Theme.of(context).textTheme.body1,
+              style: Theme.of(context).textTheme.bodyText2,
             ),
             trailing: Chip(
               padding: EdgeInsets.symmetric(horizontal: 10),
@@ -733,7 +739,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             dense: true,
             title: Text(
               'Enviadas',
-              style: Theme.of(context).textTheme.body1,
+              style: Theme.of(context).textTheme.bodyText2,
             ),
             trailing: Chip(
               padding: EdgeInsets.symmetric(horizontal: 10),
@@ -753,7 +759,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             dense: true,
             title: Text(
               'Entregadas',
-              style: Theme.of(context).textTheme.body1,
+              style: Theme.of(context).textTheme.bodyText2,
             ),
             trailing: Chip(
               padding: EdgeInsets.symmetric(horizontal: 10),
@@ -792,7 +798,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             leading: Icon(Icons.file_present_outlined),
             title: Text(
               'Publicaciones',
-              style: Theme.of(context).textTheme.body2,
+              style: Theme.of(context).textTheme.bodyText1,
             ),
             trailing: ButtonTheme(
               padding: EdgeInsets.all(0),
@@ -814,7 +820,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             dense: true,
             title: Text(
               'Productos',
-              style: Theme.of(context).textTheme.body1,
+              style: Theme.of(context).textTheme.bodyText2,
             ),
             trailing: Chip(
               padding: EdgeInsets.symmetric(horizontal: 10),
@@ -836,7 +842,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             dense: true,
             title: Text(
               'Servicios',
-              style: Theme.of(context).textTheme.body1,
+              style: Theme.of(context).textTheme.bodyText2,
             ),
             trailing: Chip(
               padding: EdgeInsets.symmetric(horizontal: 10),
@@ -879,14 +885,14 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             leading: new Icon(Icons.person_outline_outlined),
             title: Text(
               'Configuración de perfil',
-              style: Theme.of(context).textTheme.body2,
+              style: Theme.of(context).textTheme.bodyText1,
             ),
             trailing: ButtonTheme(
               padding: EdgeInsets.all(0),
               minWidth: 50.0,
               height: 25.0,
               child: ProfileSettingsDialog(
-                user: this._user,
+                user: _infoUsuarioBloc!.state.infoUsuarioModel!,
                 onChanged: () {
                   setState(() {});
                 },
@@ -898,7 +904,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             dense: true,
             title: Text(
               'Nombres',
-              style: Theme.of(context).textTheme.body1,
+              style: Theme.of(context).textTheme.bodyText2,
             ),
             trailing: Text(
               _infoUsuarioBloc!.state.infoUsuarioModel!.nombres.toString(),
@@ -910,7 +916,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             dense: true,
             title: Text(
               'Apellidos',
-              style: Theme.of(context).textTheme.body1,
+              style: Theme.of(context).textTheme.bodyText2,
             ),
             trailing: Text(
               _infoUsuarioBloc!.state.infoUsuarioModel!.apellidos.toString(),
@@ -922,7 +928,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             dense: true,
             title: Text(
               'Correo',
-              style: Theme.of(context).textTheme.body1,
+              style: Theme.of(context).textTheme.bodyText2,
             ),
             trailing: Text(
               _infoUsuarioBloc!.state.infoUsuarioModel!.email.toString(),
@@ -934,7 +940,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             dense: true,
             title: Text(
               'Dirección entregas',
-              style: Theme.of(context).textTheme.body1,
+              style: Theme.of(context).textTheme.bodyText2,
             ),
             trailing: Text(
               _infoUsuarioBloc!.state.infoUsuarioModel!.direccion.toString(),
@@ -946,7 +952,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             dense: true,
             title: Text(
               'Ciudad',
-              style: Theme.of(context).textTheme.body1,
+              style: Theme.of(context).textTheme.bodyText2,
             ),
             trailing: Text(
               _infoUsuarioBloc!.state.infoUsuarioModel!.poblacion.toString(),
@@ -958,7 +964,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             dense: true,
             title: Text(
               'Departamento',
-              style: Theme.of(context).textTheme.body1,
+              style: Theme.of(context).textTheme.bodyText2,
             ),
             trailing: Text(
               _infoUsuarioBloc!.state.infoUsuarioModel!.estado.toString(),
@@ -991,7 +997,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             leading: Icon(Icons.settings),
             title: Text(
               'Configuración',
-              style: Theme.of(context).textTheme.body2,
+              style: Theme.of(context).textTheme.bodyText1,
             ),
           ),
           // ListTile(
@@ -1009,7 +1015,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
           //       SizedBox(width: 10),
           //       Text(
           //         'Languages',
-          //         style: Theme.of(context).textTheme.body1,
+          //         style: Theme.of(context).textTheme.bodyText2,
           //       ),
           //     ],
           //   ),
@@ -1033,7 +1039,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
                 SizedBox(width: 10),
                 Text(
                   'Ayuda y Soporte',
-                  style: Theme.of(context).textTheme.body1,
+                  style: Theme.of(context).textTheme.bodyText2,
                 ),
               ],
             ),

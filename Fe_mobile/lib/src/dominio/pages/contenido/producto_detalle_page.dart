@@ -158,7 +158,7 @@ class _ProductoDetallePageState extends State<ProductoDetallePage>
                       color: Theme.of(context).primaryColor,
                     ),
                     Text(_cantidadSeleccionada.toString(),
-                        style: Theme.of(context).textTheme.subhead!.merge(
+                        style: Theme.of(context).textTheme.subtitle1!.merge(
                             TextStyle(color: Theme.of(context).primaryColor))),
                     IconButton(
                       onPressed: () {
@@ -350,7 +350,7 @@ class _ProductoDetallePageState extends State<ProductoDetallePage>
                         'Reseñas del producto',
                         overflow: TextOverflow.fade,
                         softWrap: false,
-                        style: Theme.of(context).textTheme.display1,
+                        style: Theme.of(context).textTheme.headline4,
                       ),
                     ),
                   ),

@@ -176,7 +176,7 @@ class _SolicitudTruequeListaState extends State<SolicitudTruequeListaWidget> {
                                   _productoDeseado!.nombre!,
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 2,
-                                  style: Theme.of(context).textTheme.subhead,
+                                  style: Theme.of(context).textTheme.subtitle1,
                                 ),
                                 SizedBox(height: 12),
                                 Wrap(
@@ -196,7 +196,7 @@ class _SolicitudTruequeListaState extends State<SolicitudTruequeListaWidget> {
                                                 'ACEPTADO',
                                                 style: Theme.of(context)
                                                     .textTheme
-                                                    .body1,
+                                                    .bodyText2,
                                                 overflow: TextOverflow.fade,
                                                 softWrap: false,
                                               )
@@ -206,7 +206,7 @@ class _SolicitudTruequeListaState extends State<SolicitudTruequeListaWidget> {
                                                     'OFERTADO',
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .body1,
+                                                        .bodyText2,
                                                     overflow: TextOverflow.fade,
                                                     softWrap: false,
                                                   )
@@ -217,7 +217,7 @@ class _SolicitudTruequeListaState extends State<SolicitudTruequeListaWidget> {
                                                         'RECHAZADO',
                                                         style: Theme.of(context)
                                                             .textTheme
-                                                            .body1,
+                                                            .bodyText2,
                                                         overflow:
                                                             TextOverflow.fade,
                                                         softWrap: false,
@@ -237,8 +237,9 @@ class _SolicitudTruequeListaState extends State<SolicitudTruequeListaWidget> {
                                           'Cantidad solicitada: ' +
                                               widget.detalle!.cantidadvendedor
                                                   .toString(),
-                                          style:
-                                              Theme.of(context).textTheme.body1,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText2,
                                           overflow: TextOverflow.fade,
                                           softWrap: false,
                                         ),
@@ -255,7 +256,7 @@ class _SolicitudTruequeListaState extends State<SolicitudTruequeListaWidget> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: <Widget>[
                               Text(_productoOfertado!.nombre!,
-                                  style: Theme.of(context).textTheme.display1),
+                                  style: Theme.of(context).textTheme.headline4),
                               SizedBox(height: 6),
                               Chip(
                                 padding: EdgeInsets.symmetric(horizontal: 5),

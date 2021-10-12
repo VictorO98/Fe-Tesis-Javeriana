@@ -219,6 +219,20 @@ namespace Fe.Dominio.contenido
             return _repoResena.GetResenaPorIdResena(idResena);
         }
 
+        internal async Task<RespuestaDatos> ModificarPublicacionApp(ModificarPublicacion productosServicios)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _repoProducto.ModificarPublicacionApp(productosServicios);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
+
         internal string GetImagenProdcuto(ProductosServiciosPc publicacion)
         {
             try

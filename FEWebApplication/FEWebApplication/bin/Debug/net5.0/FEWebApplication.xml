@@ -37,6 +37,11 @@
             Método para registrarse en la aplicación
             </summary>
         </member>
+        <member name="M:FEWebApplication.Authentication.AuthenticateController.ModificarDemografia(Fe.Servidor.Middleware.Contratos.Core.Seguridad.ModificarDemografia)">
+            <summary>
+            Método para modificar la demografia
+            </summary>
+        </member>
         <member name="T:FEWebApplication.Controladores.Core.COGeneralController">
             <summary>
             Servicios para guardar, modificar o borrar población, documento, demografía, demografía reportada, FAQ y razón social
@@ -357,6 +362,139 @@
             </summary>
             <returns>Respuesta de datos indicando la factura.</returns>
             <param name="contratoPSE">Información necesaria para realizar la transacción mediante PSE.</param>
+        </member>
+        <member name="M:FEWebApplication.Controladores.Dominio.Factura.FAFacturaController.FacturacionPSE(Fe.Servidor.Middleware.Contratos.Dominio.Factura.ContratoFacturaPSE)">
+            <summary>
+            Se realiza una facturacion de una transacción hecha mediante PSE.
+            </summary>
+            <returns>Respuesta de datos indicando la factura.</returns>
+            <param name="contratoFacturaPSE">Información necesaria para realizar la facturación de PSE.</param>
+        </member>
+        <member name="M:FEWebApplication.Controladores.Dominio.Factura.FAFacturaController.PedidoAFacturas(System.Collections.Generic.List{Fe.Servidor.Middleware.Modelo.Entidades.ProdSerXVendidosPed})">
+            <summary>
+            Retorna las facturas de un pedido (una factura por cada vendedor) (No las almacena en BD)
+            </summary>
+            <returns>Lista de facturas del pedido</returns>
+            <param name="pedido">Pedido del cual se desean obtener sus facturas</param>
+        </member>
+        <member name="M:FEWebApplication.Controladores.Dominio.Factura.FAFacturaController.ProductoPedidoAProductoFactura(System.Collections.Generic.List{Fe.Servidor.Middleware.Modelo.Entidades.ProdSerXVendidosPed})">
+            <summary>
+            Convuerte los productos de un pedido, a los productos de una factura (no los almacena en BD)
+            </summary>
+            <returns>Lista de productos facturados</returns>
+            <param name="pedido">Id de la factura deseada</param>
+        </member>
+        <member name="M:FEWebApplication.Controladores.Dominio.Factura.FAFacturaController.Prueba(System.Collections.Generic.List{Fe.Servidor.Middleware.Modelo.Entidades.ProdSerXVendidosPed})">
+            <summary>
+            Función para probar el proceso de facturación definido en las funciones de pago
+            </summary>
+            <returns>Listado de confirmaciones de insersión en la BD</returns>
+            <param name="pedido">Pedido que se desea facturar</param>
+        </member>
+        <member name="M:FEWebApplication.Controladores.Dominio.Factura.FAFacturaController.GuardarFactura(Fe.Servidor.Middleware.Modelo.Entidades.FacturasFac)">
+            <summary>
+            Almacena la factura en la base de datos
+            </summary>
+            <returns>Respuesta de datos verificando que se realizó la inserción de la factura</returns>
+            <param name="factura">Factura que se desea almacenar en la base de datos</param>
+        </member>
+        <member name="M:FEWebApplication.Controladores.Dominio.Factura.FAFacturaController.GetFacturaPorId(System.Int32)">
+            <summary>
+            Obtiene la factura ascociada al ID
+            </summary>
+            <returns>Factura asociada al ID</returns>
+            <param name="idFactura">Id de la factura deseada</param>
+        </member>
+        <member name="M:FEWebApplication.Controladores.Dominio.Factura.FAFacturaController.GetFacturasPorIdPedido(System.Int32)">
+            <summary>
+            Obtiene las facturas ascociadas al ID de un pedido
+            </summary>
+            <returns>Facturas asociadas al ID del pedido</returns>
+            <param name="idPedido">Id del pedido del cual se desean conocer sus facturas</param>
+        </member>
+        <member name="M:FEWebApplication.Controladores.Dominio.Factura.FAFacturaController.GetFacturasPorIdVendedor(System.Int32)">
+            <summary>
+            Obtiene las facturas ascociadas al ID de un vendedor
+            </summary>
+            <returns>Facturas asociadas al ID del vendedor</returns>
+            <param name="idVendedor">Id del vendedor del cual se desean conocer sus facturas</param>
+        </member>
+        <member name="M:FEWebApplication.Controladores.Dominio.Factura.FAFacturaController.RemoverFactura(System.Int32)">
+            <summary>
+            Elimina la factura de la base de datos
+            </summary>
+            <returns>Respuesta de datos verificando que se realizó la eliminación de la factura</returns>
+            <param name="idFactura">Id de la factura que se desea eliminar de la base de datos</param>
+        </member>
+        <member name="M:FEWebApplication.Controladores.Dominio.Factura.FAFacturaController.ModificarFactura(Fe.Servidor.Middleware.Modelo.Entidades.FacturasFac)">
+            <summary>
+            Modifica la factura en la base de datos
+            </summary>
+            <returns>Respuesta de datos verificando que se realizó la modificación de la factura</returns>
+            <param name="factura">Factura que se desea modificar en la base de datos</param>
+        </member>
+        <member name="M:FEWebApplication.Controladores.Dominio.Factura.FAFacturaController.GuardarProductoFactura(Fe.Servidor.Middleware.Modelo.Entidades.ProdSerXFacturaFac)">
+            <summary>
+            Almacena el producto de una factura en la base de datos (ProdSerXFacturaFac)
+            </summary>
+            <returns>Respuesta de datos verificando que se realizó la inserción del producto de una factura</returns>
+            <param name="productoFactura">Producto de una factura que se desea almacenar en la base de datos</param>
+        </member>
+        <member name="M:FEWebApplication.Controladores.Dominio.Factura.FAFacturaController.GetPrductoFacturaPorId(System.Int32)">
+            <summary>
+            Obtiene el producto de una factura asociado al ID (ProdSerXFacturaFac)
+            </summary>
+            <returns>Producto de una factura asociado al ID</returns>
+            <param name="idProductoFactura">Id del producto de una factura deseado</param>
+        </member>
+        <member name="M:FEWebApplication.Controladores.Dominio.Factura.FAFacturaController.GetProductosFacturaPorIdFactura(System.Int32)">
+            <summary>
+            Obtiene una lista con todos los productos de una factura asociado al ID de la factura (ProdSerXFacturaFac)
+            </summary>
+            <returns>Lista con todos los producto de una factura asociados al ID de la factura</returns>
+            <param name="idFactura">Id factura de la cual se desean obtener todos sus productos</param>
+        </member>
+        <member name="M:FEWebApplication.Controladores.Dominio.Factura.FAFacturaController.RemoverProductoFactura(System.Int32)">
+            <summary>
+            Eliminar el producto de una factura en la base de datos (ProdSerXVendidosPed)
+            </summary>
+            <returns>Respuesta de datos verificando que se realizó la eliminación del producto de una factura</returns>
+            <param name="idProductoFactura">Id producto de una factura que se desea eliminar de la base de datos</param>
+        </member>
+        <member name="M:FEWebApplication.Controladores.Dominio.Factura.FAFacturaController.ModificarProductoFactura(Fe.Servidor.Middleware.Modelo.Entidades.ProdSerXFacturaFac)">
+            <summary>
+            Modifica el producto de una factura en la base de datos (ProdSerXVendidosPed)
+            </summary>
+            <returns>Respuesta de datos verificando que se realizó la modificación del producto de una factura</returns>
+            <param name="productoFactura">Producto de una factura que se desea modificar en la base de datos</param>
+        </member>
+        <member name="M:FEWebApplication.Controladores.Dominio.Factura.FAFacturaController.DetalleProductoFactura(System.Int32)">
+            <summary>
+            Obtiene el detalle del producto de una factura (ProdSerXFacturasFac)
+            </summary>
+            <returns>Contrato de detalles del producto de una factura</returns>
+            <param name="idProductoFactura">Producto de una factura que se desea obtener su detalle</param>
+        </member>
+        <member name="M:FEWebApplication.Controladores.Dominio.Factura.FAFacturaController.ListarDetallesFactura(System.Int32)">
+            <summary>
+            Obtiene la lista de detalles de los productos de una factura (ProdSerXFacturasFac)
+            </summary>
+            <returns>Lista de contratos de detalles de los productos de una factura</returns>
+            <param name="idFactura">IDFactura del cual se desea obtener el detalle de todos sus productos</param>
+        </member>
+        <member name="M:FEWebApplication.Controladores.Dominio.Factura.FAFacturaController.CabeceraFactura(System.Int32)">
+            <summary>
+            Obtiene el contrato de una factura (ProdSerXFacturasFac)
+            </summary>
+            <returns>Contrato de una factura con sus productos</returns>
+            <param name="idFactura">Factura del que se desea obtener su contrato</param>
+        </member>
+        <member name="M:FEWebApplication.Controladores.Dominio.Factura.FAFacturaController.ListarTodasLasFacturasPorUsuario(System.Int32)">
+            <summary>
+            Obtiene todas las facturas de un usuario
+            </summary>
+            <returns>Lista con todas las facturas de un usuario</returns>
+            <param name="idUsuario">ID usuario del que se desean obtner todas sus facturas</param>
         </member>
         <member name="T:FEWebApplication.Controladores.Dominio.Pedido.PEPedidoController">
             <summary>

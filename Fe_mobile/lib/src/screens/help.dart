@@ -45,7 +45,7 @@ class _HelpWidgetState extends State<HelpWidget> {
             'Ayuda y Soporte',
             style: Theme.of(context)
                 .textTheme
-                .display1!
+                .headline4!
                 .merge(TextStyle(color: Theme.of(context).primaryColor)),
           ),
           actions: <Widget>[
@@ -73,7 +73,7 @@ class _HelpWidgetState extends State<HelpWidget> {
                       'Prefuntas frecuentes',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.display1,
+                      style: Theme.of(context).textTheme.headline4,
                     ),
                   ),
                   ListView.separated(

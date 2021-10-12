@@ -108,7 +108,7 @@ class _FavoritosUsuarioPageState extends State<FavoritosUsuarioPage> {
                         'Lista de deseos',
                         overflow: TextOverflow.fade,
                         softWrap: false,
-                        style: Theme.of(context).textTheme.display1,
+                        style: Theme.of(context).textTheme.headline4,
                       ),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,

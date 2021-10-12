@@ -28,6 +28,16 @@ namespace FEWebApplication.Controladores.Core
             _cOGeneralFachada = cOGeneralFachada;
         }
 
+        /// <summary>
+        /// Versión servidor
+        /// </summary>
+        [Route("GetVersionServer")]
+        [HttpGet]
+        public string GetVersionServer()
+        {
+            return "1.0.0";
+        }
+
         [Route("GetEstadoPoblacion")]
         [HttpGet]
         public List<EstadoPoblacionCor> GetEstadoPoblacion()

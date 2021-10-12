@@ -187,7 +187,7 @@ class _BrandWidgetState extends State<BrandWidget>
                         'Users Reviews',
                         overflow: TextOverflow.fade,
                         softWrap: false,
-                        style: Theme.of(context).textTheme.display1,
+                        style: Theme.of(context).textTheme.headline4,
                       ),
                     ),
                   ),

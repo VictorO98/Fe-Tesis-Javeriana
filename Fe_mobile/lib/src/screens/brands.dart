@@ -31,7 +31,7 @@ class _BrandsWidgetState extends State<BrandsWidget> {
         elevation: 0,
         title: Text(
           'Brands',
-          style: Theme.of(context).textTheme.display1,
+          style: Theme.of(context).textTheme.headline4,
         ),
         actions: <Widget>[
           new ShoppingCartButtonWidget(

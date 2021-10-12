@@ -72,8 +72,10 @@ class _BrandIconWidgetState extends State<BrandIconWidget>
                     size: widget.brand!.selected! ? 18 : 0,
                   ),
                   Text(
-                    widget.brand!.selected! ? widget.brand!.rate.toString() : '',
-                    style: Theme.of(context).textTheme.body2,
+                    widget.brand!.selected!
+                        ? widget.brand!.rate.toString()
+                        : '',
+                    style: Theme.of(context).textTheme.bodyText1,
                   )
                 ],
               ),

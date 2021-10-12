@@ -40,7 +40,7 @@ class _ProductsByBrandWidgetState extends State<ProductsByBrandWidget> {
               '${widget.brand!.name} Products',
               overflow: TextOverflow.fade,
               softWrap: false,
-              style: Theme.of(context).textTheme.display1,
+              style: Theme.of(context).textTheme.headline4,
             ),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,

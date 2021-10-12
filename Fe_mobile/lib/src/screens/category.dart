@@ -122,7 +122,7 @@ class _CategoryWidgetState extends State<CategoryWidget>
                       SizedBox(height: 5),
                       Text(
                         widget._category!.name,
-                        style: Theme.of(context).textTheme.title!.merge(
+                        style: Theme.of(context).textTheme.headline6!.merge(
                             TextStyle(color: Theme.of(context).primaryColor)),
                       )
                     ],

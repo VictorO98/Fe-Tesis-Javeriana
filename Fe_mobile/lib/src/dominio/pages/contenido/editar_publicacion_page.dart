@@ -1,9 +1,13 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:Fe_mobile/src/core/models/respuesta_datos_model.dart';
 import 'package:Fe_mobile/src/core/util/alert_util.dart';
+import 'package:Fe_mobile/src/core/util/currency_util.dart';
 import 'package:Fe_mobile/src/core/util/estilo_util.dart';
 import 'package:Fe_mobile/src/dominio/models/categoria_model.dart';
+import 'package:Fe_mobile/src/dominio/models/crear_publicacion_model.dart';
+import 'package:Fe_mobile/src/dominio/models/editar_publicacion_model.dart';
 import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:Fe_mobile/src/dominio/providers/contenido_provider.dart';
 import 'package:Fe_mobile/src/models/route_argument.dart';
@@ -29,38 +33,28 @@ class EditarPublicacionPage extends StatefulWidget {
 }
 
 class _EditarPublicacionPageState extends State<EditarPublicacionPage> {
+  EditarPublicacionModel _editarPublicacionModel = new EditarPublicacionModel();
   ContenidoProvider _contenidoProvider = new ContenidoProvider();
-
-  List<CategoriaModel> _listCategoriaModel = [];
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final _formDatosBasicos = GlobalKey<FormState>();
   final _formPrecio = GlobalKey<FormState>();
   final _picker = ImagePicker();
 
-  CategoriaModel? _categoriaSeleccionada;
   File? documentoASubir;
 
   String? _tipoVenta;
 
   bool isShowImages = false;
   bool isHayImagenSubida = false;
-  bool _isModifica = false;
   bool checkboxValue = false;
+  bool actualizandoProductos = false;
 
   //TODO cambiar este dato para subir varias
   static const int LIMITE_IMAGENES = 1;
   @override
   void initState() {
     super.initState();
-    _getCategorias();
-  }
-
-  _getCategorias() async {
-    List<CategoriaModel> list = await _contenidoProvider.getAllCategorias();
-    setState(() {
-      _listCategoriaModel = list;
-    });
   }
 
   @override
@@ -288,198 +282,260 @@ class _EditarPublicacionPageState extends State<EditarPublicacionPage> {
           _crearViewerImagenes(context),
           _crearBotonSeleccionarGaleria(context),
           _crearBotonTomarFoto(context),
-          Text(
-            'Información Básica',
-            style: Theme.of(context).textTheme.headline6,
+          SizedBox(
+            height: 10,
           ),
+          Text('Información Básica', style: TextStyle(fontSize: 17)),
           Form(
             key: _formDatosBasicos,
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: 5),
-                TextFormField(
-                  initialValue: widget._product!.nombre,
-                  decoration:
-                      EstiloUtil.crearInputDecorationFormCustom("Nombre \*",
-                          icon: Icon(
-                            Icons.person,
-                            color: EstiloUtil.COLOR_PRIMARY,
-                          )),
-                  onSaved: (String? value) {
-                    setState(() {
-                      widget._product!.nombre = value;
-                    });
-                  },
-                  onChanged: (String? value) {
-                    setState(() {
-                      widget._product!.nombre = value;
-                    });
-                  },
-                  validator: (String? value) =>
-                      (value!.isEmpty) || (value.trim().isEmpty)
-                          ? 'Registra el nombre de tu publicacion'
-                          : null,
-                ),
-                SizedBox(height: 5),
-                widget._product!.tipoPublicacion == "Producto"
-                    ? TextFormField(
-                        initialValue: widget._product!.cantidadtotal.toString(),
-                        onSaved: (String? value) {
-                          setState(() {
-                            widget._product!.cantidadtotal = int.parse(value!);
-                          });
-                        },
-                        onChanged: (String? value) {
-                          setState(() {
-                            widget._product!.cantidadtotal = int.parse(value!);
-                          });
-                        },
-                        keyboardType: TextInputType.number,
-                        decoration: EstiloUtil.crearInputDecorationFormCustom(
-                            'Cantidad disponible \*',
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
+              child: Column(
+                children: <Widget>[
+                  SizedBox(height: 12),
+                  TextFormField(
+                    initialValue: widget._product!.nombre,
+                    decoration:
+                        EstiloUtil.crearInputDecorationFormCustom("Nombre \*",
                             icon: Icon(
-                              Icons.credit_card,
+                              Icons.person,
                               color: EstiloUtil.COLOR_PRIMARY,
                             )),
-                        validator: (String? value) {
-                          if (value!.isEmpty || value.trim().isEmpty)
-                            return 'Registre la cantidad del producto.';
-
-                          if (int.tryParse(value) == null)
-                            return 'Solo se aceptan números.';
-                          return null;
-                        })
-                    : SizedBox(),
-                SizedBox(height: 5),
-                DropdownSearch<CategoriaModel>(
-                    mode: Mode.MENU,
-                    showSearchBox: true,
-                    showClearButton: true,
-                    selectedItem: _isModifica ? _categoriaSeleccionada : null,
-                    dropdownSearchDecoration:
-                        EstiloUtil.crearInputDecorationFormCustom(''),
-                    searchBoxDecoration:
-                        EstiloUtil.crearInputDecorationFormCustom(''),
-                    items: _listCategoriaModel,
-                    itemAsString: (CategoriaModel e) => e.nombre!,
-                    label: "Categorías \*",
-                    hint: "Seleccione la categoría",
-                    validator: (value) =>
-                        value == null ? 'Seleccione una categoría' : null,
-                    onChanged: (c) => setState(() {
-                          //widget._product.cat = c!.id;
-                        })),
-                SizedBox(height: 10),
-                TextFormField(
-                  initialValue: widget._product!.descripcion,
-                  keyboardType: TextInputType.multiline,
-                  decoration: EstiloUtil.crearInputDecorationFormCustom(
-                      "Descripción \*",
-                      icon: Icon(
-                        Icons.text_snippet_rounded,
-                        color: EstiloUtil.COLOR_PRIMARY,
-                      )),
-                  onChanged: (String? value) {
-                    setState(() {
-                      widget._product!.descripcion = value;
-                    });
-                  },
-                  onSaved: (String? value) {
-                    setState(() {
-                      widget._product!.descripcion = value;
-                    });
-                  },
-                  validator: (String? value) =>
-                      (value!.isEmpty) || (value.trim().isEmpty)
-                          ? 'Registre la descripción'
-                          : null,
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: 10),
-          Text(
-            'Precios',
-            style: Theme.of(context).textTheme.headline6,
-          ),
-          SizedBox(height: 10),
-          Form(
-            key: _formPrecio,
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: 5),
-                TextFormField(
-                    initialValue: widget._product!.preciounitario.toString(),
                     onSaved: (String? value) {
                       setState(() {
-                        widget._product!.preciounitario = int.parse(value!);
+                        widget._product!.nombre = value;
                       });
                     },
                     onChanged: (String? value) {
                       setState(() {
-                        widget._product!.preciounitario = int.parse(value!);
+                        widget._product!.nombre = value;
+                      });
+                    },
+                    validator: (String? value) =>
+                        (value!.isEmpty) || (value.trim().isEmpty)
+                            ? 'Registra el nombre de tu publicacion'
+                            : null,
+                  ),
+                  SizedBox(height: 12),
+                  widget._product!.tipoPublicacion == "Producto"
+                      ? TextFormField(
+                          initialValue:
+                              widget._product!.cantidadtotal.toString(),
+                          onSaved: (String? value) {
+                            setState(() {
+                              widget._product!.cantidadtotal =
+                                  int.parse(value!);
+                            });
+                          },
+                          onChanged: (String? value) {
+                            setState(() {
+                              widget._product!.cantidadtotal =
+                                  int.parse(value!);
+                            });
+                          },
+                          keyboardType: TextInputType.number,
+                          decoration: EstiloUtil.crearInputDecorationFormCustom(
+                              'Cantidad disponible \*',
+                              icon: Icon(
+                                Icons.credit_card,
+                                color: EstiloUtil.COLOR_PRIMARY,
+                              )),
+                          validator: (String? value) {
+                            if (value!.isEmpty || value.trim().isEmpty)
+                              return 'Registre la cantidad del producto.';
+
+                            if (int.tryParse(value) == null)
+                              return 'Solo se aceptan números.';
+                            return null;
+                          })
+                      : SizedBox(),
+                  SizedBox(height: 12),
+                  TextFormField(
+                    initialValue: widget._product!.descripcion,
+                    keyboardType: TextInputType.multiline,
+                    decoration: EstiloUtil.crearInputDecorationFormCustom(
+                        "Descripción \*",
+                        icon: Icon(
+                          Icons.text_snippet_rounded,
+                          color: EstiloUtil.COLOR_PRIMARY,
+                        )),
+                    onChanged: (String? value) {
+                      setState(() {
+                        widget._product!.descripcion = value;
+                      });
+                    },
+                    onSaved: (String? value) {
+                      setState(() {
+                        widget._product!.descripcion = value;
+                      });
+                    },
+                    validator: (String? value) =>
+                        (value!.isEmpty) || (value.trim().isEmpty)
+                            ? 'Registre la descripción'
+                            : null,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
+          Text('Precios', style: TextStyle(fontSize: 17)),
+          SizedBox(height: 10),
+          Form(
+            key: _formPrecio,
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
+              child: Column(
+                children: <Widget>[
+                  SizedBox(height: 5),
+                  TextFormField(
+                      initialValue: widget._product!.preciounitario.toString(),
+                      onSaved: (String? value) {
+                        setState(() {
+                          widget._product!.preciounitario = int.parse(value!);
+                        });
+                      },
+                      onChanged: (String? value) {
+                        setState(() {
+                          widget._product!.preciounitario = int.parse(value!);
+                        });
+                      },
+                      keyboardType: TextInputType.number,
+                      decoration: EstiloUtil.crearInputDecorationFormCustom(
+                          'Precio (Sin puntos y comas) \*',
+                          icon: Icon(
+                            Icons.credit_card,
+                            color: EstiloUtil.COLOR_PRIMARY,
+                          )),
+                      validator: (String? value) {
+                        if (value!.isEmpty || value.trim().isEmpty)
+                          return 'Registre el precio de tu publicacion';
+
+                        if (int.tryParse(value) == null)
+                          return 'Solo se aceptan números.';
+                        return null;
+                      }),
+                  SizedBox(height: 10),
+                  widget._product!.preciounitario != null
+                      ? Text(
+                          "${CurrencyUtil.convertFormatMoney('COP', widget._product!.preciounitario!)}")
+                      : Text("\$0"),
+                  SizedBox(height: 12),
+                  TextFormField(
+                    validator: (String? value) {
+                      if (widget._product!.descuento != null ||
+                          widget._product!.descuento != 0) {
+                        if (widget._product!.descuento! >= 100) {
+                          return 'Solo se aceptan valores menores del %100';
+                        }
+                      }
+                      if (widget._product!.descuento == null) {}
+                    },
+                    initialValue:
+                        widget._product!.descuento!.toInt().toString(),
+                    onSaved: (String? value) {
+                      setState(() {
+                        value == ""
+                            ? widget._product!.descuento = 0
+                            : widget._product!.descuento = double.parse(value!);
+                      });
+                    },
+                    onChanged: (String? value) {
+                      setState(() {
+                        value == ""
+                            ? widget._product!.descuento = 0
+                            : widget._product!.descuento = double.parse(value!);
                       });
                     },
                     keyboardType: TextInputType.number,
                     decoration: EstiloUtil.crearInputDecorationFormCustom(
-                        'Precio (Sin puntos y comas) \*',
+                        'Descuento (%) (Opcional - Sin puntos y comas) \*',
                         icon: Icon(
                           Icons.credit_card,
                           color: EstiloUtil.COLOR_PRIMARY,
                         )),
-                    validator: (String? value) {
-                      if (value!.isEmpty || value.trim().isEmpty)
-                        return 'Registre el precio de tu publicacion';
-
-                      if (int.tryParse(value) == null)
-                        return 'Solo se aceptan números.';
-                      return null;
-                    }),
-                SizedBox(height: 10),
-                TextFormField(
-                  initialValue: widget._product!.descuento!.toInt().toString(),
-                  onSaved: (String? value) {
-                    setState(() {
-                      value == ""
-                          ? widget._product!.descuento = 0
-                          : widget._product!.descuento = double.parse(value!);
-                    });
-                  },
-                  onChanged: (String? value) {
-                    setState(() {
-                      value == ""
-                          ? widget._product!.descuento = 0
-                          : widget._product!.descuento = double.parse(value!);
-                    });
-                  },
-                  keyboardType: TextInputType.number,
-                  decoration: EstiloUtil.crearInputDecorationFormCustom(
-                      'Descuento (%) (Opcional - Sin puntos y comas) \*',
-                      icon: Icon(
-                        Icons.credit_card,
-                        color: EstiloUtil.COLOR_PRIMARY,
-                      )),
-                ),
-                SizedBox(height: 8),
-                CheckboxListTile(
-                  value: widget._product!.habilitatrueque == 1 ? true : false,
-                  title: Text(
-                      "Habilitar trueque (Intercambia tu producto con el de otro emprendedor)"),
-                  controlAffinity: ListTileControlAffinity.leading,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      checkboxValue = value!;
-                      checkboxValue
-                          ? widget._product!.habilitatrueque = 1
-                          : widget._product!.habilitatrueque = 0;
-                    });
-                  },
-                )
-              ],
+                  ),
+                  SizedBox(height: 8),
+                  widget._product!.descuento != null
+                      ? Text("%" + widget._product!.descuento.toString())
+                      : Text("%0"),
+                  SizedBox(height: 8),
+                  CheckboxListTile(
+                    value: widget._product!.habilitatrueque == 1 ? true : false,
+                    title: Text(
+                        "Habilitar trueque (Intercambia tu producto con el de otro emprendedor)"),
+                    controlAffinity: ListTileControlAffinity.leading,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        checkboxValue = value!;
+                        checkboxValue
+                            ? widget._product!.habilitatrueque = 1
+                            : widget._product!.habilitatrueque = 0;
+                      });
+                    },
+                  ),
+                  SizedBox(height: 15),
+                  GestureDetector(
+                    onTap: () {
+                      AlertUtil.confirm(
+                          context,
+                          '¿Esta seguro de modificar la publicación ',
+                          () => _submit(),
+                          confirmBtnText: 'Modificar');
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).accentColor,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      padding: const EdgeInsets.all(10),
+                      child: const Text(
+                        'Guardar Cambios',
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
       ),
     );
+  }
+
+  void _submit() async {
+    if (_formDatosBasicos.currentState!.validate() &&
+        _formPrecio.currentState!.validate()) {
+      _formDatosBasicos.currentState!.save();
+      _formPrecio.currentState!.save();
+
+      _editarPublicacionModel.id = widget._product!.id;
+      _editarPublicacionModel.nombre = widget._product!.nombre;
+      _editarPublicacionModel.descripcion = widget._product!.descripcion;
+      _editarPublicacionModel.cantidadtotal = widget._product!.cantidadtotal;
+      _editarPublicacionModel.preciounitario = widget._product!.preciounitario;
+      _editarPublicacionModel.descuento = widget._product!.descuento;
+      _editarPublicacionModel.habilitatrueque =
+          widget._product!.habilitatrueque;
+
+      _contenidoProvider
+          .modificarPublicacion(_editarPublicacionModel, context)
+          .then((value) {
+        RespuestaDatosModel? respuesta = value;
+        if (respuesta?.codigo == 10) {
+          final funcionNavegar = () async {
+            Navigator.pop(context);
+            Navigator.of(context).pushNamed('/Tabs', arguments: 1);
+          };
+
+          AlertUtil.success(context, respuesta!.mensaje!,
+              respuesta: funcionNavegar, title: 'Modificación exitosa!');
+        }
+      }).whenComplete(() => null);
+    }
   }
 }

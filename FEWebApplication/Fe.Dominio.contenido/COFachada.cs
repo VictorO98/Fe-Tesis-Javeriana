@@ -271,6 +271,20 @@ namespace Fe.Dominio.contenido
             }
         }
 
+        public async Task<RespuestaDatos> ModificarPublicacionApp(ModificarPublicacion productosServicios)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _cOContenidoBiz.ModificarPublicacionApp(productosServicios);
+            }
+            catch (COExcepcion e)
+            {
+                throw e;
+            }
+            return respuestaDatos;
+        }
+
         public int ValidarPublicacionesPorIdUsuario(int idDemografia)
         {
             try

@@ -106,7 +106,7 @@ class BrandGridWidget extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       brand.name,
-                      style: Theme.of(context).textTheme.body2,
+                      style: Theme.of(context).textTheme.bodyText1,
                       maxLines: 1,
                       softWrap: false,
                       overflow: TextOverflow.fade,
@@ -117,7 +117,7 @@ class BrandGridWidget extends StatelessWidget {
                         Expanded(
                           child: Text(
                             '${brand.products.length} Products',
-                            style: Theme.of(context).textTheme.body1,
+                            style: Theme.of(context).textTheme.bodyText2,
                             overflow: TextOverflow.fade,
                             softWrap: false,
                           ),
@@ -129,7 +129,7 @@ class BrandGridWidget extends StatelessWidget {
                         ),
                         Text(
                           brand.rate.toString(),
-                          style: Theme.of(context).textTheme.body2,
+                          style: Theme.of(context).textTheme.bodyText1,
                         )
                       ],
                       crossAxisAlignment: CrossAxisAlignment.center,

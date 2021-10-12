@@ -5,6 +5,7 @@ import 'package:Fe_mobile/src/models/order.dart';
 import 'package:Fe_mobile/src/widgets/EmptyOrdersProductsWidget.dart';
 import 'package:Fe_mobile/src/widgets/OrderGridItemWidget.dart';
 import 'package:Fe_mobile/src/widgets/OrderListItemWidget.dart';
+import 'package:Fe_mobile/src/widgets/ProductGridItemWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -49,7 +50,7 @@ class _PublicacionesUsuarioWidgetState
                   widget.tipoPublicacion!,
                   overflow: TextOverflow.fade,
                   softWrap: false,
-                  style: Theme.of(context).textTheme.display1,
+                  style: Theme.of(context).textTheme.headline4,
                 ),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -120,7 +121,7 @@ class _PublicacionesUsuarioWidgetState
                 itemBuilder: (BuildContext context, int index) {
                   ProductoServicioModel publicacion =
                       widget.publicaciones!.elementAt(index);
-                  return ProductoUsuarioListItemWidget(
+                  return ProductGridItemWidget(
                     product: publicacion,
                     heroTag: 'orders_grid',
                   );

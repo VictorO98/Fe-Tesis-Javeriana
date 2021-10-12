@@ -63,7 +63,7 @@ class _HomeSliderWidgetState extends State<HomeSliderWidget> {
                             slide.description!,
                             style: Theme.of(context)
                                 .textTheme
-                                .title!
+                                .headline6!
                                 .merge(TextStyle(height: 0.8)),
                             textAlign: TextAlign.right,
                             overflow: TextOverflow.fade,

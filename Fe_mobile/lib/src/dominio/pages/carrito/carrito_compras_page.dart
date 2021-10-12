@@ -1,7 +1,9 @@
+import 'package:Fe_mobile/src/core/util/alert_util.dart';
 import 'package:Fe_mobile/src/core/util/comisiones_util.dart';
 import 'package:Fe_mobile/src/core/util/currency_util.dart';
 import 'package:Fe_mobile/src/dominio/models/carrito_compras_model.dart';
 import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
+import 'package:Fe_mobile/src/dominio/widgets/vacio_carrito_widget.dart';
 import 'package:Fe_mobile/src/widgets/CartItemWidget.dart';
 import 'package:flutter/material.dart';
 
@@ -47,7 +49,7 @@ class _CartWidgetState extends State<CartWidget> {
     setState(() {
       _totalCancelar = total;
       _comision = comision.toInt();
-      _checkout = _totalCancelar + _comision;
+      _checkout = _totalCancelar + _comision + ComisionesUtil.IMPUESTO_EPAYCO;
     });
     // setState(() {
     //   _cargandoUsuario = false;
@@ -68,7 +70,7 @@ class _CartWidgetState extends State<CartWidget> {
         elevation: 0,
         title: Text(
           'Atrás',
-          style: Theme.of(context).textTheme.display1,
+          style: Theme.of(context).textTheme.headline4,
         ),
         actions: <Widget>[
           Container(
@@ -86,151 +88,182 @@ class _CartWidgetState extends State<CartWidget> {
               )),
         ],
       ),
-      body: Stack(
-        fit: StackFit.expand,
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.only(bottom: 150),
-            padding: EdgeInsets.only(bottom: 15),
-            child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(vertical: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20, right: 10),
-                    child: ListTile(
-                      contentPadding: EdgeInsets.symmetric(vertical: 0),
-                      leading: Icon(
-                        Icons.add_shopping_cart_outlined,
-                        color: Theme.of(context).hintColor,
-                      ),
-                      title: Text(
-                        'Carrito de compras',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.display1,
-                      ),
-                      subtitle: Text(
-                        'Verifique su cantidad y dirijase al checkout',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.caption,
-                      ),
-                    ),
-                  ),
-                  ListView.separated(
-                    padding: EdgeInsets.symmetric(vertical: 15),
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    primary: false,
-                    itemCount: _productsList.length,
-                    separatorBuilder: (context, index) {
-                      return SizedBox(height: 15);
-                    },
-                    itemBuilder: (context, index) {
-                      return CartItemWidget(
-                          product: _productsList.elementAt(index),
-                          heroTag: 'cart');
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 0,
-            child: Container(
-              height: 170,
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-              decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(20),
-                      topLeft: Radius.circular(20)),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Theme.of(context).focusColor.withOpacity(0.15),
-                        offset: Offset(0, -2),
-                        blurRadius: 5.0)
-                  ]),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width - 40,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
-                    Row(
+      body: _checkout != 0
+          ? Stack(
+              fit: StackFit.expand,
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(bottom: 150),
+                  padding: EdgeInsets.only(bottom: 15),
+                  child: SingleChildScrollView(
+                    padding: EdgeInsets.symmetric(vertical: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
-                        Expanded(
-                          child: Text(
-                            'Subtotal',
-                            style: Theme.of(context).textTheme.body2,
-                          ),
-                        ),
-                        Text(
-                            "${CurrencyUtil.convertFormatMoney('COP', _totalCancelar)}",
-                            style: Theme.of(context).textTheme.subhead),
-                      ],
-                    ),
-                    SizedBox(height: 5),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: Text(
-                            'Comisión (2%)',
-                            style: Theme.of(context).textTheme.body2,
-                          ),
-                        ),
-                        Text(
-                            "${CurrencyUtil.convertFormatMoney('COP', _comision)}",
-                            style: Theme.of(context).textTheme.subhead),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Stack(
-                      fit: StackFit.loose,
-                      alignment: AlignmentDirectional.centerEnd,
-                      children: <Widget>[
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width - 40,
-                          child: FlatButton(
-                            onPressed: () {
-                              _carrito.setTotalCheckOut(_checkout);
-                              Navigator.of(context).pushNamed('/Checkout');
-                            },
-                            padding: EdgeInsets.symmetric(vertical: 14),
-                            color: Theme.of(context).accentColor,
-                            shape: StadiumBorder(),
-                            child: Text(
-                              'Checkout',
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                  color: Theme.of(context).primaryColor),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20, right: 10),
+                          child: ListTile(
+                            contentPadding: EdgeInsets.symmetric(vertical: 0),
+                            leading: Icon(
+                              Icons.add_shopping_cart_outlined,
+                              color: Theme.of(context).hintColor,
+                            ),
+                            title: Text(
+                              'Carrito de compras',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(context).textTheme.headline4,
+                            ),
+                            subtitle: Text(
+                              'Verifique su cantidad y dirijase al checkout',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(context).textTheme.caption,
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Text(
-                            "${CurrencyUtil.convertFormatMoney('COP', _checkout)}",
-                            style: Theme.of(context).textTheme.display1!.merge(
-                                TextStyle(
-                                    color: Theme.of(context).primaryColor)),
-                          ),
-                        )
+                        ListView.separated(
+                          padding: EdgeInsets.symmetric(vertical: 15),
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          primary: false,
+                          itemCount: _productsList.length,
+                          separatorBuilder: (context, index) {
+                            return SizedBox(height: 15);
+                          },
+                          itemBuilder: (context, index) {
+                            return CartItemWidget(
+                                product: _productsList.elementAt(index),
+                                heroTag: 'cart');
+                          },
+                        ),
                       ],
                     ),
-                    SizedBox(height: 10),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-          )
-        ],
-      ),
+                Positioned(
+                  bottom: 0,
+                  child: Container(
+                    height: 170,
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).primaryColor,
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(20),
+                            topLeft: Radius.circular(20)),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Theme.of(context)
+                                  .focusColor
+                                  .withOpacity(0.15),
+                              offset: Offset(0, -2),
+                              blurRadius: 5.0)
+                        ]),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width - 40,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.max,
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Text(
+                                  'Subtotal',
+                                  style: Theme.of(context).textTheme.bodyText1,
+                                ),
+                              ),
+                              Text(
+                                  "${CurrencyUtil.convertFormatMoney('COP', _totalCancelar)}",
+                                  style: Theme.of(context).textTheme.subtitle1),
+                            ],
+                          ),
+                          SizedBox(height: 5),
+                          Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Text(
+                                  'Comisión (2%)',
+                                  style: Theme.of(context).textTheme.bodyText1,
+                                ),
+                              ),
+                              Text(
+                                  "${CurrencyUtil.convertFormatMoney('COP', _comision)}",
+                                  style: Theme.of(context).textTheme.subtitle1),
+                            ],
+                          ),
+                          SizedBox(height: 5),
+                          Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Text(
+                                  'Impuestos',
+                                  style: Theme.of(context).textTheme.bodyText1,
+                                ),
+                              ),
+                              Text(
+                                  "${CurrencyUtil.convertFormatMoney('COP', ComisionesUtil.IMPUESTO_EPAYCO)}",
+                                  style: Theme.of(context).textTheme.subtitle1),
+                            ],
+                          ),
+                          SizedBox(height: 10),
+                          Stack(
+                            fit: StackFit.loose,
+                            alignment: AlignmentDirectional.centerEnd,
+                            children: <Widget>[
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width - 40,
+                                child: FlatButton(
+                                  onPressed: () {
+                                    if (_checkout >=
+                                        ComisionesUtil.MINIMO_COMPRA) {
+                                      _carrito.setTotalCheckOut(_checkout);
+                                      Navigator.of(context)
+                                          .pushNamed('/Checkout');
+                                    } else {
+                                      AlertUtil.error(
+                                          context,
+                                          "El monto mínimo de compra son " +
+                                              "${CurrencyUtil.convertFormatMoney('COP', ComisionesUtil.MINIMO_COMPRA)}");
+                                    }
+                                  },
+                                  padding: EdgeInsets.symmetric(vertical: 14),
+                                  color: Theme.of(context).accentColor,
+                                  shape: StadiumBorder(),
+                                  child: Text(
+                                    'Checkout',
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                        color: Theme.of(context).primaryColor),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: Text(
+                                  "${CurrencyUtil.convertFormatMoney('COP', _checkout)}",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline4!
+                                      .merge(TextStyle(
+                                          color:
+                                              Theme.of(context).primaryColor)),
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(height: 10),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )
+          : VacioCarritoWidget(),
     );
   }
 }

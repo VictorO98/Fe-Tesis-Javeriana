@@ -11,5 +11,6 @@ namespace Fe.Core.Global.Constantes
         public const string NO_SE_INSERTO_USUARIO_IDENTITY_SERVER = "NIUIS";
         public const string RUTA_NO_ENCONTRADA = "RNE";
         public const string ARCHIVO_NO_ELIMINADO = "ANE";
+        public const string MODIFICAR_USUARIO = "MU";
     }
 }

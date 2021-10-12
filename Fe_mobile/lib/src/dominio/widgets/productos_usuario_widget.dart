@@ -60,9 +60,9 @@ class _ProductoUsuarioListItemWidgetState
         // TODO : ARREGLAR EL DETALLE DEL PRODUCTO PARA MODIFICARLO
         onTap: () {
           // Navigator.of(context).pushNamed('/Product',
-          //     arguments: new RouteArgument(
-          //         argumentsList: [this.widget.heroTag],
-          //         id: this.widget.product!.id));
+          //     arguments: RouteArgument(
+          //         id: widget.product!.id,
+          //         argumentsList: [widget.product, widget.heroTag]));
         },
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
@@ -106,7 +106,7 @@ class _ProductoUsuarioListItemWidgetState
                             widget.product!.nombre!,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
-                            style: Theme.of(context).textTheme.subhead,
+                            style: Theme.of(context).textTheme.subtitle1,
                           ),
                           SizedBox(height: 12),
                           Wrap(
@@ -122,7 +122,8 @@ class _ProductoUsuarioListItemWidgetState
                                   SizedBox(width: 10),
                                   Text(
                                     widget.product!.nombreCategoria!,
-                                    style: Theme.of(context).textTheme.body1,
+                                    style:
+                                        Theme.of(context).textTheme.bodyText2,
                                     overflow: TextOverflow.fade,
                                     softWrap: false,
                                   ),
@@ -138,7 +139,8 @@ class _ProductoUsuarioListItemWidgetState
                                   SizedBox(width: 10),
                                   Text(
                                     '95 ventas', // TODO  cambiar por el número del modelo
-                                    style: Theme.of(context).textTheme.body1,
+                                    style:
+                                        Theme.of(context).textTheme.bodyText2,
                                     overflow: TextOverflow.fade,
                                     softWrap: false,
                                   ),
@@ -156,7 +158,8 @@ class _ProductoUsuarioListItemWidgetState
                                     'Unidades: ' +
                                         widget.product!.cantidadtotal
                                             .toString(), // TODO  cambiar por el número del modelo
-                                    style: Theme.of(context).textTheme.body1,
+                                    style:
+                                        Theme.of(context).textTheme.bodyText2,
                                     overflow: TextOverflow.fade,
                                     softWrap: false,
                                   ),
@@ -174,29 +177,27 @@ class _ProductoUsuarioListItemWidgetState
                       children: <Widget>[
                         Text(
                             "${CurrencyUtil.convertFormatMoney('COP', widget.product!.preciounitario!.round())}",
-                            style: Theme.of(context).textTheme.display1),
+                            style: Theme.of(context).textTheme.headline4),
                         SizedBox(height: 6),
-                        widget.product!.tipoPublicacion == "Producto"
-                            ? ActionChip(
-                                avatar: Icon(Icons.edit),
-                                onPressed: () {
-                                  Navigator.of(context).pushNamed(
-                                      '/EditarPublicacion',
-                                      arguments: new RouteArgument(
-                                          argumentsList: [widget.product]));
-                                },
-                                padding: EdgeInsets.symmetric(horizontal: 5),
-                                backgroundColor: Colors.transparent,
-                                shape: StadiumBorder(
-                                    side: BorderSide(
-                                        color: Theme.of(context).focusColor)),
-                                label: Text(
-                                  'Editar',
-                                  style: TextStyle(
-                                      color: Theme.of(context).focusColor),
-                                ),
-                              )
-                            : SizedBox(),
+                        ActionChip(
+                          avatar: Icon(Icons.edit),
+                          onPressed: () {
+                            Navigator.of(context).pushNamed(
+                                '/EditarPublicacion',
+                                arguments: new RouteArgument(
+                                    argumentsList: [widget.product]));
+                          },
+                          padding: EdgeInsets.symmetric(horizontal: 5),
+                          backgroundColor: Colors.transparent,
+                          shape: StadiumBorder(
+                              side: BorderSide(
+                                  color: Theme.of(context).focusColor)),
+                          label: Text(
+                            'Editar',
+                            style:
+                                TextStyle(color: Theme.of(context).focusColor),
+                          ),
+                        )
                       ],
                     ),
                   ],

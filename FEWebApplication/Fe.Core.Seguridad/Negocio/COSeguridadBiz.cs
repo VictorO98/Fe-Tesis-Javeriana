@@ -42,6 +42,77 @@ namespace Fe.Core.Seguridad.Negocio
             _repoDocumentosEmprendedor = repoDocumentosEmprendedor;
         }
 
+        internal async Task<RespuestaDatos> SubirImagenSocial(IFormFileCollection files, DemografiaCor demografiaCor)
+        {
+            if (demografiaCor != null)
+            {
+                try
+                {    
+                    string directorio = _configuration["ImageSociales:DirectorioSocial"];
+                    directorio = directorio + "/" + "Social";
+
+                    if (string.IsNullOrEmpty(directorio))
+                    {
+                        RepoErrorLog.AddErrorLog(new ErrorLog
+                        {
+                            Mensaje = "No se encuentra definida la ruta para las imagenes de evidencia. ",
+                            Traza = null,
+                            Usuario = demografiaCor.Email,
+                            Creacion = DateTime.Now,
+                            Tipoerror = COErrorLog.RUTA_NO_ENCONTRADA
+                        });
+                        throw new COExcepcion("Problema con las rutas. Por favor contacte a servicio al cliente. ");
+                    }
+
+
+                    var folderName = Path.Combine(directorio);
+                    if (files.Count == 0)
+                        throw new COExcepcion("No hay documento a subir. ");
+
+                    if (files.Count > 4)
+                        throw new COExcepcion("Solo se puede subir un máximo de 1 documento. ");
+
+                    string[] permittedExtensions = { ".jpg", ".jpeg", ".png" };
+                    List<string> listadoDeRutaFotos = new List<string>();
+                    var folderDocument = directorio;
+                    var indexDocumentos = 1;
+
+                    foreach (var file in files)
+                    {
+
+                        var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
+                        if (string.IsNullOrEmpty(ext) || !permittedExtensions.Contains(ext))
+                            throw new COExcepcion("Solo se aceptan imágenes JPG y PNG. ");
+
+                        var fileName = $@"imagen-usuario-buya-{demografiaCor.Id}{ext}";
+                        demografiaCor.UrlImagenPersonal = fileName;
+                        var fullPath = Path.Combine(folderName, fileName);
+                        using var stream = new FileStream(fullPath, FileMode.Create);
+                        file.CopyTo(stream);
+                        listadoDeRutaFotos.Add(fullPath);
+                        indexDocumentos += 1;
+                    }
+
+                    if (listadoDeRutaFotos.Count == 0)
+                        throw new COExcepcion("No se almacenó ninguna imagen.");
+
+                    _repoDemografia.SubirImagenSocial(demografiaCor);
+
+                    return new RespuestaDatos
+                    {
+                        Codigo = COCodigoRespuesta.OK,
+                        Mensaje = "Se guardo correctamente la imagen."
+                    };
+
+                }
+                catch (COExcepcion e)
+                {
+                    throw e;
+                }
+            }
+            else { throw new COExcepcion("El usuario ingresado no existe."); }
+        }
+
         internal async Task<RespuestaDatos> SubirDocumentosEmprendedor(DemografiaCor demografiaCor, string RazonsSocial, IFormFileCollection files)
         {
             if (demografiaCor != null)
@@ -172,6 +243,29 @@ namespace Fe.Core.Seguridad.Negocio
                 claims: authClaims,
                 signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
                 );
+        }
+
+        public async Task<RespuestaDatos> ModificarDemografia(ModificarDemografia model, DemografiaCor demografiaCor)
+        {
+            if (demografiaCor == null)
+                throw new COExcepcion("El usuario no existe");
+
+            try
+            {
+                return await _repoDemografia.ModificarDemografia(demografiaCor, model);
+            }
+            catch (COExcepcion e)
+            {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = model.Correo,
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.MODIFICAR_USUARIO
+                });
+                throw new COExcepcion("Ocurrió un problema al modificar el usuario.");
+            }
         }
 
         public List<RolCor> GetRoles()

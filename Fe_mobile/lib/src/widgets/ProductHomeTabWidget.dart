@@ -56,7 +56,7 @@ class ProductHomeTabWidgetState extends State<ProductHomeTabWidget> {
                   widget.product!.nombre!,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
-                  style: Theme.of(context).textTheme.display2,
+                  style: Theme.of(context).textTheme.headline3,
                 ),
               ),
               Chip(
@@ -65,7 +65,7 @@ class ProductHomeTabWidgetState extends State<ProductHomeTabWidget> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(calificacionProducto.toString(),
-                        style: Theme.of(context).textTheme.body2!.merge(
+                        style: Theme.of(context).textTheme.bodyText1!.merge(
                             TextStyle(color: Theme.of(context).primaryColor))),
                     Icon(
                       Icons.star_border,
@@ -235,7 +235,7 @@ class ProductHomeTabWidgetState extends State<ProductHomeTabWidget> {
             ),
             title: Text(
               'Productos Relacionados',
-              style: Theme.of(context).textTheme.display1,
+              style: Theme.of(context).textTheme.headline4,
             ),
           ),
         ),

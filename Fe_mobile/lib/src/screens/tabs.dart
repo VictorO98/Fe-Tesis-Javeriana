@@ -97,7 +97,7 @@ class _TabsWidgetState extends State<TabsWidget> {
         elevation: 0,
         title: Text(
           widget.currentTitle,
-          style: Theme.of(context).textTheme.display1,
+          style: Theme.of(context).textTheme.headline4,
         ),
         actions: <Widget>[
           new ShoppingCartButtonWidget(

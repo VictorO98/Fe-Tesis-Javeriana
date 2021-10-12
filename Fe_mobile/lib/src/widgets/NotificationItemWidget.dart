@@ -68,10 +68,11 @@ class _NotificationItemWidgetState extends State<NotificationItemWidget> {
                     this.widget.notification!.title,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
-                    style: Theme.of(context).textTheme.body2!.merge(TextStyle(
-                        fontWeight: this.widget.notification!.read
-                            ? FontWeight.w300
-                            : FontWeight.w600)),
+                    style: Theme.of(context).textTheme.bodyText1!.merge(
+                        TextStyle(
+                            fontWeight: this.widget.notification!.read
+                                ? FontWeight.w300
+                                : FontWeight.w600)),
                   ),
                   Text(
                     this.widget.notification!.time,

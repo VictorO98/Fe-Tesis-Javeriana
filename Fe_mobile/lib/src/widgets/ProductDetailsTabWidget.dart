@@ -31,7 +31,7 @@ class ProductDetailsTabWidgetState extends State<ProductDetailsTabWidget> {
             ),
             title: Text(
               'Descripción',
-              style: Theme.of(context).textTheme.display1,
+              style: Theme.of(context).textTheme.headline4,
             ),
           ),
         ),
@@ -50,7 +50,7 @@ class ProductDetailsTabWidgetState extends State<ProductDetailsTabWidget> {
             ),
             title: Text(
               'Productos Relacionados',
-              style: Theme.of(context).textTheme.display1,
+              style: Theme.of(context).textTheme.headline4,
             ),
           ),
         ),

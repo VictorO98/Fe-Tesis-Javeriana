@@ -53,6 +53,27 @@ class ServicioUtil {
     }
   }
 
+  static dynamic put(String api, String body,
+      {bool isMostrarAlertError = false, BuildContext? contextErr}) async {
+    var client = http.Client();
+    try {
+      var uri = Uri.parse(ConfServer.SERVER + api);
+
+      final response =
+          await client.put(uri, body: body, headers: await formarHeader());
+      if (response.statusCode == 200) return response.body;
+
+      controlarError(contextErr!, response, isMostrarAlertError);
+      return null;
+    } catch (e) {
+      print("Error put: $e");
+      AlertUtil.error(contextErr!, "Ocurrió un problema con los servicios. ");
+      throw e;
+    } finally {
+      client.close();
+    }
+  }
+
   static dynamic file(String api, Map<String, dynamic> data,
       {bool isMostrarAlertError = false, BuildContext? contextErr}) async {
     var dio = new Dio();

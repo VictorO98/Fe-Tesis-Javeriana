@@ -135,7 +135,7 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
 
                 entity.Property(e => e.Direccion)
                     .IsRequired()
-                    .HasMaxLength(50)
+                    .HasMaxLength(80)
                     .HasColumnName("direccion");
 
                 entity.Property(e => e.Email)
@@ -166,6 +166,8 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                 entity.Property(e => e.Telefono).HasColumnName("telefono");
 
                 entity.Property(e => e.Tipodocumentocorid).HasColumnName("tipodocumentocorid");
+
+                entity.Property(e => e.UrlImagenPersonal).HasColumnName("urlImagenPersonal");
 
                 entity.HasOne(d => d.IdpoblacionNavigation)
                     .WithMany(p => p.DemografiaCors)
@@ -376,16 +378,15 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
 
                 entity.Property(e => e.Idpedido).HasColumnName("idpedido");
 
+                entity.Property(e => e.Idvendedor).HasColumnName("idvendedor");
+
                 entity.Property(e => e.Valortotalfactura).HasColumnName("valortotalfactura");
 
                 entity.Property(e => e.Valortotalfacturaiva).HasColumnName("valortotalfacturaiva");
 
-                entity.Property(e => e.Idvendedor).HasColumnName("idvendedor");
-
                 entity.HasOne(d => d.IdpedidoNavigation)
                     .WithMany(p => p.FacturasFacs)
                     .HasForeignKey(d => d.Idpedido)
-                    .HasForeignKey(d => d.Idvendedor)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("facturas_fac_pedidos_ped");
             });
@@ -577,6 +578,7 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                     .UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.Estado)
+                    .IsRequired()
                     .HasMaxLength(5)
                     .HasColumnName("estado");
 

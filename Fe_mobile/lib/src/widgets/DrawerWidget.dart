@@ -67,7 +67,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               ),
               accountName: Text(
                 _infoUsuarioBloc!.state.infoUsuarioModel!.nombreCompleto!,
-                style: Theme.of(context).textTheme.title,
+                style: Theme.of(context).textTheme.headline6,
               ),
               accountEmail: Text(
                 _infoUsuarioBloc!.state.infoUsuarioModel!.email!,
@@ -89,7 +89,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             ),
             title: Text(
               "Inicio",
-              style: Theme.of(context).textTheme.subhead,
+              style: Theme.of(context).textTheme.subtitle1,
             ),
           ),
           ListTile(
@@ -102,7 +102,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             ),
             title: Text(
               "Notificaciones",
-              style: Theme.of(context).textTheme.subhead,
+              style: Theme.of(context).textTheme.subtitle1,
             ),
           ),
 
@@ -141,7 +141,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             ),
             title: Text(
               "Favoritos",
-              style: Theme.of(context).textTheme.subhead,
+              style: Theme.of(context).textTheme.subtitle1,
             ),
           ),
           _infoUsuarioBloc!.state.infoUsuarioModel!.rol == "Emprendedor"
@@ -155,7 +155,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   ),
                   title: Text(
                     "Crear Venta",
-                    style: Theme.of(context).textTheme.subhead,
+                    style: Theme.of(context).textTheme.subtitle1,
                   ),
                 )
               : SizedBox(),
@@ -189,7 +189,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             dense: true,
             title: Text(
               "Preferencias del usuario",
-              style: Theme.of(context).textTheme.body1,
+              style: Theme.of(context).textTheme.bodyText2,
             ),
             trailing: Icon(
               Icons.remove,
@@ -206,7 +206,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             ),
             title: Text(
               "Preguntas frecuentes",
-              style: Theme.of(context).textTheme.subhead,
+              style: Theme.of(context).textTheme.subtitle1,
             ),
           ),
           ListTile(
@@ -219,7 +219,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             ),
             title: Text(
               "Configuración",
-              style: Theme.of(context).textTheme.subhead,
+              style: Theme.of(context).textTheme.subtitle1,
             ),
           ),
           ListTile(
@@ -232,14 +232,14 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             ),
             title: Text(
               "Cerrar Sesión",
-              style: Theme.of(context).textTheme.subhead,
+              style: Theme.of(context).textTheme.subtitle1,
             ),
           ),
           ListTile(
             dense: true,
             title: Text(
               "Version 0.0.1",
-              style: Theme.of(context).textTheme.body1,
+              style: Theme.of(context).textTheme.bodyText2,
             ),
             trailing: Icon(
               Icons.remove,

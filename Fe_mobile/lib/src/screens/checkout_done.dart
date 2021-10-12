@@ -62,7 +62,7 @@ class _CheckoutDoneWidgetState extends State<CheckoutDoneWidget> {
         elevation: 0,
         title: Text(
           'Finalizado',
-          style: Theme.of(context).textTheme.display1,
+          style: Theme.of(context).textTheme.headline4,
         ),
         actions: <Widget>[
           new ShoppingCartButtonWidget(
@@ -150,7 +150,7 @@ class _CheckoutDoneWidgetState extends State<CheckoutDoneWidget> {
                       Text(
                         'Su pedido fue creado con exito, en su correo estarán las instrucciones para realizar el pago en efectivo',
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.display2,
+                        style: Theme.of(context).textTheme.headline3,
                       ),
                       SizedBox(height: 50),
                       FlatButton(
@@ -163,7 +163,7 @@ class _CheckoutDoneWidgetState extends State<CheckoutDoneWidget> {
                         shape: StadiumBorder(),
                         child: Text(
                           'Mis pedidos',
-                          style: Theme.of(context).textTheme.title,
+                          style: Theme.of(context).textTheme.headline6,
                         ),
                       ),
                     ],

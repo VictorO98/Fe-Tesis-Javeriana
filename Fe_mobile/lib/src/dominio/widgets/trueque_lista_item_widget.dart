@@ -177,7 +177,7 @@ class _TruequeListaItemWidgetState extends State<TruequeListaItemWidget> {
                                   _productoDeseado!.nombre!,
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 2,
-                                  style: Theme.of(context).textTheme.subhead,
+                                  style: Theme.of(context).textTheme.subtitle1,
                                 ),
                                 SizedBox(height: 12),
                                 Wrap(
@@ -197,7 +197,7 @@ class _TruequeListaItemWidgetState extends State<TruequeListaItemWidget> {
                                                 'ACEPTADO',
                                                 style: Theme.of(context)
                                                     .textTheme
-                                                    .body1,
+                                                    .bodyText2,
                                                 overflow: TextOverflow.fade,
                                                 softWrap: false,
                                               )
@@ -207,7 +207,7 @@ class _TruequeListaItemWidgetState extends State<TruequeListaItemWidget> {
                                                     'OFERTADO',
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .body1,
+                                                        .bodyText2,
                                                     overflow: TextOverflow.fade,
                                                     softWrap: false,
                                                   )
@@ -218,7 +218,7 @@ class _TruequeListaItemWidgetState extends State<TruequeListaItemWidget> {
                                                         'RECHAZADO',
                                                         style: Theme.of(context)
                                                             .textTheme
-                                                            .body1,
+                                                            .bodyText2,
                                                         overflow:
                                                             TextOverflow.fade,
                                                         softWrap: false,
@@ -239,8 +239,9 @@ class _TruequeListaItemWidgetState extends State<TruequeListaItemWidget> {
                                               widget.trueque!.detalleTrueque!
                                                   .cantidadvendedor
                                                   .toString(),
-                                          style:
-                                              Theme.of(context).textTheme.body1,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText2,
                                           overflow: TextOverflow.fade,
                                           softWrap: false,
                                         ),

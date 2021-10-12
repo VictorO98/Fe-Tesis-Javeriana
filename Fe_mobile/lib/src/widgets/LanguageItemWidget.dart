@@ -128,7 +128,7 @@ class _LanguageItemWidgetState extends State<LanguageItemWidget>
                     widget.language!.englishName,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
-                    style: Theme.of(context).textTheme.subhead,
+                    style: Theme.of(context).textTheme.subtitle1,
                   ),
                   Text(
                     widget.language!.localName,

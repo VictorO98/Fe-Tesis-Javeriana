@@ -30,6 +30,7 @@ namespace Fe.Dominio.pedidos
             {
                 try
                 {
+                    pedido.Fechapedido = DateTime.Now;
                     idPedido = await _repoPedidosPed.GuardarPedido(pedido);
                 }
                 catch (COExcepcion e)

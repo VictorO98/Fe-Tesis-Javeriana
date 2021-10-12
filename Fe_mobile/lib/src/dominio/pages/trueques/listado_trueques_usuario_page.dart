@@ -92,7 +92,7 @@ class _ListadoTruequesUsuarioWidgetState
             elevation: 0,
             title: Text(
               'Trueques',
-              style: Theme.of(context).textTheme.display1,
+              style: Theme.of(context).textTheme.headline4,
             ),
             actions: <Widget>[
               new ShoppingCartButtonWidget(

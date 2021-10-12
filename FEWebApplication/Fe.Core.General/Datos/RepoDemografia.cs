@@ -39,5 +39,42 @@ namespace Fe.Core.General.Datos
             using FeContext context = new FeContext();
             return context.DemografiaCors.Where(d => d.Email == emailDemografia).FirstOrDefault();
         }
+
+        public async Task<RespuestaDatos> ModificarDemografia(DemografiaCor demografiaCor, Servidor.Middleware.Contratos.Core.Seguridad.ModificarDemografia model)
+        {
+            using FeContext context = new FeContext();
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                context.DemografiaCors.Attach(demografiaCor);
+                demografiaCor.Nombre = model.Nombre;
+                demografiaCor.Apellido = model.Apellido;
+                demografiaCor.Telefono = model.Telefono;
+                demografiaCor.Direccion = model.Direccion;              
+                demografiaCor.Modificacion = DateTime.Now;
+                context.SaveChanges();
+                respuestaDatos =  new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "Usuario modificado exitosamente!" };
+            }
+            catch (COExcepcion e)
+            {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = demografiaCor.Email,
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.MODIFICAR_USUARIO
+                });
+                throw new COExcepcion("Ocurrió un problema al modificar el usuario.");
+            }
+            return respuestaDatos;
+        }
+
+        public void SubirImagenSocial(DemografiaCor demografiaCor)
+        {
+            using FeContext context = new FeContext();
+            context.DemografiaCors.Update(demografiaCor);
+            context.SaveChanges();
+        }
     }
 }

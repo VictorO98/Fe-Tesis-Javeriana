@@ -1,3 +1,4 @@
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\Microsoft.CodeAnalysis.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\appsettings.Development.json
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\appsettings.json
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\ClientApp\package-lock.json
@@ -45,7 +46,6 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Re
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\Microsoft.AspNetCore.Razor.Language.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\Microsoft.AspNetCore.SpaServices.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\Microsoft.AspNetCore.SpaServices.Extensions.dll
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\Microsoft.CodeAnalysis.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\Microsoft.CodeAnalysis.CSharp.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\Microsoft.CodeAnalysis.Razor.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\Microsoft.DotNet.PlatformAbstractions.dll

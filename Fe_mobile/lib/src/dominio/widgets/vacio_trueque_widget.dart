@@ -71,7 +71,7 @@ class VacioTruequesWidget extends StatelessWidget {
               textAlign: TextAlign.center,
               style: Theme.of(context)
                   .textTheme
-                  .display2!
+                  .headline3!
                   .merge(TextStyle(fontWeight: FontWeight.w300)),
             ),
           ),
@@ -85,7 +85,7 @@ class VacioTruequesWidget extends StatelessWidget {
             shape: StadiumBorder(),
             child: Text(
               'Empieza a comprar',
-              style: Theme.of(context).textTheme.title,
+              style: Theme.of(context).textTheme.headline6,
             ),
           ),
         ],

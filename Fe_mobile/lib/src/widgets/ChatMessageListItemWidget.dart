@@ -12,8 +12,8 @@ class ChatMessageListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new SizeTransition(
-      sizeFactor:
-          new CurvedAnimation(parent: animation as Animation<double>, curve: Curves.decelerate),
+      sizeFactor: new CurvedAnimation(
+          parent: animation as Animation<double>, curve: Curves.decelerate),
       child: currentUser.name == this.chat!.user.name
           ? getSentMessageLayout(context)
           : getReceivedMessageLayout(context),
@@ -40,7 +40,7 @@ class ChatMessageListItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
                   new Text(this.chat!.user.name!,
-                      style: Theme.of(context).textTheme.body2),
+                      style: Theme.of(context).textTheme.bodyText1),
                   new Container(
                     margin: const EdgeInsets.only(top: 5.0),
                     child: new Text(chat!.text),
@@ -94,7 +94,7 @@ class ChatMessageListItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   new Text(this.chat!.user.name!,
-                      style: Theme.of(context).textTheme.body2!.merge(
+                      style: Theme.of(context).textTheme.bodyText1!.merge(
                           TextStyle(color: Theme.of(context).primaryColor))),
                   new Container(
                     margin: const EdgeInsets.only(top: 5.0),

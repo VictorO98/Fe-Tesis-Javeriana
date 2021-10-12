@@ -31,7 +31,7 @@ class _BrandHomeTabWidgetState extends State<BrandHomeTabWidget> {
             ),
             title: Text(
               widget.brand!.name,
-              style: Theme.of(context).textTheme.display1,
+              style: Theme.of(context).textTheme.headline4,
             ),
           ),
         ),
@@ -47,7 +47,7 @@ class _BrandHomeTabWidgetState extends State<BrandHomeTabWidget> {
             ),
             title: Text(
               'Description',
-              style: Theme.of(context).textTheme.display1,
+              style: Theme.of(context).textTheme.headline4,
             ),
           ),
         ),
@@ -67,7 +67,7 @@ class _BrandHomeTabWidgetState extends State<BrandHomeTabWidget> {
             ),
             title: Text(
               'Featured Products',
-              style: Theme.of(context).textTheme.display1,
+              style: Theme.of(context).textTheme.headline4,
             ),
           ),
         ),

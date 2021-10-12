@@ -47,7 +47,7 @@ dependencies:
   image_cropper: ^1.4.0
   image_picker: ^0.8.0+3
   dropdown_search: ^0.6.3
-  image_gallery_saver: ^1.6.9
+  image_gallery_saver: ^1.7.0
   card_swiper: ^1.0.2
   dio: ^4.0.0
   

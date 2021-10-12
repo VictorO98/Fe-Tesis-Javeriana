@@ -1,3 +1,4 @@
+import 'package:Fe_mobile/src/core/pages/usuario/foto_usuario_page.dart';
 import 'package:Fe_mobile/src/dominio/pages/Contenido/crear_servicio_producto_page.dart';
 import 'package:Fe_mobile/src/dominio/pages/contenido/busqueda_productos_page.dart';
 import 'package:Fe_mobile/src/dominio/pages/contenido/editar_publicacion_page.dart';
@@ -43,6 +44,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => CrearServicioProductoPage());
       case '/Brands':
         return MaterialPageRoute(builder: (_) => BrandsWidget());
+      case '/FotoPerfil':
+        return MaterialPageRoute(builder: (_) => FotoUsuarioPage());
 //      case '/MobileVerification':
 //        return MaterialPageRoute(builder: (_) => MobileVerification());
 //      case '/MobileVerification2':

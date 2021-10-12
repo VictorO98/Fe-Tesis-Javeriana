@@ -28,7 +28,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
         elevation: 0,
         title: Text(
           'Categories',
-          style: Theme.of(context).textTheme.display1,
+          style: Theme.of(context).textTheme.headline4,
         ),
         actions: <Widget>[
           new ShoppingCartButtonWidget(
@@ -189,7 +189,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                       ),
                       child: Text(
                         subCategory.name,
-                        style: Theme.of(context).textTheme.body1,
+                        style: Theme.of(context).textTheme.bodyText2,
                       ),
                     ),
                   ),
@@ -251,7 +251,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                       ),
                       child: Text(
                         subCategory.name,
-                        style: Theme.of(context).textTheme.body1,
+                        style: Theme.of(context).textTheme.bodyText2,
                       ),
                     ),
                   ),

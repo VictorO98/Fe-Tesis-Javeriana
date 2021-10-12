@@ -69,7 +69,7 @@ class _InduccionPageState extends State<InduccionPage> {
                           padding: const EdgeInsets.only(right: 20),
                           child: Text(
                             boarding.description!,
-                            style: Theme.of(context).textTheme.display1,
+                            style: Theme.of(context).textTheme.headline4,
                           ),
                         ),
                       ],
@@ -114,7 +114,7 @@ class _InduccionPageState extends State<InduccionPage> {
                   children: <Widget>[
                     Text(
                       'Registrate',
-                      style: Theme.of(context).textTheme.display1!.merge(
+                      style: Theme.of(context).textTheme.headline4!.merge(
                             TextStyle(color: Theme.of(context).primaryColor),
                           ),
                     ),

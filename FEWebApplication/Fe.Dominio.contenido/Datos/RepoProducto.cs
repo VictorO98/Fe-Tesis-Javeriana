@@ -2,6 +2,7 @@
 using Fe.Core.Global.Constantes;
 using Fe.Core.Global.Errores;
 using Fe.Servidor.Middleware.Contratos.Core;
+using Fe.Servidor.Middleware.Contratos.Dominio.Contenido;
 using Fe.Servidor.Middleware.Dapper;
 using Fe.Servidor.Middleware.Modelo.Contexto;
 using Fe.Servidor.Middleware.Modelo.Entidades;
@@ -226,6 +227,38 @@ namespace Fe.Dominio.contenido.Datos
         {
             using FeContext context = new FeContext();
             return context.ProductosServiciosPcs.Where(p => p.Idusuario == idDemografia).ToList();
+        }
+
+        internal async Task<RespuestaDatos> ModificarPublicacionApp(ModificarPublicacion productosServicios)
+        {
+            using FeContext context = new FeContext();
+            RespuestaDatos respuestaDatos;
+            ProductosServiciosPc publicacion = await GetPublicacionPorIdPublicacion(productosServicios.Id);
+            if (publicacion != null)
+            {
+                try
+                {
+                    context.Attach(publicacion);
+                    publicacion.Descripcion = productosServicios.Descripcion;
+                    publicacion.Descuento = productosServicios.Descuento;
+                    publicacion.Cantidadtotal = productosServicios.Cantidad;
+                    publicacion.Nombre = productosServicios.Nombre;
+                    publicacion.Preciounitario = productosServicios.Preciounitario;
+                    publicacion.Habilitatrueque = productosServicios.Habilitatrueque; 
+                    publicacion.Modificacion = DateTime.Now;
+                    context.SaveChanges();
+                    respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "Publicación modificada exitosamente." };
+                }
+                catch (Exception e)
+                {
+                    throw new COExcepcion("Ocurrió un problema al intentar modificar la publicación.");
+                }
+            }
+            else
+            {
+                throw new COExcepcion("La publicación no existe");
+            }
+            return respuestaDatos;
         }
 
         internal List<ProductosServiciosPc> GetPublicacionesPorDescuento(int idUsuario)

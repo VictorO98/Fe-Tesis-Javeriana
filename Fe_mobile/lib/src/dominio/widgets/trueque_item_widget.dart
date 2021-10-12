@@ -77,7 +77,7 @@ class _TruequetemWidgetState extends State<TruequetemWidget> {
                                 widget.product!.nombre!,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2,
-                                style: Theme.of(context).textTheme.subhead,
+                                style: Theme.of(context).textTheme.subtitle1,
                               ),
                               SizedBox(
                                 height: 5,
@@ -89,7 +89,7 @@ class _TruequetemWidgetState extends State<TruequetemWidget> {
                               ),
                               Text(
                                 "${CurrencyUtil.convertFormatMoney('COP', widget.product!.preciounitario!)}",
-                                style: Theme.of(context).textTheme.display1,
+                                style: Theme.of(context).textTheme.headline4,
                               ),
                             ],
                           ),
@@ -112,7 +112,7 @@ class _TruequetemWidgetState extends State<TruequetemWidget> {
                               color: Theme.of(context).hintColor,
                             ),
                             Text(widget.quantity.toString(),
-                                style: Theme.of(context).textTheme.subhead),
+                                style: Theme.of(context).textTheme.subtitle1),
                             IconButton(
                               onPressed: () {
                                 setState(() {

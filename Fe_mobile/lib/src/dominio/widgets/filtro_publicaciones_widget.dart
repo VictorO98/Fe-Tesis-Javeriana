@@ -56,7 +56,7 @@ class _FiltroPublicacionesWidgetState extends State<FiltroPublicacionesWidget> {
                     SizedBox(width: 10),
                     Text(
                       'Filtros',
-                      style: Theme.of(context).textTheme.body2,
+                      style: Theme.of(context).textTheme.bodyText1,
                     )
                   ],
                 ),
@@ -144,7 +144,7 @@ class _FiltroPublicacionesWidgetState extends State<FiltroPublicacionesWidget> {
     return new InputDecoration(
       hintText: hintText,
       labelText: labelText,
-      hintStyle: Theme.of(context).textTheme.body1!.merge(
+      hintStyle: Theme.of(context).textTheme.bodyText2!.merge(
             TextStyle(color: Theme.of(context).focusColor),
           ),
       enabledBorder: UnderlineInputBorder(
@@ -152,10 +152,10 @@ class _FiltroPublicacionesWidgetState extends State<FiltroPublicacionesWidget> {
               BorderSide(color: Theme.of(context).hintColor.withOpacity(0.2))),
       focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: Theme.of(context).hintColor)),
-      hasFloatingPlaceholder: true,
-      labelStyle: Theme.of(context).textTheme.body1!.merge(
+      labelStyle: Theme.of(context).textTheme.bodyText2!.merge(
             TextStyle(color: Theme.of(context).hintColor),
           ),
+      floatingLabelBehavior: FloatingLabelBehavior.auto,
     );
   }
 

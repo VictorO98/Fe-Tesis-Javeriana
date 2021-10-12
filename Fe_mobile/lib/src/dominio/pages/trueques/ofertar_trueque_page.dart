@@ -104,7 +104,7 @@ class _OfertarTruequePageState extends State<OfertarTruequePage>
         elevation: 0,
         title: Text(
           'Atrás',
-          style: Theme.of(context).textTheme.display1,
+          style: Theme.of(context).textTheme.headline4,
         ),
         actions: <Widget>[
           Container(
@@ -147,7 +147,7 @@ class _OfertarTruequePageState extends State<OfertarTruequePage>
                         'Intercambio de productos',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.display1,
+                        style: Theme.of(context).textTheme.headline4,
                       ),
                       subtitle: Text(
                         'Selecciona los productos para realizar el cambio',
@@ -214,8 +214,9 @@ class _OfertarTruequePageState extends State<OfertarTruequePage>
                                         _productoInteresado.nombre!,
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 2,
-                                        style:
-                                            Theme.of(context).textTheme.subhead,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .subtitle1,
                                       ),
                                       SizedBox(
                                         height: 5,
@@ -256,7 +257,7 @@ class _OfertarTruequePageState extends State<OfertarTruequePage>
                                             .toString(),
                                         style: Theme.of(context)
                                             .textTheme
-                                            .subhead),
+                                            .subtitle1),
                                     IconButton(
                                       onPressed: () {
                                         setState(() {
@@ -364,7 +365,7 @@ class _OfertarTruequePageState extends State<OfertarTruequePage>
                                                   maxLines: 2,
                                                   style: Theme.of(context)
                                                       .textTheme
-                                                      .subhead,
+                                                      .subtitle1,
                                                 ),
                                                 SizedBox(
                                                   height: 5,
@@ -379,7 +380,7 @@ class _OfertarTruequePageState extends State<OfertarTruequePage>
                                                   "${CurrencyUtil.convertFormatMoney('COP', product.preciounitario!)}",
                                                   style: Theme.of(context)
                                                       .textTheme
-                                                      .display1,
+                                                      .headline4,
                                                 ),
                                               ],
                                             ),
@@ -412,7 +413,7 @@ class _OfertarTruequePageState extends State<OfertarTruequePage>
                                                       .toString(),
                                                   style: Theme.of(context)
                                                       .textTheme
-                                                      .subhead),
+                                                      .subtitle1),
                                               IconButton(
                                                 onPressed: () {
                                                   setState(() {

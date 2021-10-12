@@ -45,14 +45,14 @@ class OrderGridItemWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
               child: Text(
                 order.product.name,
-                style: Theme.of(context).textTheme.body2,
+                style: Theme.of(context).textTheme.bodyText1,
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Text(
                 order.product.getPrice(),
-                style: Theme.of(context).textTheme.title,
+                style: Theme.of(context).textTheme.headline6,
               ),
             ),
             Padding(
@@ -63,7 +63,7 @@ class OrderGridItemWidget extends StatelessWidget {
                   Expanded(
                     child: Text(
                       '${order.product.sales} Sales',
-                      style: Theme.of(context).textTheme.body1,
+                      style: Theme.of(context).textTheme.bodyText2,
                       overflow: TextOverflow.fade,
                       softWrap: false,
                     ),
@@ -75,7 +75,7 @@ class OrderGridItemWidget extends StatelessWidget {
                   ),
                   Text(
                     order.product.rate.toString(),
-                    style: Theme.of(context).textTheme.body2,
+                    style: Theme.of(context).textTheme.bodyText1,
                   )
                 ],
                 crossAxisAlignment: CrossAxisAlignment.center,

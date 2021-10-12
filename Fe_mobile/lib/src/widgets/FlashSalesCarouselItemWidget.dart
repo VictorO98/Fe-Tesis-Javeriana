@@ -57,7 +57,7 @@ class FlashSalesCarouselItemWidget extends StatelessWidget {
                   '${product!.descuento} %',
                   style: Theme.of(context)
                       .textTheme
-                      .body2!
+                      .bodyText1!
                       .merge(TextStyle(color: Theme.of(context).primaryColor)),
                 ),
               ),
@@ -81,7 +81,7 @@ class FlashSalesCarouselItemWidget extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     product!.nombre.toString(),
-                    style: Theme.of(context).textTheme.body2,
+                    style: Theme.of(context).textTheme.bodyText1,
                     maxLines: 1,
                     softWrap: false,
                     overflow: TextOverflow.fade,
@@ -105,7 +105,7 @@ class FlashSalesCarouselItemWidget extends StatelessWidget {
                       ),
                       Text(
                         calificacionPromedio.toString(),
-                        style: Theme.of(context).textTheme.body2,
+                        style: Theme.of(context).textTheme.bodyText1,
                       )
                     ],
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -114,7 +114,7 @@ class FlashSalesCarouselItemWidget extends StatelessWidget {
                   product!.tipoPublicacion == "Producto"
                       ? Text(
                           '${product!.cantidadtotal} Disponible',
-                          style: Theme.of(context).textTheme.body1,
+                          style: Theme.of(context).textTheme.bodyText2,
                           overflow: TextOverflow.ellipsis,
                         )
                       : SizedBox(),

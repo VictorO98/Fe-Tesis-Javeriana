@@ -95,7 +95,7 @@ class _OrderListItemWidgetState extends State<OrderListItemWidget> {
                             widget.order!.product.name,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
-                            style: Theme.of(context).textTheme.subhead,
+                            style: Theme.of(context).textTheme.subtitle1,
                           ),
                           SizedBox(height: 12),
                           Wrap(
@@ -111,7 +111,8 @@ class _OrderListItemWidgetState extends State<OrderListItemWidget> {
                                   SizedBox(width: 10),
                                   Text(
                                     '20-Jul-2021 3:14am',
-                                    style: Theme.of(context).textTheme.body1,
+                                    style:
+                                        Theme.of(context).textTheme.bodyText2,
                                     overflow: TextOverflow.fade,
                                     softWrap: false,
                                   ),
@@ -127,7 +128,8 @@ class _OrderListItemWidgetState extends State<OrderListItemWidget> {
                                   SizedBox(width: 10),
                                   Text(
                                     widget.order!.trackingNumber,
-                                    style: Theme.of(context).textTheme.body1,
+                                    style:
+                                        Theme.of(context).textTheme.bodyText2,
                                     overflow: TextOverflow.fade,
                                     softWrap: false,
                                   ),
@@ -144,7 +146,7 @@ class _OrderListItemWidgetState extends State<OrderListItemWidget> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: <Widget>[
                         Text(widget.order!.product.getPrice(),
-                            style: Theme.of(context).textTheme.display1),
+                            style: Theme.of(context).textTheme.headline4),
                         SizedBox(height: 6),
                         Chip(
                           padding: EdgeInsets.symmetric(horizontal: 5),

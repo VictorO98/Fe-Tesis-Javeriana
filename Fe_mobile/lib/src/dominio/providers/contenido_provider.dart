@@ -4,6 +4,7 @@ import 'package:Fe_mobile/src/core/models/respuesta_datos_model.dart';
 import 'package:Fe_mobile/src/core/util/servicio_util.dart';
 import 'package:Fe_mobile/src/dominio/models/categoria_model.dart';
 import 'package:Fe_mobile/src/dominio/models/crear_publicacion_model.dart';
+import 'package:Fe_mobile/src/dominio/models/editar_publicacion_model.dart';
 import 'package:Fe_mobile/src/dominio/models/guardar_favorito_model.dart';
 import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:flutter/widgets.dart';
@@ -112,5 +113,17 @@ class ContenidoProvider {
     if (data == null) return null;
     RespuestaDatosModel respuesta = RespuestaDatosModel.fromJson(data);
     return respuesta;
+  }
+
+  Future<RespuestaDatosModel?> modificarPublicacion(
+      EditarPublicacionModel datosPublicacion, BuildContext context) async {
+    String? data = await ServicioUtil.put(
+        "dominio/COContenido/ModificarPublicacionApp",
+        json.encode(datosPublicacion),
+        contextErr: context,
+        isMostrarAlertError: true);
+    if (data == null) return null;
+    final dynamic decodedData = json.decode(data);
+    return RespuestaDatosModel.fromJson(decodedData);
   }
 }

@@ -1,3 +1,4 @@
+import 'package:Fe_mobile/src/core/util/currency_util.dart';
 import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:Fe_mobile/src/models/product.dart';
 import 'package:Fe_mobile/src/models/route_argument.dart';
@@ -15,6 +16,8 @@ class ProductGridItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
     return InkWell(
       highlightColor: Colors.transparent,
       splashColor: Theme.of(context).accentColor.withOpacity(0.08),
@@ -40,22 +43,32 @@ class ProductGridItemWidget extends StatelessWidget {
           children: <Widget>[
             Hero(
               tag: this.heroTag + product.id.toString(),
-              child: Image.asset(product.urlimagenproductoservicio.toString()),
+              child: Container(
+                height: height / 5,
+                width: width / 2,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                  image: DecorationImage(
+                    image: NetworkImage(
+                        product.urlimagenproductoservicio.toString()),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
             ),
             SizedBox(height: 12),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
               child: Text(
                 product.nombre!,
-                style: Theme.of(context).textTheme.body2,
+                style: Theme.of(context).textTheme.bodyText1,
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Text(
-                product.preciounitario.toString(),
-                style: Theme.of(context).textTheme.title,
-              ),
+                  "${CurrencyUtil.convertFormatMoney('COP', product.preciounitario!.round())}",
+                  style: Theme.of(context).textTheme.headline4),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -69,8 +82,8 @@ class ProductGridItemWidget extends StatelessWidget {
                     size: 18,
                   ),
                   Text(
-                    product.calificacionpromedio.toString(),
-                    style: Theme.of(context).textTheme.body2,
+                    (product.calificacionpromedio! * 10).toString(),
+                    style: Theme.of(context).textTheme.bodyText1,
                   )
                 ],
                 crossAxisAlignment: CrossAxisAlignment.center,

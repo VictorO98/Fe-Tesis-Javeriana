@@ -71,7 +71,7 @@ class EmptyMessagesWidget extends StatelessWidget {
               textAlign: TextAlign.center,
               style: Theme.of(context)
                   .textTheme
-                  .display2!
+                  .headline3!
                   .merge(TextStyle(fontWeight: FontWeight.w300)),
             ),
           ),
@@ -86,7 +86,7 @@ class EmptyMessagesWidget extends StatelessWidget {
             child: Text(
               'Start Exploring',
 //                        textAlign: TextAlign.ce,
-              style: Theme.of(context).textTheme.title,
+              style: Theme.of(context).textTheme.headline6,
             ),
           ),
         ],

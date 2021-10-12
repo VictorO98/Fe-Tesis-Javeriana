@@ -54,7 +54,7 @@ class _BusquedaProductosPageState extends State<BusquedaProductosPage> {
               elevation: 0,
               title: Text(
                 'Tú busqueda',
-                style: Theme.of(context).textTheme.display1,
+                style: Theme.of(context).textTheme.headline4,
               ),
 
               actions: <Widget>[

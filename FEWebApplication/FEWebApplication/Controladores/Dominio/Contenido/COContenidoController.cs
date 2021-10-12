@@ -204,6 +204,25 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         }
 
         /// <summary>
+        /// Modifica la publicación indicada en la base de datos.
+        /// </summary>
+        [Route("ModificarPublicacionApp")]
+        [HttpPut]
+        public async Task<RespuestaDatos> ModificarPublicacionApp([FromBody] ModificarPublicacion productosServicios)
+        {
+            RespuestaDatos respuestaDatos;
+            try
+            {
+                respuestaDatos = await _coFachada.ModificarPublicacionApp(productosServicios);
+            }
+            catch (COExcepcion e)
+            {
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
+            }
+            return respuestaDatos;
+        }
+
+        /// <summary>
         /// Busca una categoría por su ID y la borra de la base de datos.
         /// </summary>
         /// <returns>Respuesta de datos con un código de respuesta y un mensaje que indica si fue o no la eliminación

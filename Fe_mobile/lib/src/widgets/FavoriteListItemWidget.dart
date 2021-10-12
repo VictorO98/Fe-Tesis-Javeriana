@@ -100,7 +100,7 @@ class _FavoriteListItemWidgetState extends State<FavoriteListItemWidget> {
                             widget.product!.nombre!,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
-                            style: Theme.of(context).textTheme.subhead,
+                            style: Theme.of(context).textTheme.subtitle1,
                           ),
                           Row(
                             children: <Widget>[
@@ -109,7 +109,7 @@ class _FavoriteListItemWidgetState extends State<FavoriteListItemWidget> {
                                 // TODO: AComodar esta vaina de las ventas
                                 // '${widget.product!.v} Ventas',
                                 '95 ventas',
-                                style: Theme.of(context).textTheme.body1,
+                                style: Theme.of(context).textTheme.bodyText2,
                                 overflow: TextOverflow.fade,
                                 softWrap: false,
                               ),
@@ -121,7 +121,7 @@ class _FavoriteListItemWidgetState extends State<FavoriteListItemWidget> {
                               ),
                               Text(
                                 widget.product!.calificacionpromedio.toString(),
-                                style: Theme.of(context).textTheme.body2,
+                                style: Theme.of(context).textTheme.bodyText1,
                               )
                             ],
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -132,7 +132,7 @@ class _FavoriteListItemWidgetState extends State<FavoriteListItemWidget> {
                     SizedBox(width: 8),
                     Text(
                         "${CurrencyUtil.convertFormatMoney('COP', widget.product!.preciounitario!)}",
-                        style: Theme.of(context).textTheme.display1),
+                        style: Theme.of(context).textTheme.headline4),
                   ],
                 ),
               )

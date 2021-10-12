@@ -31,7 +31,7 @@ class FaqItemWidget extends StatelessWidget {
               pregunta!,
               style: Theme.of(context)
                   .textTheme
-                  .body2!
+                  .bodyText1!
                   .merge(TextStyle(color: Theme.of(context).primaryColor)),
             ),
           ),
@@ -45,7 +45,7 @@ class FaqItemWidget extends StatelessWidget {
                     bottomLeft: Radius.circular(5))),
             child: Text(
               respuesta!,
-              style: Theme.of(context).textTheme.body1,
+              style: Theme.of(context).textTheme.bodyText2,
             ),
           ),
         ],

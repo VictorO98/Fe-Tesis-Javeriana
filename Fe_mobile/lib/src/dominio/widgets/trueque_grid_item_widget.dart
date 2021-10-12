@@ -46,14 +46,14 @@ class TruequeGridItemWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
               child: Text(
                 trueque.id.toString(),
-                style: Theme.of(context).textTheme.body2,
+                style: Theme.of(context).textTheme.bodyText1,
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Text(
                 trueque.id.toString(),
-                style: Theme.of(context).textTheme.title,
+                style: Theme.of(context).textTheme.headline6,
               ),
             ),
             Padding(
@@ -64,7 +64,7 @@ class TruequeGridItemWidget extends StatelessWidget {
                   Expanded(
                     child: Text(
                       '${trueque.id.toString()} Sales',
-                      style: Theme.of(context).textTheme.body1,
+                      style: Theme.of(context).textTheme.bodyText2,
                       overflow: TextOverflow.fade,
                       softWrap: false,
                     ),
@@ -76,7 +76,7 @@ class TruequeGridItemWidget extends StatelessWidget {
                   ),
                   Text(
                     trueque.id.toString(),
-                    style: Theme.of(context).textTheme.body2,
+                    style: Theme.of(context).textTheme.bodyText1,
                   )
                 ],
                 crossAxisAlignment: CrossAxisAlignment.center,
