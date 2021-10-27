@@ -6,6 +6,7 @@ using Fe.Servidor.Middleware.Contratos.Core;
 using Fe.Servidor.Middleware.Dapper;
 using Fe.Servidor.Middleware.Modelo.Contexto;
 using Fe.Servidor.Middleware.Modelo.Entidades;
+using Fe.Dominio.contenido;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,12 @@ namespace Fe.Dominio.facturas.Datos
 {
     public class RepoProdSerXFacturaFac
     {
+        private readonly COFachada _cOFachada;
+
+        public RepoProdSerXFacturaFac(COFachada cOFachada)
+        {
+            _cOFachada = cOFachada;
+        }
         internal async Task<RespuestaDatos> GuardarProductoFactura(ProdSerXFacturaFac productoFactura)
         {
             using FeContext context = new FeContext();
@@ -24,6 +31,9 @@ namespace Fe.Dominio.facturas.Datos
             {
                 context.Add(productoFactura);
                 context.SaveChanges();
+                ProductosServiciosPc p = await _cOFachada.GetPublicacionPorIdPublicacion((int)productoFactura.Idproductoservicio);
+                p.Cantidadtotal = (int)(p.Cantidadtotal - productoFactura.Cantidadfacturado);
+                await _cOFachada.ModificarPublicacion(p);
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "Producto facturado creado exitosamente." };
             }
             catch (Exception e)
