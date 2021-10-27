@@ -20,9 +20,11 @@ namespace Fe.Dominio.contenido.Datos
         {
             using FeContext context = new FeContext();
             RespuestaDatos respuestaDatos;
+            ProdSerXVendidosPed pp = productoPedido;
             try
             {
-                context.Add(productoPedido);
+                pp.Creacion = DateTime.Now;
+                context.Add(pp);
                 System.Diagnostics.Debug.WriteLine("Lo añadió :)");
                 System.Diagnostics.Debug.WriteLine(productoPedido.Creacion);
                 context.SaveChanges();

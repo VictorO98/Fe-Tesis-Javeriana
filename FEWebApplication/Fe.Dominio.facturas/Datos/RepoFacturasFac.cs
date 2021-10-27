@@ -21,9 +21,11 @@ namespace Fe.Dominio.facturas.Datos
         {
             using FeContext context = new FeContext();
             RespuestaDatos respuestaDatos;
+            FacturasFac f = factura;
             try
             {
-                context.Add(factura);
+                f.Fechafactura = DateTime.Now;
+                context.Add(f);
                 context.SaveChanges();
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "Factura creada exitosamente." };
             }

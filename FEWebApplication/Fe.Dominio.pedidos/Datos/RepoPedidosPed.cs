@@ -19,11 +19,13 @@ namespace Fe.Dominio.pedidos.Datos
         internal async Task<int> GuardarPedido(PedidosPed pedido)
         {
             using FeContext context = new FeContext();
+            PedidosPed p = pedido;
             try
             {
-                context.Add(pedido);
+                p.Fechapedido = DateTime.Now;
+                context.Add(p);
                 context.SaveChanges();
-                return pedido.Id;
+                return p.Id;
             }
             catch (Exception e)
             {
