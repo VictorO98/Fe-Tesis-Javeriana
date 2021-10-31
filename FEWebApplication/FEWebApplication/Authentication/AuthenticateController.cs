@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -135,6 +136,38 @@ namespace FEWebApplication.Authentication
                 respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.ERROR, Mensaje = e.Message };
             }
             return respuestaDatos;
+        }
+
+        [Route("IsImagen")]
+        [HttpGet]
+        public async Task<bool> IsImagen(string correoUsuario)
+        {
+            return  await _sEFachada.IsImagen(correoUsuario);
+        }
+
+        [Route("GetImagenSocial")]
+        [HttpGet]
+        public async Task<IActionResult> GetImagenSocial(string correoUsuario)
+        {
+            string pathImage = await _sEFachada.GetImagenSocial(correoUsuario);
+
+            var ext = Path.GetExtension(pathImage).ToLowerInvariant();
+            string mimeTypeExt = "";
+            switch (ext)
+            {
+                case ".jpg":
+                case ".jpeg":
+                    mimeTypeExt = "jpg";
+                    break;
+                case ".png":
+                    mimeTypeExt = "png";
+                    break;
+                default:
+                    mimeTypeExt = "jpg";
+                    break;
+            }
+
+            return PhysicalFile(pathImage, $@"image/{mimeTypeExt}");
         }
 
         [HttpPost]

@@ -113,6 +113,45 @@ namespace Fe.Core.Seguridad.Negocio
             else { throw new COExcepcion("El usuario ingresado no existe."); }
         }
 
+        internal async Task<bool> IsImagen(DemografiaCor demografiaCor)
+        {
+            var respuesta = false;
+            if (demografiaCor.UrlImagenPersonal != null)
+                respuesta = true;
+            return respuesta;
+        }
+
+        internal async Task<string> GetImagenSocial(DemografiaCor demografiaCor)
+        {
+            try
+            {
+                if (demografiaCor == null)
+                    throw new COExcepcion("El usuario no existe ");
+
+                string fileName = demografiaCor.UrlImagenPersonal;
+
+                if (!fileName.Contains($@"imagen-usuario-buya-{demografiaCor.Id}"))
+                    throw new COExcepcion("No tiene acceso a esta imagen. ");
+
+                string directorio = _configuration["ImageSociales:DirectorioSocial"] + "/Social";
+
+                return  Path.Combine(directorio, Path.GetFileName(fileName));
+
+            }
+            catch (COExcepcion e)
+            {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = e.Message,
+                    Traza = e.StackTrace,
+                    Usuario = demografiaCor.Email,
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.MODIFICAR_USUARIO
+                });
+                throw e;
+            }
+        }
+
         internal async Task<RespuestaDatos> SubirDocumentosEmprendedor(DemografiaCor demografiaCor, string RazonsSocial, IFormFileCollection files)
         {
             if (demografiaCor != null)

@@ -4,6 +4,7 @@ import 'package:Fe_mobile/src/core/models/info_usuario_model.dart';
 import 'package:Fe_mobile/src/core/models/login_model.dart';
 import 'package:Fe_mobile/src/core/models/respuesta_login_model.dart';
 import 'package:Fe_mobile/src/core/providers/usuario_provider.dart';
+import 'package:Fe_mobile/src/core/util/helpers_util.dart';
 import 'package:Fe_mobile/src/core/util/jwt_util.dart';
 import 'package:Fe_mobile/src/core/util/preferencias_util.dart';
 import 'package:Fe_mobile/src/core/pages/usuario/bloc/info_perfil/info_usuario_bloc.dart';
@@ -309,6 +310,7 @@ class _LoginPageState extends State<LoginPage> {
                   poblacion: await _preferenciasUtil.getPrefStr("poblacion"),
                   estado: await _preferenciasUtil.getPrefStr("estado"))));
               // 2 number refer the index of Home page
+
               Navigator.of(context).pushNamed('/Tabs', arguments: 2);
             });
           } else if (respuesta.codigo == 11) {

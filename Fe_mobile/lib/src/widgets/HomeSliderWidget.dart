@@ -69,20 +69,22 @@ class _HomeSliderWidgetState extends State<HomeSliderWidget> {
                             overflow: TextOverflow.fade,
                             maxLines: 3,
                           ),
-                          FlatButton(
-                            onPressed: () {
+                          slide.button != ''
+                              ? FlatButton(
+                                  onPressed: () {
 //                              Navigator.of(context).pushNamed('/Checkout');
-                            },
-                            padding: EdgeInsets.symmetric(vertical: 5),
-                            color: Theme.of(context).accentColor,
-                            shape: StadiumBorder(),
-                            child: Text(
-                              slide.button!,
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                  color: Theme.of(context).primaryColor),
-                            ),
-                          ),
+                                  },
+                                  padding: EdgeInsets.symmetric(vertical: 5),
+                                  color: Theme.of(context).accentColor,
+                                  shape: StadiumBorder(),
+                                  child: Text(
+                                    slide.button!,
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                        color: Theme.of(context).primaryColor),
+                                  ),
+                                )
+                              : SizedBox(),
                         ],
                       ),
                     ),

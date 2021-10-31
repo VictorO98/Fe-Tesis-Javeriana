@@ -5,6 +5,7 @@ import 'package:Fe_mobile/src/core/models/municipios_model.dart';
 import 'package:Fe_mobile/src/core/models/tipo_documento_model.dart';
 import 'package:Fe_mobile/src/core/models/rol_model.dart';
 import 'package:Fe_mobile/src/core/util/servicio_util.dart';
+import 'package:Fe_mobile/src/dominio/models/bancos_pse_model.dart';
 
 class GeneralProvider {
   Future<List<TipoDocumentoCorModel>> getTipoDocumentos() async {
@@ -14,6 +15,16 @@ class GeneralProvider {
     final List<TipoDocumentoCorModel> listado =
         List<TipoDocumentoCorModel>.from(
             decodedData.map((model) => TipoDocumentoCorModel.fromJson(model)));
+
+    return listado;
+  }
+
+  Future<List<BancosPseModel>> getBancos() async {
+    String? data = await ServicioUtil.get("core/COGeneral/GetBancos");
+    if (data == null) return [];
+    final List<dynamic> decodedData = json.decode(data);
+    final List<BancosPseModel> listado = List<BancosPseModel>.from(
+        decodedData.map((model) => BancosPseModel.fromJson(model)));
 
     return listado;
   }

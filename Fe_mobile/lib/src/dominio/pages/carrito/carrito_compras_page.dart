@@ -36,12 +36,14 @@ class _CartWidgetState extends State<CartWidget> {
     var total = 0;
     for (int i = 0; i < _productsList.length; i++) {
       if (_productsList[i]!.descuento! > 0.0) {
-        total += _productsList[i]!.preciounitario! -
-            ((_productsList[i]!.descuento! / 100) *
-                    _productsList[i]!.preciounitario!)
-                .toInt();
+        total += ((_productsList[i]!.preciounitario! -
+                    ((_productsList[i]!.descuento! / 100) *
+                        _productsList[i]!.preciounitario!)) *
+                _productsList[i]!.cantidadComprador!)
+            .toInt();
       } else {
-        total += _productsList[i]!.preciounitario!;
+        total += _productsList[i]!.preciounitario! *
+            _productsList[i]!.cantidadComprador!;
       }
     }
 
@@ -50,6 +52,7 @@ class _CartWidgetState extends State<CartWidget> {
       _totalCancelar = total;
       _comision = comision.toInt();
       _checkout = _totalCancelar + _comision + ComisionesUtil.IMPUESTO_EPAYCO;
+      _carrito.setTotalCheckOut(_checkout);
     });
     // setState(() {
     //   _cargandoUsuario = false;
@@ -88,7 +91,7 @@ class _CartWidgetState extends State<CartWidget> {
               )),
         ],
       ),
-      body: _checkout != 0
+      body: _checkout > ComisionesUtil.IMPUESTO_EPAYCO
           ? Stack(
               fit: StackFit.expand,
               children: <Widget>[
@@ -134,9 +137,8 @@ class _CartWidgetState extends State<CartWidget> {
                             return SizedBox(height: 15);
                           },
                           itemBuilder: (context, index) {
-                            return CartItemWidget(
-                                product: _productsList.elementAt(index),
-                                heroTag: 'cart');
+                            return carritoItemProductoWidget(
+                                _productsList.elementAt(index)!, 'cart');
                           },
                         ),
                       ],
@@ -244,7 +246,7 @@ class _CartWidgetState extends State<CartWidget> {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 20),
                                 child: Text(
-                                  "${CurrencyUtil.convertFormatMoney('COP', _checkout)}",
+                                  "${CurrencyUtil.convertFormatMoney('COP', _carrito.getTotalCheckOut())}",
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline4!
@@ -265,5 +267,148 @@ class _CartWidgetState extends State<CartWidget> {
             )
           : VacioCarritoWidget(),
     );
+  }
+
+  Widget carritoItemProductoWidget(
+      ProductoServicioModel product, String heroTag) {
+    return InkWell(
+      splashColor: Theme.of(context).accentColor,
+      focusColor: Theme.of(context).accentColor,
+      highlightColor: Theme.of(context).primaryColor,
+      onTap: () {
+        // Navigator.of(context).pushNamed('/Product',
+        //     arguments: RouteArgument(
+        //         id: widget.product!.id,
+        //         argumentsList: [widget.product, widget.heroTag]));
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 7),
+        decoration: BoxDecoration(
+          color: Theme.of(context).primaryColor.withOpacity(0.9),
+          boxShadow: [
+            BoxShadow(
+                color: Theme.of(context).focusColor.withOpacity(0.1),
+                blurRadius: 5,
+                offset: Offset(0, 2)),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Hero(
+              tag: heroTag + product.id.toString(),
+              child: Container(
+                height: 90,
+                width: 90,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(6),
+                  image: DecorationImage(
+                    image: NetworkImage(
+                        product.urlimagenproductoservicio.toString()),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(width: 15),
+            Flexible(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          product.nombre!,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          style: Theme.of(context).textTheme.subtitle1,
+                        ),
+                        Text(
+                          product.descuento == 0.0
+                              ? "${CurrencyUtil.convertFormatMoney('COP', product.preciounitario!)}"
+                              : "${CurrencyUtil.convertFormatMoney('COP', product.preciounitario! - ((product.descuento! / 100) * product.preciounitario!).toInt())}",
+                          style: Theme.of(context).textTheme.headline4,
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(width: 8),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      IconButton(
+                        onPressed: () {
+                          setState(() {
+                            product.cantidadComprador =
+                                this.incrementQuantity(product);
+                          });
+                        },
+                        iconSize: 30,
+                        padding: EdgeInsets.symmetric(horizontal: 5),
+                        icon: Icon(Icons.add_circle_outline),
+                        color: Theme.of(context).hintColor,
+                      ),
+                      Text(product.cantidadComprador.toString(),
+                          style: Theme.of(context).textTheme.subtitle1),
+                      IconButton(
+                        onPressed: () {
+                          setState(() {
+                            product.cantidadComprador =
+                                this.decrementQuantity(product);
+                          });
+                        },
+                        iconSize: 30,
+                        padding: EdgeInsets.symmetric(horizontal: 5),
+                        icon: Icon(Icons.remove_circle_outline),
+                        color: Theme.of(context).hintColor,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  incrementQuantity(ProductoServicioModel product) {
+    if (product.cantidadComprador! <= 99) {
+      product.cantidadComprador = product.cantidadComprador! + 1;
+      setState(() {
+        _initialConfiguration();
+      });
+      return product.cantidadComprador;
+    } else {
+      setState(() {
+        _initialConfiguration();
+      });
+      return product.cantidadComprador;
+    }
+  }
+
+  decrementQuantity(ProductoServicioModel product) {
+    if (product.cantidadComprador! > 1) {
+      product.cantidadComprador = product.cantidadComprador! - 1;
+      setState(() {
+        _initialConfiguration();
+      });
+
+      return product.cantidadComprador;
+    } else {
+      product.cantidadComprador = 0;
+      setState(() {
+        _carrito.deleteElementCarrito(product);
+        _initialConfiguration();
+        Navigator.pop(context);
+        Navigator.of(context).pushNamed('/Cart');
+        AlertUtil.info(context, 'Producto Eliminado del carrito');
+      });
+      return 0;
+    }
   }
 }

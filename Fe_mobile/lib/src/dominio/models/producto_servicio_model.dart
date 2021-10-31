@@ -14,28 +14,28 @@ String productoServicioModelToJson(ProductoServicioModel data) =>
     json.encode(data.toJson());
 
 class ProductoServicioModel {
-  ProductoServicioModel({
-    this.id,
-    this.descripcion,
-    this.cantidadtotal,
-    this.tiempoentrega,
-    this.tiempogarantia,
-    this.preciounitario,
-    this.descuento,
-    this.calificacionpromedio,
-    this.habilitatrueque,
-    this.nombre,
-    this.urlimagenproductoservicio,
-    this.nombreCategoria,
-    this.tipoPublicacion,
-    this.idusuarioNavigation,
-    this.preguntasRespuestas,
-    this.prodSerTruequeTrueIdproductoserviciocompradorNavigations,
-    this.prodSerTruequeTrueIdproductoserviciovendedorNavigations,
-    this.prodSerXVendidosPeds,
-    this.resenas,
-    this.cantidadOfertarTrueque,
-  });
+  ProductoServicioModel(
+      {this.id,
+      this.descripcion,
+      this.cantidadtotal,
+      this.tiempoentrega,
+      this.tiempogarantia,
+      this.preciounitario,
+      this.descuento,
+      this.calificacionpromedio,
+      this.habilitatrueque,
+      this.nombre,
+      this.urlimagenproductoservicio,
+      this.nombreCategoria,
+      this.tipoPublicacion,
+      this.idusuarioNavigation,
+      this.preguntasRespuestas,
+      this.prodSerTruequeTrueIdproductoserviciocompradorNavigations,
+      this.prodSerTruequeTrueIdproductoserviciovendedorNavigations,
+      this.prodSerXVendidosPeds,
+      this.resenas,
+      this.cantidadOfertarTrueque,
+      this.cantidadComprador});
 
   int? id;
   String? descripcion;
@@ -57,6 +57,7 @@ class ProductoServicioModel {
   dynamic prodSerXVendidosPeds;
   List<ResenaModel>? resenas;
   int? cantidadOfertarTrueque;
+  int? cantidadComprador;
 
   factory ProductoServicioModel.fromJson(Map<String, dynamic> json) =>
       ProductoServicioModel(

@@ -53,5 +53,11 @@ namespace Fe.Dominio.contenido.Datos
             using FeContext context = new FeContext();
             return context.ProductosFavoritosDemografiaPcs.Where(f => f.Iddemografia == idDemografia).ToList();
         }
+
+        internal object FavoritoMio(DemografiaCor demografiaCor, ProductosServiciosPc publicacion)
+        {
+            using FeContext context = new FeContext();
+            return context.ProductosFavoritosDemografiaPcs.Where(f => f.Iddemografia == demografiaCor.Id && f.Idproductoservicio == publicacion.Id).FirstOrDefault();
+        }
     }
 }

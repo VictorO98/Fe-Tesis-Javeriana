@@ -65,7 +65,7 @@ class _TabsWidgetState extends State<TabsWidget> {
           widget.currentPage = MessagesWidget();
           break;
         case 4:
-          widget.currentTitle = 'Favorites';
+          widget.currentTitle = 'Favoritos';
           widget.currentPage = FavoritosUsuarioPage();
           break;
         case 5:

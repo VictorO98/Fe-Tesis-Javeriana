@@ -1,11 +1,13 @@
 import 'package:Fe_mobile/config/ui_icons.dart';
 import 'package:Fe_mobile/src/core/models/info_usuario_model.dart';
 import 'package:Fe_mobile/src/core/pages/usuario/bloc/info_perfil/info_usuario_bloc.dart';
+import 'package:Fe_mobile/src/core/providers/usuario_provider.dart';
 import 'package:Fe_mobile/src/core/util/alert_util.dart';
 import 'package:Fe_mobile/src/core/util/conf_api.dart';
 import 'package:Fe_mobile/src/core/util/estados_pedido_util.dart';
 import 'package:Fe_mobile/src/core/util/estados_trueque_util.dart';
 import 'package:Fe_mobile/src/core/util/estilo_util.dart';
+import 'package:Fe_mobile/src/core/util/helpers_util.dart';
 import 'package:Fe_mobile/src/core/util/preferencias_util.dart';
 import 'package:Fe_mobile/src/dominio/models/info_pedidos_model.dart';
 import 'package:Fe_mobile/src/dominio/models/info_trueques_model.dart';
@@ -38,14 +40,17 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
   ContenidoProvider _contenidoProvider = new ContenidoProvider();
   TruequeProvider _truequeProvider = new TruequeProvider();
   PedidoProvider _pedidoProvider = new PedidoProvider();
+  UsuarioProvider _usuarioProvider = new UsuarioProvider();
 
   bool _cargandoUsuario = false;
   bool _cargandoProductos = false;
   bool _cargandoPedidos = false;
+  bool _isFotoPerfil = false;
 
   User _user = new User.init().getCurrentUser();
 
   String? idDemografia;
+  String? correo;
   int? _pedidoPendiente;
   int? _pedidoEmpaquetado;
   int? _pedidoEnviado;
@@ -57,15 +62,25 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
   @override
   void initState() {
     super.initState();
+    _cargarImagenUsuario();
     _infoUsuarioBloc = BlocProvider.of<InfoUsuarioBloc>(context);
     _cargarInfoUsuario();
     _infoUsuarioBloc!.state.infoUsuarioModel!.rol == "Emprendedor"
         ? _cargarProductos()
         : SizedBox();
-    //_cargarPedidos();
+    _cargarPedidos();
     _infoUsuarioBloc!.state.infoUsuarioModel!.rol == "Emprendedor"
         ? _cargarTrueques()
         : SizedBox();
+  }
+
+  _cargarImagenUsuario() async {
+    correo = await _prefs.getPrefStr("email");
+    var ans = await _usuarioProvider.isFotoPerfil(correo);
+
+    setState(() {
+      _isFotoPerfil = ans;
+    });
   }
 
   _cargarTrueques() async {
@@ -225,14 +240,19 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
                         Navigator.of(context).pushNamed('/Tabs', arguments: 1);
                       },
                       child: GestureDetector(
-                        onTap: () {
-                          print('Undiste tu foto');
-                          Navigator.of(context).pushNamed('/FotoPerfil');
-                        },
-                        child: CircleAvatar(
-                          backgroundImage: AssetImage(_user.avatar!),
-                        ),
-                      ),
+                          onTap: () {
+                            print('Undiste tu foto');
+                            Navigator.of(context).pushNamed('/FotoPerfil');
+                          },
+                          child: _isFotoPerfil
+                              ? CircleAvatar(
+                                  // backgroundImage: AssetImage(_user.avatar!),
+                                  backgroundImage: NetworkImage(
+                                      (Helpers.FOTO_USUARIO + correo!)
+                                          .toString()))
+                              : CircleAvatar(
+                                  backgroundImage: AssetImage(_user.avatar!),
+                                )),
                     )),
               ],
             ),

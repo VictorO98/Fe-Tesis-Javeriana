@@ -45,6 +45,11 @@ namespace Fe.Core.General
             return _cOGeneralBiz.GetTipoDocumentoPorId(idTipoDocumento);
         }
 
+        public List<BancosPermitidosCor> GetBancos()
+        {
+            return _cOGeneralBiz.GetBancos();
+        }
+
         public List<TipoDocumentoCor> GetTipoDocumento()
         {
             return _cOGeneralBiz.GetTipoDocumento();

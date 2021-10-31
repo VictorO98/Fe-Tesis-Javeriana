@@ -42,5 +42,17 @@ namespace Fe.Core.Seguridad
             DemografiaCor demografiaCor = _cOGeneralFachada.GetDemografiaPorEmail(correoUsuario);
             return await _cOSeguridadBiz.SubirImagenSocial(files, demografiaCor);
         }
+
+        public async Task<string> GetImagenSocial(string correoUsuario)
+        {
+            DemografiaCor demografiaCor = _cOGeneralFachada.GetDemografiaPorEmail(correoUsuario);
+            return await _cOSeguridadBiz.GetImagenSocial(demografiaCor);
+        }
+
+        public async Task<bool> IsImagen(string correoUsuario)
+        {
+            DemografiaCor demografiaCor = _cOGeneralFachada.GetDemografiaPorEmail(correoUsuario);
+            return await _cOSeguridadBiz.IsImagen(demografiaCor);
+        }
     }
 }

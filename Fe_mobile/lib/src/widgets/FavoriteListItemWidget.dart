@@ -31,7 +31,7 @@ class _FavoriteListItemWidgetState extends State<FavoriteListItemWidget> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Icon(
-              UiIcons.trash,
+              Icons.delete,
               color: Colors.white,
             ),
           ),
@@ -46,7 +46,7 @@ class _FavoriteListItemWidgetState extends State<FavoriteListItemWidget> {
         // Then show a snackbar.
         Scaffold.of(context).showSnackBar(SnackBar(
             content: Text(
-                "The ${widget.product!.nombre} product is removed from wish list")));
+                "${widget.product!.nombre} han sido removidas de tu lista favorita")));
       },
       child: InkWell(
         splashColor: Theme.of(context).accentColor,
@@ -120,7 +120,8 @@ class _FavoriteListItemWidgetState extends State<FavoriteListItemWidget> {
                                 size: 18,
                               ),
                               Text(
-                                widget.product!.calificacionpromedio.toString(),
+                                (widget.product!.calificacionpromedio! * 10)
+                                    .toString(),
                                 style: Theme.of(context).textTheme.bodyText1,
                               )
                             ],
@@ -130,9 +131,13 @@ class _FavoriteListItemWidgetState extends State<FavoriteListItemWidget> {
                       ),
                     ),
                     SizedBox(width: 8),
-                    Text(
-                        "${CurrencyUtil.convertFormatMoney('COP', widget.product!.preciounitario!)}",
-                        style: Theme.of(context).textTheme.headline4),
+                    widget.product!.descuento! > 0.0
+                        ? Text(
+                            "${CurrencyUtil.convertFormatMoney('COP', widget.product!.preciounitario! - ((widget.product!.descuento! / 100) * widget.product!.preciounitario!).toInt())}",
+                            style: Theme.of(context).textTheme.headline4)
+                        : Text(
+                            "${CurrencyUtil.convertFormatMoney('COP', widget.product!.preciounitario!)}",
+                            style: Theme.of(context).textTheme.headline4),
                   ],
                 ),
               )

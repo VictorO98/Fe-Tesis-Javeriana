@@ -11,7 +11,6 @@ class FacturaProvider {
         "factura/FAFactura/PagoConTC", json.encode(datosTC),
         isMostratAlertError: true, contextErr: context);
     if (data == null) return "";
-
     return data;
   }
 }

@@ -277,11 +277,11 @@ namespace Fe.Dominio.contenido.Datos
             return newString;
         }
 
-        internal List<ProductosServiciosPc> BuscarPublicacion(string nombre)
+        internal List<ProductosServiciosPc> BuscarPublicacion(string nombre, int idUsuario)
         {
             nombre = RemoverAcentos(nombre);
             using FeContext context = new FeContext();
-            return context.ProductosServiciosPcs.Where(p => p.Nombre.ToLower().Contains(nombre.ToLower())).ToList();
+            return context.ProductosServiciosPcs.Where(p => p.Nombre.ToLower().Contains(nombre.ToLower()) && p.Idusuario != idUsuario).ToList();
         }
 
         internal List<ProductosServiciosPc> GetPublicacionesHabilitadasTrueque(int idDemografia)

@@ -18,6 +18,7 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
         {
         }
 
+        public virtual DbSet<BancosPermitidosCor> BancosPermitidosCors { get; set; }
         public virtual DbSet<CategoriaPc> CategoriaPcs { get; set; }
         public virtual DbSet<ConceptoDev> ConceptoDevs { get; set; }
         public virtual DbSet<DemografiaCor> DemografiaCors { get; set; }
@@ -65,6 +66,21 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "C.UTF-8");
+
+            modelBuilder.Entity<BancosPermitidosCor>(entity =>
+            {
+                entity.ToTable("bancos_permitidos_cor");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .UseIdentityAlwaysColumn()
+                    .HasIdentityOptions(null, null, null, 999999L, null, null);
+
+                entity.Property(e => e.Nombre)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .HasColumnName("nombre");
+            });
 
             modelBuilder.Entity<CategoriaPc>(entity =>
             {

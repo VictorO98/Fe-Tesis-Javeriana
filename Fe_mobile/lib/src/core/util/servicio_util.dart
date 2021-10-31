@@ -33,6 +33,28 @@ class ServicioUtil {
     }
   }
 
+  static Future<String?> delete(String api,
+      {Map<String, String>? params,
+      bool isMostrarAlertError = false,
+      BuildContext? contextErr}) async {
+    var client = http.Client();
+    try {
+      var uri = Uri.parse(ConfServer.SERVER + api);
+      if (params != null) uri = uri.replace(queryParameters: params);
+      final response = await client.delete(uri, headers: await formarHeader());
+      if (response.statusCode == 200) return response.body;
+
+      controlarError(contextErr!, response, isMostrarAlertError);
+      return null;
+    } catch (e) {
+      print("Error Get: $e");
+      AlertUtil.error(contextErr!, "Ocurrió un problema con los servicios. ");
+      throw e;
+    } finally {
+      client.close();
+    }
+  }
+
   static dynamic post(String api, String body,
       {bool isMostratAlertError = false, BuildContext? contextErr}) async {
     var client = http.Client();

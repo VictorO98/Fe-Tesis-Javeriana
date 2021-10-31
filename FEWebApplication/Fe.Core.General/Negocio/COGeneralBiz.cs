@@ -38,6 +38,11 @@ namespace Fe.Core.General.Negocio
             return _repoDemografia.GetDemografiaPorEmail(emailDemografia);
         }
 
+        internal List<BancosPermitidosCor> GetBancos()
+        {
+            return _repoPoblacion.GetBancos();
+        }
+
         internal TipoDocumentoCor GetTipoDocumentoPorId(int idTipoDocumento)
         {
             return _repoDocumento.GetTipoDocumentoPorId(idTipoDocumento);

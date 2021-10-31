@@ -13,10 +13,7 @@ class SliderList {
 
   SliderList() {
     _list = [
-      new Slider(
-          image: 'img/slider3.jpg',
-          button: 'Colleción',
-          description: 'Bienvenido a Buy@.'),
+      new Slider(image: 'img/BannerPrimero.jpg', button: '', description: ''),
       new Slider(
           image: 'img/slider1.jpg',
           button: 'Explora',

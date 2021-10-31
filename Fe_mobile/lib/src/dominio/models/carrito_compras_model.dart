@@ -21,8 +21,20 @@ class CarritoComprasModel {
     _totalCheckout = value;
   }
 
+  deleteElementCarrito(ProductoServicioModel publicacion) {
+    _carritoCompras.remove(publicacion);
+    _contadorCarrito = _carritoCompras.length;
+    print("Se quito " + publicacion.nombre! + " del carrito");
+  }
+
   addElementCarrito(ProductoServicioModel publicacion, int cantidad) {
-    for (int i = 0; i < cantidad; i++) {
+    if (_carritoCompras.contains(publicacion)) {
+      var pos = _carritoCompras.indexOf(publicacion);
+      _carritoCompras[pos].cantidadComprador =
+          _carritoCompras[pos].cantidadComprador! + cantidad;
+      print("Se sumo cantidad al producto: " + publicacion.nombre!);
+    } else {
+      publicacion.cantidadComprador = cantidad;
       _carritoCompras.add(publicacion);
       print("Se agrego un producto: " + publicacion.nombre!);
     }
@@ -32,7 +44,10 @@ class CarritoComprasModel {
   printCarrito() {
     print("Carrito tamaño: " + _carritoCompras.length.toString());
     for (int i = 0; i < _carritoCompras.length; i++) {
-      print(_carritoCompras[i].nombre);
+      print("Producto: " +
+          _carritoCompras[i].nombre! +
+          " Cantidad a llevar: " +
+          _carritoCompras[i].cantidadComprador.toString());
     }
   }
 }

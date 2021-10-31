@@ -1,3 +1,4 @@
+import 'package:Fe_mobile/src/core/util/alert_util.dart';
 import 'package:Fe_mobile/src/core/util/preferencias_util.dart';
 import 'package:Fe_mobile/src/dominio/models/carrito_compras_model.dart';
 import 'package:Fe_mobile/src/dominio/models/guardar_favorito_model.dart';
@@ -121,6 +122,8 @@ class _ProductoDetallePageState extends State<ProductoDetallePage>
             SizedBox(width: 10),
             FlatButton(
               onPressed: () {
+                AlertUtil.success(context, 'Publicación añadida al carrito',
+                    title: 'Felicidades!');
                 setState(() {
                   _carrito.addElementCarrito(
                       widget._product!, _cantidadSeleccionada);
@@ -135,7 +138,6 @@ class _ProductoDetallePageState extends State<ProductoDetallePage>
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    // TODO: AÑADIR AL CARRO
                     Expanded(
                       child: Text(
                         'Añadir al carrito',

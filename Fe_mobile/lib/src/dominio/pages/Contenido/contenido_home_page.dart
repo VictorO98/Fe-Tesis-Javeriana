@@ -2,6 +2,7 @@ import 'package:Fe_mobile/config/ui_icons.dart';
 import 'package:Fe_mobile/src/core/models/info_usuario_model.dart';
 import 'package:Fe_mobile/src/core/pages/usuario/bloc/info_perfil/info_usuario_bloc.dart';
 import 'package:Fe_mobile/src/core/util/conf_api.dart';
+import 'package:Fe_mobile/src/core/util/helpers_util.dart';
 import 'package:Fe_mobile/src/core/util/preferencias_util.dart';
 import 'package:Fe_mobile/src/core/util/publicaciones_util.dart';
 import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';

@@ -1,4 +1,6 @@
+import 'package:Fe_mobile/src/core/util/alert_util.dart';
 import 'package:Fe_mobile/src/core/util/currency_util.dart';
+import 'package:Fe_mobile/src/dominio/models/carrito_compras_model.dart';
 import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:Fe_mobile/src/models/product.dart';
 import 'package:Fe_mobile/src/models/route_argument.dart';
@@ -17,6 +19,8 @@ class CartItemWidget extends StatefulWidget {
 }
 
 class _CartItemWidgetState extends State<CartItemWidget> {
+  CarritoComprasModel _carrito = new CarritoComprasModel();
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -90,8 +94,8 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                       IconButton(
                         onPressed: () {
                           setState(() {
-                            widget.quantity =
-                                this.incrementQuantity(widget.quantity);
+                            widget.product!.cantidadComprador =
+                                this.incrementQuantity();
                           });
                         },
                         iconSize: 30,
@@ -99,13 +103,13 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                         icon: Icon(Icons.add_circle_outline),
                         color: Theme.of(context).hintColor,
                       ),
-                      Text(widget.quantity.toString(),
+                      Text(widget.product!.cantidadComprador.toString(),
                           style: Theme.of(context).textTheme.subtitle1),
                       IconButton(
                         onPressed: () {
                           setState(() {
-                            widget.quantity =
-                                this.decrementQuantity(widget.quantity);
+                            widget.product!.cantidadComprador =
+                                this.decrementQuantity();
                           });
                         },
                         iconSize: 30,
@@ -124,19 +128,37 @@ class _CartItemWidgetState extends State<CartItemWidget> {
     );
   }
 
-  incrementQuantity(int quantity) {
-    if (quantity <= 99) {
-      return ++quantity;
+  incrementQuantity() {
+    if (widget.product!.cantidadComprador! <= 99) {
+      widget.product!.cantidadComprador =
+          widget.product!.cantidadComprador! + 1;
+      return widget.product!.cantidadComprador;
     } else {
-      return quantity;
+      return widget.product!.cantidadComprador;
     }
   }
 
-  decrementQuantity(int quantity) {
-    if (quantity > 1) {
-      return --quantity;
+  decrementQuantity() {
+    if (widget.product!.cantidadComprador! > 1) {
+      widget.product!.cantidadComprador =
+          widget.product!.cantidadComprador! - 1;
+      setState(() {
+        var aux = _carrito.getTotalCheckOut() - widget.product!.preciounitario!;
+        _carrito.setTotalCheckOut(aux);
+      });
+
+      return widget.product!.cantidadComprador;
     } else {
-      return quantity;
+      widget.product!.cantidadComprador = 0;
+      setState(() {
+        _carrito.deleteElementCarrito(widget.product!);
+        _carrito.setTotalCheckOut(
+            _carrito.getTotalCheckOut() - widget.product!.preciounitario!);
+        Navigator.pop(context);
+        Navigator.of(context).pushNamed('/Cart');
+        AlertUtil.info(context, 'Producto Eliminado del carrito');
+      });
+      return 0;
     }
   }
 }

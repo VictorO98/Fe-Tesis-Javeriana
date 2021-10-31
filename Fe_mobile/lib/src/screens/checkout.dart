@@ -1,9 +1,18 @@
 import 'dart:ui';
 
+import 'package:Fe_mobile/src/core/models/info_usuario_model.dart';
+import 'package:Fe_mobile/src/core/models/respuesta_datos_model.dart';
+import 'package:Fe_mobile/src/core/pages/usuario/bloc/info_perfil/info_usuario_bloc.dart';
+import 'package:Fe_mobile/src/core/util/alert_util.dart';
 import 'package:Fe_mobile/src/core/util/currency_util.dart';
 import 'package:Fe_mobile/src/core/util/estilo_util.dart';
+import 'package:Fe_mobile/src/core/util/preferencias_util.dart';
 import 'package:Fe_mobile/src/dominio/models/carrito_compras_model.dart';
+import 'package:Fe_mobile/src/dominio/models/guardar_pedido_model.dart';
+import 'package:Fe_mobile/src/dominio/models/guardar_producto_pedido_model.dart';
 import 'package:Fe_mobile/src/dominio/models/pago_tarjeta_credito_model.dart';
+import 'package:Fe_mobile/src/dominio/providers/factura_provider.dart';
+import 'package:Fe_mobile/src/dominio/providers/pedidos_provider.dart';
 import 'package:Fe_mobile/src/models/route_argument.dart';
 import 'package:Fe_mobile/src/widgets/ShoppingCartButtonWidget.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +25,15 @@ class CheckoutWidget extends StatefulWidget {
 class _CheckoutWidgetState extends State<CheckoutWidget> {
   CarritoComprasModel _carrito = new CarritoComprasModel();
   PagoTarjetaCreditoModel _pago = new PagoTarjetaCreditoModel();
+  GuardarPedidoModel _pedido = new GuardarPedidoModel();
+
+  PedidoProvider _pedidoProvider = new PedidoProvider();
+  FacturaProvider _facturaProvider = new FacturaProvider();
+
+  InfoUsuarioBloc? _infoUsuarioBloc;
 
   final _formTC = GlobalKey<FormState>();
+  final _prefs = new PreferenciasUtil();
 
   List<String> meses = [
     "1",
@@ -36,6 +52,9 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
 
   int? nroCuotas;
 
+  bool _cargandoUsuario = false;
+  bool _pagando = false;
+
   @override
   void initState() {
     super.initState();
@@ -43,7 +62,33 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
     _pago.anioTc = 25;
     _pago.mesTc = 01;
     _pago.cvcTc = 001;
-    //_initialConfiguration();
+    //_cargarInfoUsuario();
+  }
+
+  void _cargarInfoUsuario() async {
+    setState(() {
+      _cargandoUsuario = true;
+    });
+
+    if (_infoUsuarioBloc!.state.infoUsuarioModel != null) {
+      _infoUsuarioBloc!.add(OnSetearInfoUsuario(new InfoUsuarioModel(
+          id: await _prefs.getPrefStr("id"),
+          documento: await _prefs.getPrefStr("documento"),
+          tipoDocumento: await _prefs.getPrefStr("tipoDocumento"),
+          email: await _prefs.getPrefStr("email"),
+          nombres: await _prefs.getPrefStr("nombres"),
+          apellidos: await _prefs.getPrefStr("apellidos"),
+          nombreCompleto: await _prefs.getPrefStr("nombreCompleto"),
+          numeroTelefono: await _prefs.getPrefStr("telefono"),
+          rol: await _prefs.getPrefStr("roles"),
+          direccion: await _prefs.getPrefStr("direccion"),
+          estado: await _prefs.getPrefStr("estado"),
+          poblacion: await _prefs.getPrefStr("poblacion"))));
+
+      setState(() {
+        _cargandoUsuario = false;
+      });
+    }
   }
 
   @override
@@ -113,7 +158,6 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                 ),
               ),
             ),
-            // TODO TARJETA DE CREDITO WIDGET
             _widgetTarjetaCredito(),
             SizedBox(height: 20),
             Text("Datos de la tarjeta"),
@@ -262,7 +306,6 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
               ),
             ),
             SizedBox(height: 20),
-
             Positioned(
               bottom: 0,
               child: Container(
@@ -295,8 +338,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                             width: 320,
                             child: FlatButton(
                               onPressed: () {
-                                // Navigator.of(context)
-                                //     .pushNamed('/CheckoutDone');
+                                Navigator.of(context).pushNamed('/Bancos');
                               },
                               padding: EdgeInsets.symmetric(vertical: 10),
                               color: Theme.of(context).accentColor,
@@ -325,45 +367,54 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                       SizedBox(
                         height: 10,
                       ),
-                      Stack(
-                        fit: StackFit.loose,
-                        alignment: AlignmentDirectional.centerEnd,
-                        children: <Widget>[
-                          SizedBox(
-                            width: 320,
-                            child: FlatButton(
-                              onPressed: () {
-                                _submitTC();
-                              },
-                              padding: EdgeInsets.symmetric(vertical: 14),
-                              color: Theme.of(context).accentColor,
-                              shape: StadiumBorder(),
-                              child: Container(
-                                width: double.infinity,
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 20),
-                                child: Text(
-                                  'Confirmar Pago',
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      color: Theme.of(context).primaryColor),
+                      !_pagando
+                          ? Stack(
+                              fit: StackFit.loose,
+                              alignment: AlignmentDirectional.centerEnd,
+                              children: <Widget>[
+                                SizedBox(
+                                  width: 320,
+                                  child: FlatButton(
+                                    onPressed: () {
+                                      AlertUtil.confirm(
+                                          context,
+                                          '¿Desea confirmar compra?',
+                                          () => _submitTC(),
+                                          confirmBtnText: 'Confirmar');
+                                    },
+                                    padding: EdgeInsets.symmetric(vertical: 14),
+                                    color: Theme.of(context).accentColor,
+                                    shape: StadiumBorder(),
+                                    child: Container(
+                                      width: double.infinity,
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20),
+                                      child: Text(
+                                        'Confirmar Pago',
+                                        textAlign: TextAlign.start,
+                                        style: TextStyle(
+                                            color:
+                                                Theme.of(context).primaryColor),
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: Text(
-                              "${CurrencyUtil.convertFormatMoney('COP', _carrito.getTotalCheckOut())}",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline4!
-                                  .merge(TextStyle(
-                                      color: Theme.of(context).primaryColor)),
-                            ),
-                          )
-                        ],
-                      ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
+                                  child: Text(
+                                    "${CurrencyUtil.convertFormatMoney('COP', _carrito.getTotalCheckOut())}",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline4!
+                                        .merge(TextStyle(
+                                            color: Theme.of(context)
+                                                .primaryColor)),
+                                  ),
+                                )
+                              ],
+                            )
+                          : CircularProgressIndicator(),
                       SizedBox(height: 10),
                     ],
                   ),
@@ -376,10 +427,91 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
     );
   }
 
-  void _submitTC() {
+  void _submitTC() async {
     if (_formTC.currentState!.validate()) {
       _formTC.currentState!.save();
+
+      Navigator.pop(context);
+
+      setState(() {
+        _pagando = true;
+      });
+
+      // Se crea la cabecera del pedido
+      var idUsuario = await _prefs.getPrefStr("id");
+
+      _pedido.id = 0;
+      _pedido.idusuario = int.parse(idUsuario!);
+      _pedido.estado = 'PEN';
+
+      _pedidoProvider.crearPedido(_pedido, context).then((value) {
+        var idPedido = value;
+        var _productosAComprar = _carrito.returnCarrito();
+        var _cantidadProductos = _carrito.returSizeCarrito();
+
+        // Guardar Productos por pedido
+        for (int i = 0; i < _cantidadProductos; i++) {
+          var _productoPorPedido = new GuardarProductoPedidoModel();
+
+          _productoPorPedido.id = 0;
+          _productoPorPedido.idproductoservico = _productosAComprar[i].id;
+          _productoPorPedido.idpedido = idPedido;
+          _productoPorPedido.cantidadespedida =
+              _productosAComprar[i].cantidadComprador;
+
+          if (_productosAComprar[i].descuento! > 0.0) {
+            _productoPorPedido.preciototal =
+                ((_productosAComprar[i].preciounitario! -
+                            ((_productosAComprar[i].descuento! / 100) *
+                                _productosAComprar[i].preciounitario!)) *
+                        _productosAComprar[i].cantidadComprador!)
+                    .toInt();
+          } else {
+            _productoPorPedido.preciototal =
+                _productosAComprar[i].preciounitario! *
+                    _productosAComprar[i].cantidadComprador!;
+          }
+          print(_productoPorPedido.preciototal);
+
+          _pedidoProvider
+              .guardarProductoPedidoPorId(_productoPorPedido, context)
+              .then((value) {
+            RespuestaDatosModel? respuesta = value;
+            print(respuesta!.mensaje);
+          }).whenComplete(() => null);
+        }
+
+        //Cobro con TC
+        _pago.idDemografiaComprador = int.parse(idUsuario);
+        _pago.idPedido = 2;
+        _pagatTC();
+      }).whenComplete(() => null);
+    } else {
+      Navigator.pop(context);
     }
+  }
+
+  void _pagatTC() async {
+    _facturaProvider.pagoConTC(_pago, context).then((value) {
+      var respuesta = value;
+      if (respuesta[13] == 'r') {
+        setState(() {
+          _pagando = false;
+        });
+        final funcionNavegar = () async {
+          Navigator.pop(context);
+          Navigator.of(context).pushNamed('/Tabs', arguments: 1);
+        };
+
+        AlertUtil.success(context, 'Transacción realizada correctamente',
+            respuesta: funcionNavegar);
+      } else {
+        setState(() {
+          _pagando = false;
+        });
+        AlertUtil.error(context, respuesta);
+      }
+    }).whenComplete(() => _pagando = true);
   }
 
   Widget _widgetTarjetaCredito() {

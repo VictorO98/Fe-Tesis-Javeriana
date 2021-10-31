@@ -35,7 +35,14 @@ namespace FEWebApplication.Controladores.Core
         [HttpGet]
         public string GetVersionServer()
         {
-            return "1.0.0";
+            return "1.0.1";
+        }
+
+        [Route("GetBancos")]
+        [HttpGet]
+        public List<BancosPermitidosCor> GetBancos()
+        {
+            return _cOGeneralFachada.GetBancos();
         }
 
         [Route("GetEstadoPoblacion")]

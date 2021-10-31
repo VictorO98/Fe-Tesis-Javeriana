@@ -7,6 +7,7 @@ import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:Fe_mobile/src/dominio/providers/contenido_provider.dart';
 import 'package:Fe_mobile/src/models/product.dart';
 import 'package:Fe_mobile/src/widgets/EmptyFavoritesWidget.dart';
+import 'package:Fe_mobile/src/widgets/FavoriteGridItemWidget.dart';
 import 'package:Fe_mobile/src/widgets/FavoriteListItemWidget.dart';
 import 'package:Fe_mobile/src/widgets/ProductGridItemWidget.dart';
 import 'package:Fe_mobile/src/widgets/SearchBarWidget.dart';
@@ -21,7 +22,7 @@ class FavoritosUsuarioPage extends StatefulWidget {
 
 class _FavoritosUsuarioPageState extends State<FavoritosUsuarioPage> {
   final _prefs = new PreferenciasUtil();
-  String layout = 'list';
+  String layout = 'grid';
 
   List<ProductoServicioModel>? _productsList;
 
@@ -167,31 +168,31 @@ class _FavoritosUsuarioPageState extends State<FavoritosUsuarioPage> {
                     },
                   ),
                 ),
-//                 Offstage(
-//                   offstage: this.layout != 'grid' || _productsList!.isEmpty,
-//                   child: Container(
-//                     padding: EdgeInsets.symmetric(horizontal: 20),
-//                     child: new StaggeredGridView.countBuilder(
-//                       primary: false,
-//                       shrinkWrap: true,
-//                       crossAxisCount: 4,
-//                       itemCount: _productsList!.length,
-//                       itemBuilder: (BuildContext context, int index) {
-//                         ProductoServicioModel product =
-//                             _productsList!.elementAt(index);
-//                         return ProductGridItemWidget(
-//                           product: product,
-//                           heroTag: 'favorites_grid',
-//                         );
-//                       },
-// //                  staggeredTileBuilder: (int index) => new StaggeredTile.fit(index % 2 == 0 ? 1 : 2),
-//                       staggeredTileBuilder: (int index) =>
-//                           new StaggeredTile.fit(2),
-//                       mainAxisSpacing: 15.0,
-//                       crossAxisSpacing: 15.0,
-//                     ),
-//                   ),
-//                 ),
+                Offstage(
+                  offstage: this.layout != 'grid' || _productsList!.isEmpty,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: new StaggeredGridView.countBuilder(
+                      primary: false,
+                      shrinkWrap: true,
+                      crossAxisCount: 4,
+                      itemCount: _productsList!.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        ProductoServicioModel product =
+                            _productsList!.elementAt(index);
+                        return FavoriteGridItemWidget(
+                          product: product,
+                          heroTag: 'favorites_grid',
+                        );
+                      },
+//                  staggeredTileBuilder: (int index) => new StaggeredTile.fit(index % 2 == 0 ? 1 : 2),
+                      staggeredTileBuilder: (int index) =>
+                          new StaggeredTile.fit(2),
+                      mainAxisSpacing: 15.0,
+                      crossAxisSpacing: 15.0,
+                    ),
+                  ),
+                ),
                 Offstage(
                   offstage: _productsList!.isNotEmpty,
                   child: EmptyFavoritesWidget(),

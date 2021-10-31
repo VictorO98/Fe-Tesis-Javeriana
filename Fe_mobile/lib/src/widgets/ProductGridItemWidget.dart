@@ -22,10 +22,10 @@ class ProductGridItemWidget extends StatelessWidget {
       highlightColor: Colors.transparent,
       splashColor: Theme.of(context).accentColor.withOpacity(0.08),
       onTap: () {
-        Navigator.of(context).pushNamed('/Product',
-            arguments: new RouteArgument(
-                argumentsList: [this.product, this.heroTag],
-                id: this.product.id));
+        // Navigator.of(context).pushNamed('/Product',
+        //     arguments: new RouteArgument(
+        //         argumentsList: [this.product, this.heroTag],
+        //         id: this.product.id));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -66,9 +66,13 @@ class ProductGridItemWidget extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Text(
-                  "${CurrencyUtil.convertFormatMoney('COP', product.preciounitario!.round())}",
-                  style: Theme.of(context).textTheme.headline4),
+              child: product.descuento! > 0.0
+                  ? Text(
+                      "${CurrencyUtil.convertFormatMoney('COP', product.preciounitario! - ((product.descuento! / 100) * product.preciounitario!).toInt())}",
+                      style: Theme.of(context).textTheme.headline4)
+                  : Text(
+                      "${CurrencyUtil.convertFormatMoney('COP', product.preciounitario!)}",
+                      style: Theme.of(context).textTheme.headline4),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),

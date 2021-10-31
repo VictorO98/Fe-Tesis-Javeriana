@@ -34,5 +34,11 @@ namespace Fe.Core.General.Datos
             using FeContext context = new FeContext();
             return context.PoblacionCors.Where(p => p.Estado == COEstados.VIGENTE && p.Id == idPoblacion).FirstOrDefault();
         }
+
+        internal List<BancosPermitidosCor> GetBancos()
+        {
+            using FeContext context = new FeContext();
+            return context.BancosPermitidosCors.ToList();
+        }
     }
 }

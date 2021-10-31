@@ -1,5 +1,8 @@
 import 'package:Fe_mobile/config/ui_icons.dart';
+import 'package:Fe_mobile/src/core/models/info_usuario_model.dart';
+import 'package:Fe_mobile/src/core/pages/usuario/bloc/info_perfil/info_usuario_bloc.dart';
 import 'package:Fe_mobile/src/core/util/conf_api.dart';
+import 'package:Fe_mobile/src/core/util/preferencias_util.dart';
 import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:Fe_mobile/src/dominio/providers/contenido_provider.dart';
 import 'package:Fe_mobile/src/models/route_argument.dart';
@@ -18,6 +21,8 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
   final globalKey = new GlobalKey<ScaffoldState>();
 
   List<ProductoServicioModel>? _listaFiltro;
+  final _prefs = new PreferenciasUtil();
+  InfoUsuarioBloc? _infoUsuarioBloc;
 
   TextEditingController busqueda = TextEditingController();
   ContenidoProvider _contenidoProvider = new ContenidoProvider();
@@ -50,8 +55,9 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
   }
 
   void values() async {
+    var idUsuario = await _prefs.getPrefStr("id");
     _listaFiltro = await _contenidoProvider.busquedaProductosPorNombre(
-        context, _searchText);
+        context, _searchText, idUsuario!);
     for (var i = 0; i < _listaFiltro!.length; i++) {
       _listaFiltro![i].urlimagenproductoservicio =
           "${ConfServer.SERVER}dominio/COContenido/GetImagenProdcuto?idPublicacion=${_listaFiltro![i].id}";

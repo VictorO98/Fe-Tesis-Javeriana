@@ -47,6 +47,13 @@ class ContenidoProvider {
     return listado;
   }
 
+  Future<bool> isFavorito(String idDemografia, String idPublicacion) async {
+    String? data = await ServicioUtil.get("dominio/COContenido/FavoritoMio",
+        params: {"idUsuario": idDemografia, "idPublicacion": idPublicacion});
+    if (data == null) return false;
+    return data == 'true';
+  }
+
   Future<RespuestaDatosModel?> guardarPublicacionFavorita(
       GuardarPublicacionFavoritaModel publicacion, BuildContext context) async {
     String? data = await ServicioUtil.post(
@@ -70,6 +77,17 @@ class ContenidoProvider {
     return listado;
   }
 
+  Future<List<ProductoServicioModel>> elimiarFavorito(String idFavorito) async {
+    String? data = await ServicioUtil.get("dominio/COContenido/RemoverFavorito",
+        params: {"idFavorito": idFavorito});
+    if (data == null) return [];
+    final List<dynamic> decodedData = json.decode(data);
+    final List<ProductoServicioModel> listado =
+        List<ProductoServicioModel>.from(
+            decodedData.map((model) => ProductoServicioModel.fromJson(model)));
+    return listado;
+  }
+
   Future<List<ProductoServicioModel>> filtroTipoPublicacion(
       BuildContext context, int idTipoPublicacion) async {
     String? data = await ServicioUtil.get(
@@ -84,10 +102,13 @@ class ContenidoProvider {
   }
 
   Future<List<ProductoServicioModel>> busquedaProductosPorNombre(
-      BuildContext context, String nombrePublicacion) async {
+      BuildContext context, String nombrePublicacion, String idUsuario) async {
     String? data = await ServicioUtil.get(
         "dominio/COContenido/BuscarPublicacion",
-        params: {"nombre": nombrePublicacion.toString()});
+        params: {
+          "nombre": nombrePublicacion.toString(),
+          "idUsuario": idUsuario
+        });
     if (data == null) return [];
     final List<dynamic> decodedData = json.decode(data);
     final List<ProductoServicioModel> listado =

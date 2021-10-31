@@ -52,6 +52,11 @@
             Controlador de general
             </summary>
         </member>
+        <member name="M:FEWebApplication.Controladores.Core.COGeneralController.GetVersionServer">
+            <summary>
+            Versión servidor
+            </summary>
+        </member>
         <member name="M:FEWebApplication.Controladores.Core.COGeneralController.GuardarFaqCor(Fe.Servidor.Middleware.Modelo.Entidades.FaqCor)">
             <summary>
             Almacena la FAQ en la base de datos
@@ -209,6 +214,11 @@
             de la publicación.</returns>
             <param name="productosServicios">Publicación que se desea modificar en la base de datos.</param>
         </member>
+        <member name="M:FEWebApplication.Controladores.Dominio.Contenido.COContenidoController.ModificarPublicacionApp(Fe.Servidor.Middleware.Contratos.Dominio.Contenido.ModificarPublicacion)">
+            <summary>
+            Modifica la publicación indicada en la base de datos.
+            </summary>
+        </member>
         <member name="M:FEWebApplication.Controladores.Dominio.Contenido.COContenidoController.RemoverCategoria(System.Int32)">
             <summary>
             Busca una categoría por su ID y la borra de la base de datos.
@@ -329,12 +339,13 @@
             </summary>
             <returns>Una lista de publicaciones con sus reseñas, preguntas y respuestas, categoría y tipo de publicación.</returns>
         </member>
-        <member name="M:FEWebApplication.Controladores.Dominio.Contenido.COContenidoController.BuscarPublicacion(System.String)">
+        <member name="M:FEWebApplication.Controladores.Dominio.Contenido.COContenidoController.BuscarPublicacion(System.String,System.Int32)">
             <summary>
             Obtiene todas las publicaciones que contengan el parámetro dado en su nombre.
             </summary>
             <returns>Una lista de publicaciones con sus reseñas, preguntas y respuestas, categoría y tipo de publicación.</returns>
             <param name="nombre">El nombre de las publicaciones a filtrar.</param>
+            <param name="idUsuario"></param>
         </member>
         <member name="M:FEWebApplication.Controladores.Dominio.Contenido.COContenidoController.GetPublicacionesHabilitadasTrueque(System.Int32)">
             <summary>

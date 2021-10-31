@@ -41,6 +41,23 @@ class UsuarioProvider {
     return respuesta;
   }
 
+  Future<bool> isFotoPerfil(String? correo) async {
+    String? data = await ServicioUtil.get("api/Authenticate/IsImagen",
+        params: {"correoUsuario": correo.toString()});
+    if (data == null) return false;
+    return data == 'true';
+  }
+
+  Future<RespuestaDatosModel?> guardarFotoUsuario(
+      Map<String, dynamic> param, BuildContext context) async {
+    dynamic data = await ServicioUtil.file(
+        "api/Authenticate/SubirImagenSocial", param,
+        isMostrarAlertError: true, contextErr: context);
+    if (data == null) return null;
+    RespuestaDatosModel respuesta = RespuestaDatosModel.fromJson(data);
+    return respuesta;
+  }
+
   Future<RespuestaLoginModel?> iniciarSesion(
       LoginModel loginModel, BuildContext context) async {
     String? data = await ServicioUtil.post(

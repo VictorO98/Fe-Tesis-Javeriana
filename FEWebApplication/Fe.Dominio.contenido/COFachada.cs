@@ -340,9 +340,9 @@ namespace Fe.Dominio.contenido
             }
         }
 
-        public async Task<List<ContratoPublicacionPc>> BuscarPublicacion(string nombre)
+        public async Task<List<ContratoPublicacionPc>> BuscarPublicacion(string nombre, int idUsuario)
         {
-            return  await _cOContenidoBiz.BuscarPublicacion(nombre);
+            return  await _cOContenidoBiz.BuscarPublicacion(nombre, idUsuario);
         }
         public async Task<List<ContratoPublicacionPc>> GetPublicacionesHabilitadasTrueque(int idDemografia)
         {
@@ -368,6 +368,13 @@ namespace Fe.Dominio.contenido
         public async Task<ContratoPublicacionPc> GetProductoPorIdProducto(int idPublicacion)
         {
             return await _cOContenidoBiz.GetProductoPorIdProducto(idPublicacion);
+        }
+
+        public async Task<bool> FavoritoMio(int idPublicacion, int idUsuario)
+        {
+            DemografiaCor demografiaCor = _cOGeneralFachada.GetDemografiaPorId(idUsuario);
+            ProductosServiciosPc publicacion = await _cOContenidoBiz.GetPublicacionPorIdPublicacion(idPublicacion);
+            return await _cOContenidoBiz.FavoritoMio(demografiaCor, publicacion);
         }
     }
 }

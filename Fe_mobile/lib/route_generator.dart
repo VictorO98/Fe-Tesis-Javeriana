@@ -3,6 +3,7 @@ import 'package:Fe_mobile/src/dominio/pages/Contenido/crear_servicio_producto_pa
 import 'package:Fe_mobile/src/dominio/pages/contenido/busqueda_productos_page.dart';
 import 'package:Fe_mobile/src/dominio/pages/contenido/editar_publicacion_page.dart';
 import 'package:Fe_mobile/src/dominio/pages/contenido/publicaciones_usuario_page.dart';
+import 'package:Fe_mobile/src/dominio/pages/facturacion/lista_bancos_pse_page.dart';
 import 'package:Fe_mobile/src/dominio/pages/trueques/lista_solicitud_trueques_page.dart';
 import 'package:Fe_mobile/src/dominio/pages/trueques/listado_trueques_usuario_page.dart';
 import 'package:Fe_mobile/src/dominio/pages/trueques/ofertar_trueque_page.dart';
@@ -46,6 +47,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => BrandsWidget());
       case '/FotoPerfil':
         return MaterialPageRoute(builder: (_) => FotoUsuarioPage());
+      case '/Bancos':
+        return MaterialPageRoute(builder: (_) => ListaBancosPage());
 //      case '/MobileVerification':
 //        return MaterialPageRoute(builder: (_) => MobileVerification());
 //      case '/MobileVerification2':

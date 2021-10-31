@@ -405,6 +405,13 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
             }
         }
 
+        [Route("FavoritoMio")]
+        [HttpGet]
+        public async Task<bool> FavoritoMio(int idPublicacion, int idUsuario)
+        {
+            return await _coFachada.FavoritoMio(idPublicacion, idUsuario);
+        }
+
         // TODO: Decodificacion de JWT para validar el usuario mediante el claim del ID
         /// <summary>
         /// Almacena la publicación favorita en la BD.
@@ -540,11 +547,12 @@ namespace FEWebApplication.Controladores.Dominio.Contenido
         /// </summary>
         /// <returns>Una lista de publicaciones con sus reseñas, preguntas y respuestas, categoría y tipo de publicación.</returns>
         /// <param name="nombre">El nombre de las publicaciones a filtrar.</param>
+        /// <param name="idUsuario"></param>
         [Route("BuscarPublicacion")]
         [HttpGet]
-        public async Task<List<ContratoPublicacionPc>> BuscarPublicacion(string nombre)
+        public async Task<List<ContratoPublicacionPc>> BuscarPublicacion(string nombre, int idUsuario)
         {
-            return await _coFachada.BuscarPublicacion(nombre);
+            return await _coFachada.BuscarPublicacion(nombre, idUsuario);
         }
 
         // TODO: Decodificacion de JWT para validar el usuario mediante el claim del ID

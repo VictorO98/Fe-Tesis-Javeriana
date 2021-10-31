@@ -335,6 +335,30 @@ namespace Fe.Dominio.contenido
             return respuestaDatos;
         }
 
+        internal async Task<bool> FavoritoMio(DemografiaCor demografiaCor, ProductosServiciosPc publicacion)
+        {
+            try
+            {
+                bool respuesta = false;
+                if (demografiaCor == null)
+                    throw new COExcepcion("El usuario no existe. ");
+
+                if (publicacion == null)
+                    throw new COExcepcion("La publicación no existe. ");
+
+                var ans = _repoFavorito.FavoritoMio(demografiaCor,publicacion);
+
+                if (ans != null)
+                    respuesta = true;
+
+                return respuesta;
+            }
+             catch(COExcepcion e)
+            {
+                throw e;
+            }
+        }
+
         internal List<PreguntasRespuestasPc> GetPreguntasyRespuestasPorIdPublicacion(int idPublicacion)
         {
             return _repoPyR.GetPreguntasyRespuestasPorIdPublicacion(idPublicacion);
@@ -509,10 +533,10 @@ namespace Fe.Dominio.contenido
             return publicaciones;
         }
 
-        internal async Task<List<ContratoPublicacionPc>> BuscarPublicacion(string nombre)
+        internal async Task<List<ContratoPublicacionPc>> BuscarPublicacion(string nombre, int idUsuario)
         {
             List<ContratoPublicacionPc> publicaciones = new List<ContratoPublicacionPc>();
-            List<ProductosServiciosPc> publicacion = _repoProducto.BuscarPublicacion(nombre);
+            List<ProductosServiciosPc> publicacion = _repoProducto.BuscarPublicacion(nombre, idUsuario);
             for (int i = 0; i < publicacion.Count; i++)
             {
                 publicaciones.Add(await DesplegarPublicacion(publicacion[i].Id));
