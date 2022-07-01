@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:Fe_mobile/src/core/models/cuentas_bancarias_model.dart';
+import 'package:Fe_mobile/src/core/models/datos_bancarios_demografia_model.dart';
 import 'package:Fe_mobile/src/core/models/login_model.dart';
 import 'package:Fe_mobile/src/core/models/modificar_demografia_model.dart';
 import 'package:Fe_mobile/src/core/models/registro_model.dart';
@@ -10,6 +12,30 @@ import 'package:flutter/cupertino.dart';
 
 class UsuarioProvider {
   refreshToken(String token) {}
+
+  Future<CuentaBancariaDemografiaModel?> obtenerDatosBancariosEmprendedor(
+      BuildContext context, String idDemografia) async {
+    String? data = await ServicioUtil.get(
+        "api/Authenticate/ObtenerDatosbancarios",
+        params: {"idDemografia": idDemografia},
+        contextErr: context,
+        isMostrarAlertError: true);
+    if (data == null) return null;
+    final dynamic decodedData = json.decode(data);
+    return CuentaBancariaDemografiaModel.fromJson(decodedData);
+  }
+
+  Future<RespuestaDatosModel?> generarEnlaceDeConfirmacion(
+      BuildContext context, String email) async {
+    String? data = await ServicioUtil.get(
+        "api/Authenticate/GenerarEnlaceConfirmacion",
+        params: {"email": email},
+        contextErr: context,
+        isMostrarAlertError: true);
+    if (data == null) return null;
+    final dynamic decodedData = json.decode(data);
+    return RespuestaDatosModel.fromJson(decodedData);
+  }
 
   Future<RespuestaDatosModel?> registrarUsuario(
       RegistroModel datosRegistro, BuildContext context) async {
@@ -66,5 +92,17 @@ class UsuarioProvider {
     if (data == null) return null;
     final dynamic decodedData = json.decode(data);
     return RespuestaLoginModel.fromJson(decodedData);
+  }
+
+  Future<RespuestaDatosModel?> cargarDatosBancariosEmprendedor(
+      DatosBancariosModel? datosBancariosModel, BuildContext context) async {
+    String? data = await ServicioUtil.post(
+        "api/Authenticate/GuardarDatosBancarios",
+        json.encode(datosBancariosModel),
+        isMostratAlertError: true,
+        contextErr: context);
+    if (data == null) return null;
+    final dynamic decodedData = json.decode(data);
+    return RespuestaDatosModel.fromJson(decodedData);
   }
 }

@@ -41,23 +41,21 @@ class _CategoryIconWidgetState extends State<CategoryIconWidget>
         curve: Curves.easeInOut,
         padding: EdgeInsets.symmetric(horizontal: 15),
         decoration: BoxDecoration(
-          // color: widget.producto!.selected
-          //     ? Theme.of(context).primaryColor
-          //     : Colors.transparent,
+          color: true ? Theme.of(context).primaryColor : Colors.transparent,
           borderRadius: BorderRadius.circular(50),
         ),
         child: Row(
           children: <Widget>[
-            // Hero(
-            //   tag: widget.heroTag! + widget.producto!.id,
-            //   child: Icon(
-            //     widget.producto!.icon,
-            //     color: widget.producto!.selected
-            //         ? Theme.of(context).accentColor
-            //         : Theme.of(context).primaryColor,
-            //     size: 32,
-            //   ),
-            // ),
+            Hero(
+              tag: widget.heroTag! + widget.producto!.id.toString(),
+              child: Icon(
+                Icons.ac_unit,
+                color: true
+                    ? Theme.of(context).accentColor
+                    : Theme.of(context).primaryColor,
+                size: 32,
+              ),
+            ),
             SizedBox(width: 10),
             AnimatedSize(
               duration: Duration(milliseconds: 350),

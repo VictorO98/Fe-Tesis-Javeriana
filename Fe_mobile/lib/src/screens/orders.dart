@@ -1,3 +1,4 @@
+import 'package:Fe_mobile/src/core/util/helpers_util.dart';
 import 'package:Fe_mobile/src/models/order.dart';
 import 'package:Fe_mobile/src/screens/orders_products.dart';
 import 'package:Fe_mobile/src/widgets/DrawerWidget.dart';
@@ -49,14 +50,18 @@ class _OrdersWidgetState extends State<OrdersWidget> {
                   height: 30,
                   margin: EdgeInsets.only(top: 12.5, bottom: 12.5, right: 20),
                   child: InkWell(
-                    borderRadius: BorderRadius.circular(300),
-                    onTap: () {
-                      Navigator.of(context).pushNamed('/Tabs', arguments: 1);
-                    },
-                    child: CircleAvatar(
-                      backgroundImage: AssetImage('img/user3.jpg'),
-                    ),
-                  )),
+                      borderRadius: BorderRadius.circular(300),
+                      onTap: () {
+                        Navigator.of(context).pushNamed('/Tabs', arguments: 1);
+                      },
+                      child: Helpers.IS_FOTO_PERFIL
+                          ? CircleAvatar(
+                              // backgroundImage: AssetImage(_user.avatar!),
+                              backgroundImage: NetworkImage(
+                                  (Helpers.FOTO_USUARIO).toString()))
+                          : CircleAvatar(
+                              backgroundImage: AssetImage('img/user3.jpg'),
+                            ))),
             ],
             bottom: TabBar(
                 indicatorPadding: EdgeInsets.all(10),

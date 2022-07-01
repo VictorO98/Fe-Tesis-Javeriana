@@ -16,6 +16,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Fe.Core.Seguridad.Negocio
@@ -25,17 +26,19 @@ namespace Fe.Core.Seguridad.Negocio
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RepoDemografia _repoDemografia;
         private readonly RepoDocumento _repoDocumento;
+        private readonly RepoDatosBancarios _repoDatosBancarios;
         private readonly RepoRoles _repoRoles;
         private readonly RepoDocumentosEmprendedor _repoDocumentosEmprendedor;
         private readonly RepoPoblacion _repoPoblacion;
         private readonly IConfiguration _configuration;
 
-        public COSeguridadBiz(UserManager<IdentityUser> userManager, RepoDemografia repoDemografia, RepoDocumento repoDocumento,
+        public COSeguridadBiz(UserManager<IdentityUser> userManager, RepoDemografia repoDemografia, RepoDocumento repoDocumento, RepoDatosBancarios repoDatosBancarios,
                             RepoRoles repoRoles, IConfiguration configuration, RepoPoblacion repoPoblacion, RepoDocumentosEmprendedor repoDocumentosEmprendedor) 
         {
             _userManager = userManager;
             _repoDemografia = repoDemografia;
             _repoDocumento = repoDocumento;
+            _repoDatosBancarios = repoDatosBancarios;
             _configuration = configuration;
             _repoRoles = repoRoles;
             _repoPoblacion = repoPoblacion;
@@ -111,6 +114,33 @@ namespace Fe.Core.Seguridad.Negocio
                 }
             }
             else { throw new COExcepcion("El usuario ingresado no existe."); }
+        }
+
+        internal CuentaBancariaEmprendedor ObtenerDatosbancarios(DemografiaCor demografiaCor)
+        {
+            if (demografiaCor == null)
+                throw new COExcepcion("El usuario no existe. ");
+
+            return _repoDatosBancarios.ObtenerDatosbancarios(demografiaCor.Id);
+        }
+
+        public async Task<RespuestaDatos> ConfirmAccount(ConfirmarCuentaDatos confirmarCuentaDatos)
+        {
+            if (confirmarCuentaDatos.Email == null || confirmarCuentaDatos.Code == null)
+                throw new COExcepcion("No se confirmo la cuenta.");
+
+            var userExists = await _userManager.FindByEmailAsync(confirmarCuentaDatos.Email);
+            if (userExists == null)
+                throw new COExcepcion("Este correo electrónico no se enceuntra registrado. ");
+
+            string decodedTokenString = confirmarCuentaDatos.Code;
+            var result = await _userManager.ConfirmEmailAsync(userExists, decodedTokenString);
+            if (result.Succeeded)
+                return new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "Usuario confirmado correctamente." };
+
+            StringBuilder sb = new StringBuilder();
+            result.Errors.ToList().ForEach(err => sb.Append($@" - {err.Description}"));
+            throw new COExcepcion(sb.ToString());
         }
 
         internal async Task<bool> IsImagen(DemografiaCor demografiaCor)
@@ -227,6 +257,31 @@ namespace Fe.Core.Seguridad.Negocio
             else { throw new COExcepcion("El usuario ingresado no existe."); }
         }
 
+        public async Task<RespuestaDatos> GuardarDatosBancarios(DatosBancariosDemografia model, DemografiaCor demografiaCor)
+        {
+            try
+            {
+                if (demografiaCor.Rolcorid == CORol.EMPRENDEDOR)
+                {
+                    var datosBancarios = new CuentasBancariasDemografiaCor
+                    {
+                        IdDemografia = demografiaCor.Id,
+                        Numero = Convert.ToInt64(model.NumeroCuentaBancaria),
+                        Tipocuenta = model.TipoDeCuenta,
+                        Identidadbancaria = model.EntidadBancaria,
+                        Creacion = DateTime.Now,
+                        Modificacion = DateTime.Now
+                    };
+                    return await _repoDatosBancarios.GuardarDatosBancariosDemografia(datosBancarios);
+                }
+                return null;
+            }
+            catch(COExcepcion e)
+            {
+                throw e;
+            }
+        }
+
         public async Task<RespuestaLogin> RefreshToken(string token)
         {
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
@@ -322,12 +377,12 @@ namespace Fe.Core.Seguridad.Negocio
             if (await _userManager.CheckPasswordAsync(user, model.Password))
             {
                 // TODO : Queda pendiente resolver la confirmación del usuario para desbloquear esta validación
-                /*if (!user.EmailConfirmed)
-                     return new RespuestaLogin
-                     {
-                         Codigo = 11,
-                         Mensaje = "Por favor confirme la cuenta. El email fue enviado a su correo electrónico. ¿Desea reenviar el mensaje de confirmación?"
-                     };*/
+               /* if (!user.EmailConfirmed)
+                    return new RespuestaLogin
+                    {
+                        Codigo = 11,
+                        Mensaje = "Por favor confirme la cuenta. El email fue enviado a su correo electrónico. ¿Desea reenviar el mensaje de confirmación?"
+                    };*/
                 var token = await GenerarTokenAcceso(user);
 
                 return new RespuestaLogin
@@ -370,6 +425,39 @@ namespace Fe.Core.Seguridad.Negocio
                     UserName = model.Email,
                     PhoneNumber = model.NumeroTelefonico.ToString()
                 };
+
+                StringBuilder sbPassword = new StringBuilder();
+
+                var hasNumber = new Regex(@"[0-9]+");
+                var hasUpperChar = new Regex(@"[A-Z]+");
+                var hasLowerChar = new Regex(@"[a-z]+");
+                var hasSymbols = new Regex(@"[!@#$%^&*()_+=\[{\]};:<>|./?,-]");
+
+                if (!hasLowerChar.IsMatch(model.Password))
+                {
+                    sbPassword.Append($@" - La contraseña debe contener al menos una letra minúscula");
+                    throw new COExcepcion(sbPassword.ToString());
+                }
+                else if (!hasUpperChar.IsMatch(model.Password))
+                {
+                    sbPassword.Append($@" - La contraseña debe contener al menos una letra mayúscula");
+                    throw new COExcepcion(sbPassword.ToString());
+                }
+                else if (!hasNumber.IsMatch(model.Password))
+                {
+                    sbPassword.Append($@" - La contraseña debe contener al menos un valor numérico");
+                    throw new COExcepcion(sbPassword.ToString());
+                }
+
+                else if (!hasSymbols.IsMatch(model.Password))
+                {
+                    sbPassword.Append($@" - La contraseña debe contener al menos un carácter de caso especial");
+                    throw new COExcepcion(sbPassword.ToString());
+                }
+                else
+                {
+              
+                }
 
                 var result = await _userManager.CreateAsync(user, model.Password);
 

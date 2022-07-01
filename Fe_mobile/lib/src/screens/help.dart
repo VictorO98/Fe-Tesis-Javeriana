@@ -70,7 +70,7 @@ class _HelpWidgetState extends State<HelpWidget> {
                       color: Theme.of(context).hintColor,
                     ),
                     title: Text(
-                      'Prefuntas frecuentes',
+                      'Preguntas frecuentes',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.headline4,

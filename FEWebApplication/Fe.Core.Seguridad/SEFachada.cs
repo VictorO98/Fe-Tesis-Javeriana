@@ -54,5 +54,17 @@ namespace Fe.Core.Seguridad
             DemografiaCor demografiaCor = _cOGeneralFachada.GetDemografiaPorEmail(correoUsuario);
             return await _cOSeguridadBiz.IsImagen(demografiaCor);
         }
+
+        public async Task<RespuestaDatos> GuardarDatosBancarios(DatosBancariosDemografia model)
+        {
+            DemografiaCor demografiaCor = _cOGeneralFachada.GetDemografiaPorEmail(model.Email);
+            return await _cOSeguridadBiz.GuardarDatosBancarios(model, demografiaCor);
+        }
+
+        public CuentaBancariaEmprendedor ObtenerDatosbancarios(int idDemografia)
+        {
+            DemografiaCor demografiaCor = _cOGeneralFachada.GetDemografiaPorId(idDemografia);
+            return _cOSeguridadBiz.ObtenerDatosbancarios(demografiaCor);
+        }
     }
 }

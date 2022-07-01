@@ -1,6 +1,8 @@
 import 'package:Fe_mobile/config/ui_icons.dart';
 import 'package:Fe_mobile/src/core/models/info_usuario_model.dart';
 import 'package:Fe_mobile/src/core/pages/usuario/bloc/info_perfil/info_usuario_bloc.dart';
+import 'package:Fe_mobile/src/core/util/conf_api.dart';
+import 'package:Fe_mobile/src/core/util/helpers_util.dart';
 import 'package:Fe_mobile/src/core/util/preferencias_util.dart';
 import 'package:Fe_mobile/src/models/user.dart';
 import 'package:flutter/material.dart';
@@ -73,10 +75,15 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 _infoUsuarioBloc!.state.infoUsuarioModel!.email!,
                 style: Theme.of(context).textTheme.caption,
               ),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor: Theme.of(context).accentColor,
-                backgroundImage: AssetImage(_user.avatar!),
-              ),
+              currentAccountPicture: Helpers.IS_FOTO_PERFIL
+                  ? CircleAvatar(
+                      backgroundColor: Theme.of(context).accentColor,
+                      backgroundImage:
+                          NetworkImage((Helpers.FOTO_USUARIO).toString()))
+                  : CircleAvatar(
+                      backgroundColor: Theme.of(context).accentColor,
+                      backgroundImage: AssetImage(_user.avatar!),
+                    ),
             ),
           ),
           ListTile(
@@ -238,7 +245,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
           ListTile(
             dense: true,
             title: Text(
-              "Version 0.0.1",
+              "Version " + ConfServer.VERSION_SERVER,
               style: Theme.of(context).textTheme.bodyText2,
             ),
             trailing: Icon(

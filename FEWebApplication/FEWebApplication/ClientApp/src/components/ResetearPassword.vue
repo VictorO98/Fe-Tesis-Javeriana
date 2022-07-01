@@ -41,7 +41,7 @@ import "vue-loading-overlay/dist/vue-loading.css";
 import * as Services from "../util/services";
 
 export default {
-  name: "ResetearPassword",  
+  name: "ResetearPassword",
 
   components: {
     TextInput,
@@ -56,26 +56,27 @@ export default {
 
     function onSubmit(values) {
       form = Object.assign(values, {
-        token: route.params.token.join("/"), 
+        token: route.params.token.join("/"),
         email: obj.email,
       });
 
       isLoading.value = true;
-      
-      Services.post("/api/Authenticate/RecuperarPassword", form).then(data=>{
-        console.log("B3", data);
-        if(data?.data.codigo==10)
-          alert(data.data.mensaje);
-        
-      }).catch(err=>{
-        if(err.response.data?.codigo==20){
-          alert("ERROR: " +err.response.data.mensaje);
-        }else{
-          alert("OCURRIÓ UN ERROR")
-        }
-      }).finally(()=>{
-         isLoading.value = false;
-      });
+
+      Services.post("/api/Authenticate/RecuperarPassword", form)
+        .then((data) => {
+          console.log("B3", data);
+          if (data?.data.codigo == 10) alert(data.data.mensaje);
+        })
+        .catch((err) => {
+          if (err.response.data?.codigo == 20) {
+            alert("ERROR: " + err.response.data.mensaje);
+          } else {
+            alert("OCURRIÓ UN ERROR");
+          }
+        })
+        .finally(() => {
+          isLoading.value = false;
+        });
     }
 
     // Using yup to generate a validation schema
@@ -92,7 +93,7 @@ export default {
       onSubmit,
       schema,
       obj,
-      isLoading
+      isLoading,
     };
   },
 };

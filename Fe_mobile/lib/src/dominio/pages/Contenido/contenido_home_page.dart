@@ -1,6 +1,7 @@
 import 'package:Fe_mobile/config/ui_icons.dart';
 import 'package:Fe_mobile/src/core/models/info_usuario_model.dart';
 import 'package:Fe_mobile/src/core/pages/usuario/bloc/info_perfil/info_usuario_bloc.dart';
+import 'package:Fe_mobile/src/core/providers/usuario_provider.dart';
 import 'package:Fe_mobile/src/core/util/conf_api.dart';
 import 'package:Fe_mobile/src/core/util/helpers_util.dart';
 import 'package:Fe_mobile/src/core/util/preferencias_util.dart';
@@ -37,6 +38,7 @@ class _ContenidoHomePageState extends State<ContenidoHomePage>
   final _prefs = new PreferenciasUtil();
 
   ContenidoProvider _contenidoProvider = new ContenidoProvider();
+  UsuarioProvider _usuarioProvider = new UsuarioProvider();
 
   InfoUsuarioBloc? _infoUsuarioBloc;
 
@@ -48,6 +50,9 @@ class _ContenidoHomePageState extends State<ContenidoHomePage>
   bool _cargarProductosDescuento = false;
   bool _cargarProductos = false;
   bool _cargarServicios = false;
+
+  // List<Product>? _productsOfCategoryList;
+  // List<ProductoServicioModel>? _productsOfBrandList;
 
   @override
   void initState() {
@@ -69,14 +74,14 @@ class _ContenidoHomePageState extends State<ContenidoHomePage>
     // _productsOfBrandList = _brandsList.list!.firstWhere((brand) {
     //   return brand.selected!;
     // }).products;
-    //
 
     super.initState();
     _infoUsuarioBloc = BlocProvider.of<InfoUsuarioBloc>(context);
     _initialConfiguration();
     _getProductosEnDescuento();
-    // _getProductos();
-    // _getServicios();
+    _getProductos();
+    _getServicios();
+    //_cargarImagenUsuario();
   }
 
   _initialConfiguration() async {
@@ -129,28 +134,49 @@ class _ContenidoHomePageState extends State<ContenidoHomePage>
 
   _getProductos() async {
     _productos = await _contenidoProvider.filtroTipoPublicacion(
-        context, PublicacionUtil.PRODUCTO);
+        context,
+        PublicacionUtil.PRODUCTO,
+        _infoUsuarioBloc!.state.infoUsuarioModel!.id!);
     if (_productos != null) {
       for (var i = 0; i < _productos!.length; i++) {
         _productos![i].urlimagenproductoservicio =
             "${ConfServer.SERVER}dominio/COContenido/GetImagenProdcuto?idPublicacion=${_productos![i].id}";
       }
+    }
+    if (mounted)
       setState(() {
         _cargarProductos = true;
       });
-    }
   }
 
   _getServicios() async {
     _servicios = await _contenidoProvider.filtroTipoPublicacion(
-        context, PublicacionUtil.SERVICIO);
+        context,
+        PublicacionUtil.SERVICIO,
+        _infoUsuarioBloc!.state.infoUsuarioModel!.id!);
     if (_servicios != null) {
       for (var i = 0; i < _servicios!.length; i++) {
         _servicios![i].urlimagenproductoservicio =
             "${ConfServer.SERVER}dominio/COContenido/GetImagenProdcuto?idPublicacion=${_servicios![i].id}";
       }
+    }
+    if (mounted)
       setState(() {
         _cargarServicios = true;
+      });
+  }
+
+  _cargarImagenUsuario() async {
+    if (!Helpers.IS_FOTO_PERFIL) {
+      var ans = await _usuarioProvider
+          .isFotoPerfil(_infoUsuarioBloc!.state.infoUsuarioModel!.email);
+
+      setState(() {
+        Helpers.IS_FOTO_PERFIL = ans;
+        if (ans) {
+          Helpers.FOTO_USUARIO = Helpers.FOTO_USUARIO +
+              _infoUsuarioBloc!.state.infoUsuarioModel!.email!;
+        }
       });
     }
   }
@@ -178,74 +204,83 @@ class _ContenidoHomePageState extends State<ContenidoHomePage>
                 : Center(child: CircularProgressIndicator())
             : SizedBox(),
         // Heading (Recommended for you)
-        // Padding(
-        //   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-        //   child: ListTile(
-        //     dense: true,
-        //     contentPadding: EdgeInsets.symmetric(vertical: 0),
-        //     leading: Icon(
-        //       Icons.star_border_outlined,
-        //       color: Theme.of(context).hintColor,
-        //     ),
-        //     title: Text(
-        //       'Productos',
-        //       style: Theme.of(context).textTheme.headline4,
-        //     ),
-        //   ),
-        // ),
-        // StickyHeader(
-        //   header: CategoriesIconsCarouselWidget(
-        //       heroTag: 'home_categories_1',
-        //       publicacion: _productos,
-        //       onChanged: (id) {
-        //         // setState(() {
-        //         //   animationController.reverse().then((f) {
-        //         //     _productsOfCategoryList =
-        //         //         _categoriesList.list!.firstWhere((category) {
-        //         //       return category.id == id;
-        //         //     }).products;
-        //         //     animationController.forward();
-        //         //   });
-        //         // });
-        //       }),
-        //   content: CategorizedProductsWidget(
-        //       animationOpacity: animationOpacity, productsList: _productos),
-        // ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+          child: ListTile(
+            dense: true,
+            contentPadding: EdgeInsets.symmetric(vertical: 0),
+            leading: Icon(
+              Icons.star_border_outlined,
+              color: Theme.of(context).hintColor,
+            ),
+            title: Text(
+              'Productos',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+          ),
+        ),
+        _productos != null
+            ? _cargarProductos
+                ? StickyHeader(
+                    header: CategoriesIconsCarouselWidget(
+                        heroTag: 'home_categories_1',
+                        publicacion: _productos,
+                        onChanged: (id) {
+                          // setState(() {
+                          //   animationController.reverse().then((f) {
+                          //     _productsOfCategoryList =
+                          //         _categoriesList.list!.firstWhere((category) {
+                          //       return category.id == id;
+                          //     }).products;
+                          //     animationController.forward();
+                          //   });
+                          // });
+                        }),
+                    content: CategorizedProductsWidget(
+                        animationOpacity: animationOpacity,
+                        productsList: _productos),
+                  )
+                : Center(child: CircularProgressIndicator())
+            : SizedBox(),
         // Heading (Brands)
-        // Padding(
-        //   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-        //   child: ListTile(
-        //     dense: true,
-        //     contentPadding: EdgeInsets.symmetric(vertical: 0),
-        //     leading: Icon(
-        //       UiIcons.flag,
-        //       color: Theme.of(context).hintColor,
-        //     ),
-        //     title: Text(
-        //       'Servicios',
-        //       style: Theme.of(context).textTheme.headline4,
-        //     ),
-        //   ),
-        // ),
-        // // StickyHeader(
-        // //   header: BrandsIconsCarouselWidget(
-        // //       heroTag: 'home_brand_1',
-        // //       brandsList: _brandsList,
-        // //       onChanged: (id) {
-        // //         setState(() {
-        // //           animationController.reverse().then((f) {
-        // //             _productsOfBrandList =
-        // //                 _brandsList.list!.firstWhere((brand) {
-        // //               return brand.id == id;
-        // //             }).products;
-        // //             animationController.forward();
-        // //           });
-        // //         });
-        // //       }),
-        // //   content: CategorizedProductsWidget(
-        // //       animationOpacity: animationOpacity,
-        // //       productsList: _productsOfBrandList),
-        // // ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+          child: ListTile(
+            dense: true,
+            contentPadding: EdgeInsets.symmetric(vertical: 0),
+            leading: Icon(
+              Icons.flag_outlined,
+              color: Theme.of(context).hintColor,
+            ),
+            title: Text(
+              'Servicios',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+          ),
+        ),
+        _servicios != null
+            ? _cargarServicios
+                ? StickyHeader(
+                    header: BrandsIconsCarouselWidget(
+                        heroTag: 'home_brand_1',
+                        publicacion: _servicios,
+                        onChanged: (id) {
+                          // setState(() {
+                          //   animationController.reverse().then((f) {
+                          //     _productsOfBrandList =
+                          //         _brandsList.list!.firstWhere((brand) {
+                          //       return brand.id == id;
+                          //     }).products;
+                          //     animationController.forward();
+                          //   });
+                          // });
+                        }),
+                    content: CategorizedProductsWidget(
+                        animationOpacity: animationOpacity,
+                        productsList: _servicios),
+                  )
+                : Center(child: CircularProgressIndicator())
+            : SizedBox(),
       ],
     );
 //      ],

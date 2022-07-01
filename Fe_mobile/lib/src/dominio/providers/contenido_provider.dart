@@ -89,10 +89,13 @@ class ContenidoProvider {
   }
 
   Future<List<ProductoServicioModel>> filtroTipoPublicacion(
-      BuildContext context, int idTipoPublicacion) async {
+      BuildContext context, int idTipoPublicacion, String idUsuario) async {
     String? data = await ServicioUtil.get(
         "dominio/COContenido/FiltrarPublicacion",
-        params: {"idTipoPublicacion": idTipoPublicacion.toString()});
+        params: {
+          "idTipoPublicacion": idTipoPublicacion.toString(),
+          "idUsuario": idUsuario
+        });
     if (data == null) return [];
     final List<dynamic> decodedData = json.decode(data);
     final List<ProductoServicioModel> listado =

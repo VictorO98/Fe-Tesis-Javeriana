@@ -107,7 +107,7 @@ class _SolicitudTruequeDetalleWidgetState
                   detalle: widget.infoTrueques!
                       .elementAt(index)
                       .prodSerTruequeTrues!
-                      .elementAt(index),
+                      .elementAt(0),
                   onDismissed: () {
                     setState(() {
                       widget.infoTrueques!.removeAt(index);

@@ -1,6 +1,7 @@
 import 'package:Fe_mobile/src/core/util/alert_util.dart';
 import 'package:Fe_mobile/src/core/util/comisiones_util.dart';
 import 'package:Fe_mobile/src/core/util/currency_util.dart';
+import 'package:Fe_mobile/src/core/util/helpers_util.dart';
 import 'package:Fe_mobile/src/dominio/models/carrito_compras_model.dart';
 import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:Fe_mobile/src/dominio/widgets/vacio_carrito_widget.dart';
@@ -47,6 +48,7 @@ class _CartWidgetState extends State<CartWidget> {
       }
     }
 
+    // TODO PENDIENTE PARAMETRIZAR ESTOS DATOS INCLUEYNDO LO DEL BACKEND
     var comision = total * ComisionesUtil.COMISION_BUYA;
     setState(() {
       _totalCancelar = total;
@@ -81,14 +83,18 @@ class _CartWidgetState extends State<CartWidget> {
               height: 30,
               margin: EdgeInsets.only(top: 12.5, bottom: 12.5, right: 20),
               child: InkWell(
-                borderRadius: BorderRadius.circular(300),
-                onTap: () {
-                  Navigator.of(context).pushNamed('/Tabs', arguments: 1);
-                },
-                child: CircleAvatar(
-                  backgroundImage: AssetImage('img/user3.jpg'),
-                ),
-              )),
+                  borderRadius: BorderRadius.circular(300),
+                  onTap: () {
+                    Navigator.of(context).pushNamed('/Tabs', arguments: 1);
+                  },
+                  child: Helpers.IS_FOTO_PERFIL
+                      ? CircleAvatar(
+                          // backgroundImage: AssetImage(_user.avatar!),
+                          backgroundImage:
+                              NetworkImage((Helpers.FOTO_USUARIO).toString()))
+                      : CircleAvatar(
+                          backgroundImage: AssetImage('img/user3.jpg'),
+                        ))),
         ],
       ),
       body: _checkout > ComisionesUtil.IMPUESTO_EPAYCO
@@ -187,7 +193,7 @@ class _CartWidgetState extends State<CartWidget> {
                             children: <Widget>[
                               Expanded(
                                 child: Text(
-                                  'Comisión (2%)',
+                                  'Comisión (1%)',
                                   style: Theme.of(context).textTheme.bodyText1,
                                 ),
                               ),

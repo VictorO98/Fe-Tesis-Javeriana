@@ -255,7 +255,7 @@ class _FotoUsuarioPageState extends State<FotoUsuarioPage> {
                   width: MediaQuery.of(context).size.width,
                   child: ElevatedButton.icon(
                       icon: Icon(Icons.image, color: Colors.white),
-                      label: Text("SUBIR FOTO",
+                      label: Text("ACEPTAR",
                           style: TextStyle(color: Colors.white)),
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(

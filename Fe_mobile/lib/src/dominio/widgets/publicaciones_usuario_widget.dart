@@ -1,6 +1,7 @@
 import 'package:Fe_mobile/config/ui_icons.dart';
 import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:Fe_mobile/src/dominio/widgets/productos_usuario_widget.dart';
+import 'package:Fe_mobile/src/dominio/widgets/vacio_sin_publicaciones_widget.dart';
 import 'package:Fe_mobile/src/models/order.dart';
 import 'package:Fe_mobile/src/widgets/EmptyOrdersProductsWidget.dart';
 import 'package:Fe_mobile/src/widgets/OrderGridItemWidget.dart';
@@ -135,7 +136,7 @@ class _PublicacionesUsuarioWidgetState
           ),
           Offstage(
             offstage: widget.publicaciones!.isNotEmpty,
-            child: EmptyOrdersProductsWidget(),
+            child: VacioSinPublicacionessWidget(),
           )
         ],
       ),

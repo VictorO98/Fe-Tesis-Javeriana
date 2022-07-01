@@ -1,12 +1,14 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:Fe_mobile/src/core/models/datos_bancarios_demografia_model.dart';
 import 'package:Fe_mobile/src/core/models/departamentos_model.dart';
 import 'package:Fe_mobile/src/core/models/municipios_model.dart';
 import 'package:Fe_mobile/src/core/models/registro_model.dart';
 import 'package:Fe_mobile/src/core/models/respuesta_datos_model.dart';
 import 'package:Fe_mobile/src/core/contract/validar_registro_contract.dart';
 import 'package:Fe_mobile/src/core/models/rol_model.dart';
+import 'package:Fe_mobile/src/dominio/models/bancos_pse_model.dart';
 import 'package:path/path.dart' as path;
 import 'package:Fe_mobile/src/core/models/step_manejador_model.dart';
 import 'package:Fe_mobile/src/core/models/tipo_documento_model.dart';
@@ -32,6 +34,7 @@ class RegistroPage extends StatefulWidget {
 }
 
 class _RegistroPageState extends State<RegistroPage> {
+  DatosBancariosModel _datosBancariosModel = new DatosBancariosModel();
   RegistroModel registroModel = new RegistroModel();
   UsuarioProvider _usuarioProvider = new UsuarioProvider();
   GeneralProvider _generalProvider = new GeneralProvider();
@@ -56,9 +59,12 @@ class _RegistroPageState extends State<RegistroPage> {
   List<DepartamentoModel> listDepartamento = [];
   List<MunicipiosModel> listMunicipios = [];
   List<RolModel> listadoRol = [];
+  List<BancosPseModel> listadoBancos = [];
 
   List<File> listadoFotoCedula = [];
   List<File> listadoDocumentoCamaraComercio = [];
+
+  List<String> _tipoDeCuentaBancaria = ["Ahorros", "Corriente"];
 
   final _formKey = GlobalKey<FormState>();
   final _formDatosPersonales = GlobalKey<FormState>();
@@ -74,6 +80,7 @@ class _RegistroPageState extends State<RegistroPage> {
   late String labelRegresar;
 
   String? razonSocial;
+  String? _tipoCuenta;
 
   ButtonStyle? _styleButtonSiguiente;
 
@@ -83,6 +90,7 @@ class _RegistroPageState extends State<RegistroPage> {
   bool isShowImageCC = false;
   late bool isLoadingRegistro;
 
+  BancosPseModel? _bancoSeleccionado;
   MunicipiosModel? _municipioSeleccionado;
   DepartamentoModel? _departamentoSeleccionado;
 
@@ -121,6 +129,14 @@ class _RegistroPageState extends State<RegistroPage> {
     _getDocumentos();
     _getDepartamentos();
     _getRoles();
+    _getBancos();
+  }
+
+  _getBancos() async {
+    List<BancosPseModel> listado = await _generalProvider.getBancos();
+    setState(() {
+      listadoBancos = listado;
+    });
   }
 
   _getRoles() async {
@@ -692,7 +708,7 @@ class _RegistroPageState extends State<RegistroPage> {
               TextFormField(
                   onSaved: (String? value) {
                     setState(() {
-                      registroModel.email = value;
+                      registroModel.email = value!.trim();
                     });
                   },
                   keyboardType: TextInputType.emailAddress,
@@ -897,12 +913,95 @@ class _RegistroPageState extends State<RegistroPage> {
                             razonSocial = value;
                           });
                         },
-                        validator: (dynamic value) =>
-                            value == null ? 'Ingresa una razón social' : null,
+                        validator: (dynamic value) => value == null
+                            ? 'Ingrese el nombre de su emprendimiento'
+                            : null,
                         decoration: EstiloUtil.crearInputDecorationFormCustom(
-                            'Nombre razón social',
+                            'Nombre de Emprendimiento',
                             icon: Icon(
                               Icons.home,
+                              color: EstiloUtil.COLOR_PRIMARY,
+                            )),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      DropdownSearch<BancosPseModel>(
+                          mode: Mode.MENU,
+                          showSearchBox: true,
+                          showClearButton: true,
+                          selectedItem: _isModifica ? _bancoSeleccionado : null,
+                          dropdownSearchDecoration:
+                              EstiloUtil.crearInputDecorationFormCustom(''),
+                          searchBoxDecoration:
+                              EstiloUtil.crearInputDecorationFormCustom(''),
+                          items: listadoBancos,
+                          itemAsString: (BancosPseModel e) => e.nombre!,
+                          onBeforeChange: (prevItem, nextItem) async {
+                            _bancoSeleccionado = nextItem;
+                            return true;
+                          },
+                          label: "Selecciona tu banco \*",
+                          hint: "Seleccione un banco",
+                          validator: (value) =>
+                              value == null ? 'Seleccione un banco' : null,
+                          onChanged: (c) => setState(() {
+                                _datosBancariosModel.entidadBancaria = c?.id;
+                              })),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      DropdownButtonFormField<String>(
+                        decoration:
+                            EstiloUtil.crearInputDecorationFormCustom('',
+                                icon: Icon(
+                                  Icons.account_balance_rounded,
+                                  color: EstiloUtil.COLOR_PRIMARY,
+                                )),
+                        value: _tipoCuenta,
+                        items: _tipoDeCuentaBancaria.map((String val) {
+                          return DropdownMenuItem<String>(
+                            value: val,
+                            child: new Text(
+                              val,
+                            ),
+                          );
+                        }).toList(),
+                        validator: (value) => value == null
+                            ? 'Seleccione un tipo de cuenta'
+                            : null,
+                        onChanged: (c) => setState(() {
+                          _tipoCuenta = c!;
+                          _tipoCuenta == "Ahorros"
+                              ? _datosBancariosModel.tipoDeCuenta = "AHO"
+                              : _datosBancariosModel.tipoDeCuenta = "COR";
+                        }),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        onSaved: (String? value) {
+                          setState(() {
+                            _datosBancariosModel.numeroCuentaBancaria = value!;
+                          });
+                        },
+                        onChanged: (String? value) {
+                          setState(() {
+                            _datosBancariosModel.numeroCuentaBancaria = value!;
+                          });
+                        },
+                        validator: (dynamic value) {
+                          if (value!.isEmpty || value.trim().isEmpty)
+                            return 'Registre su número de teléfono';
+
+                          if (int.tryParse(value) == null)
+                            return 'Solo se aceptan números.';
+                        },
+                        decoration: EstiloUtil.crearInputDecorationFormCustom(
+                            'Número de cuenta',
+                            icon: Icon(
+                              Icons.local_atm_sharp,
                               color: EstiloUtil.COLOR_PRIMARY,
                             )),
                       ),
@@ -952,7 +1051,7 @@ class _RegistroPageState extends State<RegistroPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    "La contraseña debe contener mínimo 8 caracteres.",
+                    "Su contraseña debe tener al menos 8 caracteres con un número, un carácter especial y un alfabeto.",
                     style: TextStyle(fontSize: 17),
                   ),
                   SizedBox(
@@ -974,9 +1073,9 @@ class _RegistroPageState extends State<RegistroPage> {
                                 () => _isShowPassword = !_isShowPassword))),
                     validator: (value) {
                       if (value!.isEmpty || (value.trim().isEmpty)) {
-                        if (value.length < 8) {
+                        if (value.length < 8)
                           return "La contraseña es muy corta";
-                        }
+
                         return 'Registre la contraseña';
                       }
                       return null;
@@ -1186,6 +1285,10 @@ class _RegistroPageState extends State<RegistroPage> {
       registroModel.idTipoDocumento =
           int.parse(registroModel.idTipoDocumentoStr ?? '0');
       registroModel.isAceptaTerminosYCondiciones = true;
+      if (_datosBancariosModel.entidadBancaria == null) {
+        _datosBancariosModel.entidadBancaria = 0;
+      }
+
       setState(() {
         isLoadingRegistro = true;
       });
@@ -1216,6 +1319,11 @@ class _RegistroPageState extends State<RegistroPage> {
               "files": _documentosEmprendedor
             };
             await _usuarioProvider.subirDocumentosEmprendedor(data, context);
+
+            _datosBancariosModel.email = registroModel.email;
+
+            await _usuarioProvider.cargarDatosBancariosEmprendedor(
+                _datosBancariosModel, context);
           }
           final funcionNavegar = () {
             WidgetsBinding.instance!.addPostFrameCallback((_) {

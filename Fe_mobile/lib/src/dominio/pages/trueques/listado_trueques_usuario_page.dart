@@ -1,6 +1,7 @@
 import 'package:Fe_mobile/src/core/models/info_usuario_model.dart';
 import 'package:Fe_mobile/src/core/pages/usuario/bloc/info_perfil/info_usuario_bloc.dart';
 import 'package:Fe_mobile/src/core/util/estados_trueque_util.dart';
+import 'package:Fe_mobile/src/core/util/helpers_util.dart';
 import 'package:Fe_mobile/src/core/util/preferencias_util.dart';
 import 'package:Fe_mobile/src/dominio/models/info_trueques_model.dart';
 import 'package:Fe_mobile/src/dominio/widgets/trueque_detalle_widget.dart';
@@ -103,14 +104,18 @@ class _ListadoTruequesUsuarioWidgetState
                   height: 30,
                   margin: EdgeInsets.only(top: 12.5, bottom: 12.5, right: 20),
                   child: InkWell(
-                    borderRadius: BorderRadius.circular(300),
-                    onTap: () {
-                      Navigator.of(context).pushNamed('/Tabs', arguments: 1);
-                    },
-                    child: CircleAvatar(
-                      backgroundImage: AssetImage('img/user3.jpg'),
-                    ),
-                  )),
+                      borderRadius: BorderRadius.circular(300),
+                      onTap: () {
+                        Navigator.of(context).pushNamed('/Tabs', arguments: 1);
+                      },
+                      child: Helpers.IS_FOTO_PERFIL
+                          ? CircleAvatar(
+                              // backgroundImage: AssetImage(_user.avatar!),
+                              backgroundImage: NetworkImage(
+                                  (Helpers.FOTO_USUARIO).toString()))
+                          : CircleAvatar(
+                              backgroundImage: AssetImage('img/user3.jpg'),
+                            ))),
             ],
             bottom: TabBar(
                 indicatorPadding: EdgeInsets.all(10),

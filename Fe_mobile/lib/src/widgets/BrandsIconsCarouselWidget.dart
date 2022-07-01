@@ -1,15 +1,16 @@
 import 'package:Fe_mobile/config/ui_icons.dart';
+import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:Fe_mobile/src/models/brand.dart';
 import 'package:Fe_mobile/src/widgets/BrandIconWidget.dart';
 import 'package:flutter/material.dart';
 
 class BrandsIconsCarouselWidget extends StatefulWidget {
-  BrandsList? brandsList;
+  List<ProductoServicioModel>? publicacion;
   String? heroTag;
   ValueChanged<String>? onChanged;
 
   BrandsIconsCarouselWidget(
-      {Key? key, this.brandsList, this.heroTag, this.onChanged})
+      {Key? key, this.publicacion, this.heroTag, this.onChanged})
       : super(key: key);
 
   @override
@@ -37,19 +38,19 @@ class _BrandsIconsCarouselWidgetState extends State<BrandsIconsCarouselWidget> {
                 ),
                 child: ListView.builder(
                   shrinkWrap: true,
-                  itemCount: widget.brandsList!.list!.length,
+                  itemCount: widget.publicacion!.length,
                   itemBuilder: (context, index) {
                     double _marginLeft = 0;
                     (index == 0) ? _marginLeft = 12 : _marginLeft = 0;
                     return BrandIconWidget(
                         heroTag: widget.heroTag,
                         marginLeft: _marginLeft,
-                        brand: widget.brandsList!.list!.elementAt(index),
+                        publicacion: widget.publicacion!.elementAt(index),
                         onPressed: (String id) {
-                          setState(() {
-                            widget.brandsList!.selectById(id);
-                            widget.onChanged!(id);
-                          });
+                          // setState(() {
+                          //   widget.publicacion!.selectById(id);
+                          //   widget.onChanged!(id);
+                          // });
                         });
                   },
                   scrollDirection: Axis.horizontal,
@@ -69,7 +70,7 @@ class _BrandsIconsCarouselWidgetState extends State<BrandsIconsCarouselWidget> {
                 Navigator.of(context).pushNamed('/Brands');
               },
               icon: Icon(
-                UiIcons.settings_2,
+                Icons.menu_open_outlined,
                 size: 28,
                 color: Theme.of(context).primaryColor,
               ),

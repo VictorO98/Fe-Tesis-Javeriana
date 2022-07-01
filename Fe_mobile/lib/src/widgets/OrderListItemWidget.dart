@@ -50,10 +50,7 @@ class _OrderListItemWidgetState extends State<OrderListItemWidget> {
         focusColor: Theme.of(context).accentColor,
         highlightColor: Theme.of(context).primaryColor,
         onTap: () {
-          Navigator.of(context).pushNamed('/Product',
-              arguments: new RouteArgument(
-                  argumentsList: [this.widget.heroTag],
-                  id: this.widget.order!.product.id));
+          Navigator.of(context).pushNamed('/EstadoPedido');
         },
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),

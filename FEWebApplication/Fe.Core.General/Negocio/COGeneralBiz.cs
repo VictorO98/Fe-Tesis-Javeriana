@@ -68,7 +68,8 @@ namespace Fe.Core.General.Negocio
             RespuestaDatos respuestaDatos;
             try
             {
-                respuestaDatos = await _repoDemografia.GuardarDemografia(demografia);
+                await _repoDemografia.GuardarDemografia(demografia);
+                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "OK" };
             }
             catch (COExcepcion e)
             {

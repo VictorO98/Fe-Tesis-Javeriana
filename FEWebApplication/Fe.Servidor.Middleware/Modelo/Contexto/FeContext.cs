@@ -21,6 +21,7 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
         public virtual DbSet<BancosPermitidosCor> BancosPermitidosCors { get; set; }
         public virtual DbSet<CategoriaPc> CategoriaPcs { get; set; }
         public virtual DbSet<ConceptoDev> ConceptoDevs { get; set; }
+        public virtual DbSet<CuentasBancariasDemografiaCor> CuentasBancariasDemografiaCors { get; set; }
         public virtual DbSet<DemografiaCor> DemografiaCors { get; set; }
         public virtual DbSet<DemografiaReportadaCor> DemografiaReportadaCors { get; set; }
         public virtual DbSet<DevolucionesDetalleDev> DevolucionesDetalleDevs { get; set; }
@@ -39,6 +40,7 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
         public virtual DbSet<IdentityusertokenString> IdentityusertokenStrings { get; set; }
         public virtual DbSet<ImagenesPublicacionesPc> ImagenesPublicacionesPcs { get; set; }
         public virtual DbSet<NotificacionesCor> NotificacionesCors { get; set; }
+        public virtual DbSet<ParametroCor> ParametroCors { get; set; }
         public virtual DbSet<PedidosPed> PedidosPeds { get; set; }
         public virtual DbSet<PoblacionCor> PoblacionCors { get; set; }
         public virtual DbSet<PreguntasRespuestasPc> PreguntasRespuestasPcs { get; set; }
@@ -119,6 +121,31 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                 entity.Property(e => e.Nombre)
                     .HasMaxLength(25)
                     .HasColumnName("nombre");
+            });
+
+            modelBuilder.Entity<CuentasBancariasDemografiaCor>(entity =>
+            {
+                entity.ToTable("cuentas_bancarias_demografia_cor");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .UseIdentityAlwaysColumn()
+                    .HasIdentityOptions(null, null, null, 999999L, null, null);
+
+                entity.Property(e => e.Creacion).HasColumnName("creacion");
+
+                entity.Property(e => e.IdDemografia).HasColumnName("idDemografia");
+
+                entity.Property(e => e.Identidadbancaria).HasColumnName("identidadbancaria");
+
+                entity.Property(e => e.Modificacion).HasColumnName("modificacion");
+
+                entity.Property(e => e.Numero).HasColumnName("numero");
+
+                entity.Property(e => e.Tipocuenta)
+                    .IsRequired()
+                    .HasMaxLength(3)
+                    .HasColumnName("tipocuenta");
             });
 
             modelBuilder.Entity<DemografiaCor>(entity =>
@@ -581,6 +608,31 @@ namespace Fe.Servidor.Middleware.Modelo.Contexto
                     .HasForeignKey(d => d.Idusuario)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_idUsuario");
+            });
+
+            modelBuilder.Entity<ParametroCor>(entity =>
+            {
+                entity.ToTable("parametro_cor");
+
+                entity.Property(e => e.Id)
+                    .UseIdentityAlwaysColumn()
+                    .HasIdentityOptions(null, null, null, 999999L, null, null);
+
+                entity.Property(e => e.Codigo)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("codigo");
+
+                entity.Property(e => e.Creacion).HasColumnName("creacion");
+
+                entity.Property(e => e.Descripcion)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .HasColumnName("descripcion");
+
+                entity.Property(e => e.Valor)
+                    .IsRequired()
+                    .HasColumnName("valor");
             });
 
             modelBuilder.Entity<PedidosPed>(entity =>

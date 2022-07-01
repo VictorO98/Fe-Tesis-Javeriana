@@ -1,5 +1,8 @@
 import 'package:Fe_mobile/config/ui_icons.dart';
 import 'package:Fe_mobile/src/core/pages/usuario/perfil_usuario_page.dart';
+import 'package:Fe_mobile/src/core/providers/usuario_provider.dart';
+import 'package:Fe_mobile/src/core/util/helpers_util.dart';
+import 'package:Fe_mobile/src/core/util/preferencias_util.dart';
 import 'package:Fe_mobile/src/screens/chat.dart';
 import 'package:Fe_mobile/src/dominio/pages/contenido/favoritos_usuario_page.dart';
 import 'package:Fe_mobile/src/dominio/pages/Contenido/contenido_home_page.dart';
@@ -31,10 +34,30 @@ class TabsWidget extends StatefulWidget {
 class _TabsWidgetState extends State<TabsWidget> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   var sizeIcons = 22.0;
+
+  final _prefs = new PreferenciasUtil();
+
+  UsuarioProvider _usuarioProvider = new UsuarioProvider();
+
   @override
   initState() {
     _selectTab(widget.currentTab);
+    _cargarImagenUsuario();
     super.initState();
+  }
+
+  _cargarImagenUsuario() async {
+    if (!Helpers.IS_FOTO_PERFIL) {
+      var email = await _prefs.getPrefStr("email");
+      var ans = await _usuarioProvider.isFotoPerfil(email);
+
+      setState(() {
+        Helpers.IS_FOTO_PERFIL = ans;
+        if (ans) {
+          Helpers.FOTO_USUARIO = Helpers.FOTO_USUARIO + email!;
+        }
+      });
+    }
   }
 
   @override
@@ -61,7 +84,7 @@ class _TabsWidgetState extends State<TabsWidget> {
           widget.currentPage = ContenidoHomePage();
           break;
         case 3:
-          widget.currentTitle = 'Messages';
+          widget.currentTitle = 'Mensajes';
           widget.currentPage = MessagesWidget();
           break;
         case 4:
@@ -112,9 +135,15 @@ class _TabsWidgetState extends State<TabsWidget> {
                 onTap: () {
                   Navigator.of(context).pushNamed('/Tabs', arguments: 1);
                 },
-                child: CircleAvatar(
-                  backgroundImage: AssetImage('img/user3.jpg'),
-                ),
+                child: Helpers.IS_FOTO_PERFIL
+                    ? CircleAvatar(
+                        backgroundColor: Theme.of(context).accentColor,
+                        backgroundImage:
+                            NetworkImage((Helpers.FOTO_USUARIO).toString()))
+                    : CircleAvatar(
+                        backgroundColor: Theme.of(context).accentColor,
+                        backgroundImage: AssetImage('img/user3.jpg'),
+                      ),
               )),
         ],
       ),

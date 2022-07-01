@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\publish\</_PublishTargetUrl>
+    <History>True|2022-04-22T06:33:20.2540589Z;True|2022-04-18T14:24:19.0958775-05:00;True|2021-12-14T14:35:34.9863687-05:00;True|2021-12-14T02:12:24.4031273-05:00;True|2021-12-14T01:45:47.5677221-05:00;True|2021-12-13T17:39:41.1107173-05:00;True|2021-12-13T17:27:20.5815295-05:00;True|2021-12-13T15:56:02.7390931-05:00;True|2021-12-13T15:23:48.4891216-05:00;True|2021-12-13T15:22:44.3231909-05:00;True|2021-12-13T12:48:40.1383791-05:00;True|2021-12-13T10:38:54.4599334-05:00;True|2021-12-09T02:44:37.6671987-05:00;</History>
+  </PropertyGroup>
+</Project>

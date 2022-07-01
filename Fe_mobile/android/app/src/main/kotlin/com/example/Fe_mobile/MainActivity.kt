@@ -1,4 +1,4 @@
-package com.example.Fe_mobile
+package co.buya
 
 import io.flutter.embedding.android.FlutterActivity
 

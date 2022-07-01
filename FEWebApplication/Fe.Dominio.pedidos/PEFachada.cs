@@ -116,6 +116,7 @@ namespace Fe.Dominio.pedidos
                 if (await ValidarPrecioProductoPedido(productoPedido))
                 {
                     TipoPublicacionPc tipoProductoPedido = _cOContenidoFachada.GetTipoPublicacionPorID(producto.Idtipopublicacion);
+                    productoPedido.Creacion = DateTime.Now;
                     if (tipoProductoPedido != null)
                     {
                         System.Diagnostics.Debug.WriteLine("Este es el tipo:");

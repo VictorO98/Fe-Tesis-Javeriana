@@ -1,10 +1,10 @@
 {
-  "name": "TuFlete",
+  "name": "tuflete",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "serve": "vue-cli-service serve src/main.js",
+    "build": "vue-cli-service build src/main.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -16,7 +16,7 @@
     "stylus": "^0.54.8",
     "stylus-loader": "^3.0.2",
     "vee-validate": "^4.3.5",
-    "vue": "^3.2.10",
+    "vue": "^3.0.11",
     "vue-axios": "^3.2.4",
     "vue-loader-v16": "npm:vue-loader@^16.0.0-alpha.3",
     "vue-loading-overlay": "^4.0.1",

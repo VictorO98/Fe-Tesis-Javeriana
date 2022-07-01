@@ -1,3 +1,4 @@
+import 'package:Fe_mobile/src/core/util/helpers_util.dart';
 import 'package:Fe_mobile/src/models/language.dart';
 import 'package:Fe_mobile/src/widgets/DrawerWidget.dart';
 import 'package:Fe_mobile/src/widgets/LanguageItemWidget.dart';
@@ -51,14 +52,18 @@ class _LanguagesWidgetState extends State<LanguagesWidget> {
               height: 30,
               margin: EdgeInsets.only(top: 12.5, bottom: 12.5, right: 20),
               child: InkWell(
-                borderRadius: BorderRadius.circular(300),
-                onTap: () {
-                  Navigator.of(context).pushNamed('/Tabs', arguments: 1);
-                },
-                child: CircleAvatar(
-                  backgroundImage: AssetImage('img/user3.jpg'),
-                ),
-              )),
+                  borderRadius: BorderRadius.circular(300),
+                  onTap: () {
+                    Navigator.of(context).pushNamed('/Tabs', arguments: 1);
+                  },
+                  child: Helpers.IS_FOTO_PERFIL
+                      ? CircleAvatar(
+                          // backgroundImage: AssetImage(_user.avatar!),
+                          backgroundImage:
+                              NetworkImage((Helpers.FOTO_USUARIO).toString()))
+                      : CircleAvatar(
+                          backgroundImage: AssetImage('img/user3.jpg'),
+                        ))),
         ],
       ),
       body: SingleChildScrollView(

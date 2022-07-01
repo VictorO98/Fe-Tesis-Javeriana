@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:Fe_mobile/src/core/models/info_usuario_model.dart';
 import 'package:Fe_mobile/src/core/models/login_model.dart';
+import 'package:Fe_mobile/src/core/models/respuesta_datos_model.dart';
 import 'package:Fe_mobile/src/core/models/respuesta_login_model.dart';
 import 'package:Fe_mobile/src/core/providers/usuario_provider.dart';
+import 'package:Fe_mobile/src/core/util/alert_util.dart';
 import 'package:Fe_mobile/src/core/util/helpers_util.dart';
 import 'package:Fe_mobile/src/core/util/jwt_util.dart';
 import 'package:Fe_mobile/src/core/util/preferencias_util.dart';
@@ -234,6 +236,23 @@ class _LoginPageState extends State<LoginPage> {
                           style: Theme.of(context).textTheme.bodyText2,
                         ),
                       ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pushNamed('/Registro');
+                        },
+                        child: RichText(
+                          text: TextSpan(
+                            style: Theme.of(context).textTheme.headline2,
+                            children: [
+                              TextSpan(text: '¿ No tienes cuenta ?'),
+                              TextSpan(
+                                  text: ' Registrate',
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.w900)),
+                            ],
+                          ),
+                        ),
+                      ),
 
                       // SizedBox(height: 50),    FUTURA IMPLEMENTACION
                       // Text(
@@ -246,24 +265,6 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ],
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed('/Registro');
-              },
-              child: RichText(
-                text: TextSpan(
-                  style: Theme.of(context).textTheme.headline6!.merge(
-                        TextStyle(color: Theme.of(context).primaryColor),
-                      ),
-                  children: [
-                    TextSpan(text: '¿ No tienes cuenta ?'),
-                    TextSpan(
-                        text: ' Registrate',
-                        style: TextStyle(fontWeight: FontWeight.w700)),
-                  ],
-                ),
-              ),
             ),
           ],
         ),
@@ -313,10 +314,21 @@ class _LoginPageState extends State<LoginPage> {
 
               Navigator.of(context).pushNamed('/Tabs', arguments: 2);
             });
-          } else if (respuesta.codigo == 11) {
-            // TODO: Impelemtar este pedazo de cogido en el login
-            print("Entro aqui");
           }
+        } else if (respuesta!.codigo == 11) {
+          AlertUtil.confirm(context, respuesta.mensaje!, () {
+            Navigator.pop(context);
+            _usuarioProvider
+                .generarEnlaceDeConfirmacion(context, _loginModel.email!)
+                .then((dataEnlace) {
+              RespuestaDatosModel? respuestaEnlace = dataEnlace;
+              if (respuestaEnlace?.codigo == 10) {
+                AlertUtil.success(context, respuestaEnlace!.mensaje!);
+              }
+            });
+          }, confirmBtnText: "REENVIAR");
+        } else if (respuesta.codigo == 40) {
+          AlertUtil.error(context, respuesta.mensaje!);
         }
       }).whenComplete(() => setState(() => _isLoadingIniciarSesion = false));
     }

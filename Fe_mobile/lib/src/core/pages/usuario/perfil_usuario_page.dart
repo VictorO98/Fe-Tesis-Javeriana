@@ -1,4 +1,5 @@
 import 'package:Fe_mobile/config/ui_icons.dart';
+import 'package:Fe_mobile/src/core/models/cuentas_bancarias_model.dart';
 import 'package:Fe_mobile/src/core/models/info_usuario_model.dart';
 import 'package:Fe_mobile/src/core/pages/usuario/bloc/info_perfil/info_usuario_bloc.dart';
 import 'package:Fe_mobile/src/core/providers/usuario_provider.dart';
@@ -36,6 +37,8 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
   List<InfoPedidosModel> _infoPedidos = [];
   List<InfoTruequesModel> _infoTruequesSolicitados = [];
 
+  CuentaBancariaDemografiaModel? _cuentaBancariaModel;
+
   InfoUsuarioBloc? _infoUsuarioBloc;
   ContenidoProvider _contenidoProvider = new ContenidoProvider();
   TruequeProvider _truequeProvider = new TruequeProvider();
@@ -45,7 +48,6 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
   bool _cargandoUsuario = false;
   bool _cargandoProductos = false;
   bool _cargandoPedidos = false;
-  bool _isFotoPerfil = false;
 
   User _user = new User.init().getCurrentUser();
 
@@ -62,7 +64,6 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
   @override
   void initState() {
     super.initState();
-    _cargarImagenUsuario();
     _infoUsuarioBloc = BlocProvider.of<InfoUsuarioBloc>(context);
     _cargarInfoUsuario();
     _infoUsuarioBloc!.state.infoUsuarioModel!.rol == "Emprendedor"
@@ -72,15 +73,19 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
     _infoUsuarioBloc!.state.infoUsuarioModel!.rol == "Emprendedor"
         ? _cargarTrueques()
         : SizedBox();
+    _infoUsuarioBloc!.state.infoUsuarioModel!.rol == "Emprendedor"
+        ? _cargarInformarcionBancaria()
+        : SizedBox();
   }
 
-  _cargarImagenUsuario() async {
-    correo = await _prefs.getPrefStr("email");
-    var ans = await _usuarioProvider.isFotoPerfil(correo);
-
-    setState(() {
-      _isFotoPerfil = ans;
-    });
+  _cargarInformarcionBancaria() async {
+    var idUsuario = _infoUsuarioBloc!.state.infoUsuarioModel!.id.toString();
+    var datos = await _usuarioProvider.obtenerDatosBancariosEmprendedor(
+        context, idUsuario);
+    if (mounted)
+      setState(() {
+        _cuentaBancariaModel = datos;
+      });
   }
 
   _cargarTrueques() async {
@@ -244,14 +249,13 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
                             print('Undiste tu foto');
                             Navigator.of(context).pushNamed('/FotoPerfil');
                           },
-                          child: _isFotoPerfil
+                          child: Helpers.IS_FOTO_PERFIL
                               ? CircleAvatar(
                                   // backgroundImage: AssetImage(_user.avatar!),
                                   backgroundImage: NetworkImage(
-                                      (Helpers.FOTO_USUARIO + correo!)
-                                          .toString()))
+                                      (Helpers.FOTO_USUARIO).toString()))
                               : CircleAvatar(
-                                  backgroundImage: AssetImage(_user.avatar!),
+                                  backgroundImage: AssetImage('img/user3.jpg'),
                                 )),
                     )),
               ],
@@ -274,6 +278,9 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
           _cargandoUsuario
               ? Center(child: CircularProgressIndicator())
               : _userProfile(context),
+          _infoUsuarioBloc!.state.infoUsuarioModel!.rol == "Emprendedor"
+              ? _informacionFinancieraEmprendedor(context)
+              : SizedBox(),
           _acountSettings(context),
         ],
       ),
@@ -522,6 +529,90 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
         ],
       ),
     );
+  }
+
+  Widget _informacionFinancieraEmprendedor(BuildContext context) {
+    return _cuentaBancariaModel != null
+        ? Container(
+            margin: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+              borderRadius: BorderRadius.circular(6),
+              boxShadow: [
+                BoxShadow(
+                    color: Theme.of(context).hintColor.withOpacity(0.15),
+                    offset: Offset(0, 3),
+                    blurRadius: 10)
+              ],
+            ),
+            child: ListView(
+              shrinkWrap: true,
+              primary: false,
+              children: <Widget>[
+                ListTile(
+                  leading: new Icon(Icons.atm),
+                  title: Text(
+                    'Información financiera',
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                  trailing: ButtonTheme(
+                    padding: EdgeInsets.all(0),
+                    minWidth: 50.0,
+                    height: 25.0,
+                    child: ProfileSettingsDialog(
+                      user: _infoUsuarioBloc!.state.infoUsuarioModel!,
+                      onChanged: () {
+                        setState(() {});
+                      },
+                    ),
+                  ),
+                ),
+                ListTile(
+                  onTap: () {},
+                  dense: true,
+                  title: Text(
+                    'Número de cuenta',
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                  trailing: Text(
+                    '245678963',
+                    style: TextStyle(color: Theme.of(context).focusColor),
+                  ),
+                ),
+                ListTile(
+                    onTap: () {},
+                    dense: true,
+                    title: Text(
+                      'Tipo de cuenta',
+                      style: Theme.of(context).textTheme.bodyText2,
+                    ),
+                    trailing: _cuentaBancariaModel!.tipocuenta == 'AHO'
+                        ? Text(
+                            'Ahorros',
+                            style:
+                                TextStyle(color: Theme.of(context).focusColor),
+                          )
+                        : Text(
+                            'Corriente',
+                            style:
+                                TextStyle(color: Theme.of(context).focusColor),
+                          )),
+                ListTile(
+                  onTap: () {},
+                  dense: true,
+                  title: Text(
+                    'Banco asociado',
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                  trailing: Text(
+                    _cuentaBancariaModel!.identidadbancaria!,
+                    style: TextStyle(color: Theme.of(context).focusColor),
+                  ),
+                ),
+              ],
+            ),
+          )
+        : CircularProgressIndicator();
   }
 
   Widget _userTruequeSolicitados(BuildContext context) {

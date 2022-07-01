@@ -1,6 +1,5 @@
 import 'package:Fe_mobile/src/core/util/currency_util.dart';
 import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
-import 'package:Fe_mobile/src/models/product.dart';
 import 'package:Fe_mobile/src/models/route_argument.dart';
 import 'package:flutter/material.dart';
 
@@ -22,10 +21,8 @@ class ProductGridItemWidget extends StatelessWidget {
       highlightColor: Colors.transparent,
       splashColor: Theme.of(context).accentColor.withOpacity(0.08),
       onTap: () {
-        // Navigator.of(context).pushNamed('/Product',
-        //     arguments: new RouteArgument(
-        //         argumentsList: [this.product, this.heroTag],
-        //         id: this.product.id));
+        Navigator.of(context).pushNamed('/EditarPublicacion',
+            arguments: new RouteArgument(argumentsList: [product]));
       },
       child: Container(
         decoration: BoxDecoration(

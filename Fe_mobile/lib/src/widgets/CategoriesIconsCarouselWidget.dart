@@ -40,7 +40,7 @@ class _CategoriesIconsCarouselWidgetState
                 Navigator.of(context).pushNamed('/Categories');
               },
               icon: Icon(
-                UiIcons.settings_2,
+                Icons.menu_open_outlined,
                 size: 28,
                 color: Theme.of(context).primaryColor,
               ),

@@ -1,9 +1,12 @@
 import 'package:Fe_mobile/src/core/pages/usuario/foto_usuario_page.dart';
+import 'package:Fe_mobile/src/core/pages/usuario/perfil_usuario_page.dart';
+import 'package:Fe_mobile/src/core/pages/usuario/restaurar_contra_page.dart';
 import 'package:Fe_mobile/src/dominio/pages/Contenido/crear_servicio_producto_page.dart';
 import 'package:Fe_mobile/src/dominio/pages/contenido/busqueda_productos_page.dart';
 import 'package:Fe_mobile/src/dominio/pages/contenido/editar_publicacion_page.dart';
 import 'package:Fe_mobile/src/dominio/pages/contenido/publicaciones_usuario_page.dart';
 import 'package:Fe_mobile/src/dominio/pages/facturacion/lista_bancos_pse_page.dart';
+import 'package:Fe_mobile/src/dominio/pages/pedidos/estado_pedido_contacto.dart';
 import 'package:Fe_mobile/src/dominio/pages/trueques/lista_solicitud_trueques_page.dart';
 import 'package:Fe_mobile/src/dominio/pages/trueques/listado_trueques_usuario_page.dart';
 import 'package:Fe_mobile/src/dominio/pages/trueques/ofertar_trueque_page.dart';
@@ -49,6 +52,10 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => FotoUsuarioPage());
       case '/Bancos':
         return MaterialPageRoute(builder: (_) => ListaBancosPage());
+      case '/Recuperar':
+        return MaterialPageRoute(builder: (_) => RestaurarContraPage());
+      case '/Perfil':
+        return MaterialPageRoute(builder: (_) => PerfilUsuarioPage());
 //      case '/MobileVerification':
 //        return MaterialPageRoute(builder: (_) => MobileVerification());
 //      case '/MobileVerification2':
@@ -93,6 +100,8 @@ class RouteGenerator {
         return MaterialPageRoute(
             builder: (_) =>
                 BusquedaProductosPage(routeArgument: args as RouteArgument?));
+      case '/EstadoPedido':
+        return MaterialPageRoute(builder: (_) => EstadoPedidoContactoPage());
 //      case '/Food':
 //        return MaterialPageRoute(
 //            builder: (_) => FoodWidget(

@@ -11,7 +11,7 @@ namespace Fe.Core.General.Datos
 {
     public class RepoDemografia
     {
-        public async Task<RespuestaDatos> GuardarDemografia(DemografiaCor demografia)
+        public async Task<int> GuardarDemografia(DemografiaCor demografia)
         {
             using FeContext context = new FeContext();
             RespuestaDatos respuestaDatos;
@@ -19,13 +19,12 @@ namespace Fe.Core.General.Datos
             {
                 context.Add(demografia);
                 context.SaveChanges();
-                respuestaDatos = new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "Categoría creada exitosamente." };
+                return demografia.Id;
             }
             catch (Exception e)
             {
                 throw new COExcepcion("Ocurrió un problema al intentar agregar la categoría.");
-            }
-            return respuestaDatos;
+            }   
         }
 
         internal DemografiaCor GetDemografiaPorId(int idDemografia)

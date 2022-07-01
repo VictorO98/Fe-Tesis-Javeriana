@@ -121,6 +121,10 @@ namespace Fe.Dominio.facturas
             {
                 total += p.Preciototal;
             }
+            //TODO Hay que cambiar estos y parametrizarlos
+            var comision = total * 0.01;
+            var checkOut = total + comision + 2380;
+            total = (int?)checkOut;
             String uuid = Guid.NewGuid().ToString();
             PseModel response = epayco.BankCreate(
               COEpayco.CODIGO_BANCARIO[contratoPSE.Banco],

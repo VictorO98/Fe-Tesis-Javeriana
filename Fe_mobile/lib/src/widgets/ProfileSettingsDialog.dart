@@ -47,10 +47,11 @@ class _ProfileSettingsDialogState extends State<ProfileSettingsDialog> {
 
   _getDepartamentos() async {
     List<DepartamentoModel> listado = await _generalProvider.getDepartamentos();
-    setState(() {
-      listDepartamento = listado;
-      listDepartamento.sort((a, b) => a.nombre!.compareTo(b.nombre!));
-    });
+    if (mounted)
+      setState(() {
+        listDepartamento = listado;
+        listDepartamento.sort((a, b) => a.nombre!.compareTo(b.nombre!));
+      });
   }
 
   _getMunicipios(int? idEstado) async {

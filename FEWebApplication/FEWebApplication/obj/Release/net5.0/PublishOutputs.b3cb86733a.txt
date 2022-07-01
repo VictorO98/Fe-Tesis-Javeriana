@@ -142,6 +142,4 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Re
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\PubTmp\Out\Fe.Dominio.trueques.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\PubTmp\Out\Fe.Servidor.Integracion.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\PubTmp\Out\Fe.Servidor.Middleware.pdb
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\PubTmp\Out\FEWebApplication.Views.dll
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\PubTmp\Out\FEWebApplication.Views.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\PubTmp\Out\FEWebApplication.deps.json

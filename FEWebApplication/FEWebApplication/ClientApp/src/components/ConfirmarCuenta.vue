@@ -6,8 +6,8 @@
         <b> CONFIRMAR CUENTA </b>
       </h5>
       <b
-        >Bienvenido a {{ title }}, haga click en el siguiente botón para
-        confirmar la cuenta.
+        >Bienvenido a Buy@, haga click en el siguiente botón para confirmar la
+        cuenta.
       </b>
       <p>Email: {{ obj.email }}</p>
       <br />

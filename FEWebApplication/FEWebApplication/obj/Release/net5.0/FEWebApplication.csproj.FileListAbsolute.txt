@@ -1,4 +1,3 @@
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\Microsoft.CodeAnalysis.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\appsettings.Development.json
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\appsettings.json
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\ClientApp\package-lock.json
@@ -11,8 +10,6 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Re
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\FEWebApplication.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\ref\FEWebApplication.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\FEWebApplication.pdb
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\FEWebApplication.Views.dll
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\FEWebApplication.Views.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\Blazored.Toast.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\Dapper.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\Dapper.Contrib.dll
@@ -46,6 +43,7 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Re
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\Microsoft.AspNetCore.Razor.Language.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\Microsoft.AspNetCore.SpaServices.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\Microsoft.AspNetCore.SpaServices.Extensions.dll
+D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\Microsoft.CodeAnalysis.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\Microsoft.CodeAnalysis.CSharp.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\Microsoft.CodeAnalysis.Razor.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\bin\Release\net5.0\Microsoft.DotNet.PlatformAbstractions.dll
@@ -122,19 +120,7 @@ D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Re
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\FEWebApplication.MvcApplicationPartsAssemblyInfo.cache
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\FEWebApplication.RazorAssemblyInfo.cache
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\FEWebApplication.RazorAssemblyInfo.cs
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\FEWebApplication.TagHelpers.input.cache
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\FEWebApplication.TagHelpers.output.cache
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\FEWebApplication.RazorCoreGenerate.cache
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\Razor\Pages\Error.cshtml.g.cs
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\Razor\Pages\Index.cshtml.g.cs
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\Razor\Pages\Privacy.cshtml.g.cs
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\Razor\Pages\Shared\_Layout.cshtml.g.cs
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\Razor\Pages\Shared\_ValidationScriptsPartial.cshtml.g.cs
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\Razor\Pages\_ViewImports.cshtml.g.cs
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\Razor\Pages\_ViewStart.cshtml.g.cs
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\FEWebApplication.RazorTargetAssemblyInfo.cache
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\FEWebApplication.RazorTargetAssemblyInfo.cs
-D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\FEWebApplication.Views.pdb
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\FEWebApplication.csproj.CopyComplete
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\FEWebApplication.dll
 D:\Documentos\Repositorios\Comunidad-Fe\FEWebApplication\FEWebApplication\obj\Release\net5.0\ref\FEWebApplication.dll

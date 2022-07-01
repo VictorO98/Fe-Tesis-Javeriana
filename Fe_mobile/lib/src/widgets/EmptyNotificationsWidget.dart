@@ -32,7 +32,7 @@ class EmptyNotificationsWidget extends StatelessWidget {
                           Theme.of(context).focusColor.withOpacity(0.1),
                         ])),
                 child: Icon(
-                  UiIcons.bell,
+                  Icons.notifications,
                   color: Theme.of(context).primaryColor,
                   size: 70,
                 ),
@@ -67,7 +67,7 @@ class EmptyNotificationsWidget extends StatelessWidget {
           Opacity(
             opacity: 0.4,
             child: Text(
-              'D\'ont have any notification',
+              'No tienes notificaciones',
               textAlign: TextAlign.center,
               style: Theme.of(context)
                   .textTheme
@@ -84,7 +84,7 @@ class EmptyNotificationsWidget extends StatelessWidget {
             color: Theme.of(context).focusColor.withOpacity(0.15),
             shape: StadiumBorder(),
             child: Text(
-              'Start Exploring',
+              'Empieza a explorar',
 //                        textAlign: TextAlign.ce,
               style: Theme.of(context).textTheme.headline6,
             ),

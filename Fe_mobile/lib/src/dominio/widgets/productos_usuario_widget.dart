@@ -36,7 +36,7 @@ class _ProductoUsuarioListItemWidgetState
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Icon(
-              UiIcons.trash,
+              Icons.delete,
               color: Colors.white,
             ),
           ),
@@ -50,8 +50,7 @@ class _ProductoUsuarioListItemWidgetState
 
         // Then show a snackbar.
         Scaffold.of(context).showSnackBar(SnackBar(
-            content: Text(
-                "The ${widget.product!.nombre} order is removed from wish list")));
+            content: Text("${widget.product!.nombre} removido de la lista")));
       },
       child: InkWell(
         splashColor: Theme.of(context).accentColor,
@@ -146,25 +145,29 @@ class _ProductoUsuarioListItemWidgetState
                                   ),
                                 ],
                               ),
-                              Row(
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.format_list_numbered_rtl_outlined,
-                                    color: Theme.of(context).focusColor,
-                                    size: 20,
-                                  ),
-                                  SizedBox(width: 10),
-                                  Text(
-                                    'Unidades: ' +
-                                        widget.product!.cantidadtotal
-                                            .toString(), // TODO  cambiar por el número del modelo
-                                    style:
-                                        Theme.of(context).textTheme.bodyText2,
-                                    overflow: TextOverflow.fade,
-                                    softWrap: false,
-                                  ),
-                                ],
-                              ),
+                              widget.product!.tipoPublicacion == 'Producto'
+                                  ? Row(
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons
+                                              .format_list_numbered_rtl_outlined,
+                                          color: Theme.of(context).focusColor,
+                                          size: 20,
+                                        ),
+                                        SizedBox(width: 10),
+                                        Text(
+                                          'Unidades: ' +
+                                              widget.product!.cantidadtotal
+                                                  .toString(), // TODO  cambiar por el número del modelo
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText2,
+                                          overflow: TextOverflow.fade,
+                                          softWrap: false,
+                                        )
+                                      ],
+                                    )
+                                  : SizedBox(),
                             ],
 //                            crossAxisAlignment: CrossAxisAlignment.center,
                           ),
@@ -175,9 +178,13 @@ class _ProductoUsuarioListItemWidgetState
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: <Widget>[
-                        Text(
-                            "${CurrencyUtil.convertFormatMoney('COP', widget.product!.preciounitario!.round())}",
-                            style: Theme.of(context).textTheme.headline4),
+                        widget.product!.descuento! > 0.0
+                            ? Text(
+                                "${CurrencyUtil.convertFormatMoney('COP', widget.product!.preciounitario! - ((widget.product!.descuento! / 100) * widget.product!.preciounitario!).toInt())}",
+                                style: Theme.of(context).textTheme.headline4)
+                            : Text(
+                                "${CurrencyUtil.convertFormatMoney('COP', widget.product!.preciounitario!)}",
+                                style: Theme.of(context).textTheme.headline4),
                         SizedBox(height: 6),
                         ActionChip(
                           avatar: Icon(Icons.edit),

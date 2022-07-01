@@ -33,16 +33,19 @@ namespace FEWebApplication.Authentication
         private readonly IConfiguration _configuration;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly RepoDemografia _repoDemografia;
         private readonly WorkflowMensaje _workflowMensaje;
 
         public AuthenticateController(COSeguridadBiz seguridadBiz, IConfiguration configuration, SEFachada sEFachada
-            , UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, WorkflowMensaje workflowMensaje)
+            , UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, WorkflowMensaje workflowMensaje,
+            RepoDemografia repoDemografia)
         {
             _seguridadBiz = seguridadBiz;
             _sEFachada = sEFachada;
             _configuration = configuration;
             _userManager = userManager;
             _roleManager = roleManager;
+            _repoDemografia = repoDemografia;
             _workflowMensaje = workflowMensaje;
         }
 
@@ -81,6 +84,63 @@ namespace FEWebApplication.Authentication
             }
 
             
+        }
+
+        [HttpPost]
+        [Route("ConfirmarCuenta")]
+        public async Task<RespuestaDatos> ConfirmarCuenta([FromBody] ConfirmarCuentaDatos confirmarCuentaDatos)
+        {
+            return await _seguridadBiz.ConfirmAccount(confirmarCuentaDatos);
+        }
+
+        [HttpGet]
+        [Route("GenerarEnlaceConfirmacion")]
+        public async Task<RespuestaDatos> GenerarEnlaceConfirmacion(string email)
+        {
+            var userExists = await _userManager.FindByEmailAsync(email);
+            if (userExists == null)
+                throw new COExcepcion("La cuenta no existe. ");
+
+            var demografia = _repoDemografia.GetDemografiaPorEmail(userExists.Email);
+            if (demografia == null)
+            {
+                RepoErrorLog.AddErrorLog(new ErrorLog
+                {
+                    Mensaje = "El usuario no existe en demografia. ",
+                    Traza = "",
+                    Usuario = userExists.Email,
+                    Creacion = DateTime.Now,
+                    Tipoerror = COErrorLog.USUARIO_SIN_RELACION
+                });
+                throw new COExcepcion("Por favor contactar a soporte técnico. ");
+            }
+
+            //Generar token de recuperación
+            var code = await _userManager.GenerateEmailConfirmationTokenAsync(userExists);
+            var urlApp = _configuration["App:Url"];
+
+            //var linkConfirmation = urlApp + Url.Action("ConfirmarCuenta", "Authenticate", new
+            //{
+            //    userId = userExists.Email,
+            //    code
+            //});
+            var linkConfirmation = urlApp + $@"/ConfirmarCuenta/{userExists.Email}/{code}";
+
+            try
+            {
+                //Envia mensaje de registro
+                await _workflowMensaje.EnviarMensajeRegistro(new DemografiaDatos
+                {
+                    Nombres = demografia.Nombre,
+                    Apellidos = demografia.Apellido,
+                    Email = demografia.Email
+                }, linkConfirmation);
+                return new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = "Se envió el enlace de confirmación a su correo electrónico." };
+            }
+            catch (Exception e)
+            {
+                throw new COExcepcion("No se logró enviar el correo electrónico. " + e.Message);
+            }
         }
 
         /// <summary>
@@ -198,6 +258,20 @@ namespace FEWebApplication.Authentication
             return respuestaDatos;
         }
 
+        [HttpPost]
+        [Route("GuardarDatosBancarios")]
+        public async Task<RespuestaDatos> GuardarDatosBancarios([FromBody] DatosBancariosDemografia model)
+        {
+            return await _sEFachada.GuardarDatosBancarios(model);
+        }
+
+        [HttpGet]
+        [Route("ObtenerDatosbancarios")]
+        public CuentaBancariaEmprendedor ObtenerDatosbancarios(int idDemografia)
+        {
+            return _sEFachada.ObtenerDatosbancarios(idDemografia);
+        }
+
         /// <summary>
         /// Método para registrarse en la aplicación
         /// </summary>
@@ -208,26 +282,26 @@ namespace FEWebApplication.Authentication
         {
             // Registra el usuario en el aplicativo
             ApplicationUser user = await _seguridadBiz.RegistrarUsuario(model);
-
             try
             {
-                var urlApp = _configuration["App:Url"];
-                //Generar token de confirmación
-                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                var linkConfirmation = urlApp + $@"/ConfirmarCuenta/{user.Email}/{code}";
+                /* var urlApp = _configuration["App:Url"];
+                 //Generar token de confirmación
+                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                 var linkConfirmation = urlApp + $@"/ConfirmarCuenta/{user.Email}/{code}";
 
-                Console.WriteLine($@"A1 - {linkConfirmation}");
+                 Console.WriteLine($@"A1 - {linkConfirmation}");
 
 
-                //Envia mensaje de registro
-                await _workflowMensaje.EnviarMensajeRegistro(new DemografiaDatos
-                {
-                    Nombres = model.Nombres,
-                    Apellidos = model.Apellidos,
-                    Email = model.Email
-                }, linkConfirmation);
+                 //Envia mensaje de registro
+                 await _workflowMensaje.EnviarMensajeRegistro(new DemografiaDatos
+                 {
+                     Nombres = model.Nombres,
+                     Apellidos = model.Apellidos,
+                     Email = model.Email
+                 }, linkConfirmation);*/
 
-                return new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = $@"Hemos enviado a su correo electrónico un enlace de confirmación, por favor revise su bandeja de entrada y siga las instrucciones para activar su cuenta en {_configuration["App:Nombre"]}." };
+                //return new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = $@"Hemos enviado a su correo electrónico un enlace de confirmación, por favor revise su bandeja de entrada y siga las instrucciones para activar su cuenta en {_configuration["App:Nombre"]}." };
+                return new RespuestaDatos { Codigo = COCodigoRespuesta.OK, Mensaje = $@"Bienvenido a Buy@, ya puedes ingresar con tus credenciales!!!" };
             
             }
             catch (Exception e)

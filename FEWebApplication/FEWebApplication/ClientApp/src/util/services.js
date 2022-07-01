@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const api = "http://159.65.216.80";
-
+const api = "http://157.230.83.145";
+// const api = "http://localhost:5000"
 
 const get = (path, parameters = null) => {
     return axios.get(api + path, {

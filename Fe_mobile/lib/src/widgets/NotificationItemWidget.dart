@@ -24,7 +24,7 @@ class _NotificationItemWidgetState extends State<NotificationItemWidget> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Icon(
-              UiIcons.trash,
+              Icons.delete,
               color: Colors.white,
             ),
           ),
@@ -38,7 +38,7 @@ class _NotificationItemWidgetState extends State<NotificationItemWidget> {
 
         // Then show a snackbar.
         Scaffold.of(context).showSnackBar(
-            SnackBar(content: Text("${widget.notification!.title} dismissed")));
+            SnackBar(content: Text("${widget.notification!.title} Eliminada")));
       },
       child: Container(
         color: this.widget.notification!.read

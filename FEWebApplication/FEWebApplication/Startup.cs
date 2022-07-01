@@ -150,6 +150,7 @@ namespace FEWebApplication
             services.AddScoped<RepoPedidosPed>();
             services.AddScoped<RepoFacturasFac>();
             services.AddScoped<RepoProdSerXFacturaFac>();
+            services.AddScoped<RepoDatosBancarios>();
 
             services.AddScoped<RepoTemplateMensaje>();
 
@@ -162,7 +163,7 @@ namespace FEWebApplication
 
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "ClientApp/dist";
+                configuration.RootPath = "Clientapp";
             });
         }
 
@@ -212,7 +213,7 @@ namespace FEWebApplication
             app.UseSpa(spa =>
             {
                 if (env.IsDevelopment())
-                    spa.Options.SourcePath = "ClientApp/";
+                    spa.Options.SourcePath = "Clientapp";
                 else
                     spa.Options.SourcePath = "dist";
 

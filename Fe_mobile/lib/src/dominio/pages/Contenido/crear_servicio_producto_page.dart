@@ -6,6 +6,7 @@ import 'package:Fe_mobile/src/core/models/step_manejador_model.dart';
 import 'package:Fe_mobile/src/core/util/alert_util.dart';
 import 'package:Fe_mobile/src/core/util/currency_util.dart';
 import 'package:Fe_mobile/src/core/util/estilo_util.dart';
+import 'package:Fe_mobile/src/core/util/helpers_util.dart';
 import 'package:Fe_mobile/src/core/util/preferencias_util.dart';
 import 'package:Fe_mobile/src/core/util/remover_acentos_util.dart';
 import 'package:Fe_mobile/src/dominio/models/categoria_model.dart';
@@ -159,14 +160,19 @@ class _CrearServicioProductoPageState extends State<CrearServicioProductoPage> {
                     height: 30,
                     margin: EdgeInsets.only(top: 12.5, bottom: 12.5, right: 20),
                     child: InkWell(
-                      borderRadius: BorderRadius.circular(300),
-                      onTap: () {
-                        Navigator.of(context).pushNamed('/Tabs', arguments: 1);
-                      },
-                      child: CircleAvatar(
-                        backgroundImage: AssetImage('img/user3.jpg'),
-                      ),
-                    )),
+                        borderRadius: BorderRadius.circular(300),
+                        onTap: () {
+                          Navigator.of(context)
+                              .pushNamed('/Tabs', arguments: 1);
+                        },
+                        child: Helpers.IS_FOTO_PERFIL
+                            ? CircleAvatar(
+                                // backgroundImage: AssetImage(_user.avatar!),
+                                backgroundImage: NetworkImage(
+                                    (Helpers.FOTO_USUARIO).toString()))
+                            : CircleAvatar(
+                                backgroundImage: AssetImage('img/user3.jpg'),
+                              ))),
               ],
             ),
             body: GestureDetector(

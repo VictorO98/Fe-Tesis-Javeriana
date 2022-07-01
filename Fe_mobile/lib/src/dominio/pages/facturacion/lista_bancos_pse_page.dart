@@ -1,10 +1,20 @@
+import 'package:Fe_mobile/src/core/models/respuesta_datos_model.dart';
 import 'package:Fe_mobile/src/core/providers/general_provider.dart';
+import 'package:Fe_mobile/src/core/util/alert_util.dart';
 import 'package:Fe_mobile/src/core/util/currency_util.dart';
+import 'package:Fe_mobile/src/core/util/helpers_util.dart';
+import 'package:Fe_mobile/src/core/util/preferencias_util.dart';
 import 'package:Fe_mobile/src/dominio/models/bancos_pse_model.dart';
 import 'package:Fe_mobile/src/dominio/models/carrito_compras_model.dart';
+import 'package:Fe_mobile/src/dominio/models/guardar_pedido_model.dart';
+import 'package:Fe_mobile/src/dominio/models/guardar_producto_pedido_model.dart';
+import 'package:Fe_mobile/src/dominio/models/pago_pse_model.dart';
+import 'package:Fe_mobile/src/dominio/providers/factura_provider.dart';
+import 'package:Fe_mobile/src/dominio/providers/pedidos_provider.dart';
 import 'package:Fe_mobile/src/widgets/ShoppingCartButtonWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ListaBancosPage extends StatefulWidget {
   @override
@@ -12,11 +22,19 @@ class ListaBancosPage extends StatefulWidget {
 }
 
 class _ListaBancosPageWidgetState extends State<ListaBancosPage> {
+  final _prefs = new PreferenciasUtil();
+
   CarritoComprasModel _carrito = new CarritoComprasModel();
+  GuardarPedidoModel _pedido = new GuardarPedidoModel();
+  PagoPseModel _pagoPseModel = new PagoPseModel();
 
   GeneralProvider _generalProvider = new GeneralProvider();
+  PedidoProvider _pedidoProvider = new PedidoProvider();
+  FacturaProvider _facturaProvider = new FacturaProvider();
 
   List<BancosPseModel> _listaBancos = [];
+
+  String? _bancoSeleccionado;
 
   bool cagrandoBancos = false;
 
@@ -65,14 +83,18 @@ class _ListaBancosPageWidgetState extends State<ListaBancosPage> {
               height: 30,
               margin: EdgeInsets.only(top: 12.5, bottom: 12.5, right: 20),
               child: InkWell(
-                borderRadius: BorderRadius.circular(300),
-                onTap: () {
-                  Navigator.of(context).pushNamed('/Tabs', arguments: 1);
-                },
-                child: CircleAvatar(
-                  backgroundImage: AssetImage('img/user3.jpg'),
-                ),
-              )),
+                  borderRadius: BorderRadius.circular(300),
+                  onTap: () {
+                    Navigator.of(context).pushNamed('/Tabs', arguments: 1);
+                  },
+                  child: Helpers.IS_FOTO_PERFIL
+                      ? CircleAvatar(
+                          // backgroundImage: AssetImage(_user.avatar!),
+                          backgroundImage:
+                              NetworkImage((Helpers.FOTO_USUARIO).toString()))
+                      : CircleAvatar(
+                          backgroundImage: AssetImage('img/user3.jpg'),
+                        ))),
         ],
       ),
       body: Padding(
@@ -111,8 +133,12 @@ class _ListaBancosPageWidgetState extends State<ListaBancosPage> {
                         itemBuilder: (BuildContext context, int index) {
                           return GestureDetector(
                             onTap: () {
-                              print("Banco seleccionado: " +
-                                  _listaBancos[index].nombre.toString());
+                              setState(() {
+                                _bancoSeleccionado = _listaBancos[index].nombre;
+
+                                print("Banco seleccionado: " +
+                                    _bancoSeleccionado!);
+                              });
                             },
                             child: Container(
                               height: 50,
@@ -146,6 +172,9 @@ class _ListaBancosPageWidgetState extends State<ListaBancosPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
+                      _bancoSeleccionado != null
+                          ? Text('Banco Seleccionado: ' + _bancoSeleccionado!)
+                          : SizedBox(),
                       SizedBox(
                         height: 10,
                       ),
@@ -157,11 +186,11 @@ class _ListaBancosPageWidgetState extends State<ListaBancosPage> {
                             width: 320,
                             child: FlatButton(
                               onPressed: () {
-                                // AlertUtil.confirm(
-                                //     context,
-                                //     '¿Desea confirmar compra?',
-                                //     () => _submitTC(),
-                                //     confirmBtnText: 'Confirmar');
+                                AlertUtil.confirm(
+                                    context,
+                                    '¿Desea confirmar compra?',
+                                    () => _createLinkPse(),
+                                    confirmBtnText: 'Confirmar');
                               },
                               padding: EdgeInsets.symmetric(vertical: 14),
                               color: Theme.of(context).accentColor,
@@ -202,5 +231,76 @@ class _ListaBancosPageWidgetState extends State<ListaBancosPage> {
         ),
       ),
     );
+  }
+
+  void _createLinkPse() async {
+    // Se crea la cabecera del pedido
+    var idUsuario = await _prefs.getPrefStr("id");
+
+    _pedido.id = 0;
+    _pedido.idusuario = int.parse(idUsuario!);
+    _pedido.estado = 'PEN';
+
+    _pedidoProvider.crearPedido(_pedido, context).then((value) {
+      var idPedido = value;
+      var _productosAComprar = _carrito.returnCarrito();
+      var _cantidadProductos = _carrito.returSizeCarrito();
+
+      // Guardar Productos por pedido
+      for (int i = 0; i < _cantidadProductos; i++) {
+        var _productoPorPedido = new GuardarProductoPedidoModel();
+
+        _productoPorPedido.id = 0;
+        _productoPorPedido.idproductoservico = _productosAComprar[i].id;
+        _productoPorPedido.idpedido = idPedido;
+        _productoPorPedido.cantidadespedida =
+            _productosAComprar[i].cantidadComprador;
+
+        if (_productosAComprar[i].descuento! > 0.0) {
+          _productoPorPedido.preciototal =
+              ((_productosAComprar[i].preciounitario! -
+                          ((_productosAComprar[i].descuento! / 100) *
+                              _productosAComprar[i].preciounitario!)) *
+                      _productosAComprar[i].cantidadComprador!)
+                  .toInt();
+        } else {
+          _productoPorPedido.preciototal =
+              _productosAComprar[i].preciounitario! *
+                  _productosAComprar[i].cantidadComprador!;
+        }
+        print(_productoPorPedido.preciototal);
+
+        _pedidoProvider
+            .guardarProductoPedidoPorId(_productoPorPedido, context)
+            .then((value) {
+          RespuestaDatosModel? respuesta = value;
+          print(respuesta!.mensaje);
+        }).whenComplete(() => null);
+      }
+
+      if (_bancoSeleccionado != null) {
+        _pagoPseModel.idDemografiaComprador = int.parse(idUsuario);
+        _pagoPseModel.idPedido = idPedido;
+        _pagoPseModel.banco = _bancoSeleccionado;
+
+        _pagoPSE();
+      } else {
+        AlertUtil.error(context, "Seleccione un banco");
+      }
+    }).whenComplete(() => null);
+  }
+
+  void _pagoPSE() async {
+    _facturaProvider.pagoConPSE(_pagoPseModel, context).then((value) {
+      var respuesta = value;
+
+      print(respuesta!.urlbanco!);
+      // TODO queda pendiente darle permisos a IOS
+      _launchURL(respuesta.urlbanco!);
+    }).whenComplete(() => null);
+  }
+
+  void _launchURL(String url) async {
+    await launch(url);
   }
 }

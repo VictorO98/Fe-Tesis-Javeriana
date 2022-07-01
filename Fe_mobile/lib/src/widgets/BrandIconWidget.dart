@@ -1,15 +1,20 @@
+import 'package:Fe_mobile/src/dominio/models/producto_servicio_model.dart';
 import 'package:Fe_mobile/src/models/brand.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class BrandIconWidget extends StatefulWidget {
-  Brand? brand;
+  ProductoServicioModel? publicacion;
   String? heroTag;
   double? marginLeft;
   ValueChanged<String>? onPressed;
 
   BrandIconWidget(
-      {Key? key, this.brand, this.heroTag, this.marginLeft, this.onPressed})
+      {Key? key,
+      this.publicacion,
+      this.heroTag,
+      this.marginLeft,
+      this.onPressed})
       : super(key: key);
 
   @override
@@ -33,7 +38,7 @@ class _BrandIconWidgetState extends State<BrandIconWidget>
       highlightColor: Theme.of(context).accentColor,
       onTap: () {
         setState(() {
-          widget.onPressed!(widget.brand!.id);
+          widget.onPressed!(widget.publicacion!.id.toString());
         });
       },
       child: AnimatedContainer(
@@ -41,23 +46,29 @@ class _BrandIconWidgetState extends State<BrandIconWidget>
         curve: Curves.easeInOut,
         padding: EdgeInsets.symmetric(horizontal: 15),
         decoration: BoxDecoration(
-          color: widget.brand!.selected!
-              ? Theme.of(context).primaryColor
-              : Colors.transparent,
+          color: true ? Theme.of(context).primaryColor : Colors.transparent,
           borderRadius: BorderRadius.circular(50),
         ),
         child: Row(
           children: <Widget>[
             Hero(
-              tag: widget.heroTag! + widget.brand!.id,
-              child: SvgPicture.asset(
-                widget.brand!.logo,
-                color: widget.brand!.selected!
+              tag: widget.heroTag! + widget.publicacion!.id.toString(),
+              child: Icon(
+                Icons.ac_unit,
+                color: true
                     ? Theme.of(context).accentColor
                     : Theme.of(context).primaryColor,
-                width: 50,
-//                height: 18,
+                size: 32,
               ),
+//               SvgPicture.asset(
+//                 // ! CAMBIAR ESTO PA LOS LOGOS
+//                 widget.publicacion!.id!.toString(),
+//                 color: true
+//                     ? Theme.of(context).accentColor
+//                     : Theme.of(context).primaryColor,
+//                 width: 50,
+// //                height: 18,
+//               ),
             ),
             SizedBox(width: 10),
             AnimatedSize(
@@ -69,12 +80,10 @@ class _BrandIconWidgetState extends State<BrandIconWidget>
                   Icon(
                     Icons.star,
                     color: Colors.amber,
-                    size: widget.brand!.selected! ? 18 : 0,
+                    size: true ? 18 : 0,
                   ),
                   Text(
-                    widget.brand!.selected!
-                        ? widget.brand!.rate.toString()
-                        : '',
+                    true ? '4.5' : '',
                     style: Theme.of(context).textTheme.bodyText1,
                   )
                 ],

@@ -1,4 +1,4 @@
-npm# clientapp
+# clientapp
 
 ## Project setup
 ```

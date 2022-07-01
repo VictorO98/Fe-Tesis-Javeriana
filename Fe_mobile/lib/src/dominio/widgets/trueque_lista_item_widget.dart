@@ -102,39 +102,39 @@ class _TruequeListaItemWidgetState extends State<TruequeListaItemWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Dismissible(
-      key: Key(this.widget.trueque.hashCode.toString()),
-      background: Container(
-        color: Colors.red,
-        child: Align(
-          alignment: Alignment.centerRight,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Icon(
-              UiIcons.trash,
-              color: Colors.white,
+    return _cargandoInfo
+        ? Dismissible(
+            key: Key(this.widget.trueque.hashCode.toString()),
+            background: Container(
+              color: Colors.red,
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Icon(
+                    UiIcons.trash,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
             ),
-          ),
-        ),
-      ),
-      onDismissed: (direction) {
-        // Remove the item from the data source.
-        setState(() {
-          widget.onDismissed!();
-        });
+            onDismissed: (direction) {
+              // Remove the item from the data source.
+              setState(() {
+                widget.onDismissed!();
+              });
 
-        // TODO: REVISAR ESTO PARA FUTURAS IMPLEMENTACIONES
-        // Then show a snackbar.
-        // Scaffold.of(context).showSnackBar(SnackBar(
-        //     content: Text(
-        //         "The ${widget.trueque!.product.name} order is removed from wish list")));
-      },
-      child: InkWell(
-        splashColor: Theme.of(context).accentColor,
-        focusColor: Theme.of(context).accentColor,
-        highlightColor: Theme.of(context).primaryColor,
-        child: _cargandoInfo
-            ? Container(
+              // TODO: REVISAR ESTO PARA FUTURAS IMPLEMENTACIONES
+              // Then show a snackbar.
+              // Scaffold.of(context).showSnackBar(SnackBar(
+              //     content: Text(
+              //         "The ${widget.trueque!.product.name} order is removed from wish list")));
+            },
+            child: InkWell(
+              splashColor: Theme.of(context).accentColor,
+              focusColor: Theme.of(context).accentColor,
+              highlightColor: Theme.of(context).primaryColor,
+              child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                 decoration: BoxDecoration(
                   color: Theme.of(context).primaryColor.withOpacity(0.9),
@@ -278,11 +278,10 @@ class _TruequeListaItemWidgetState extends State<TruequeListaItemWidget> {
                     )
                   ],
                 ),
-              )
-            : Container(
-                alignment: Alignment.center,
-                child: CircularProgressIndicator()),
-      ),
-    );
+              ),
+            ),
+          )
+        : Container(
+            alignment: Alignment.center, child: CircularProgressIndicator());
   }
 }

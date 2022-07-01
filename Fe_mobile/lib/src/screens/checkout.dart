@@ -6,6 +6,7 @@ import 'package:Fe_mobile/src/core/pages/usuario/bloc/info_perfil/info_usuario_b
 import 'package:Fe_mobile/src/core/util/alert_util.dart';
 import 'package:Fe_mobile/src/core/util/currency_util.dart';
 import 'package:Fe_mobile/src/core/util/estilo_util.dart';
+import 'package:Fe_mobile/src/core/util/helpers_util.dart';
 import 'package:Fe_mobile/src/core/util/preferencias_util.dart';
 import 'package:Fe_mobile/src/dominio/models/carrito_compras_model.dart';
 import 'package:Fe_mobile/src/dominio/models/guardar_pedido_model.dart';
@@ -13,7 +14,6 @@ import 'package:Fe_mobile/src/dominio/models/guardar_producto_pedido_model.dart'
 import 'package:Fe_mobile/src/dominio/models/pago_tarjeta_credito_model.dart';
 import 'package:Fe_mobile/src/dominio/providers/factura_provider.dart';
 import 'package:Fe_mobile/src/dominio/providers/pedidos_provider.dart';
-import 'package:Fe_mobile/src/models/route_argument.dart';
 import 'package:Fe_mobile/src/widgets/ShoppingCartButtonWidget.dart';
 import 'package:flutter/material.dart';
 
@@ -120,14 +120,18 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
               height: 30,
               margin: EdgeInsets.only(top: 12.5, bottom: 12.5, right: 20),
               child: InkWell(
-                borderRadius: BorderRadius.circular(300),
-                onTap: () {
-                  Navigator.of(context).pushNamed('/Tabs', arguments: 1);
-                },
-                child: CircleAvatar(
-                  backgroundImage: AssetImage('img/user3.jpg'),
-                ),
-              )),
+                  borderRadius: BorderRadius.circular(300),
+                  onTap: () {
+                    Navigator.of(context).pushNamed('/Tabs', arguments: 1);
+                  },
+                  child: Helpers.IS_FOTO_PERFIL
+                      ? CircleAvatar(
+                          // backgroundImage: AssetImage(_user.avatar!),
+                          backgroundImage:
+                              NetworkImage((Helpers.FOTO_USUARIO).toString()))
+                      : CircleAvatar(
+                          backgroundImage: AssetImage('img/user3.jpg'),
+                        ))),
         ],
       ),
       body: SingleChildScrollView(
@@ -340,7 +344,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                               onPressed: () {
                                 Navigator.of(context).pushNamed('/Bancos');
                               },
-                              padding: EdgeInsets.symmetric(vertical: 10),
+                              padding: EdgeInsets.symmetric(vertical: 4),
                               color: Theme.of(context).accentColor,
                               shape: StadiumBorder(),
                               child: Container(
@@ -352,7 +356,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
                                       color: Theme.of(context).primaryColor,
-                                      fontSize: height / 40),
+                                      fontSize: height / 50),
                                 ),
                               ),
                             ),
